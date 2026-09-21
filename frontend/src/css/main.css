@@ -1,0 +1,119 @@
+/* --------------------------------------------------------------------------
+   Tailwind por cima do Ipanema.
+
+   O CSS gerado vai para settings.css_code (frontend/inject.mjs), impresso pelo
+   layout do tema em todas as páginas — sem precisar de fork.
+
+   - SEM preflight: o reset do Tailwind apagaria os estilos base do tema.
+   - prefix(tw): o Ipanema já tem classes como .hidden, .container, .flex.
+     Sem prefixo o Tailwind geraria versões próprias delas a partir dos .tpl
+     do tema e mudaria o layout. Use sempre tw:flex, tw:bg-brand, etc.
+   - utilities SEM layer: CSS fora de @layer ganha de CSS em @layer, e o CSS
+     do Ipanema não usa layers. Assim uma classe tw: consegue sobrescrever.
+   -------------------------------------------------------------------------- */
+@layer theme;
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" prefix(tw);
+
+/* Onde o Tailwind procura classes usadas. Sem fork, o HTML próprio entra pelos
+   blocks "code" dos templates JSON — por isso eles também são lidos.
+   config/ fica de fora: o settings_data.json contém o próprio CSS gerado. */
+@source "../../../theme/**/*.tpl";
+@source "../../../theme/templates/**/*.json";
+@source "../../../design/components/**/*.html";
+@source "../js/**/*.js";
+
+/* --------------------------------------------------------------------------
+   Ponte com o Brand Editor.
+
+   css_code é CSS puro (não passa pelo Twig), então as cores e fontes vêm das
+   variáveis que o próprio Ipanema já define a partir dos settings, em
+   theme/layouts/resources/style-tokens.tpl. Viram tw:bg-brand, tw:text-brand-accent…
+
+   Os fallbacks só valem se o tema não definir a variável.
+   -------------------------------------------------------------------------- */
+@theme {
+  --color-brand: var(--button-primary-background-color, #1a1a1a);
+  --color-brand-accent: var(--accent-color, #6366f1);
+  --color-brand-bg: var(--main-background, #ffffff);
+  --color-brand-text: var(--main-foreground, #1a1a1a);
+
+  --font-sans: var(--body-font, ui-sans-serif, system-ui, sans-serif);
+  --font-display: var(--heading-font, var(--font-sans));
+}
+
+/* Regra da plataforma: NÃO usar seletores de ID em CSS — IDs são reservados
+   para funções internas da Nuvemshop. Use classes ou os hooks js-*.
+   Cores de fundo/texto do body ficam com o Ipanema (Brand Editor). */
+
+/* Evita "flash" de conteúdo antes do Alpine inicializar */
+[x-cloak] {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Correções do Ipanema (sem fork, só dá para sobrescrever CSS)
+   -------------------------------------------------------------------------- */
+
+/* Logo em texto (loja sem imagem de logo): .logo-text-container tem
+   margin: auto e max-width 450px, o que centraliza o nome da loja mesmo com
+   "logo à esquerda". Encosta na esquerda quando o layout é logo-left. */
+.logo-left .logo-text-container,
+.logo-md-left .logo-text-container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Cabeçalho em uma linha só no desktop: logo | menu | ícones.
+   O Ipanema renderiza .head-row (logo + ícones) e .nav-desktop-container (menu) como
+   linhas irmãs dentro de .head-main. Sem fork não dá para mudar o HTML, então a
+   .head-row vira display: contents e logo, menu e ícones passam a ser itens de uma
+   única linha flex em .head-main, limitada à largura da página (mesma do .container).
+   Vale só com "Largura: página" + "Logo à esquerda"; celular fica como o tema faz.
+   Dropdowns são position: fixed e posicionados pelo JS do tema — não dependem disto. */
+@media (min-width: 768px) {
+  .head-main:has(> .head-row.container.logo-md-left) {
+    --qd-header-width: 720px;
+    display: flex;
+    align-items: center;
+    column-gap: var(--utility-items-gap, var(--spacing-4));
+    padding-top: var(--header-vertical-padding);
+    padding-bottom: var(--header-vertical-padding);
+    padding-left: calc((100% - var(--qd-header-width)) / 2 + var(--gutter-container));
+    padding-right: calc((100% - var(--qd-header-width)) / 2 + var(--gutter-container));
+  }
+  .head-main:has(> .head-row.container.logo-md-left) > .head-row {
+    display: contents;
+  }
+  .head-main:has(> .head-row.container.logo-md-left) .logo-container {
+    order: 0;
+    flex: 0 0 auto;
+  }
+  .head-main:has(> .head-row.container.logo-md-left) > .nav-desktop-container {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    border-top: 0;
+    background-color: transparent;
+  }
+  .head-main:has(> .head-row.container.logo-md-left) > .nav-desktop-container > .nav-desktop-grid {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  .head-main:has(> .head-row.container.logo-md-left) .search-container,
+  .head-main:has(> .head-row.container.logo-md-left) .utilities-language-desktop,
+  .head-main:has(> .head-row.container.logo-md-left) .header-account,
+  .head-main:has(> .head-row.container.logo-md-left) .header-cart {
+    order: 2;
+  }
+}
+@media (min-width: 992px) {
+  .head-main:has(> .head-row.container.logo-md-left) { --qd-header-width: min(var(--page-width), 960px); }
+}
+@media (min-width: 1200px) {
+  .head-main:has(> .head-row.container.logo-md-left) { --qd-header-width: min(var(--page-width), 1140px); }
+}
+@media (min-width: 1400px) {
+  .head-main:has(> .head-row.container.logo-md-left) { --qd-header-width: var(--page-width); }
+}

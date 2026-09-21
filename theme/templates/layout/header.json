@@ -1,0 +1,108 @@
+{
+  "type": "header",
+  "name": "Cabeçalho",
+  "sections": {
+    "navigation_bar": {
+      "type": "navigation-bar",
+      "settings": {
+        "section_width": "full",
+        "horizontal_padding": 32,
+        "background_color": "#000066",
+        "text_color": "#FFFFFF"
+      },
+      "blocks": {
+        "nav_icon_text": {
+          "type": "nav-icon-text-group",
+          "settings": {
+            "alignment": "center",
+            "gap": 24
+          },
+          "blocks": {
+            "item_1": {
+              "type": "nav-icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "shipping",
+                "description": "Frete grátis acima de R$ 299"
+              }
+            },
+            "item_2": {
+              "type": "nav-icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "card",
+                "description": "Até 6x sem juros no cartão"
+              }
+            }
+          },
+          "block_order": [
+            "item_1",
+            "item_2"
+          ]
+        }
+      },
+      "block_order": [
+        "nav_icon_text"
+      ]
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position_desktop": "left",
+        "section_width": "page",
+        "vertical_padding": 12,
+        "horizontal_padding": 40,
+        "use_different_mobile_padding": true,
+        "vertical_padding_mobile": 16,
+        "horizontal_padding_mobile": 28,
+        "background_color": "#FFFFFF",
+        "text_color": "#000066"
+      },
+      "blocks": {
+        "logo": {
+          "type": "header-logo",
+          "settings": {
+            "height": 42,
+            "use_different_mobile_height": false
+          }
+        },
+        "utilities": {
+          "type": "header-utilities",
+          "settings": {
+            "format": "icons",
+            "search_type": "icon",
+            "cart_icon": "bag",
+            "show_languages_header": false
+          }
+        },
+        "navigation": {
+          "type": "header-navigation",
+          "settings": {
+            "nav_uppercase": false,
+            "show_categories_link": false,
+            "show_mobile_categories": false,
+            "nav_alignment_desktop": "left",
+            "vertical_padding": 14,
+            "nav_divider_color": "transparent",
+            "show_secondary_menu": false,
+            "show_featured_link": true,
+            "featured_link_item": "Contato",
+            "featured_link_color": "#fb4516",
+            "menu": "submenu"
+          },
+          "blocks": [],
+          "block_order": []
+        }
+      },
+      "block_order": [
+        "logo",
+        "utilities",
+        "navigation"
+      ]
+    }
+  },
+  "order": [
+    "navigation_bar",
+    "header"
+  ]
+}
