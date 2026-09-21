@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "nuvemshop-dev": {
+      "command": ".venv/bin/python",
+      "args": ["mcp-server/main.py"],
+      "env": {
+        "THEME_DIR": "./theme"
+      }
+    }
+  }
+}

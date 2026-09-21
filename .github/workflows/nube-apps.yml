@@ -1,0 +1,44 @@
+name: nube-apps
+
+# Build + testes dos apps NubeSDK (checkout). A publicação é manual, no
+# portal de parceiros (script de checkout com "Uses NubeSDK") — o CI só garante
+# que o bundle compila e os testes passam.
+
+on:
+  push:
+    branches: [main]
+    paths: ["nube-apps/**"]
+  pull_request:
+    branches: [main]
+    paths: ["nube-apps/**"]
+
+jobs:
+  checkout-quick:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nube-apps/checkout-quick
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Testes
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Publicar artefato do bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkout-quick-dist
+          path: nube-apps/checkout-quick/dist/main.min.js
+          if-no-files-found: error

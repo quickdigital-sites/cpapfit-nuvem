@@ -1,0 +1,120 @@
+name: theme-deploy
+
+# Fluxo (ver README → "Fluxo de tema"):
+#   PR              -> build + theme diff + push em HOMOLOG (imprime a URL de preview)
+#   push na main    -> build + push em PROD
+#   run manual      -> push em PROD e, com publish=true, publica (ativa na loja)
+#
+# Secrets (Settings → Secrets and variables → Actions):
+#   NUVEMSHOP_CLI_TOKEN   Base64 de {"store_id":N,"access_token":"..."} (scripts/cli-token.sh)
+#   THEME_ID_HOMOLOG      id da instalação de homolog (nuvemshop theme list)
+#   THEME_ID_PROD         id da instalação publicada; vazio => job prod avisa e pula
+# Variable:
+#   STORE_URL             ex. https://cpapfit.lojavirtualnuvem.com.br (link de preview)
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publicar o tema de PROD (ativa na loja)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: theme-deploy-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  homolog:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    environment: homolog
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build do frontend
+        working-directory: frontend
+        env:
+          ASSETS_REPO: ${{ github.repository }}
+          ASSETS_REF: ${{ github.event.pull_request.head.sha }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Instalar a CLI da Nuvemshop
+        run: npm install -g @tiendanube/cli
+
+      - name: Diff + push em HOMOLOG
+        working-directory: theme
+        env:
+          NUVEMSHOP_CLI_TOKEN: ${{ secrets.NUVEMSHOP_CLI_TOKEN }}
+          THEME_ID_HOMOLOG: ${{ secrets.THEME_ID_HOMOLOG }}
+        run: |
+          set -euo pipefail
+          nuvemshop theme diff  --theme-id "$THEME_ID_HOMOLOG" --token "$NUVEMSHOP_CLI_TOKEN" || true
+          nuvemshop theme push  --theme-id "$THEME_ID_HOMOLOG" --token "$NUVEMSHOP_CLI_TOKEN" -y
+
+      - name: Link de preview
+        env:
+          STORE_URL: ${{ vars.STORE_URL }}
+          THEME_ID_HOMOLOG: ${{ secrets.THEME_ID_HOMOLOG }}
+        run: |
+          {
+            echo "### Preview do homolog"
+            if [ -n "${STORE_URL:-}" ]; then
+              echo "Abra **logado no admin da loja**:"
+              echo ""
+              echo "\`${STORE_URL}/?theme_installation_id=${THEME_ID_HOMOLOG}\`"
+            else
+              echo "_Defina a variável \`STORE_URL\` para montar o link automaticamente._"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  prod:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build do frontend
+        working-directory: frontend
+        env:
+          ASSETS_REPO: ${{ github.repository }}
+          ASSETS_REF: ${{ github.sha }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Instalar a CLI da Nuvemshop
+        run: npm install -g @tiendanube/cli
+
+      - name: Push em PROD
+        working-directory: theme
+        env:
+          NUVEMSHOP_CLI_TOKEN: ${{ secrets.NUVEMSHOP_CLI_TOKEN }}
+          THEME_ID_PROD: ${{ secrets.THEME_ID_PROD }}
+          PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
+        run: |
+          set -euo pipefail
+          if [ -z "${THEME_ID_PROD:-}" ]; then
+            echo "THEME_ID_PROD vazio — deploy de prod pausado. Nada a fazer." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          nuvemshop theme push --theme-id "$THEME_ID_PROD" --token "$NUVEMSHOP_CLI_TOKEN" -y
+          if [ "$PUBLISH" = "true" ]; then
+            echo ">> publish (ativando o tema na loja)"
+            nuvemshop theme publish --theme-id "$THEME_ID_PROD" --token "$NUVEMSHOP_CLI_TOKEN" -y
+          fi

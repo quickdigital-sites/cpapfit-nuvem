@@ -1,0 +1,36 @@
+# --- Segredos e config por-máquina ---
+.env
+.env.*
+!.env.example
+theme/.nuvem
+theme/manifest.json
+claude-desktop.json
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- Saída de build do frontend (gerada pelo CI / npm run build) ---
+theme/static/css/tailwind.css
+theme/static/js/app.js
+
+# --- Build dos nube-apps ---
+nube-apps/**/dist/
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# --- SO / editores ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
