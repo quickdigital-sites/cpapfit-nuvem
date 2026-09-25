@@ -79,6 +79,7 @@
   --qd-gold: #ad9361;
   --qd-ink: #4a4a48;
   --qd-hairline: #e1dcd7;
+  --qd-indigo: #2f3295;
 }
 
 /* .container FLUIDA: 100% da largura até o max-width (--page-width = 1600px),
@@ -203,8 +204,8 @@
   .qd-plans-pill__sub   { display: block; font: 400 13px/15px var(--body-font); color: var(--qd-ink); }
   .qd-plans-pill__arrow { flex: 0 0 auto; color: var(--qd-ink); display: inline-flex; }
 
-  /* Linha 2: menu ocupa a largura toda, sem borda extra */
-  .head-main > .nav-desktop-container { border-top: 0; }
+  /* Linha 2: menu com borda-topo cinza neutra (#ccc), conforme Figma 0:1109 */
+  .head-main > .nav-desktop-container { border-top: 1px solid #ccc; }
 }
 
 /* --- Compacto (<1200): [hambúrguer] [logo central] [carrinho] + busca embaixo.
@@ -242,7 +243,7 @@
    ganha círculo dourado + hambúrguer e uma divisória. Categorias com chevron.
    ========================================================================== */
 @media (min-width: 1200px) {
-  .nav-desktop-container { background: #fefdfc; border-top: 0; }
+  .nav-desktop-container { background: #fefdfc; border-top: 1px solid #ccc; }
 
   /* Ordem das linhas (Figma 24:584): 1) header  2) menu  3) barra de benefícios.
      No nativo a barra de navegação vem no topo; reordenamos com flex. */
@@ -322,16 +323,56 @@
     box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18);
     padding: 0;
   }
-  /* conteúdo alinhado à largura do container do tema (gutter horizontal nativo) */
+  /* Conteúdo do submenu (Figma 0:1070): "Categorias" + colunas de subcategorias
+     à esquerda + banners (blocos navigation-banner) à direita. Alinhado ao container. */
   .nav-desktop-container .desktop-dropdown-container {
     background: transparent;
-    padding-top: 24px; padding-bottom: 28px;
+    display: flex; align-items: flex-start; gap: 48px;
+    padding-top: 28px; padding-bottom: 36px;
   }
+  /* coluna "Categorias" (subcategorias em 2 colunas) */
+  .nav-desktop-container .desktop-list-subitems {
+    flex: 1 1 auto; min-width: 0; margin: 0;
+    column-count: 2; column-gap: 48px;
+  }
+  .nav-desktop-container .desktop-list-subitems::before {
+    content: "Categorias";
+    column-span: all; display: block;
+    font: 700 18px/1 var(--heading-font); color: var(--qd-ink);
+    margin-bottom: 20px;
+  }
+  .nav-desktop-container .desktop-list-subitems > li { break-inside: avoid; margin-bottom: 12px; }
   .nav-desktop-container .desktop-dropdown .nav-list-link-heading {
-    font: 700 13px/1.4 var(--heading-font);
-    color: var(--qd-ink);
+    font: 600 15px/1.4 var(--body-font); color: var(--qd-ink);
   }
   .nav-desktop-container .desktop-dropdown a:hover { color: var(--qd-gold); }
+
+  /* Banners à direita (navigation-banner). Imagem = foto; título = marca ("Resmed");
+     "Linha" e o botão são adicionados via CSS. */
+  .nav-desktop-container .nav-desktop-banners { flex: 0 0 auto; display: flex; gap: 16px; }
+  .nav-desktop-container .nav-banner-item {
+    position: relative; display: block; overflow: hidden;
+    width: 340px; height: 300px; border-radius: 16px; text-decoration: none;
+  }
+  .nav-desktop-container .nav-banner-item-img { width: 100%; height: 100%; object-fit: cover; }
+  .nav-desktop-container .nav-banner-item::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(47,50,149,0) 25%, rgba(47,50,149,.78) 100%);
+  }
+  .nav-desktop-container .nav-banner-item-title {
+    position: absolute; left: 24px; right: 24px; top: 28px; margin: 0;
+    color: #fff; font: 800 28px/1.05 var(--heading-font);
+  }
+  .nav-desktop-container .nav-banner-item-title::before {
+    content: "Linha"; display: block; margin-bottom: 6px;
+    font: 400 14px/1 var(--body-font); opacity: .9;
+  }
+  .nav-desktop-container .nav-banner-item::after {
+    content: "VER LINHA COMPLETA  →"; position: absolute; left: 24px; bottom: 28px;
+    background: var(--qd-gold); color: #fff; text-transform: uppercase;
+    font: 700 12px/1 var(--heading-font);
+    padding: 12px 18px; border-radius: 9999px;
+  }
 
   /* overlay escurece a página quando um submenu abre; header(1000)+submenu ficam
      por cima (overlay z=999), e pointer-events:none p/ não interferir no hover */
@@ -371,6 +412,11 @@
    botão "voltar" visível e "Minha conta" no topo (feedback do cliente).
    ========================================================================== */
 @media (max-width: 1199.98px) {
+  /* Drawer lateral: 90% da largura, no máx 350px (em vez de tela cheia).
+     Os painéis aninhados (modal-right) ancoram à esquerda, sobre o mesmo drawer. */
+  .modal-nav-hamburger { width: 90% !important; max-width: 350px !important; }
+  .modal-nav-hamburger.modal-right { left: 0 !important; right: auto !important; }
+
   /* "Minha conta" (fica no .modal-footer) sobe para logo abaixo do cabeçalho */
   #nav-hamburger.modal { display: flex; flex-direction: column; }
   #nav-hamburger > .modal-header { order: 0; }
@@ -380,26 +426,35 @@
   }
   #nav-hamburger > .modal-body { order: 2; }
 
-  /* Botão "voltar" visível nos painéis aninhados */
-  .modal-nav-hamburger .modal-header { display: flex; align-items: center; gap: 8px; }
-  .modal-nav-hamburger .modal-back {
+  /* Cabeçalho (X no root; voltar + título nos aninhados) em AZUL, texto/ícones brancos */
+  .modal-nav-hamburger > .modal-header {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--qd-indigo);
+  }
+  .modal-nav-hamburger > .modal-header .modal-title { color: #fff; font-weight: 700; }
+  .modal-nav-hamburger > .modal-header button { color: #fff; }
+  .modal-nav-hamburger > .modal-header svg { color: #fff; fill: #fff; }
+  .modal-nav-hamburger > .modal-header .modal-back {
     display: inline-flex !important; align-items: center; justify-content: center;
     width: 40px; height: 40px; flex: 0 0 auto;
-    color: var(--qd-ink);
   }
-  .modal-nav-hamburger .modal-back svg { width: 20px; height: 20px; }
-  .modal-nav-hamburger .modal-title { color: var(--qd-ink); font-weight: 700; }
+  .modal-nav-hamburger > .modal-header .modal-back svg { width: 20px; height: 20px; }
 
-  /* itens do menu com a tipografia da marca */
-  #nav-hamburger .nav-list-link { font-family: var(--heading-font); color: var(--qd-ink); }
-  /* chevrons dourados (identidade, igual ao desktop) — sprite via <use> usa fill */
-  #nav-hamburger .nav-list-arrow svg,
-  #nav-hamburger .nav-list-arrow .icon-inline { fill: var(--qd-gold); color: var(--qd-gold); }
-  /* back arrow em dourado também */
-  .modal-nav-hamburger .modal-back svg { fill: var(--qd-gold); color: var(--qd-gold); }
-  /* "Minha conta" no topo: faixa creme, ícone dourado + texto inline centralizado */
+  /* itens do menu: fonte da marca com peso alto (como no desktop) */
+  #nav-hamburger .nav-list-link { font-family: var(--heading-font); font-weight: 700; color: var(--qd-ink); }
+  /* chevron dourado ENCORPADO (igual ao desktop) — troca o sprite fino */
+  #nav-hamburger .nav-list-arrow svg { display: none; }
+  #nav-hamburger .nav-list-arrow { display: inline-flex; align-items: center; justify-content: center; }
+  #nav-hamburger .nav-list-arrow::after {
+    content: ""; width: 8px; height: 8px;
+    border-right: 2.5px solid var(--qd-gold);
+    border-bottom: 2.5px solid var(--qd-gold);
+    transform: rotate(-45deg);
+  }
+
+  /* "Minha conta" no topo: fundo BRANCO (como o resto), ícone dourado + texto inline */
   #nav-hamburger > .modal-footer .nav-panel-account-row {
-    background: var(--qd-cream);
+    background: #fff;
     display: flex; align-items: center; min-height: 56px;
   }
   #nav-hamburger .nav-panel-account { display: flex; align-items: center; width: 100%; }
