@@ -193,7 +193,7 @@ Cronológico, do início até agora:
    - Linha cinza entre header e menu removida.
 8. **Layout/espaço.** `page_width` do setting **1320 → 1600** (`settings_data.json`); `.container` tornada **fluida** (`width:100%; max-width: var(--page-width)`, sem os degraus fixos por breakpoint do tema).
 9. **Responsividade header+menu (sem scroll horizontal).** Corte em **1200px**: `≥1200` = desktop (logo/busca/planos/conta/carrinho + menu horizontal + benefícios; fonte do menu em degraus **15/14/13px** por faixa p/ caber); `<1200` = **padrão mobile completo** (hambúrguer + logo central + carrinho + busca full-width; esconde menu horizontal, "Planos" e conta). Motivo: o menu horizontal de 8 itens não cabia em 768–1150 (gerava ~375px de scroll). Verificado `docOverflow=0` em 320/375/414/768/1024/1199/1200/1280/1366/1440/1920 (submenu fechado e aberto). Touch targets mobile ≥ 44px. **Não** foi usado `overflow-x:hidden`.
-10. **Menu (mobile) — parcial.** `modal-back` (voltar um nível) visível; "Minha conta" no topo do menu lateral. **Falta validar** interativamente e refinar.
+10. **Menu (mobile) — concluído e validado** (390px). Painéis deslizantes nativos com: **botão "voltar" (‹) visível e funcional** (testado: entra em categoria → volta à raiz); **"Minha conta" no topo** em faixa creme, ícone dourado + texto inline (Montserrat); **chevrons dourados** (#AD9361, igual ao desktop); **touch targets** itens 56px, back/close ~59px, hambúrguer/carrinho/busca 44px. Obs.: o **X de fechar** existe (59px) — no preview logado fica sob a barra de rascunho, mas aparece em produção. Sem Figma de menu mobile, identidade aplicada de forma sóbria (creme + dourado + Montserrat).
 
 Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar o DOM real renderizado (logado no admin) para as classes certas (`.head-row`, `.search-container`, `.nav-desktop-list`, `.desktop-dropdown`, `.nav-desktop-container`, `.menu-container`, `.navigation-bar`, `.sticky-header-wrapper`). A barra de benefícios (`.navigation-bar`) é um **strip de scroll horizontal nativo** (não é overflow de página).
 
@@ -214,7 +214,7 @@ Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar
 
 - [ ] **Logo:** subir a imagem oficial em Admin → Layout → "Logotipo da sua marca" (o texto some quando a imagem entra). Um PNG 200×60 exportado do Figma está disponível; ideal ter SVG/alta resolução.
 - [ ] **Link da pílula "Planos de Assinatura"** (hoje `#`) → URL real da página de planos.
-- [ ] **Menu mobile:** validar "voltar um nível" e "Minha conta no topo"; refinar visual (identidade).
+- [x] **Menu mobile:** "voltar um nível", "Minha conta no topo" e identidade — **concluído e validado** (2026-09-25).
 - [ ] **Banners no submenu desktop** (ver [PENDENCIAS.md](PENDENCIAS.md)).
 - [ ] **Tablet (768–1199):** hoje usa o padrão mobile completo (esconde "Planos" e conta). Reavaliar se quer um layout híbrido que preserve esses itens no tablet.
 - [ ] **Barra de benefícios no mobile:** hoje é um strip de scroll horizontal nativo; avaliar quebrar em 2 linhas.

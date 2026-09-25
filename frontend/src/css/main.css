@@ -392,4 +392,20 @@
 
   /* itens do menu com a tipografia da marca */
   #nav-hamburger .nav-list-link { font-family: var(--heading-font); color: var(--qd-ink); }
+  /* chevrons dourados (identidade, igual ao desktop) — sprite via <use> usa fill */
+  #nav-hamburger .nav-list-arrow svg,
+  #nav-hamburger .nav-list-arrow .icon-inline { fill: var(--qd-gold); color: var(--qd-gold); }
+  /* back arrow em dourado também */
+  .modal-nav-hamburger .modal-back svg { fill: var(--qd-gold); color: var(--qd-gold); }
+  /* "Minha conta" no topo: faixa creme, ícone dourado + texto inline centralizado */
+  #nav-hamburger > .modal-footer .nav-panel-account-row {
+    background: var(--qd-cream);
+    display: flex; align-items: center; min-height: 56px;
+  }
+  #nav-hamburger .nav-panel-account { display: flex; align-items: center; width: 100%; }
+  #nav-hamburger .nav-panel-account-links { display: flex; align-items: center; gap: 10px; }
+  #nav-hamburger .nav-panel-account-links .utility-icon {
+    color: var(--qd-gold); fill: var(--qd-gold); width: 22px; height: 22px; flex: 0 0 auto;
+  }
+  #nav-hamburger .nav-panel-link { font-family: var(--heading-font); font-weight: 700; color: var(--qd-ink); }
 }
