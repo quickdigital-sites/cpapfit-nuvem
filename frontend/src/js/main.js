@@ -11,9 +11,27 @@
  */
 import miniCart from "./components/mini-cart.js";
 import productGallery from "./components/product-gallery.js";
+import initHeaderPlans from "./components/header-plans.js";
+import initHeaderSearch from "./components/header-search.js";
 
 document.addEventListener("alpine:init", () => {
   // Componentes ficam disponíveis nos templates como x-data="miniCart()"
   window.Alpine.data("miniCart", miniCart);
   window.Alpine.data("productGallery", productGallery);
 });
+
+// Enhancements do header nativo
+initHeaderPlans();  // injeta a pílula "Planos de Assinatura"
+initHeaderSearch(); // garante submit da busca (Enter/clique) + preserva o preview
+
+// Overlay escuro atrás do submenu do menu desktop (mostrado por CSS :has no hover)
+(() => {
+  const add = () => {
+    if (document.querySelector(".qd-menu-overlay")) return;
+    const o = document.createElement("div");
+    o.className = "qd-menu-overlay";
+    document.body.appendChild(o);
+  };
+  if (document.readyState !== "loading") add();
+  else document.addEventListener("DOMContentLoaded", add);
+})();

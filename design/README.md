@@ -51,18 +51,35 @@ unlisted: keep                     # keep (padrão) | remove
 - Classes Tailwind **sempre com `tw:`** — variantes depois do prefixo: `tw:md:grid-cols-3`, `tw:hover:underline`.
 - Cores e fontes do Brand Editor: `tw:bg-brand`, `tw:text-brand-accent`, `tw:bg-brand-bg`,
   `tw:text-brand-text`, `tw:font-display`, `tw:font-sans`.
-- Imagens: `src="asset:home/banner.webp"`.
+- Imagens: URL absoluta da loja (`src="https://dcdn.mitiendanube.com/…"`) — ver [Assets](#assets).
+  (`src="asset:home/banner.webp"` só se o repo for público; não é o caso aqui.)
 - Interação com Alpine; componentes JS em `frontend/src/js/components/`.
 - Sem Twig, sem id em CSS. Comentários HTML são removidos no build.
 
-## Assets e jsDelivr
+## Assets
 
-`asset:home/x.webp` vira `https://cdn.jsdelivr.net/gh/<repo>@<commit>/design/assets/home/x.webp`.
+> **Neste projeto (cpapfit-nuvem) as imagens são hospedadas na loja, não no jsDelivr.**
+> O repositório é **privado** e o jsDelivr só serve repositórios públicos — `asset:` daria 404.
+> Por isso, aqui as imagens vêm da própria Nuvemshop e são referenciadas por **URL absoluta**
+> (`https://…`), que o `compose.mjs` passa intacta (só reescreve strings com prefixo `asset:`).
 
-- Local: commit = `HEAD` do checkout. **O commit precisa estar no GitHub** — commite, dê push e rode
-  `docker compose restart frontend` antes de olhar o preview.
-- CI: usa o commit do PR (`ASSETS_REF`).
-- O repo é público: tudo em `assets/` fica público.
+Como cada imagem chega na loja:
+
+- **Seções nativas** (slideshow, banners, produtos em destaque): suba pelo campo de imagem do
+  **Brand Editor**. A Nuvemshop guarda a URL da CDN dela (`dcdn.mitiendanube.com/…`) no JSON; traga
+  de volta com `theme pull` (fluxo `brand-editor-sync`). Não hardcode a URL no YAML.
+- **Componentes custom** (`components/*.html`, sem Twig): precisam de URL absoluta. Sem fork,
+  `static/images/` não chega na loja, então use uma URL da CDN da loja (ex.: reaproveitando a de uma
+  imagem já subida pelo Brand Editor). Com a instalação **forkada**, referencie `static/images/…`
+  servido pela loja.
+
+### jsDelivr (só para repositório público)
+
+O `compose.mjs` também suporta o modo jsDelivr: `asset:home/x.webp` vira
+`https://cdn.jsdelivr.net/gh/<repo>@<commit>/design/assets/home/x.webp` (repo = `ASSETS_REPO`,
+commit = `ASSETS_REF`, padrão `HEAD`). Isso **só funciona com o repositório público** e não é usado
+aqui. Se um dia o repo virar público (ou os assets forem para um repo público separado via
+`ASSETS_REPO`), volte a usar `asset:` — commite e dê push antes de olhar o preview.
 
 ## Quando o fork for liberado
 

@@ -46,37 +46,40 @@ function writeJson(file, data) {
 }
 
 function injectCss() {
-  if (!existsSync(CSS_OUT)) return;
-  const css = readFileSync(CSS_OUT, "utf8")
-    .replace(/\/\*![\s\S]*?\*\/\s*/, "") // banner de licença do Tailwind
-    .trim();
-
+  // O CSS agora vai no bloco <style> do footer (injectJs): o setting css_code é
+  // do tipo custom_css e tem limite de 15000 caracteres, apertado demais para um
+  // tema custom. Aqui só limpamos qualquer bloco nosso que tenha ficado no
+  // css_code de pushes antigos, preservando o resto (Brand Editor).
   const data = JSON.parse(readFileSync(SETTINGS, "utf8"));
   const current = data.settings.css_code ?? "";
-  const block = `${CSS_START}\n${css}\n${CSS_END}`;
-  const re = new RegExp(`${escapeRe(CSS_START)}[\\s\\S]*?${escapeRe(CSS_END)}`);
-
-  data.settings.css_code = re.test(current)
-    ? current.replace(re, () => block)
-    : [current.trim(), block].filter(Boolean).join("\n\n");
-
-  if (writeJson(SETTINGS, data)) console.log(`inject: css_code atualizado (${kb(css)})`);
+  const re = new RegExp(`\\n*${escapeRe(CSS_START)}[\\s\\S]*?${escapeRe(CSS_END)}`);
+  if (!re.test(current)) return;
+  data.settings.css_code = current.replace(re, "").trim();
+  if (writeJson(SETTINGS, data)) console.log("inject: css_code limpo (CSS movido para o <style> do footer)");
 }
 
 function injectJs() {
-  if (!existsSync(JS_OUT)) return;
-  const js = readFileSync(JS_OUT, "utf8")
-    .replace(/\/\/# sourceMappingURL=.*$/m, "") // sourcemap inline do modo watch
-    .replace(/<\/script/gi, "<\\/script")
-    .trim();
+  const css = existsSync(CSS_OUT)
+    ? readFileSync(CSS_OUT, "utf8")
+        .replace(/\/\*![\s\S]*?\*\/\s*/, "") // banner de licença do Tailwind
+        .replace(/<\/style/gi, "<\\/style")
+        .trim()
+    : "";
+  const js = existsSync(JS_OUT)
+    ? readFileSync(JS_OUT, "utf8")
+        .replace(/\/\/# sourceMappingURL=.*$/m, "") // sourcemap inline do modo watch
+        .replace(/<\/script/gi, "<\\/script")
+        .trim()
+    : "";
 
-  // Ordem importa: o inline registra o listener de alpine:init antes dos
-  // scripts defer (plugin primeiro, depois o core) executarem.
+  // Ordem importa: <style> primeiro; depois o inline registra o listener de
+  // alpine:init antes dos scripts defer (plugin, depois core) executarem.
   const code = [
+    css ? `<style>${css}</style>` : "",
     `<script>${js}</script>`,
     `<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@${version("@alpinejs/collapse")}/dist/cdn.min.js"></script>`,
     `<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@${version("alpinejs")}/dist/cdn.min.js"></script>`,
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 
   const data = JSON.parse(readFileSync(FOOTER, "utf8"));
   data.sections[SECTION_ID] = {
@@ -87,7 +90,7 @@ function injectJs() {
   };
   if (!data.order.includes(SECTION_ID)) data.order.push(SECTION_ID);
 
-  if (writeJson(FOOTER, data)) console.log(`inject: block de JS no footer atualizado (${kb(js)})`);
+  if (writeJson(FOOTER, data)) console.log(`inject: footer (código) atualizado — css ${kb(css)} + js ${kb(js)}`);
 }
 
 function run(fn) {
@@ -110,7 +113,7 @@ if (process.argv.includes("--watch")) {
     timers[file] = setTimeout(() => run(fn), 150);
   };
   // observa a pasta, não o arquivo: tailwind/esbuild podem recriar o arquivo
-  watch(dirname(CSS_OUT), onChange(CSS_OUT, injectCss));
+  watch(dirname(CSS_OUT), onChange(CSS_OUT, () => { injectCss(); injectJs(); }));
   watch(dirname(JS_OUT), onChange(JS_OUT, injectJs));
-  console.log("inject em watch — tailwind.css -> css_code, app.js -> footer.json");
+  console.log("inject em watch — tailwind.css + app.js -> bloco <style>/<script> do footer.json");
 }

@@ -34,3 +34,6 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Harness de preview local (gerado)
+frontend/preview.html

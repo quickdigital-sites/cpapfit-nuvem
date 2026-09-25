@@ -64,56 +64,332 @@
   margin-right: 0;
 }
 
-/* Cabeçalho em uma linha só no desktop: logo | menu | ícones.
-   O Ipanema renderiza .head-row (logo + ícones) e .nav-desktop-container (menu) como
-   linhas irmãs dentro de .head-main. Sem fork não dá para mudar o HTML, então a
-   .head-row vira display: contents e logo, menu e ícones passam a ser itens de uma
-   única linha flex em .head-main, limitada à largura da página (mesma do .container).
-   Vale só com "Largura: página" + "Logo à esquerda"; celular fica como o tema faz.
-   Dropdowns são position: fixed e posicionados pelo JS do tema — não dependem disto. */
-@media (min-width: 768px) {
-  .head-main:has(> .head-row.container.logo-md-left) {
-    --qd-header-width: 720px;
+/* ==========================================================================
+   Header CPAP Fit — restiliza o header NATIVO do Ipanema (sem fork, só CSS).
+   DOM nativo:
+     .head-main
+       > .head-row.container        (linha 1: logo, busca, conta, carrinho)
+       > .nav-desktop-container      (linha 2: menu — desktop)
+   Design (Figma 24:586 / 24:1079): creme #f4f1ed, dourado #ad9361,
+   texto #4a4a48, borda #e1dcd7. Busca = pílula com botão dourado;
+   conta/carrinho = círculos creme; badge do carrinho dourado.
+   ========================================================================== */
+:root {
+  --qd-cream: #f4f1ed;
+  --qd-gold: #ad9361;
+  --qd-ink: #4a4a48;
+  --qd-hairline: #e1dcd7;
+}
+
+/* .container FLUIDA: 100% da largura até o max-width (--page-width = 1600px),
+   sem os degraus fixos por breakpoint do tema (540/720/960/1140). Aproveita
+   melhor o espaço em resoluções intermediárias. O gutter lateral vem do tema. */
+.container {
+  width: 100% !important;
+  max-width: var(--page-width, 1600px) !important;
+}
+
+/* --- Busca: some com o gatilho de ícone e mostra o form como pílula --- */
+.search-container .search-trigger { display: none !important; }
+.search-container .js-search-expand-form.search-floating-container {
+  display: block !important;
+  position: static !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important; /* o tema deixa "none" no estado fechado */
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+.search-container .search-form-wrap,
+.search-container .search-form { width: 100%; margin: 0; pointer-events: auto; }
+.search-container .search-form-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--qd-cream);
+  border: 0;
+  border-radius: 9999px;
+  padding: 6px 6px 6px 20px;
+  margin: 0;
+}
+.search-container .search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 8px 0;
+  font-family: var(--body-font);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--qd-ink);
+}
+.search-container .search-input::placeholder { color: var(--qd-ink); opacity: .85; }
+.search-container .search-submit-btn {
+  flex: 0 0 auto;
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--qd-gold);
+  color: #fff;
+  position: static;
+}
+.search-container .search-submit-btn svg { width: 20px; height: 20px; color: #fff; }
+.search-container .search-empty-btn { display: none !important; }
+.search-container .search-suggestions {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 60;
+}
+
+/* --- Conta e carrinho como círculos creme --- */
+.head-row .header-account > .header-icon,
+.head-row .header-cart .header-icon {
+  position: relative;
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 9999px;
+  background: var(--qd-cream);
+}
+.head-row .header-account > .header-icon svg,
+.head-row .header-cart .header-icon svg { width: 20px; height: 20px; }
+.head-row .header-cart .js-cart-widget-amount.badge {
+  position: absolute; top: -4px; right: -4px; bottom: auto; left: auto;
+  min-width: 20px; height: 20px; padding: 0 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--qd-gold) !important;
+  color: #fff !important;
+  font: 700 11px/1 var(--body-font);
+  border-radius: 9999px;
+}
+
+/* --- Pílula "Planos de Assinatura" (injetada por app.js) --- */
+.qd-plans-pill { display: none; }
+
+/* --- Linha 1 no desktop: logo | busca (cresce) | planos | conta | carrinho --- */
+@media (min-width: 1200px) {
+  .head-main > .head-row.container {
     display: flex;
     align-items: center;
-    column-gap: var(--utility-items-gap, var(--spacing-4));
-    padding-top: var(--header-vertical-padding);
-    padding-bottom: var(--header-vertical-padding);
-    padding-left: calc((100% - var(--qd-header-width)) / 2 + var(--gutter-container));
-    padding-right: calc((100% - var(--qd-header-width)) / 2 + var(--gutter-container));
+    gap: 24px;
+    flex-wrap: nowrap;
   }
-  .head-main:has(> .head-row.container.logo-md-left) > .head-row {
-    display: contents;
+  .head-row .logo-container { order: 0; flex: 0 0 auto; margin: 0; }
+  .head-row .search-container { order: 1; flex: 1 1 auto; min-width: 0; }
+  .head-row .qd-plans-pill { order: 2; }
+  .head-row .header-account { order: 3; flex: 0 0 auto; }
+  .head-row .header-cart { order: 4; flex: 0 0 auto; }
+
+  .qd-plans-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 56px; padding: 8px 14px 8px 10px;
+    border: 1px solid var(--qd-hairline);
+    border-radius: 9999px;
+    text-decoration: none; white-space: nowrap;
   }
-  .head-main:has(> .head-row.container.logo-md-left) .logo-container {
-    order: 0;
-    flex: 0 0 auto;
+  .qd-plans-pill__icon {
+    flex: 0 0 auto; width: 40px; height: 40px; border-radius: 9999px;
+    background: var(--qd-gold); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
   }
-  .head-main:has(> .head-row.container.logo-md-left) > .nav-desktop-container {
-    order: 1;
-    flex: 1 1 auto;
-    min-width: 0;
-    border-top: 0;
-    background-color: transparent;
+  .qd-plans-pill__title { display: block; font: 700 13px/15px var(--heading-font); text-transform: uppercase; color: var(--qd-ink); }
+  .qd-plans-pill__sub   { display: block; font: 400 13px/15px var(--body-font); color: var(--qd-ink); }
+  .qd-plans-pill__arrow { flex: 0 0 auto; color: var(--qd-ink); display: inline-flex; }
+
+  /* Linha 2: menu ocupa a largura toda, sem borda extra */
+  .head-main > .nav-desktop-container { border-top: 0; }
+}
+
+/* --- Compacto (<1200): [hambúrguer] [logo central] [carrinho] + busca embaixo.
+   Esconde o menu horizontal (não cabe) e usa o hambúrguer; esconde Planos/conta
+   (padrão mobile). O menu lateral do hambúrguer traz todas as categorias. --- */
+@media (max-width: 1199.98px) {
+  /* troca menu horizontal -> hambúrguer */
+  .nav-desktop-container { display: none !important; }
+  .head-row .menu-container { display: flex !important; order: 0; flex: 0 0 auto; }
+  .head-row .header-account { display: none !important; }
+
+  .head-main > .head-row.container {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 8px;
   }
-  .head-main:has(> .head-row.container.logo-md-left) > .nav-desktop-container > .nav-desktop-grid {
-    max-width: none;
-    margin: 0;
+  .head-row .logo-container { order: 1; flex: 1 1 auto; display: flex; justify-content: center; margin: 0; }
+  .head-row .header-cart { order: 2; flex: 0 0 auto; }
+  .head-row .search-container { order: 3; flex: 0 0 100%; width: 100%; }
+
+  /* hambúrguer dourado */
+  .menu-container .header-icon {
+    width: 44px; height: 44px; border-radius: 9999px;
+    background: var(--qd-gold);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .menu-container .header-icon svg { color: #fff; }
+
+  /* touch targets >= 44px */
+  .head-row .header-cart .header-icon { width: 44px; height: 44px; }
+  .search-container .search-submit-btn { width: 44px; height: 44px; }
+}
+
+/* ==========================================================================
+   Menu (linha 2) — nav NATIVO do Ipanema estilizado p/ o Figma (24:621).
+   .nav-desktop-list > li.nav-main-item; o 1º item ("Menu") = departamentos,
+   ganha círculo dourado + hambúrguer e uma divisória. Categorias com chevron.
+   ========================================================================== */
+@media (min-width: 1200px) {
+  .nav-desktop-container { background: #fefdfc; border-top: 0; }
+
+  /* Ordem das linhas (Figma 24:584): 1) header  2) menu  3) barra de benefícios.
+     No nativo a barra de navegação vem no topo; reordenamos com flex. */
+  .sticky-header-wrapper { display: flex; flex-direction: column; }
+  .sticky-header-wrapper > .js-head-main { order: 0; }
+  .sticky-header-wrapper > #ns-section-navigation_bar,
+  .sticky-header-wrapper > .section-navigation-bar,
+  .sticky-header-wrapper > .js-navigation-bar { order: 1; }
+
+  /* fora as setas nativas de rolagem lateral */
+  .nav-desktop-container .nav-desktop-list-arrow { display: none !important; }
+  /* zera paddings internos p/ alinhar com o header; o gutter vem do .container */
+  .nav-desktop-container .nav-desktop,
+  .nav-desktop-container .js-desktop-nav-col { padding-left: 0; padding-right: 0; margin: 0; max-width: none; }
+  /* itens distribuídos de ponta a ponta (Menu faceia o logo, Serviços a sacola).
+     Sem padding lateral aqui — o gutter/largura vêm do .container pai. */
+  .nav-desktop-list {
+    display: flex; align-items: center; flex-wrap: nowrap; overflow: visible;
+    width: 100%; justify-content: space-between;
+    gap: 8px; padding-left: 0; padding-right: 0;
+    height: 60px; margin: 0;
+  }
+  .nav-desktop-list > li.nav-main-item { display: flex; align-items: center; }
+  .nav-desktop-list > li.nav-main-item > a.nav-list-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--heading-font); font-weight: 700; line-height: 1;
+    font-size: 15px;
+    color: var(--qd-ink);
+    padding: 8px 0;
+    white-space: nowrap;
+  }
+  /* categorias (exceto "Menu"): pílula dourada no hover/aberto, sem deslocar o layout */
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link {
+    padding: 10px 16px; border-radius: 9999px;
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .nav-desktop-list > li.nav-main-item:first-child > a.nav-list-link:hover { color: var(--qd-gold); }
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child):hover > a.nav-list-link {
+    background: var(--qd-gold); color: #fff;
+  }
+  /* chevron dourado encorpado (o do sprite é fino); vira branco e "pra cima" no hover */
+  .nav-desktop-list .nav-list-link-icon { display: none; }
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link::after {
+    content: ""; flex: 0 0 auto;
+    width: 7px; height: 7px; margin-top: -3px;
+    border-right: 2.5px solid var(--qd-gold);
+    border-bottom: 2.5px solid var(--qd-gold);
+    transform: rotate(45deg);
+  }
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child):hover > a.nav-list-link::after {
+    border-color: #fff; margin-top: 3px;
+    transform: rotate(-135deg);
+  }
+
+  /* 1º item = "Menu": círculo dourado + hambúrguer, sem caret, com divisória */
+  .nav-desktop-list > li.nav-main-item:first-child > a.nav-list-link::before {
+    content: ""; flex: 0 0 auto;
+    width: 30px; height: 30px; border-radius: 9999px;
+    background-color: var(--qd-gold);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 6h16M4 12h16M4 18h16'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center; background-size: 16px;
+  }
+  .nav-desktop-list > li.nav-main-item:first-child > a.nav-list-link > svg { display: none; }
+  .nav-desktop-list > li.nav-main-item:first-child {
+    padding-right: 12px;
+    border-right: 1px solid var(--qd-hairline);
+  }
+  /* último item faceia a borda direita (sem padding-right), como o 1º sem padding-left */
+  .nav-desktop-list > li.nav-main-item:last-child > a.nav-list-link { padding-right: 0 !important; }
+
+  /* Submenu: MANTÉM a geometria nativa (hover estável — nada de reposicionar).
+     Só o visual muda: painel transparente, card branco constrito, sem radius.
+     O overlay escuro é um <div> no body (.qd-menu-overlay), ver regra global. */
+  .nav-desktop-container .desktop-dropdown {
+    background: #fefdfc;               /* painel ocupa 100% da largura da página */
+    border: 0; border-radius: 0;
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18);
     padding: 0;
   }
-  .head-main:has(> .head-row.container.logo-md-left) .search-container,
-  .head-main:has(> .head-row.container.logo-md-left) .utilities-language-desktop,
-  .head-main:has(> .head-row.container.logo-md-left) .header-account,
-  .head-main:has(> .head-row.container.logo-md-left) .header-cart {
-    order: 2;
+  /* conteúdo alinhado à largura do container do tema (gutter horizontal nativo) */
+  .nav-desktop-container .desktop-dropdown-container {
+    background: transparent;
+    padding-top: 24px; padding-bottom: 28px;
+  }
+  .nav-desktop-container .desktop-dropdown .nav-list-link-heading {
+    font: 700 13px/1.4 var(--heading-font);
+    color: var(--qd-ink);
+  }
+  .nav-desktop-container .desktop-dropdown a:hover { color: var(--qd-gold); }
+
+  /* overlay escurece a página quando um submenu abre; header(1000)+submenu ficam
+     por cima (overlay z=999), e pointer-events:none p/ não interferir no hover */
+  body:has(.nav-desktop-list > li.nav-main-item.nav-dropdown:hover) .qd-menu-overlay {
+    opacity: 1; visibility: visible;
   }
 }
-@media (min-width: 992px) {
-  .head-main:has(> .head-row.container.logo-md-left) { --qd-header-width: min(var(--page-width), 960px); }
+
+/* overlay do submenu desktop (div injetado no body por app.js) */
+.qd-menu-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.15s ease;
+  z-index: 999; pointer-events: none;
 }
-@media (min-width: 1200px) {
-  .head-main:has(> .head-row.container.logo-md-left) { --qd-header-width: min(var(--page-width), 1140px); }
+
+/* --------------------------------------------------------------------------
+   Menu responsivo — evita SCROLL LATERAL nas resoluções-alvo (1280/1366/1440).
+   Acima de 1440 fica no tamanho cheio (15px). Abaixo, reduz fonte e paddings
+   das <li>/pílulas (a fonte diminui em degraus fixos, não continuamente).
+   -------------------------------------------------------------------------- */
+@media (min-width: 1366px) and (max-width: 1439.98px) {
+  .nav-desktop-list > li.nav-main-item > a.nav-list-link { font-size: 14px; }
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 9px 12px; }
+  .nav-desktop-list > li.nav-main-item:first-child { padding-right: 12px; }
 }
-@media (min-width: 1400px) {
-  .head-main:has(> .head-row.container.logo-md-left) { --qd-header-width: var(--page-width); }
+@media (min-width: 1200px) and (max-width: 1365.98px) {
+  .nav-desktop-list > li.nav-main-item > a.nav-list-link { font-size: 13px; gap: 4px; }
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 8px 9px; }
+  .nav-desktop-list > li.nav-main-item:first-child { padding-right: 10px; }
+  .nav-desktop-list { gap: 4px; }
+}
+
+/* ==========================================================================
+   Menu mobile (hambúrguer lateral) — painéis deslizantes nativos, mas com o
+   botão "voltar" visível e "Minha conta" no topo (feedback do cliente).
+   ========================================================================== */
+@media (max-width: 1199.98px) {
+  /* "Minha conta" (fica no .modal-footer) sobe para logo abaixo do cabeçalho */
+  #nav-hamburger.modal { display: flex; flex-direction: column; }
+  #nav-hamburger > .modal-header { order: 0; }
+  #nav-hamburger > .modal-footer {
+    order: 1; margin-top: 0;
+    border-top: 0; border-bottom: 1px solid var(--qd-hairline);
+  }
+  #nav-hamburger > .modal-body { order: 2; }
+
+  /* Botão "voltar" visível nos painéis aninhados */
+  .modal-nav-hamburger .modal-header { display: flex; align-items: center; gap: 8px; }
+  .modal-nav-hamburger .modal-back {
+    display: inline-flex !important; align-items: center; justify-content: center;
+    width: 40px; height: 40px; flex: 0 0 auto;
+    color: var(--qd-ink);
+  }
+  .modal-nav-hamburger .modal-back svg { width: 20px; height: 20px; }
+  .modal-nav-hamburger .modal-title { color: var(--qd-ink); font-weight: 700; }
+
+  /* itens do menu com a tipografia da marca */
+  #nav-hamburger .nav-list-link { font-family: var(--heading-font); color: var(--qd-ink); }
 }

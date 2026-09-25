@@ -174,8 +174,8 @@ O layout das páginas mora em [`design/`](design/README.md) e é montado pelo `f
 - `design/pages/home.yaml` — ordem das seções, misturando **seções nativas** do Ipanema (editáveis no
   Brand Editor, com dados da loja) e **componentes custom**;
 - `design/components/*.html` — HTML + Tailwind (`tw:`) + Alpine, cada um vira uma seção "Personalizada";
-- `design/assets/` — imagens referenciadas como `asset:<caminho>`, servidas pelo jsDelivr no commit atual
-  (commite e dê push antes de olhar o preview).
+- imagens — **neste projeto (repo privado) são hospedadas na loja** e referenciadas por URL absoluta
+  (o jsDelivr só serve repo público). Detalhes em [design/README.md](design/README.md#assets).
 
 Duas skills do Claude Code conduzem o trabalho:
 
