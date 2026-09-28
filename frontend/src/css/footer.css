@@ -75,6 +75,15 @@ div[data-section-id="footer"] .footer-main-info {
 div[data-section-id="footer"] .footer-secondary-info,
 div[data-section-id="footer"] .footer-country-selector-container { display: none !important; }
 div[data-section-id="footer"] .footer-main-info > * { margin: 0; padding: 0; max-width: none; flex: 0 0 auto; }
+/* blocks "code" vêm com .block-fill (width 100%) — no desktop cada coluna tem a largura do conteúdo */
+@media (min-width: 768px) {
+  div[data-section-id="footer"] .footer-main-info > .code-block { width: auto !important; }
+  /* os 3 menus viram colunas do próprio footer (5 colunas distribuídas, como no Figma) */
+  div[data-section-id="footer"] .footer-main-info > .code-block:has(.qd-footer-links),
+  div[data-section-id="footer"] .qd-footer-links { display: contents; }
+  .qd-footer-menu { flex: 0 0 auto; min-width: 174px; }
+  .qd-footer-menu a { white-space: nowrap; }
+}
 
 /* Lista VIP (newsletter nativa + campo "Seu nome" do footer.js) */
 div[data-section-id="footer"] .footer-newsletter-container { width: 394px; }
