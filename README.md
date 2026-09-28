@@ -92,6 +92,17 @@ scripts/publish-assets.sh           # envia ao repo público (SSH do GitHub) e g
 ```
 
 - Commite `design/assets.json` junto — é ele que fixa a versão das imagens.
+- **`Permission to quickdigital-sites/quickdigital-sites-cpapfit-assets.git denied to <usuário>`**: seu
+  usuário do GitHub não tem escrita nesse repo. Um admin da org adiciona em *Settings → Collaborators and
+  teams* (papel **Write**). Teste com `git ls-remote git@github.com:quickdigital-sites/quickdigital-sites-cpapfit-assets.git`.
+- O script usa o **mesmo host SSH do `origin`**. Neste repo o origin é `git@github.com-agency:…` (alias do
+  `~/.ssh/config` com a chave da Quick, `id_ed25519_agency`), então a chave certa é usada automaticamente.
+  Em outra máquina: `git remote set-url origin git@github.com-agency:quickdigital-sites/cpapfit-nuvem.git`.
+- **A chave SSH padrão é de outra conta?** Rode só este script com a chave certa, sem mexer nas outras:
+  `GIT_SSH_COMMAND='ssh -i ~/.ssh/SUA_CHAVE -o IdentitiesOnly=yes' scripts/publish-assets.sh`
+  (ou um alias do `~/.ssh/config`: `ASSETS_REMOTE=git@SEU_ALIAS:quickdigital-sites/quickdigital-sites-cpapfit-assets.git scripts/publish-assets.sh`).
+  Para ver qual conta uma chave usa: `ssh -T -i ~/.ssh/SUA_CHAVE -o IdentitiesOnly=yes git@github.com`.
+- Sem o `design/assets.json`, o build aponta as imagens para o repo do tema (privado) e elas **não carregam**.
 - O commit é fixo, então não há cache velho do jsDelivr: cada publicação gera URLs novas.
 - Imagem declarada no YAML é controlada pelo repo (o Brand Editor é sobrescrito no próximo build).
 
