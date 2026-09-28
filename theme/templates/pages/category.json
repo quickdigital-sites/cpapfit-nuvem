@@ -13,7 +13,7 @@
       "type": "page-header",
       "settings": {
         "section_width": "page",
-        "vertical_padding": 32,
+        "vertical_padding": 0,
         "horizontal_padding": 32
       }
     },
@@ -22,7 +22,7 @@
       "settings": {
         "columns": "4",
         "columns_mobile": "2",
-        "pagination": "infinite",
+        "pagination": "classic",
         "section_width": "page",
         "vertical_padding": 0,
         "horizontal_padding": 32

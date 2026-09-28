@@ -22,6 +22,7 @@
     "products_per_row_desktop": "4",
     "pagination": "classic",
     "promotion_labels_position": "below",
+    "product_aspect_ratio": "square",
     "labels_on_image_position": "bottom",
     "product_installments": true,
     "quick_shop": true,

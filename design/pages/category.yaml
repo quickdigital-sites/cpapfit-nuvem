@@ -1,0 +1,16 @@
+# Categoria (PLP) — gera theme/templates/pages/category.json (frontend/compose.mjs).
+# Figma: desktop 24:2370 • mobile 24:2687. Visual em frontend/src/css/plp.css + js/components/plp.js.
+# Só ajustes de settings das seções nativas; a ordem/estrutura continua a do Ipanema.
+unlisted: keep
+
+sections:
+  - native: category_hero        # banner da categoria (só aparece se a categoria tiver imagem)
+  - native: heading
+    settings: { section_width: page, vertical_padding: 0 }
+  - native: product_list
+    settings:
+      columns: "4"
+      columns_mobile: "2"
+      pagination: classic         # paginação numerada do Figma (infinite = "carregar mais")
+      section_width: page
+      vertical_padding: 0

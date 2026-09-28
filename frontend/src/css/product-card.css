@@ -30,6 +30,10 @@
   border-radius: 14px;
   overflow: hidden;
 }
+/* foto quadrada (setting product_aspect_ratio = square) e produto inteiro, sem cortar (Figma) */
+.js-item-product .product-item-image-container-cropped .product-item-image { object-fit: contain !important; background: #fff; }
+/* contador "1 / 3" do slider de fotos do card: não existe no Figma */
+.js-item-product .js-product-item-slider-pagination-container-private { display: none !important; }
 .js-item-product .product-item-information { display: flex; flex: 1 1 auto; flex-direction: column; }
 .js-item-product .product-item-information-inner {
   flex: 1 1 auto;

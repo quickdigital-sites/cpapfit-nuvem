@@ -20,6 +20,8 @@
 @import "./product-card.css";
 @import "./home.css";
 @import "./footer.css";
+@import "./plp.css";
+@import "./pdp.css";
 
 /* Onde o Tailwind procura classes usadas. Sem fork, o HTML próprio entra pelos
    blocks "code" dos templates JSON — por isso eles também são lidos.

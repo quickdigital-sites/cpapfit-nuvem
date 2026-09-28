@@ -1,0 +1,239 @@
+/* ==========================================================================
+   PDP — produto (Figma 35:10696 desktop • 66:17596 mobile).
+   Restiliza o main-product NATIVO + frontend/src/js/components/pdp.js
+   (card do topo, preços + cupom, botão WhatsApp).
+   ========================================================================== */
+.qd-pdp .js-product-detail { background: var(--qd-offwhite); color: var(--qd-ink); }
+.qd-pdp .js-product-detail > .container > .breadcrumbs {
+  margin: 0 0 26px; opacity: 1; gap: 4px;
+  font-family: var(--heading-font); font-size: 13px; font-weight: 600; line-height: 16.5px; color: var(--qd-ink);
+}
+
+/* --- Card do topo: nome + código ------------------------------------------ */
+.qd-pdp-top {
+  display: flex; align-items: center; gap: 36px; margin: 0 0 16px; padding: 26px 40px;
+  background: #fff; border-radius: 20px;
+}
+.qd-pdp-titles { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.qd-pdp-titles .product-name {
+  margin: 0; font-family: var(--heading-font); font-size: 30px; font-weight: 500; line-height: 1.15;
+  text-transform: uppercase; color: var(--qd-ink);
+}
+.qd-pdp-titles .product-sku { margin: 0; font-size: 13px; font-weight: 700; line-height: 16.5px; color: var(--qd-ink); }
+
+/* --- Colunas: galeria (card) + compra (card) ------------------------------- */
+/* O tema nativo usa flex com width 60%/40% nas colunas: zera e usa grid 726px + resto (Figma). */
+.qd-pdp .product-columns { align-items: start; }
+.qd-pdp .js-product-images,
+.qd-pdp .js-product-info { width: auto !important; min-width: 0; padding: 20px !important; background: #fff; border-radius: 20px; }
+@media (min-width: 768px) {
+  .qd-pdp .product-columns { display: grid !important; grid-template-columns: minmax(0, 726px) minmax(0, 1fr); column-gap: 16px !important; }
+  .qd-pdp .js-product-images { flex: none !important; column-gap: 6px; }
+}
+
+/* galeria: miniaturas 80px à esquerda (setas em cima/baixo), foto principal quadrada */
+@media (min-width: 768px) {
+  .qd-pdp .product-images-thumbs:not(.product-images-thumbs-horizontal) { width: 80px; }
+  .qd-pdp .product-images:has(.product-images-thumbs:not(.product-images-thumbs-horizontal)) .product-images-slider { width: calc(100% - 86px); }
+  .qd-pdp .swiper-product-thumb { height: 504px; }
+}
+.qd-pdp .product-images-slider { margin-bottom: 0; }
+.qd-pdp .product-thumb { border-radius: 14px; overflow: hidden; border: 1px solid transparent; }
+.qd-pdp .product-thumb.selected { border-color: #000; }
+.qd-pdp .product-thumb img { object-fit: cover; }
+.qd-pdp .product-slide-link { border-radius: 14px; overflow: hidden; background: #fff; }
+.qd-pdp .product-slide-link img { object-fit: contain; }
+.qd-pdp .swiper-product-arrow { color: var(--qd-dark); }
+.qd-pdp .js-product-slider-pagination { display: none; }
+
+/* --- Coluna de compra: ordem do Figma --------------------------------------
+   product-content e o form viram "contents" para os blocos serem itens do flex da coluna
+   e poderem ser reordenados (frete vai para o fim, depois da descrição). */
+.qd-pdp .js-product-info { gap: 20px !important; }
+.qd-pdp .js-product-info .product-content,
+.qd-pdp .js-product-info .js-product-form { display: contents; }
+.qd-pdp .js-product-info .js-nubesdk-slot:empty { display: none; }
+.qd-pdp .qd-pdp-price-row { order: 1; }
+.qd-pdp .product-detail-variants { order: 2; }
+.qd-pdp .product-actions { order: 3; }
+.qd-pdp .product-purchase-info { order: 4; }
+.qd-pdp .product-info-description { order: 5; }
+.qd-pdp .product-shipping-wrapper { order: 6; width: 100% !important; margin: 0; padding-top: 20px; border-top: 1px solid #e1dcd7; }
+.qd-pdp .product-content > *, .qd-pdp .js-product-form > * { margin-top: 0; margin-bottom: 0; }
+
+/* --- Preços + cupom -------------------------------------------------------- */
+.qd-pdp-price-row { display: flex; align-items: stretch; gap: 40px; padding-bottom: 16px; border-bottom: 1px solid #e1dcd7; }
+.qd-pdp-price-row .js-price-container { display: flex; flex-direction: column; gap: 16px; flex: 0 0 auto; margin: 0; }
+/* "De / Por" empilhados + selo % OFF ao lado */
+.qd-pdp .product-price-main { display: grid; grid-template-columns: auto auto; justify-content: start; align-items: center; column-gap: 10px; }
+.qd-pdp .product-price-main .product-price-compare { grid-column: 1; }
+.qd-pdp .product-price-main .product-price-row { display: contents; }
+.qd-pdp .product-price-main .product-price-display { grid-column: 1; }
+.qd-pdp .product-price-main .product-offer-label { grid-column: 2; grid-row: 1 / span 2; }
+.qd-pdp .product-price-compare { font-size: 13px; font-weight: 500; line-height: 18px; color: var(--qd-ink); opacity: 1; text-decoration: none; }
+.qd-pdp .product-price-compare::before { content: "De "; }
+.qd-pdp .product-price-display { font-size: 13px; font-weight: 700; line-height: 18px; color: var(--qd-ink); }
+.qd-pdp .product-price-display::before { content: "Por "; font-weight: 500; }
+/* sem preço "De": preço principal em destaque */
+.qd-pdp .js-price-container:has(.js-compare-price-display[style*="none"]) .product-price-display {
+  font-family: var(--heading-font); font-size: 19px; line-height: 20px; color: var(--qd-teal-strong);
+}
+.qd-pdp .js-price-container:has(.js-compare-price-display[style*="none"]) .product-price-display::before { content: none; }
+.qd-pdp .product-offer-label,
+.qd-pdp .product-payment-discount .text-accent {
+  display: inline-flex; align-items: center; width: max-content; padding: 6px 12px; border-radius: 50px;
+  background: rgba(0, 165, 140, .14); color: var(--qd-teal-strong) !important;
+  font-family: var(--heading-font); font-size: 13px; font-weight: 700; line-height: 13px; text-transform: uppercase;
+}
+/* preço Pix (com ícone do Pix) */
+.qd-pdp .payment-discount-price-product-container {
+  display: flex; align-items: center; gap: 10px; margin: 0;
+  font-size: 13px; font-weight: 500; line-height: 20px; color: var(--qd-ink);
+}
+.qd-pdp .payment-discount-price-product-container::before {
+  content: ""; flex: 0 0 auto; width: 20px; height: 20px; background: var(--qd-ink);
+  -webkit-mask: var(--qd-ico-pix) center / contain no-repeat; mask: var(--qd-ico-pix) center / contain no-repeat;
+}
+.qd-pdp .payment-discount-price-product { margin: 0; font-family: var(--heading-font); font-size: 19px; font-weight: 700; line-height: 20px; color: var(--qd-teal-strong); }
+/* parcelas (ícone de cartão) + "ver parcelamento" — movido para dentro da coluna de preço (pdp.js) */
+.qd-pdp .js-product-payments-container { margin: 0; padding: 0; border: 0; cursor: pointer; }
+.qd-pdp .product-installment { position: relative; margin: 0; padding-left: 30px; font-size: 13px; font-weight: 500; line-height: 20px; color: var(--qd-ink); }
+.qd-pdp .product-installment::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 20px; height: 20px; background: var(--qd-ink);
+  -webkit-mask: var(--qd-ico-card) center / contain no-repeat; mask: var(--qd-ico-card) center / contain no-repeat;
+}
+.qd-pdp .product-installment-amount, .qd-pdp .product-installment-value { font-weight: 700; }
+.qd-pdp .product-payments-link {
+  display: inline-block; margin: 8px 0 0 30px; padding: 0; font-family: var(--heading-font); font-size: 13px; font-weight: 700;
+  line-height: 18px; color: var(--qd-ink); text-decoration: underline; text-transform: none;
+}
+.qd-pdp .js-product-payments-container .product-payment-discount,
+.qd-pdp .js-product-payments-container .product-payment-discount-disclaimer { display: none; }
+
+.qd-pdp-coupon { display: flex; flex-direction: column; justify-content: center; gap: 16px; padding-left: 40px; border-left: 1px solid #e1dcd7; }
+.qd-pdp-coupon-title { margin: 0; font-size: 13px; font-weight: 600; line-height: 16.5px; }
+.qd-pdp-coupon-box {
+  display: flex; align-items: center; gap: 8px; width: max-content; height: 56px; padding: 8px 12px 8px 10px;
+  border: 1px solid #e1dcd7; border-radius: 60px;
+}
+.qd-pdp-coupon-icon { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50px; background: var(--qd-gold); position: relative; }
+.qd-pdp-coupon-icon::after {
+  content: ""; position: absolute; inset: 10px; background: #fff;
+  -webkit-mask: var(--qd-ico-coupon) center / contain no-repeat; mask: var(--qd-ico-coupon) center / contain no-repeat;
+}
+.qd-pdp-coupon-text { width: 107px; font-family: var(--heading-font); font-size: 13px; font-weight: 700; line-height: 15px; text-transform: uppercase; }
+.qd-pdp-coupon .qd-coupon-code { color: var(--qd-ink); }
+.qd-pdp-coupon .qd-coupon-copy { color: #fff; }
+
+/* --- Variantes: pílulas ---------------------------------------------------- */
+.qd-pdp .product-detail-variants-group { margin: 0 0 10px; }
+.qd-pdp .product-detail-variants-group:last-child { margin-bottom: 0; }
+.qd-pdp .product-detail-variants .form-label { display: block; margin: 0 0 10px; font-size: 13px; font-weight: 600; line-height: 16.5px; color: var(--qd-ink); }
+.qd-pdp .btn-variant {
+  display: inline-flex; align-items: center; justify-content: center; width: auto; min-width: 0; min-height: 42px;
+  margin: 0 10px 10px 0; padding: 9px 17px; border: 1px solid #ccc; border-radius: 170px; background: #fff; color: var(--qd-ink);
+}
+.qd-pdp .btn-variant .btn-variant-content { font-family: var(--heading-font); font-size: 13px; font-weight: 600; line-height: 15px; white-space: nowrap; }
+.qd-pdp .btn-variant.selected { background: var(--qd-gold); border-color: var(--qd-gold); color: #fff; }
+
+/* --- Comprar + WhatsApp (sem seletor de quantidade no Figma) --------------- */
+.qd-pdp .qd-pdp-actions { display: flex !important; align-items: center; gap: 16px; }
+.qd-pdp .qd-pdp-actions .form-quantity-container { display: none; }
+.qd-pdp .qd-pdp-actions .buy-button-container { flex: 1 1 auto; min-width: 0; }
+.qd-pdp .js-addtocart.btn-primary {
+  width: 100%; height: 42px; padding: 0 0 0 30px; border: 0; border-radius: 30px;
+  background: var(--qd-teal-strong) var(--qd-ico-cart-white) no-repeat calc(50% - 50px) center / 24px 24px;
+  font-family: var(--heading-font); font-size: 15px; font-weight: 700; line-height: 42px; text-transform: uppercase; color: #fff;
+}
+.qd-pdp-whatsapp {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 266px;
+  height: 42px; border: 1px solid var(--qd-ink); border-radius: 20px;
+  font-family: var(--heading-font); font-size: 13px; font-weight: 500; line-height: 16.5px; text-transform: uppercase;
+  color: var(--qd-ink); text-decoration: none;
+}
+.qd-pdp-whatsapp:hover { background: var(--qd-cream); color: var(--qd-ink); text-decoration: none; }
+.qd-pdp-wa-icon {
+  width: 24px; height: 24px; background: currentColor;
+  -webkit-mask: var(--qd-ico-whatsapp) center / contain no-repeat; mask: var(--qd-ico-whatsapp) center / contain no-repeat;
+}
+
+/* --- Garantia + descrição curta -------------------------------------------- */
+.qd-pdp .product-purchase-info { margin: 0; font-size: 13px; color: var(--qd-ink); }
+.qd-pdp .product-purchase-info .icon-text-item { align-items: center; gap: 10px; }
+.qd-pdp .product-purchase-info .icon-text-item-content { flex-direction: row; align-items: center; gap: 10px; }
+.qd-pdp .product-purchase-info [class*="title"] { margin: 0; font-family: var(--heading-font); font-size: 13px; font-weight: 700; line-height: 15px; text-transform: uppercase; }
+.qd-pdp .product-purchase-info [class*="description"], .qd-pdp .product-purchase-info [class*="description"] p { margin: 0; }
+.qd-pdp .product-purchase-info a { font-size: 11px; font-weight: 400; line-height: 15px; text-transform: uppercase; text-decoration: underline; color: var(--qd-ink); }
+.qd-pdp .product-info-description { margin: 0; padding: 0; border: 0; }
+.qd-pdp .product-description-heading { margin: 0 0 10px; font-family: var(--heading-font); font-size: 13px; font-weight: 600; line-height: 16.5px; text-transform: none; color: var(--qd-ink); }
+/* no card fica o resumo (4 linhas); o texto inteiro vai para "Detalhes do produto" abaixo */
+.qd-pdp .js-product-info .product-description-content {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+  font-size: 15px; font-weight: 400; line-height: 22px; color: var(--qd-ink);
+}
+.qd-pdp .js-product-info .product-description-content :is(h1, h2, h3, h4, h5, h6, p, ul, li, strong, b) { display: inline; margin: 0; }
+/* a descrição vem do admin com fontes/tamanhos inline: normaliza */
+.qd-pdp .js-product-info .product-description-content * { font-family: inherit !important; font-size: inherit !important; font-weight: inherit !important; line-height: inherit !important; color: inherit !important; }
+.qd-pdp .js-product-info .product-description-content :is(img, iframe, video, table, br) { display: none; }
+.qd-pdp .js-product-info .product-description-content :is(h1, h2, h3, h4, h5, h6, p, li)::after { content: " "; }
+
+/* --- Frete: rótulo + pílula na mesma linha --------------------------------- */
+.qd-pdp .js-shipping-calculator-form { display: flex; flex-wrap: wrap; align-items: center; column-gap: 10px; row-gap: 8px; }
+.qd-pdp .js-shipping-calculator-form .form-label { margin: 0; font-size: 13px; font-weight: 600; line-height: 16.5px; color: var(--qd-ink); }
+.qd-pdp .product-shipping-calculator .input-append {
+  display: flex; align-items: center; width: 331px; max-width: 100%; height: 42px; margin: 0; padding: 6px 6px 6px 20px;
+  border-radius: 170px; background: var(--qd-cream);
+}
+.qd-pdp .product-shipping-calculator .js-shipping-input {
+  flex: 1 1 auto; min-width: 0; height: auto; padding: 0; border: 0; background: transparent; box-shadow: none;
+  font-family: var(--heading-font); font-size: 13px; font-weight: 600; color: var(--qd-ink);
+}
+.qd-pdp .product-shipping-calculator .js-shipping-input::placeholder { color: var(--qd-ink); opacity: 1; }
+.qd-pdp .product-shipping-calculator .js-calculate-shipping {
+  position: static; height: 30px; min-width: 40px; padding: 0 12px; border: 0; border-radius: 170px; background: var(--qd-gold); color: #fff;
+  font-family: var(--heading-font); font-size: 11px; font-weight: 600; line-height: 30px;
+}
+.qd-pdp .js-shipping-calculator-form .js-shipping-zipcode-help { flex-basis: 100%; padding: 0; font-size: 11px; text-align: left; }
+
+/* --- Detalhes do produto (descrição completa, criada pelo pdp.js) ---------- */
+.qd-pdp-details { padding: 40px 0 20px; color: var(--qd-ink); }
+.qd-pdp-section-title { margin: 0 0 40px; font-family: var(--heading-font); font-size: 22px; font-weight: 600; line-height: normal; text-transform: none; color: var(--qd-ink); }
+.qd-pdp-details-body { max-width: 1026px; margin: 0 auto; font-size: 15px; font-weight: 500; line-height: 26px; }
+.qd-pdp-details-body * { font-family: inherit !important; }
+.qd-pdp-details-body :is(p, span, font, li, div) { font-size: inherit !important; line-height: inherit !important; color: inherit !important; }
+.qd-pdp-details-body :is(h1, h2, h3, h4) { margin: 0 0 30px; font-family: var(--heading-font); font-size: 25px; font-weight: 700; line-height: 36px; text-transform: none; color: var(--qd-ink); }
+.qd-pdp-details-body :is(h5, h6) { margin: 0 0 16px; font-size: 17px; font-weight: 700; }
+.qd-pdp-details-body p { margin: 0 0 30px; }
+.qd-pdp-details-body img, .qd-pdp-details-body iframe { max-width: 100%; height: auto; border-radius: 14px; }
+.qd-pdp-details-body iframe { aspect-ratio: 16 / 9; width: 100%; }
+
+/* --- Relacionados ("Veja também") ------------------------------------------ */
+.qd-pdp :is([data-section-id="complementary_products"], [data-section-id="alternative_products"]) .heading-block {
+  margin: 0; font-family: var(--heading-font); font-size: 22px; font-weight: 600; color: var(--qd-ink); text-transform: none;
+}
+div:is([data-section-id="complementary_products"], [data-section-id="alternative_products"]) { padding: 60px 0 40px !important; }
+
+/* ==========================================================================
+   MOBILE (Figma 66:17596)
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  .qd-pdp-top { padding: 16px; gap: 12px; border-radius: 16px; }
+  .qd-pdp-titles { gap: 8px; }
+  .qd-pdp-titles .product-name { font-size: 20px; line-height: 1.2; }
+  .qd-pdp .product-columns { display: flex; flex-direction: column; row-gap: 12px; }
+  .qd-pdp .js-product-images, .qd-pdp .js-product-info { width: 100% !important; padding: 12px !important; border-radius: 16px; margin: 0; }
+  .qd-pdp-price-row { flex-direction: column; gap: 16px; }
+  .qd-pdp-coupon { padding: 16px 0 0; border-left: 0; border-top: 1px solid #e1dcd7; }
+  .qd-pdp-coupon-box { width: 100%; }
+  .qd-pdp-coupon-text { width: auto; flex: 1 1 auto; font-size: 11px; line-height: 13px; }
+  .qd-pdp-coupon .qd-coupon-code { letter-spacing: 4px; padding: 0 8px; }
+  /* COMPRAR + WhatsApp redondo (Figma mobile) */
+  .qd-pdp-whatsapp { flex: 0 0 42px; width: 42px; padding: 0; border-radius: 50%; font-size: 0; gap: 0; }
+  .qd-pdp .js-shipping-calculator-form .form-label { flex-basis: 100%; }
+  .qd-pdp .product-shipping-calculator .input-append { width: 100%; }
+  .qd-pdp-details { padding: 30px 0 10px; }
+  .qd-pdp-section-title { margin-bottom: 20px; font-size: 19px; }
+  .qd-pdp-details-body :is(h1, h2, h3, h4) { margin-bottom: 20px; font-size: 19px; line-height: 26px; }
+  .qd-pdp-details-body { font-size: 13px; line-height: 20px; }
+  .qd-pdp-details-body p { margin-bottom: 20px; }
+}

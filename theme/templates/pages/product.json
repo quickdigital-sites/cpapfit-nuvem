@@ -3,7 +3,11 @@
     "main_product": {
       "type": "main-product",
       "settings": {
-        "section_width": "full"
+        "section_width": "page",
+        "column_gap": 16,
+        "vertical_padding": 16,
+        "horizontal_padding": 0,
+        "background_color": "#FEFDFC"
       },
       "blocks": {
         "product_media": {
@@ -11,16 +15,16 @@
           "settings": {
             "show_thumbnails": true,
             "thumbnail_position": "left",
-            "format": "grid",
-            "columns": "1_and_2",
-            "gap": 8
+            "format": "slider",
+            "columns": "1",
+            "gap": 6
           }
         },
         "product_info": {
           "type": "product-info",
           "settings": {
-            "gap": 40,
-            "vertical_padding": 8,
+            "gap": 20,
+            "vertical_padding": 0,
             "horizontal_padding": 0
           },
           "blocks": {
@@ -28,16 +32,16 @@
               "type": "description",
               "settings": {
                 "show_title": true,
-                "show_social": true
+                "show_social": false
               }
             },
             "purchase_info": {
               "type": "purchase-info",
               "settings": {
                 "icon_size": 24,
-                "title_size": "paragraph",
+                "title_size": "paragraph_small",
                 "description_size": "paragraph_small",
-                "gap": 24
+                "gap": 10
               },
               "blocks": {
                 "icon_returns": {
@@ -52,20 +56,19 @@
                   "type": "icon-text-item",
                   "settings": {
                     "icon": "security",
-                    "title": "Seu título aqui",
-                    "description": "Seu texto aqui"
+                    "title": "Garantia de 3 meses",
+                    "description": "<a href=\"/troca-devolucao-garantia/\">ver regras</a>"
                   }
                 }
               },
               "block_order": [
-                "icon_returns",
                 "icon_security"
               ]
             }
           },
           "block_order": [
-            "description",
-            "purchase_info"
+            "purchase_info",
+            "description"
           ]
         }
       },
@@ -87,14 +90,14 @@
         "complementary_heading": {
           "type": "heading",
           "settings": {
-            "title": "Seu título aqui",
-            "size": "h2"
+            "title": "Compre junto",
+            "size": "h4"
           }
         },
         "complementary_products_block": {
           "type": "product-recommendations",
           "settings": {
-            "columns": "4",
+            "columns": "5",
             "columns_mobile": "2"
           }
         }
@@ -117,14 +120,14 @@
         "alternative_heading": {
           "type": "heading",
           "settings": {
-            "title": "Seu título aqui",
-            "size": "h2"
+            "title": "Veja também",
+            "size": "h4"
           }
         },
         "alternative_products_block": {
           "type": "product-recommendations",
           "settings": {
-            "columns": "4",
+            "columns": "5",
             "columns_mobile": "2"
           }
         }

@@ -39,6 +39,17 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 - [ ] **Ícones:** as setas/etiqueta/carrinho/play foram desenhados em CSS (máscara SVG) porque o
   ambiente não conseguiu baixar os SVGs do Figma. Trocar pelos originais se houver diferença visível.
 
+- [ ] **PLP — limites do nativo (2026-09-28):** paginação clássica do tema é de 60 produtos por página
+  (Figma mostra 24) e o filtro de preço é por dois campos (Figma mostra slider). Sem fork não dá para mudar.
+- [ ] **PDP — seções do Figma sem suporte nativo:** "Ficha técnica" (com download do manual), "Perguntas
+  frequentes" e "Vídeo do produto" dependem de conteúdo por produto que o tema não tem (caminhos: fork +
+  campos personalizados, ou app). "Detalhes do produto"
+  foi feito com a **descrição completa** do produto (o card de compra mostra só as 4 primeiras linhas).
+  Também não há: logo da marca no card do título, coração (favoritos) e ícone de zoom. O **seletor de
+  quantidade** foi escondido (não existe no Figma) — a quantidade se ajusta no carrinho.
+- [ ] **PDP — cupom "Aproveite também"** (R$ 100 OFF na linha Philips / QUERO100) e WhatsApp estão fixos em
+  `frontend/src/js/components/pdp.js` — confirmar e ajustar quando a campanha mudar.
+
 ---
 
 ## Resolvido

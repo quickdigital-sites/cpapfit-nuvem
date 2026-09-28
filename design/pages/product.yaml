@@ -1,0 +1,39 @@
+# Produto (PDP) — gera theme/templates/pages/product.json (frontend/compose.mjs).
+# Figma: desktop 35:10696 • mobile 66:17596. Visual em frontend/src/css/pdp.css + js/components/pdp.js.
+#
+# ⚠️ Seções "Detalhes do produto", "Ficha técnica", "Perguntas frequentes" e "Vídeo do produto" do Figma
+#    dependem de conteúdo POR PRODUTO que o tema nativo não tem (só a descrição). Ficam para quando
+#    houver fork/app de campos personalizados — ver PENDENCIAS.md.
+unlisted: keep
+
+sections:
+  - native: main_product
+    settings: { section_width: page, column_gap: 16, vertical_padding: 16, horizontal_padding: 0, background_color: "#FEFDFC" }
+    blocks:
+      product_media:
+        settings: { format: slider, columns: "1", show_thumbnails: true, thumbnail_position: left, gap: 6 }
+      product_info:
+        settings: { gap: 20, vertical_padding: 0, horizontal_padding: 0 }
+        block_order: [purchase_info, description]   # garantia antes da descrição (Figma)
+        blocks:
+          purchase_info:
+            settings: { icon_size: 24, title_size: paragraph_small, description_size: paragraph_small, gap: 10 }
+            block_order: [icon_security]
+            blocks:
+              icon_security:
+                settings:
+                  icon: security
+                  title: Garantia de 3 meses
+                  description: '<a href="/troca-devolucao-garantia/">ver regras</a>'
+          description:
+            settings: { show_title: true, show_social: false }
+
+  - native: complementary_products
+    blocks:
+      complementary_heading: { settings: { title: Compre junto, size: h4 } }
+      complementary_products_block: { settings: { columns: "5", columns_mobile: "2" } }
+
+  - native: alternative_products
+    blocks:
+      alternative_heading: { settings: { title: Veja também, size: h4 } }
+      alternative_products_block: { settings: { columns: "5", columns_mobile: "2" } }
