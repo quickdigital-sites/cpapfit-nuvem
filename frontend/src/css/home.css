@@ -83,7 +83,16 @@ div[data-section-id="hero"] { min-height: 0 !important; } /* o tema imprime min-
   height: var(--qd-hero-h) !important;
   min-height: var(--qd-hero-h) !important;
 }
+[data-section-id="hero"] .media-visual { background: var(--qd-indigo); }
 [data-section-id="hero"] .media-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
+/* desktop: foto ocupa só a direita, como no Figma (left 34.6%, largura 65.4%, altura 155%, top -16%) */
+@media (min-width: 768px) {
+  [data-section-id="hero"] .media-visual img {
+    position: absolute; left: 34.61%; top: -16.13%;
+    width: 65.4% !important; height: 155.03% !important; max-width: none;
+    object-fit: cover; object-position: center;
+  }
+}
 [data-section-id="hero"] .media-visual::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: var(--qd-grad-indigo);
@@ -135,7 +144,7 @@ div[data-section-id="hero"] { min-height: 0 !important; } /* o tema imprime min-
   pointer-events: auto;
 }
 :is([data-section-id="hero"], [data-section-id="linhas"]) .group-block:has(.btn) .image-block img {
-  width: auto !important; height: 30px !important; max-width: 110px; object-fit: contain; position: static;
+  width: auto !important; height: 24px !important; max-width: 96px; object-fit: contain; position: static;
 }
 /* bloco de imagem sem imagem cai no placeholder do tema — esconde até o lojista subir o logo */
 .image-block:has(img[src*="placeholders"], img[data-src*="placeholders"], img[srcset*="placeholders"], img[data-srcset*="placeholders"]) {
@@ -208,7 +217,7 @@ div[data-section-id="hero"] { min-height: 0 !important; } /* o tema imprime min-
   }
   :is([data-section-id="hero"], [data-section-id="linhas"]) .btn.btn-primary::after { width: 12px; height: 12px; }
   :is([data-section-id="hero"], [data-section-id="linhas"]) .group-block:has(.btn) .image-block { height: 33px; padding: 3px 10px; border-radius: 34px; }
-  :is([data-section-id="hero"], [data-section-id="linhas"]) .group-block:has(.btn) .image-block img { height: 24px !important; max-width: 80px; }
+  :is([data-section-id="hero"], [data-section-id="linhas"]) .group-block:has(.btn) .image-block img { height: 20px !important; max-width: 72px; }
   /* cupom vira uma linha só: "R$ 200 OFF NA RESMED: QUERO200" (código sublinhado) */
   [data-section-id="hero"] .group-block:has(.label-block) { padding: 0; border-top: 0; }
   [data-section-id="hero"] .group-block:has(.label-block) > .group-content { gap: 4px !important; }
