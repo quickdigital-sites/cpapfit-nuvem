@@ -21,7 +21,7 @@
             "gap": 10,
             "vertical_padding": 0,
             "horizontal_padding": 0,
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/hero.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/hero.webp"
           },
           "blocks": {
             "titulo": {
@@ -63,7 +63,7 @@
                   "settings": {
                     "width": "fit",
                     "link": "/resmed/",
-                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/logo-resmed.png"
+                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/logo-resmed.png"
                   }
                 }
               },
@@ -149,7 +149,7 @@
               "settings": {
                 "text": "Máscaras",
                 "link": "/mascaras/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-mascaras.webp"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/categoria-mascaras.webp"
               }
             },
             "c2": {
@@ -157,7 +157,7 @@
               "settings": {
                 "text": "BIPAPs | VPAPs",
                 "link": "/bipaps/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-bipaps.webp"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/categoria-bipaps.webp"
               }
             },
             "c3": {
@@ -165,7 +165,7 @@
               "settings": {
                 "text": "CPAP Automático",
                 "link": "/cpaps/cpap-automatico/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-cpap-automatico.webp"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/categoria-cpap-automatico.webp"
               }
             },
             "c4": {
@@ -173,7 +173,7 @@
               "settings": {
                 "text": "CPAP Dreamstation",
                 "link": "/cpaps/dreamstation/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-dreamstation.webp"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/categoria-dreamstation.webp"
               }
             },
             "c5": {
@@ -181,7 +181,7 @@
               "settings": {
                 "text": "CPAP Portátil",
                 "link": "/cpaps/cpap-portatil/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-cpap-portatil.webp"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/categoria-cpap-portatil.webp"
               }
             },
             "c6": {
@@ -189,7 +189,7 @@
               "settings": {
                 "text": "CPAP Pressão Fixa",
                 "link": "/cpaps/cpap-pressao-fixa/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-cpap-pressao-fixa.webp"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/categoria-cpap-pressao-fixa.webp"
               }
             },
             "c7": {
@@ -197,7 +197,7 @@
               "settings": {
                 "text": "Umidificador",
                 "link": "/acessorios/umidificador/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-umidificador.webp"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/categoria-umidificador.webp"
               }
             }
           },
@@ -415,7 +415,7 @@
             "gap": 10,
             "vertical_padding": 60,
             "horizontal_padding": 60,
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/linha-resmed.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/linha-resmed.webp"
           },
           "blocks": {
             "rotulo": {
@@ -457,7 +457,7 @@
                   "settings": {
                     "width": "fit",
                     "link": "/resmed/",
-                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/logo-resmed.png"
+                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/logo-resmed.png"
                   }
                 }
               },
@@ -482,7 +482,7 @@
             "gap": 10,
             "vertical_padding": 60,
             "horizontal_padding": 60,
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/linha-philips.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/linha-philips.webp"
           },
           "blocks": {
             "rotulo": {
@@ -524,7 +524,7 @@
                   "settings": {
                     "width": "fit",
                     "link": "/philips-respironics/",
-                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/logo-philips.png"
+                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/logo-philips.png"
                   }
                 }
               },
@@ -613,7 +613,7 @@
               "settings": {
                 "text": "BMC",
                 "link": "/marcas/bmc/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-bmc.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/marca-bmc.png"
               }
             },
             "m2": {
@@ -621,7 +621,7 @@
               "settings": {
                 "text": "Covidien",
                 "link": "/marcas/covidien/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-covidien.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/marca-covidien.png"
               }
             },
             "m3": {
@@ -629,7 +629,7 @@
               "settings": {
                 "text": "Caire",
                 "link": "/marcas/caire/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-caire.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/marca-caire.png"
               }
             },
             "m4": {
@@ -637,7 +637,7 @@
               "settings": {
                 "text": "Resmed",
                 "link": "/resmed/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-resmed.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/marca-resmed.png"
               }
             },
             "m5": {
@@ -645,7 +645,7 @@
               "settings": {
                 "text": "Fisher & Paykel",
                 "link": "/marcas/fisher-paykel/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-fisher-paykel.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/marca-fisher-paykel.png"
               }
             },
             "m6": {
@@ -653,7 +653,7 @@
               "settings": {
                 "text": "MD",
                 "link": "/marcas/md/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-md.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/marca-md.png"
               }
             },
             "m7": {
@@ -661,7 +661,7 @@
               "settings": {
                 "text": "Ventcare",
                 "link": "/marcas/ventcare/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-ventcare.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/marca-ventcare.png"
               }
             }
           },
@@ -703,14 +703,14 @@
           "type": "banner",
           "settings": {
             "link": "/resmed/",
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/promo-resmed.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/promo-resmed.webp"
           }
         },
         "promo_2": {
           "type": "banner",
           "settings": {
             "link": "/philips-respironics/",
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/promo-philips.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/promo-philips.webp"
           }
         }
       },
@@ -761,7 +761,7 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/video-capa.webp"
                   }
                 },
                 "legenda": {
@@ -791,7 +791,7 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/video-capa.webp"
                   }
                 },
                 "legenda": {
@@ -821,7 +821,7 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/video-capa.webp"
                   }
                 },
                 "legenda": {
@@ -851,7 +851,7 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/video-capa.webp"
                   }
                 },
                 "legenda": {
@@ -915,7 +915,7 @@
               "settings": {
                 "text": "Vendas de equipamentos",
                 "link": "/produtos/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-vendas.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/servico-vendas.png"
               }
             },
             "s2": {
@@ -923,7 +923,7 @@
               "settings": {
                 "text": "Aluguel de CPAP e BIPAP",
                 "link": "/aluguel-de-cpap-e-bipap/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-aluguel-cpap.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/servico-aluguel-cpap.png"
               }
             },
             "s3": {
@@ -931,7 +931,7 @@
               "settings": {
                 "text": "Acompanhamento clínico",
                 "link": "/acompanhamento-clinico/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-acompanhamento.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/servico-acompanhamento.png"
               }
             },
             "s4": {
@@ -939,7 +939,7 @@
               "settings": {
                 "text": "Aluguel de ventiladores",
                 "link": "/aluguel-de-ventiladores/",
-                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-aluguel-ventiladores.png"
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@dbf1ed1fa9a6e9fccebcbf214a6d08090cb59ff7/design/assets/home/servico-aluguel-ventiladores.png"
               }
             }
           },
