@@ -14,6 +14,7 @@ import productGallery from "./components/product-gallery.js";
 import initHeaderPlans from "./components/header-plans.js";
 import initHeaderSearch from "./components/header-search.js";
 import initHomeTabs from "./components/home-tabs.js";
+import initFooter from "./components/footer.js";
 
 document.addEventListener("alpine:init", () => {
   // Componentes ficam disponíveis nos templates como x-data="miniCart()"
@@ -25,6 +26,7 @@ document.addEventListener("alpine:init", () => {
 initHeaderPlans();  // injeta a pílula "Planos de Assinatura"
 initHeaderSearch(); // garante submit da busca (Enter/clique) + preserva o preview
 initHomeTabs();     // abas de "Destaques" da home (troca a vitrine nativa visível)
+initFooter();       // footer: copiar cupom, menus (acordeão no mobile), "Seu nome" na newsletter
 
 // Overlay escuro atrás do submenu do menu desktop (mostrado por CSS :has no hover)
 (() => {

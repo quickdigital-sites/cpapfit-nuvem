@@ -243,6 +243,7 @@ Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar
 
 - **Fork indisponível** → só `custom/`, `templates/`, `settings_data.json` são graváveis. HTML de header/footer/sections = só CSS/JS/Brand Editor.
 - **`css_code` tem limite de 15.000 chars** → por isso o CSS vai no `<style>` do footer.
+- **Block "code" (custom_code) tem limite de 50.000 chars** → o `inject.mjs` quebra o CSS em vários `<style>` (cortes entre regras de nível 0), um block por pedaço (`code`, `code_2`…), e o JS no último. Erro típico no push: `Setting "code" of type "custom_code" exceeds limit: 50000 characters`.
 - **Dois tokens** (Admin API ≠ CLI de tema). CLI usa `theme/.nuvem`.
 - **Menu/config do admin** pode demorar (cache) a refletir no preview — recarregar.
 - **Header nativo:** o form de busca fica com `pointer-events:none` fechado; foi preciso forçar `pointer-events:auto` + handler próprio de submit.

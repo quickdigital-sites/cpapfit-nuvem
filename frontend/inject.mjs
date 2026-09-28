@@ -58,6 +58,31 @@ function injectCss() {
   if (writeJson(SETTINGS, data)) console.log("inject: css_code limpo (CSS movido para o <style> do footer)");
 }
 
+// Limite da plataforma para o setting "code" (custom_code): 50.000 caracteres. Margem de segurança.
+const BLOCK_LIMIT = 45000;
+
+// Quebra CSS minificado em pedaços <= max, cortando só depois de um "}" de nível 0
+// (fim de regra ou de @media inteiro), para cada pedaço ser CSS válido sozinho.
+function splitCss(css, max) {
+  if (!css) return [];
+  if (css.length <= max) return [css];
+  const out = [];
+  let depth = 0, start = 0, lastCut = -1, quote = null;
+  for (let i = 0; i < css.length; i++) {
+    const ch = css[i];
+    if (quote) { if (ch === "\\") i++; else if (ch === quote) quote = null; continue; }
+    if (ch === '"' || ch === "'") quote = ch;
+    else if (ch === "{") depth++;
+    else if (ch === "}") { depth--; if (depth === 0) lastCut = i + 1; }
+    if (i - start + 1 > max && lastCut > start) {
+      out.push(css.slice(start, lastCut));
+      start = lastCut;
+    }
+  }
+  out.push(css.slice(start));
+  return out.filter((c) => c.trim());
+}
+
 function injectJs() {
   const css = existsSync(CSS_OUT)
     ? readFileSync(CSS_OUT, "utf8")
@@ -74,23 +99,37 @@ function injectJs() {
 
   // Ordem importa: <style> primeiro; depois o inline registra o listener de
   // alpine:init antes dos scripts defer (plugin, depois core) executarem.
-  const code = [
-    css ? `<style>${css}</style>` : "",
+  const scripts = [
     `<script>${js}</script>`,
     `<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@${version("@alpinejs/collapse")}/dist/cdn.min.js"></script>`,
     `<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@${version("alpinejs")}/dist/cdn.min.js"></script>`,
-  ].filter(Boolean).join("\n");
+  ].join("\n");
+
+  // O setting "code" (custom_code) aceita no máximo 50.000 caracteres por block. O CSS é
+  // quebrado em vários <style> (cortes só entre regras de nível 0) e cada pedaço vai num
+  // block "code" próprio; o JS vai no último.
+  const pieces = [...splitCss(css, BLOCK_LIMIT - 20).map((c) => `<style>${c}</style>`), scripts];
+  for (const p of pieces) {
+    if (p.length > BLOCK_LIMIT) throw new Error(`block de código com ${p.length} caracteres (limite ${BLOCK_LIMIT})`);
+  }
+  const blocks = {};
+  const order = [];
+  pieces.forEach((code, i) => {
+    const id = i === 0 ? "code" : `code_${i + 1}`;
+    blocks[id] = { type: "code", settings: { code } };
+    order.push(id);
+  });
 
   const data = JSON.parse(readFileSync(FOOTER, "utf8"));
   data.sections[SECTION_ID] = {
     type: "custom",
     settings: { section_width: "full", vertical_padding: 0, horizontal_padding: 0 },
-    blocks: { code: { type: "code", settings: { code } } },
-    block_order: ["code"],
+    blocks,
+    block_order: order,
   };
   if (!data.order.includes(SECTION_ID)) data.order.push(SECTION_ID);
 
-  if (writeJson(FOOTER, data)) console.log(`inject: footer (código) atualizado — css ${kb(css)} + js ${kb(js)}`);
+  if (writeJson(FOOTER, data)) console.log(`inject: footer (código) atualizado — css ${kb(css)} + js ${kb(js)} em ${order.length} blocks`);
 }
 
 function run(fn) {

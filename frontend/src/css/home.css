@@ -53,14 +53,14 @@
     [data-section-id^="destaques_"], [data-section-id="mais_vendidos"], [data-section-id="hero"])
   :is(.swiper-button-prev, .swiper-button-next)::after {
   content: "";
-  width: 9px; height: 9px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: translateX(-2px) rotate(-45deg);
+  width: 24px; height: 24px; background: currentColor;
+  -webkit-mask: var(--qd-ico-chevron-left) center / contain no-repeat;
+          mask: var(--qd-ico-chevron-left) center / contain no-repeat;
+  transform: scaleX(-1); /* seta "próximo" (o ícone do Figma aponta para a esquerda) */
 }
 :is([data-section-id="categorias"], [data-section-id="marcas"], [data-section-id="servicos"],
     [data-section-id^="destaques_"], [data-section-id="mais_vendidos"], [data-section-id="hero"])
-  .swiper-button-prev::after { transform: translateX(2px) rotate(135deg); }
+  .swiper-button-prev::after { transform: none; }
 
 /* --- Bullets de paginação (8px; ativo azul) ------------------------------- */
 :is([data-section-id^="destaques_"], [data-section-id="mais_vendidos"], [data-section-id="marcas"],
@@ -395,7 +395,7 @@ div[data-section-id="videos"] { padding: 20px 0 70px !important; }
 }
 [data-section-id="videos"] .video-player-icon svg { display: none; }
 [data-section-id="videos"] .video-player-icon::after {
-  content: ""; width: 20px; height: 20px; background: currentColor;
+  content: ""; width: 24px; height: 24px; background: currentColor;
   -webkit-mask: var(--qd-ico-play) center / contain no-repeat;
           mask: var(--qd-ico-play) center / contain no-repeat;
 }

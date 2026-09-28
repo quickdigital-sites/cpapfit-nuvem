@@ -1,0 +1,40 @@
+# Footer CPAP Fit — gera theme/templates/layout/footer.json (frontend/compose.mjs).
+# Figma: desktop 24:806 • mobile 24:948.
+#
+#   footer_topo (componente)  redes sociais + barra de benefícios com cupom (COPIAR)
+#   footer (nativo)           Lista VIP (newsletter NATIVA — envia pro admin) + contato + menus (blocks "code")
+#   footer_base (componente)  endereço/CNPJ/© + Nuvemshop / Quick Digital + faixa em degradê
+#   nuvemshop_dev_js          CSS/JS do build (frontend/inject.mjs) — manter por último
+#
+# O legal nativo (copyright/pagamentos) fica escondido por CSS. Visual em frontend/src/css/footer.css.
+template: layout/footer
+unlisted: remove
+
+sections:
+  - component: footer-topo
+    settings: { custom_background_color: "#2F3295" }
+
+  - native: footer
+    settings:
+      background_color: "#2F3295"
+      text_color: "#FEFDFC"
+      section_width: page
+      vertical_padding: 0
+      horizontal_padding: 0
+      menus_toggle: true
+      footer_payments_show: false
+      footer_shipping_show: false
+    block_order: [newsletter, contato, links]
+    blocks:
+      newsletter:
+        type: footer-newsletter
+        settings:
+          title: Lista VIP
+          description: Tenha acesso a descontos e condições especiais
+      contato: { component: footer-contato }
+      links: { component: footer-links }
+
+  - component: footer-base
+    settings: { custom_background_color: "#2F3295" }
+
+  - native: nuvemshop_dev_js

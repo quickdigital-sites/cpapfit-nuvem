@@ -128,17 +128,39 @@ function componentSection(name, entry) {
   };
 }
 
+// Block com `component: <nome>` (dentro de uma seção nativa) vira um block "code" com o HTML de
+// design/components/<nome>.html — ex.: uma coluna própria dentro do footer nativo.
+function componentHtml(name) {
+  const file = resolve(COMPONENTS_DIR, `${name}.html`);
+  if (!existsSync(file)) throw new Error(`componente não encontrado: design/components/${name}.html`);
+  return resolveAssets(readFileSync(file, "utf8").replace(/<!--[\s\S]*?-->/g, "").trim());
+}
+
+function expandBlockComponents(node) {
+  if (!node || typeof node !== "object" || !node.blocks) return node;
+  const blocks = {};
+  for (const [id, b] of Object.entries(node.blocks)) {
+    blocks[id] = b && b.component
+      ? { type: "code", settings: { code: componentHtml(b.component), width: "fill", ...(b.settings ?? {}) } }
+      : expandBlockComponents(b);
+  }
+  return { ...node, blocks };
+}
+
 function composePage(yamlFile) {
   // merge: true habilita chaves de merge do YAML (`<<: *ancora`) para reaproveitar blocos.
   const spec = YAML.parse(readFileSync(yamlFile, "utf8"), { merge: true }) ?? {};
   const page = spec.page ?? basename(yamlFile, extname(yamlFile));
-  const out = resolve(TEMPLATES_DIR, `${page}.json`);
+  // `template: layout/footer` grava em theme/templates/layout/footer.json (padrão: pages/<página>.json)
+  const out = spec.template
+    ? resolve(root, "theme/templates", `${spec.template}.json`)
+    : resolve(TEMPLATES_DIR, `${page}.json`);
   const current = existsSync(out) ? JSON.parse(readFileSync(out, "utf8")) : { sections: {}, order: [] };
   const sections = {};
   const order = [];
 
   for (const [i, raw] of (spec.sections ?? []).entries()) {
-    const entry = resolveAssetsDeep(raw);
+    const entry = expandBlockComponents(resolveAssetsDeep(raw));
     const where = `${basename(yamlFile)} sections[${i}]`;
     if (entry.component) {
       const id = COMPONENT_PREFIX + String(entry.component).replace(/[^a-z0-9_]/gi, "_").toLowerCase();

@@ -3,12 +3,14 @@
    Uso: .elemento::after { content:""; width:24px; height:24px; background:currentColor;
         -webkit-mask: var(--qd-ico-arrow) center / contain no-repeat;
                 mask: var(--qd-ico-arrow) center / contain no-repeat; }
-   Obs.: os SVGs originais do Figma não puderam ser exportados (rede do ambiente
-   bloqueia figma.com); estes seguem o mesmo desenho (traço 2px, cantos redondos).
+   Todos com os paths originais do Figma (exportados do arquivo 1P4JHFz4FEG8UEBkDOB1qm).
    -------------------------------------------------------------------------- */
 :root {
-  --qd-ico-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
-  --qd-ico-tag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z'/%3E%3Ccircle cx='7.5' cy='7.5' r='1.5'/%3E%3C/svg%3E");
-  --qd-ico-cart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 3.5h2.3l2.6 11.7a1.8 1.8 0 0 0 1.8 1.4h8.3a1.8 1.8 0 0 0 1.8-1.4L21 7.5H6'/%3E%3Ccircle cx='9.5' cy='20' r='1.2'/%3E%3Ccircle cx='17.5' cy='20' r='1.2'/%3E%3C/svg%3E");
-  --qd-ico-play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z'/%3E%3C/svg%3E");
+  --qd-ico-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16.17 11L10.81 5.64L12.22 4.22L20 12L12.22 19.78L10.81 18.36L16.17 13H4V11H16.17Z'/%3E%3C/svg%3E");
+  --qd-ico-tag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10.9 2.1L20.8 3.51L22.22 13.41L13.03 22.61C12.63 23 12 23 11.61 22.61L1.71 12.71C1.32 12.32 1.32 11.68 1.71 11.29L10.9 2.1ZM11.61 4.22L3.83 12L12.32 20.48L20.1 12.71L19.04 5.28L11.61 4.22ZM13.73 10.59C12.95 9.8 12.95 8.54 13.73 7.76C14.51 6.98 15.78 6.98 16.56 7.76C17.34 8.54 17.34 9.8 16.56 10.59C15.78 11.37 14.51 11.37 13.73 10.59Z'/%3E%3C/svg%3E");
+  --qd-ico-cart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 6.42L0.76 3.17L2.18 1.76L5.42 5H20.66C21.21 5 21.66 5.45 21.66 6C21.66 6.1 21.65 6.2 21.62 6.29L19.22 14.29C19.09 14.71 18.7 15 18.26 15H6V17H17V19H5C4.45 19 4 18.55 4 18V6.42ZM6 7V13H17.52L19.32 7H6ZM5.5 23C4.68 23 4 22.33 4 21.5C4 20.67 4.68 20 5.5 20C6.33 20 7 20.67 7 21.5C7 22.33 6.33 23 5.5 23ZM17.5 23C16.68 23 16 22.33 16 21.5C16 20.67 16.68 20 17.5 20C18.33 20 19 20.67 19 21.5C19 22.33 18.33 23 17.5 23Z'/%3E%3C/svg%3E");
+  --qd-ico-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z'/%3E%3C/svg%3E");
+  --qd-ico-minus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 11V13H19V11H5Z'/%3E%3C/svg%3E");
+  --qd-ico-chevron-left: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10.83 12L15.78 16.95L14.36 18.36L8 12L14.36 5.64L15.78 7.05L10.83 12Z'/%3E%3C/svg%3E");
+  --qd-ico-play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.75 5.44L18.26 11.57C18.5 11.71 18.58 12.01 18.44 12.25C18.4 12.33 18.33 12.39 18.26 12.43L7.75 18.56C7.51 18.7 7.21 18.62 7.07 18.38C7.02 18.3 7 18.22 7 18.13V5.87C7 5.59 7.22 5.37 7.5 5.37C7.59 5.37 7.68 5.39 7.75 5.44Z'/%3E%3C/svg%3E");
 }
