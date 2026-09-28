@@ -32,6 +32,90 @@ nuvemshop-dev/
 
 ---
 
+## CPAP Fit: clonei o repo, como faço push para o homolog?
+
+A loja e o tema homolog **já existem** — não repita o "loja do zero" abaixo. Para um checkout novo
+(outra máquina / outro dev) só faltam as credenciais locais, que **não vão para o git**:
+
+| O quê | Para quê | Onde conseguir |
+|---|---|---|
+| `theme/.nuvem` | **push/pull/watch do tema** (é o que falta para subir a home) | gerado por `nuvemshop theme authorize` (abaixo) |
+| `.env` → `THEME_ID_HOMOLOG=14473488` | diz em qual instalação fazer push | valor fixo do projeto (ver HANDOVER §2) — ou `nuvemshop theme list` |
+| `.env` → `TIENDANUBE_ACCESS_TOKEN` / `TIENDANUBE_STORE_ID=8074130` | só para o **MCP / Admin API** (catálogo, pedidos). **Não** é usado no push de tema | pedir a quem tem o `.env` do projeto (Quick Digital) ou gerar pelo app de parceiro (passo 2 abaixo) |
+
+Todos os comandos abaixo partem da **raiz do repo** (`cpapfit-nuvem/`). Requisito: **Node ≥ 24.15**
+(exigido pela `@tiendanube/cli` 2.3+; confira com `node -v`).
+
+```bash
+# 1. ferramentas (uma vez por máquina)
+npm install -g @tiendanube/cli
+(cd frontend && npm ci)
+
+# 2. .env
+cp .env.example .env            # preencha THEME_ID_HOMOLOG=14473488 (o resto só se for usar o MCP)
+
+# 3. autorizar a CLI — abre o navegador; rode DENTRO de theme/
+(cd theme && nuvemshop theme authorize)
+```
+
+No `authorize`, entre com uma conta que tenha **acesso ao admin da loja CPAP Fit**
+(`cpapfit4.lojavirtualnuvem.com.br`, store 8074130) — dono da loja ou usuário convidado com permissão
+de Layout/Temas. Se sua conta não tiver acesso, peça ao dono da loja para te adicionar em
+*Admin → Configurações → Usuários e notificações*. A CLI grava `theme/.nuvem` (fica fora do git).
+Confira com `cd theme && nuvemshop theme list` — tem que aparecer a instalação `14473488` ("CPAP Fit — Dev").
+
+Depois, o loop de sempre:
+
+```bash
+(cd frontend && npm run build)
+(cd theme && set -a && . ../.env && set +a && nuvemshop theme push --theme-id "$THEME_ID_HOMOLOG" -y)
+```
+
+Preview (só renderiza **logado no admin** da loja):
+`https://cpapfit4.lojavirtualnuvem.com.br/?theme_installation_id=14473488`
+
+> ⚠️ Antes do push, se alguém mexeu no Brand Editor do homolog (imagens, categorias das abas…),
+> rode `nuvemshop theme pull --theme-id "$THEME_ID_HOMOLOG"` e faça o build de novo — senão o push
+> desfaz o que foi feito na loja.
+
+### Imagens (repo público de assets)
+
+O repo do tema é privado e o jsDelivr só serve repos públicos. Por isso as imagens de `design/assets/`
+são espelhadas no repo **público** `quickdigital-sites/quickdigital-sites-cpapfit-assets`, e o build usa
+`asset:<caminho>` → `https://cdn.jsdelivr.net/gh/<repo>@<commit>/design/assets/<caminho>`.
+
+```bash
+# depois de adicionar/trocar arquivos em design/assets/
+scripts/publish-assets.sh           # envia ao repo público (SSH do GitHub) e grava o commit em design/assets.json
+(cd frontend && npm run build)      # recompõe os templates com as novas URLs
+# … theme push
+```
+
+- Commite `design/assets.json` junto — é ele que fixa a versão das imagens.
+- O commit é fixo, então não há cache velho do jsDelivr: cada publicação gera URLs novas.
+- Imagem declarada no YAML é controlada pelo repo (o Brand Editor é sobrescrito no próximo build).
+
+### Problemas comuns
+
+- **`cd: no such file or directory: theme`**: você está dentro de `frontend/`. Volte para a raiz
+  (`cd ..`) ou use `cd ../theme`. Os blocos acima usam `( cd pasta && comando )` para não mudar de pasta.
+- **`npm warn EBADENGINE ... @tiendanube/cli ... required: { node: '>=24.15.0' }`**: seu Node é mais
+  antigo. Costuma funcionar mesmo assim, mas atualize para evitar erros estranhos na CLI
+  (`nvm install 24 && nvm use 24`, ou `brew upgrade node`). Depois de trocar de Node, reinstale o
+  front: `cd frontend && rm -rf node_modules && npm ci`.
+
+- **`Cannot find module '../lightningcss.darwin-arm64.node'`** (ou `@tailwindcss/oxide-*`) no
+  `npm run build`: o `frontend/node_modules` foi instalado em outro sistema (ex.: Linux/Docker/VM) e
+  não tem os binários do seu. Reinstale na sua máquina:
+  `cd frontend && rm -rf node_modules && npm ci`.
+  Não copie `node_modules` entre máquinas nem entre host e container.
+- **`theme list` / `push` dá 403**: está usando o token da Admin API. A CLI usa só o `theme/.nuvem`
+  — rode `nuvemshop theme authorize` de novo.
+- **Push mostra arquivos "Skipped"** (`static/`, `sections/`, `snippets/`…): esperado — sem fork a
+  plataforma só aceita `templates/`, `custom/` e `config/settings_data.json`. Ver HANDOVER §4.1.
+- **Preview mostra o tema antigo (Morelia)**: você não está logado no admin, ou o link perdeu o
+  `?theme_installation_id=14473488`.
+
 ## Começando uma loja do zero
 
 Passo a passo completo. Marque conforme for fazendo — o que trava a maioria das pessoas é o passo 2.

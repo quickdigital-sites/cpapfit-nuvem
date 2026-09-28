@@ -12,7 +12,8 @@
  *                     com o HTML num block "Código". Sem fork, é o único jeito de ter HTML próprio.
  *
  * Strings `asset:<caminho>` (no YAML ou no HTML) viram URL do jsDelivr para design/assets/<caminho>,
- * fixada num commit: ASSETS_REF (padrão: HEAD) em ASSETS_REPO (padrão: remote origin).
+ * fixada num commit: ASSETS_REF em ASSETS_REPO (env) ou design/assets.json {repo, ref}
+ * (padrão: HEAD do remote origin). Ver scripts/publish-assets.sh.
  * O jsDelivr só serve commits que já estão no GitHub — commite e dê push nos assets antes do preview.
  *
  * Só grava quando o conteúdo muda. Uso: node compose.mjs [--watch]
@@ -55,12 +56,19 @@ function gitRepo() {
   return url?.match(/[:/]([^/:]+)\/([^/]+?)(?:\.git)?$/)?.slice(1, 3).join("/") ?? null;
 }
 
-const ASSETS_REPO = process.env.ASSETS_REPO || gitRepo();
+// Repo PÚBLICO de assets (o repo do tema é privado e o jsDelivr só serve repos públicos).
+// Fonte, em ordem: variável de ambiente → design/assets.json (versionado; gravado por
+// scripts/publish-assets.sh) → remote origin + HEAD deste repo (modo antigo).
+const assetsCfg = (() => {
+  const f = resolve(root, "design/assets.json");
+  try { return existsSync(f) ? JSON.parse(readFileSync(f, "utf8")) : {}; } catch { return {}; }
+})();
+const ASSETS_REPO = process.env.ASSETS_REPO || assetsCfg.repo || gitRepo();
 const warned = new Set();
 const warnOnce = (msg) => warned.has(msg) || (warned.add(msg), console.warn(`compose: ⚠ ${msg}`));
 
 function assetUrl(path) {
-  const ref = process.env.ASSETS_REF || gitHead();
+  const ref = process.env.ASSETS_REF || assetsCfg.ref || gitHead();
   if (!existsSync(resolve(ASSETS_DIR, path))) warnOnce(`asset não encontrado: design/assets/${path}`);
   if (!ASSETS_REPO || !ref) {
     warnOnce("não consegui descobrir repo/commit para os assets — defina ASSETS_REPO e ASSETS_REF");
@@ -121,7 +129,8 @@ function componentSection(name, entry) {
 }
 
 function composePage(yamlFile) {
-  const spec = YAML.parse(readFileSync(yamlFile, "utf8")) ?? {};
+  // merge: true habilita chaves de merge do YAML (`<<: *ancora`) para reaproveitar blocos.
+  const spec = YAML.parse(readFileSync(yamlFile, "utf8"), { merge: true }) ?? {};
   const page = spec.page ?? basename(yamlFile, extname(yamlFile));
   const out = resolve(TEMPLATES_DIR, `${page}.json`);
   const current = existsSync(out) ? JSON.parse(readFileSync(out, "utf8")) : { sections: {}, order: [] };

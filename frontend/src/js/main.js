@@ -13,6 +13,7 @@ import miniCart from "./components/mini-cart.js";
 import productGallery from "./components/product-gallery.js";
 import initHeaderPlans from "./components/header-plans.js";
 import initHeaderSearch from "./components/header-search.js";
+import initHomeTabs from "./components/home-tabs.js";
 
 document.addEventListener("alpine:init", () => {
   // Componentes ficam disponíveis nos templates como x-data="miniCart()"
@@ -23,6 +24,7 @@ document.addEventListener("alpine:init", () => {
 // Enhancements do header nativo
 initHeaderPlans();  // injeta a pílula "Planos de Assinatura"
 initHeaderSearch(); // garante submit da busca (Enter/clique) + preserva o preview
+initHomeTabs();     // abas de "Destaques" da home (troca a vitrine nativa visível)
 
 // Overlay escuro atrás do submenu do menu desktop (mostrado por CSS :has no hover)
 (() => {

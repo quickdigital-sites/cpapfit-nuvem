@@ -15,6 +15,30 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
   de banner no Brand Editor** para cada categoria, com a **foto**, o **nome da marca**
   e o **link**. Depende das artes/fotos e dos links de cada linha.
 
+- [ ] **Home — fazer push e conferir no homolog** (2026-09-28). O build foi gerado, mas este checkout
+  não tem `.env`/`theme/.nuvem` (credenciais da CLI). Rodar `cd frontend && npm run build` e
+  `cd theme && nuvemshop theme push --theme-id "$THEME_ID_HOMOLOG" -y`, depois abrir o preview logado e
+  conferir desktop/mobile contra o Figma (0:326 / 0:630). Ajustar o que a renderização real mostrar.
+- [x] **Home — imagens do Figma** (2026-09-28): exportadas para `design/assets/home/` (26 arquivos) e
+  referenciadas no YAML como `asset:home/…`. Servidas pelo jsDelivr a partir do repo **público**
+  `quickdigital-sites/quickdigital-sites-cpapfit-assets` (commit fixado em `design/assets.json`, gravado
+  por `scripts/publish-assets.sh`). Trocar imagem = substituir o arquivo, rodar o script, build e push.
+  Faltam só as URLs de vídeo (YouTube). Categorias receberam fundo branco quadrado; Serviços, recorte redondo.
+- [ ] **Home — links de categoria presumidos** (`/mascaras/`, `/bipaps/`, `/cpaps/cpap-automatico/`,
+  `/marcas/...`, serviços etc. em `design/pages/home.yaml` e `design/components/destaques-abas.html`).
+  Conferir com as categorias/páginas reais da loja e corrigir.
+- [ ] **Home — abas de Destaques:** escolher no Brand Editor a **categoria** de cada vitrine
+  `destaques_1..6` (Kits promocionais, Máscaras, Tops CPAPs, Concentradores, Acessórios p/ Polissonografia,
+  Acessórios). Hoje todas usam a coleção padrão. Depois dar `theme pull` para não sobrescrever no push.
+- [ ] **Home — Dicas & Vídeos:** preencher a URL (YouTube) e a legenda dos 4 vídeos no Brand Editor.
+- [ ] **Home — cupom do hero:** confirmar texto/código ("R$ 200 OFF na Resmed" / `QUERO200`) e o link
+  do botão "Ver linha completa".
+- [ ] **Card de produto — itens sem suporte nativo:** a **marca** acima do nome ("PHILIPS RESPIRONICS")
+  e o **coração de favoritos** do Figma não existem no card do Ipanema (precisa de fork ou app).
+  O preço Pix aparece com o texto nativo "com Pix" (Figma: "no PIX").
+- [ ] **Ícones:** as setas/etiqueta/carrinho/play foram desenhados em CSS (máscara SVG) porque o
+  ambiente não conseguiu baixar os SVGs do Figma. Trocar pelos originais se houver diferença visível.
+
 ---
 
 ## Resolvido

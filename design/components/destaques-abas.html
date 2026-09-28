@@ -1,0 +1,20 @@
+<!--
+  Destaques (Figma 0:368 desktop / 0:692 mobile): título + abas em pílula.
+  Cada aba mostra UMA seção nativa product-list (destaques_1..6, logo abaixo desta seção);
+  a troca é feita por frontend/src/js/components/home-tabs.js (data-qd-tab = data-section-id).
+  O produto de cada vitrine é escolhido no Brand Editor (campo "Produtos" da seção).
+  Sem JS: só a 1ª vitrine aparece (CSS) e as abas continuam como links para a categoria.
+-->
+<section class="container qd-tabs" aria-label="Destaques" data-qd-tabs>
+  <div class="qd-tabs-row">
+    <h2 class="qd-section-title">Destaques</h2>
+    <div class="qd-tabs-list" role="tablist">
+      <a href="/kits-promocionais/" class="qd-chip" role="tab" data-qd-tab="destaques_1">Kits promocionais</a>
+      <a href="/mascaras/" class="qd-chip" role="tab" data-qd-tab="destaques_2">Máscaras</a>
+      <a href="/cpaps/" class="qd-chip" role="tab" data-qd-tab="destaques_3">Tops CPAPS</a>
+      <a href="/oxigenoterapia/concentradores-de-oxigenio/" class="qd-chip" role="tab" data-qd-tab="destaques_4">Concentradores De Oxigênio</a>
+      <a href="/diagnostico/acessorios-para-polissonografia/" class="qd-chip" role="tab" data-qd-tab="destaques_5">Acessórios Para Polissonografia</a>
+      <a href="/acessorios/" class="qd-chip" role="tab" data-qd-tab="destaques_6">Acessórios</a>
+    </div>
+  </div>
+</section>

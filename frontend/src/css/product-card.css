@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Card de produto (vitrine) — Figma "vitrine" 24:1373 (desktop) / 24:1700 (mobile).
+   Restiliza o card NATIVO do Ipanema (snippets/product-list/product-item/item.tpl),
+   então vale para TODAS as vitrines (home, categoria, busca, relacionados).
+   Ordem no card: selo % OFF → nome → preço Pix (grande, verde) → preço cheio/parcelas → COMPRAR.
+   Settings usados: promotion_labels_position = below (selo abaixo da foto), quick_shop = true
+   (botão COMPRAR), payment_discount_price = true (preço no Pix).
+   ⚠️ Marca (ex.: "PHILIPS RESPIRONICS") e o coração de favoritos do Figma não existem no card
+   nativo — ficam para quando houver fork (ver PENDENCIAS.md).
+   ========================================================================== */
+:root {
+  --qd-teal-strong: #00a58c;
+  --qd-card-border: rgba(0, 0, 0, 0.1);
+  --qd-offwhite: #fefdfc;
+}
+
+.js-item-product.product-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px 10px 0;
+  background: var(--qd-offwhite);
+  border: 1px solid var(--qd-card-border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.products-list-slider .swiper-wrapper { align-items: stretch; }
+.products-list-slider .js-item-product.swiper-slide { height: auto; }
+.js-item-product .product-item-image-container {
+  border-radius: 14px;
+  overflow: hidden;
+}
+.js-item-product .product-item-information { display: flex; flex: 1 1 auto; flex-direction: column; }
+.js-item-product .product-item-information-inner {
+  flex: 1 1 auto;
+  gap: 8px;
+  padding: 16px 6px;
+}
+.js-item-product .product-item-link { gap: 8px; color: var(--qd-ink); }
+
+/* selo "30% OFF" (label de promoção abaixo da foto) */
+.js-item-product .product-item-promo-label.label,
+.js-item-product .labels .label-primary {
+  padding: 6px 12px;
+  background: rgba(0, 165, 140, 0.14);
+  color: var(--qd-teal-strong);
+  border: 0;
+  border-radius: 50px;
+  font-family: var(--heading-font);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 13px;
+}
+.js-item-product .labels { gap: 6px; }
+
+.js-item-product .product-item-name {
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--qd-ink);
+}
+
+/* preço de lista: verde e grande (quando não há preço Pix) */
+.js-item-product .product-item-price {
+  font-family: var(--heading-font);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--qd-teal-strong);
+}
+.js-item-product .product-item-price-compare { font-size: 13px; color: var(--qd-ink); opacity: .6; }
+.js-item-product .product-item-discount { display: none; } /* o % já aparece no selo */
+
+/* preço no Pix (payment discount) vem logo abaixo do nome, em destaque */
+.js-item-product .product-item-payment-discount {
+  order: 1;
+  margin: 0;
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px;
+  font-family: var(--body-font);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--qd-ink);
+}
+.js-item-product .product-item-payment-discount .payment-discount-price-product {
+  font-family: var(--heading-font);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--qd-teal-strong);
+}
+.js-item-product .product-item-price-container,
+.js-item-product .product-item-installments { order: 2; }
+/* com preço Pix visível, o preço cheio vira linha secundária ("ou R$ 310,00") */
+.js-item-product .product-item-link:has(.product-item-payment-discount:not([style*="none"])) .product-item-price {
+  font-family: var(--body-font);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--qd-ink);
+}
+.js-item-product .product-item-link:has(.product-item-payment-discount:not([style*="none"])) .product-item-price::before {
+  content: "ou ";
+  font-weight: 500;
+}
+.js-item-product .product-item-installments,
+.js-item-product .product-installments {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--qd-ink);
+}
+.js-item-product .product-installment-amount,
+.js-item-product .product-installment-value { font-weight: 700; }
+
+/* botão COMPRAR (quick shop) — pílula verde com carrinho */
+.js-item-product .product-item-quick-shop-container {
+  margin-top: auto;
+  padding: 10px 6px 16px;
+}
+.js-item-product .product-item-quick-shop-container .btn {
+  display: block;
+  width: 100%;
+  height: 44px;
+  padding: 0 0 0 40px;
+  border: 0;
+  border-radius: 60px;
+  background: var(--qd-teal-strong) var(--qd-ico-cart-white) no-repeat calc(50% - 38px) center / 24px 24px;
+  color: var(--qd-offwhite);
+  font-family: var(--heading-font);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 44px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.js-item-product .product-item-quick-shop-container .btn:hover { filter: brightness(.95); }
+:root {
+  /* carrinho BRANCO (background-image não aceita currentColor em <input>) */
+  --qd-ico-cart-white: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fefdfc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 3.5h2.3l2.6 11.7a1.8 1.8 0 0 0 1.8 1.4h8.3a1.8 1.8 0 0 0 1.8-1.4L21 7.5H6'/%3E%3Ccircle cx='9.5' cy='20' r='1.2'/%3E%3Ccircle cx='17.5' cy='20' r='1.2'/%3E%3C/svg%3E");
+}
+
+/* Mobile (Figma 24:1700): card 160px, foto 144px, tipografia menor, botão 32px */
+@media (max-width: 767.98px) {
+  .js-item-product.product-item { padding: 8px 8px 0; border-radius: 16px; }
+  .js-item-product .product-item-image-container { border-radius: 10px; }
+  .js-item-product .product-item-information-inner { gap: 4px; padding: 8px 0; }
+  .js-item-product .product-item-link { gap: 4px; }
+  .js-item-product .product-item-promo-label.label,
+  .js-item-product .labels .label-primary { padding: 4px 8px; font-size: 10px; line-height: normal; border-radius: 44px; }
+  .js-item-product .product-item-name { font-size: 12px; line-height: 15px; }
+  .js-item-product .product-item-price,
+  .js-item-product .product-item-payment-discount .payment-discount-price-product { font-size: 14px; line-height: normal; }
+  .js-item-product .product-item-payment-discount { font-size: 10px; line-height: normal; gap: 0 4px; }
+  .js-item-product .product-item-installments,
+  .js-item-product .product-installments,
+  .js-item-product .product-item-link:has(.product-item-payment-discount:not([style*="none"])) .product-item-price {
+    font-size: 10px; line-height: 13px;
+  }
+  .js-item-product .product-item-quick-shop-container { padding: 4px 0 12px; }
+  .js-item-product .product-item-quick-shop-container .btn {
+    height: 32px; line-height: 32px; padding-left: 20px; border-radius: 16px; font-size: 11px;
+    background-size: 14px 14px; background-position: calc(50% - 30px) center;
+  }
+}

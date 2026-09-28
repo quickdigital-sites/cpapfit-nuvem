@@ -7,7 +7,7 @@ as decisões técnicas, o fluxo de trabalho e o registro do que já foi desenvol
 > [docs/frontend.md](docs/frontend.md) (stack do front). Este HANDOVER foca no
 > **estado atual do projeto CPAP Fit** e nas **armadilhas** descobertas na prática.
 
-Última atualização: 2026-09-25.
+Última atualização: 2026-09-28.
 
 ---
 
@@ -50,6 +50,8 @@ Só renderiza o nosso tema **logado no admin da loja**; sem login mostra a Morel
 ---
 
 ## 3. Setup rápido (novo dev)
+
+> Passo a passo detalhado (de onde vem cada credencial + problemas comuns, ex.: erro do `lightningcss`): [README → "CPAP Fit: clonei o repo"](README.md#cpap-fit-clonei-o-repo-como-faço-push-para-o-homolog).
 
 ```bash
 # 1. ferramentas
@@ -98,7 +100,8 @@ O build gera `theme/static/css/tailwind.css` e `theme/static/js/app.js`, mas `st
 ### 4.3. Layout a partir do Figma — `design/`
 - `design/pages/home.yaml` — ordem das seções da home (mistura seções **nativas** do Ipanema + **componentes custom**). Compilado por `frontend/compose.mjs` → `theme/templates/pages/home.json`.
 - `design/components/*.html` — HTML + Tailwind (prefixo `tw:`) + Alpine; cada um vira uma seção "Personalizada".
-- ⚠️ Os componentes atuais (`beneficios`, `categorias-circulos`, `destaques-marcas`, `essenciais-titulo`) ainda são **placeholders** genéricos (Calças/Camisas/smartwatches) — **serão substituídos** pelo conteúdo real da CPAP Fit.
+- A home CPAP Fit (2026-09-28) usa **seções nativas** para quase tudo (imagens/textos editáveis no Brand Editor) e só **um** componente: `destaques-abas` (abas de Destaques). Os placeholders antigos da Quick foram removidos.
+- O YAML aceita âncoras/merge (`<<: *ancora`) para reaproveitar blocos (`compose.mjs` usa `merge: true`).
 
 ### 4.4. Assets (imagens) — hospedadas na LOJA
 - Repo é **privado** → **jsDelivr não serve** (só repo público). Por isso `asset:` **não** é usado aqui.
@@ -196,6 +199,14 @@ Cronológico, do início até agora:
 10. **Menu (mobile) — concluído e validado** (390px). Painéis deslizantes nativos, virou **drawer lateral 90% / máx 350px** (página escurecida atrás). **Cabeçalho azul** (`--qd-indigo #2F3295`) com **X, "voltar" (‹), título e ícones brancos** (raiz e aninhados); **botão "voltar" funcional** (entra em categoria → volta à raiz). **"Minha conta" no topo, fundo branco**, ícone dourado + texto inline (Montserrat). Itens em **negrito** + **chevron dourado encorpado** (CSS, igual ao desktop). Touch targets ≥ 44px.
 11. **Menu desktop — borda + submenu com banners.** (a) **`border-top: 1px solid #ccc`** no menu (Figma 0:1109). (b) **Submenu (Figma 0:1070):** "Categorias" (subcategorias em 2 colunas) à esquerda + **banners à direita**. Os banners usam o bloco **NATIVO `navigation-banner`** (`theme/blocks/navigation-banner.tpl`, renderizado por `header-navigation.tpl` em `.nav-desktop-banners` > `.nav-banner-item`) — **editável no Brand Editor por categoria** (campos `menu_item`, `image`, `title`, `url`), **sem fork**. Só estilizamos (card, gradiente, rótulo "Linha" e botão "VER LINHA COMPLETA" via CSS). O lojista cadastra os banners no Brand Editor → navegação → bloco "Banner". Ver [PENDENCIAS.md](PENDENCIAS.md).
 
+12. **Home (desktop 0:326 + mobile 0:630) — implementada, aguardando push/validação no homolog.** `design/pages/home.yaml` reescrito; CSS em `frontend/src/css/home.css` (+ `product-card.css`, `icons.css`, importados no `main.css`), escopado por `[data-section-id="<id>"]` (atributo, não ID). Seções:
+    - `hero` (slideshow): foto no Brand Editor + **gradiente azul por CSS**; título/texto/CTA dourado + pílula de logo (bloco imagem) + cupom tracejado (bloco label). Mobile: cupom vira linha única com código sublinhado. Altura 540/300.
+    - `categorias`, `marcas`, `servicos` (featured-categories, círculos com imagem+nome; título de Categorias só no mobile).
+    - `cmp_destaques_abas` (componente) + `destaques_1..6` (product-list): **cada aba mostra uma vitrine nativa** — `frontend/src/js/components/home-tabs.js` alterna por `data-section-id` e dispara `resize` para o Swiper. Sem JS aparece só a 1ª.
+    - `linhas` (banners 2 col: Linha Resmed / Philips, gradiente por CSS, CTA + logo), `mais_vendidos` (product-list), `banners_promo` (2 artes), `videos` (seção Personalizada com 4 blocos de vídeo; 9:16 no desktop e 16:9 no mobile via CSS).
+    - **Card de produto** restilizado globalmente (vale também para PLP/busca): selo % OFF, preço Pix em destaque, parcelas, botão COMPRAR verde. `promotion_labels_position` → `below` no `settings_data.json`.
+    - Verificado com **mock estático** do DOM nativo + CSS real do Ipanema (Playwright, 1440 e 390px, sem scroll horizontal). **Ainda não conferido na loja** (sem credenciais da CLI neste checkout).
+
 Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar o DOM real renderizado (logado no admin) para as classes certas (`.head-row`, `.search-container`, `.nav-desktop-list`, `.desktop-dropdown`, `.nav-desktop-container`, `.menu-container`, `.navigation-bar`, `.sticky-header-wrapper`). A barra de benefícios (`.navigation-bar`) é um **strip de scroll horizontal nativo** (não é overflow de página).
 
 ---
@@ -220,7 +231,8 @@ Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar
 - [ ] **Tablet (768–1199):** hoje usa o padrão mobile completo (esconde "Planos" e conta). Reavaliar se quer um layout híbrido que preserve esses itens no tablet.
 - [ ] **Barra de benefícios no mobile:** hoje é um strip de scroll horizontal nativo; avaliar quebrar em 2 linhas.
 - [ ] **FOUC:** separar CSS crítico (header/menu) para o `<head>` (via `css_code`, respeitando o limite de 15k) e manter o resto no footer.
-- [ ] **Home:** substituir os componentes placeholder pelos reais (hero, categorias em círculos, destaques, banners, marcas, vídeos, serviços) — ver `design/home.yaml`.
+- [x] **Home:** estrutura + CSS prontos (2026-09-28). Falta **push no homolog, conferência visual** e o conteúdo no Brand Editor (imagens, categorias das abas, URLs de vídeo) — ver [PENDENCIAS.md](PENDENCIAS.md).
+- [ ] **Footer** (Figma 24:806 desktop / 24:948 mobile) — próximo passo.
 - [ ] **PLP e PDP** (catálogo e produto), desktop + mobile.
 - [ ] **Secrets do CI** (quando for automatizar deploy): `NUVEMSHOP_CLI_TOKEN` (via `scripts/cli-token.sh`), `THEME_ID_HOMOLOG`, e a variable `STORE_URL=https://cpapfit4.lojavirtualnuvem.com.br`.
 - [ ] **Go-live:** publicar a instalação Ipanema (substitui a Morelia). Rever estratégia de 2 instalações (homolog/prod) dado o limite da plataforma.

@@ -21,7 +21,7 @@
     "products_per_row_mobile": "2",
     "products_per_row_desktop": "4",
     "pagination": "classic",
-    "promotion_labels_position": "over",
+    "promotion_labels_position": "below",
     "labels_on_image_position": "bottom",
     "product_installments": true,
     "quick_shop": true,

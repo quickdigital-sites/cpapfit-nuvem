@@ -1,481 +1,977 @@
 {
   "sections": {
-    "slideshow": {
+    "hero": {
       "type": "slideshow",
       "settings": {
-        "autoplay": true,
         "section_width": "full",
-        "autoplay_speed": 6,
+        "auto_height": false,
+        "height_full": 60,
         "vertical_padding": 0,
-        "horizontal_padding": 0
+        "horizontal_padding": 0,
+        "autoplay": true,
+        "autoplay_speed": 6
       },
       "blocks": {
         "slide_1": {
           "type": "slide",
           "settings": {
             "alignment": "start",
-            "gap": 16,
-            "vertical_padding": 32,
-            "horizontal_padding": 64,
-            "text_color": "#FFFFFF",
-            "show_overlay": true,
-            "overlay_color": "#000066",
-            "overlay_opacity": 85,
-            "link": "/produtos/"
+            "text_color": "#FEFDFC",
+            "show_overlay": false,
+            "gap": 10,
+            "vertical_padding": 0,
+            "horizontal_padding": 0,
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/hero.webp"
           },
           "blocks": {
-            "heading": {
+            "titulo": {
               "type": "heading",
               "settings": {
-                "title": "Tecnologia no pulso.",
+                "title": "Conforto e Tecnologia Para Seu Sono",
                 "size": "custom",
-                "custom_font_size": 64,
-                "custom_mobile_font_size": 40,
-                "mobile_font_size": true
+                "custom_font_size": 51,
+                "mobile_font_size": true,
+                "custom_mobile_font_size": 24
               }
             },
-            "button": {
-              "type": "button",
-              "settings": {
-                "label": "Aproveitar agora",
-                "variant": "primary",
-                "size": "medium",
-                "link": "/produtos/"
-              }
-            },
-            "kicker": {
+            "texto": {
               "type": "text",
               "settings": {
-                "text": "Ofertas da semana em smartwatches",
-                "size": "paragraph_big"
+                "text": "Equipamentos modernos para tratamento domiciliar."
               }
             },
-            "offer": {
-              "type": "text",
+            "cta": {
+              "type": "group",
               "settings": {
-                "text": "Até 80% OFF",
-                "size": "paragraph_big"
-              }
+                "direction": "row",
+                "alignment": "start",
+                "gap": 12,
+                "width": "fill"
+              },
+              "blocks": {
+                "botao": {
+                  "type": "button",
+                  "settings": {
+                    "label": "Ver linha completa",
+                    "link": "/resmed/",
+                    "variant": "primary",
+                    "size": "medium"
+                  }
+                },
+                "logo": {
+                  "type": "image",
+                  "settings": {
+                    "width": "fit",
+                    "link": "/resmed/",
+                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/logo-resmed.png"
+                  }
+                }
+              },
+              "block_order": [
+                "botao",
+                "logo"
+              ]
+            },
+            "cupom": {
+              "type": "group",
+              "settings": {
+                "direction": "row",
+                "alignment": "start",
+                "gap": 16,
+                "width": "fill"
+              },
+              "blocks": {
+                "oferta": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<strong>R$ 200 OFF</strong> na Resmed",
+                    "width": "fit"
+                  }
+                },
+                "codigo": {
+                  "type": "label",
+                  "settings": {
+                    "text": "QUERO200",
+                    "variant": "primary"
+                  }
+                }
+              },
+              "block_order": [
+                "oferta",
+                "codigo"
+              ]
             }
           },
           "block_order": [
-            "kicker",
-            "heading",
-            "offer",
-            "button"
-          ]
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "alignment": "start",
-            "gap": 16,
-            "vertical_padding": 32,
-            "horizontal_padding": 64,
-            "text_color": "#FFFFFF",
-            "show_overlay": true,
-            "overlay_color": "#000033",
-            "overlay_opacity": 85,
-            "link": "/produtos/"
-          },
-          "blocks": {
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Performance que acelera.",
-                "size": "custom",
-                "custom_font_size": 64,
-                "custom_mobile_font_size": 40,
-                "mobile_font_size": true
-              }
-            },
-            "text": {
-              "type": "text",
-              "settings": {
-                "text": "Acessórios com até 50% OFF",
-                "size": "paragraph_big"
-              }
-            },
-            "button": {
-              "type": "button",
-              "settings": {
-                "label": "Ver acessórios",
-                "variant": "primary",
-                "size": "medium",
-                "link": "/produtos/"
-              }
-            }
-          },
-          "block_order": [
-            "heading",
-            "text",
-            "button"
+            "titulo",
+            "texto",
+            "cta",
+            "cupom"
           ]
         }
       },
       "block_order": [
-        "slide_1",
-        "slide_2"
+        "slide_1"
       ]
     },
-    "featured_products_1": {
+    "categorias": {
+      "type": "featured-categories",
+      "settings": {
+        "orientation": "vertical",
+        "text_alignment": "center",
+        "section_width": "page",
+        "gap": 40,
+        "vertical_padding": 60,
+        "background_color": "#E5E0D8"
+      },
+      "blocks": {
+        "titulo": {
+          "type": "heading",
+          "settings": {
+            "title": "Categorias",
+            "size": "h4"
+          }
+        },
+        "lista": {
+          "type": "category-nav",
+          "settings": {
+            "category_type": "image_thumbnail",
+            "format_image": "circular",
+            "image_position": "top",
+            "items_text_alignment": "center",
+            "image_size": 188,
+            "gap": 16,
+            "text_color": "#4A4A48"
+          },
+          "blocks": {
+            "c1": {
+              "type": "category-item",
+              "settings": {
+                "text": "Máscaras",
+                "link": "/mascaras/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-mascaras.webp"
+              }
+            },
+            "c2": {
+              "type": "category-item",
+              "settings": {
+                "text": "BIPAPs | VPAPs",
+                "link": "/bipaps/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-bipaps.webp"
+              }
+            },
+            "c3": {
+              "type": "category-item",
+              "settings": {
+                "text": "CPAP Automático",
+                "link": "/cpaps/cpap-automatico/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-cpap-automatico.webp"
+              }
+            },
+            "c4": {
+              "type": "category-item",
+              "settings": {
+                "text": "CPAP Dreamstation",
+                "link": "/cpaps/dreamstation/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-dreamstation.webp"
+              }
+            },
+            "c5": {
+              "type": "category-item",
+              "settings": {
+                "text": "CPAP Portátil",
+                "link": "/cpaps/cpap-portatil/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-cpap-portatil.webp"
+              }
+            },
+            "c6": {
+              "type": "category-item",
+              "settings": {
+                "text": "CPAP Pressão Fixa",
+                "link": "/cpaps/cpap-pressao-fixa/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-cpap-pressao-fixa.webp"
+              }
+            },
+            "c7": {
+              "type": "category-item",
+              "settings": {
+                "text": "Umidificador",
+                "link": "/acessorios/umidificador/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/categoria-umidificador.webp"
+              }
+            }
+          },
+          "block_order": [
+            "c1",
+            "c2",
+            "c3",
+            "c4",
+            "c5",
+            "c6",
+            "c7"
+          ]
+        }
+      },
+      "block_order": [
+        "titulo",
+        "lista"
+      ]
+    },
+    "cmp_destaques_abas": {
+      "type": "custom",
+      "settings": {
+        "section_width": "full",
+        "vertical_padding": 0,
+        "horizontal_padding": 0,
+        "gap": 0
+      },
+      "blocks": {
+        "code": {
+          "type": "code",
+          "settings": {
+            "code": "<section class=\"container qd-tabs\" aria-label=\"Destaques\" data-qd-tabs>\n  <div class=\"qd-tabs-row\">\n    <h2 class=\"qd-section-title\">Destaques</h2>\n    <div class=\"qd-tabs-list\" role=\"tablist\">\n      <a href=\"/kits-promocionais/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_1\">Kits promocionais</a>\n      <a href=\"/mascaras/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_2\">Máscaras</a>\n      <a href=\"/cpaps/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_3\">Tops CPAPS</a>\n      <a href=\"/oxigenoterapia/concentradores-de-oxigenio/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_4\">Concentradores De Oxigênio</a>\n      <a href=\"/diagnostico/acessorios-para-polissonografia/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_5\">Acessórios Para Polissonografia</a>\n      <a href=\"/acessorios/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_6\">Acessórios</a>\n    </div>\n  </div>\n</section>",
+            "width": "fill"
+          }
+        }
+      },
+      "block_order": [
+        "code"
+      ]
+    },
+    "destaques_1": {
       "type": "product-list",
       "settings": {
         "alignment": "left",
         "section_width": "page",
-        "gap": 24,
-        "vertical_padding": 48
+        "gap": 20,
+        "vertical_padding": 0
       },
       "blocks": {
-        "header_group": {
-          "type": "group",
+        "products": {
+          "type": "products",
           "settings": {
-            "direction": "row",
-            "alignment": "center",
-            "alignment_vertical": "center"
+            "format": "slider",
+            "columns": "5",
+            "use_different_mobile_format": true,
+            "format_mobile": "slider",
+            "columns_mobile": "2",
+            "max_products": 12
+          }
+        }
+      },
+      "block_order": [
+        "products"
+      ]
+    },
+    "destaques_2": {
+      "type": "product-list",
+      "settings": {
+        "alignment": "left",
+        "section_width": "page",
+        "gap": 20,
+        "vertical_padding": 0
+      },
+      "blocks": {
+        "products": {
+          "type": "products",
+          "settings": {
+            "format": "slider",
+            "columns": "5",
+            "use_different_mobile_format": true,
+            "format_mobile": "slider",
+            "columns_mobile": "2",
+            "max_products": 12
+          }
+        }
+      },
+      "block_order": [
+        "products"
+      ]
+    },
+    "destaques_3": {
+      "type": "product-list",
+      "settings": {
+        "alignment": "left",
+        "section_width": "page",
+        "gap": 20,
+        "vertical_padding": 0
+      },
+      "blocks": {
+        "products": {
+          "type": "products",
+          "settings": {
+            "format": "slider",
+            "columns": "5",
+            "use_different_mobile_format": true,
+            "format_mobile": "slider",
+            "columns_mobile": "2",
+            "max_products": 12
+          }
+        }
+      },
+      "block_order": [
+        "products"
+      ]
+    },
+    "destaques_4": {
+      "type": "product-list",
+      "settings": {
+        "alignment": "left",
+        "section_width": "page",
+        "gap": 20,
+        "vertical_padding": 0
+      },
+      "blocks": {
+        "products": {
+          "type": "products",
+          "settings": {
+            "format": "slider",
+            "columns": "5",
+            "use_different_mobile_format": true,
+            "format_mobile": "slider",
+            "columns_mobile": "2",
+            "max_products": 12
+          }
+        }
+      },
+      "block_order": [
+        "products"
+      ]
+    },
+    "destaques_5": {
+      "type": "product-list",
+      "settings": {
+        "alignment": "left",
+        "section_width": "page",
+        "gap": 20,
+        "vertical_padding": 0
+      },
+      "blocks": {
+        "products": {
+          "type": "products",
+          "settings": {
+            "format": "slider",
+            "columns": "5",
+            "use_different_mobile_format": true,
+            "format_mobile": "slider",
+            "columns_mobile": "2",
+            "max_products": 12
+          }
+        }
+      },
+      "block_order": [
+        "products"
+      ]
+    },
+    "destaques_6": {
+      "type": "product-list",
+      "settings": {
+        "alignment": "left",
+        "section_width": "page",
+        "gap": 20,
+        "vertical_padding": 0
+      },
+      "blocks": {
+        "products": {
+          "type": "products",
+          "settings": {
+            "format": "slider",
+            "columns": "5",
+            "use_different_mobile_format": true,
+            "format_mobile": "slider",
+            "columns_mobile": "2",
+            "max_products": 12
+          }
+        }
+      },
+      "block_order": [
+        "products"
+      ]
+    },
+    "linhas": {
+      "type": "banners",
+      "settings": {
+        "format": "grid",
+        "columns": "2",
+        "columns_mobile": "1",
+        "use_different_mobile_format": true,
+        "format_mobile": "grid",
+        "section_width": "page",
+        "banner_aspect_ratio": "custom",
+        "banner_aspect_ratio_height": 54,
+        "use_different_mobile_aspect_ratio": true,
+        "banner_aspect_ratio_mobile": "custom",
+        "banner_aspect_ratio_mobile_height": 56,
+        "gap": 20,
+        "vertical_padding": 0
+      },
+      "blocks": {
+        "resmed": {
+          "type": "banner",
+          "settings": {
+            "alignment": "start",
+            "text_color": "#FEFDFC",
+            "show_overlay": false,
+            "gap": 10,
+            "vertical_padding": 60,
+            "horizontal_padding": 60,
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/linha-resmed.webp"
           },
           "blocks": {
-            "heading": {
-              "type": "heading",
+            "rotulo": {
+              "type": "text",
               "settings": {
-                "title": "Destaques da loja",
-                "size": "h4"
+                "text": "Linha"
               }
             },
-            "view_all_button": {
-              "type": "view-all-button",
+            "titulo": {
+              "type": "heading",
               "settings": {
-                "label": "Ver tudo",
-                "variant": "tertiary"
+                "title": "Resmed",
+                "size": "custom",
+                "custom_font_size": 41,
+                "mobile_font_size": true,
+                "custom_mobile_font_size": 28
               }
+            },
+            "cta": {
+              "type": "group",
+              "settings": {
+                "direction": "row",
+                "alignment": "start",
+                "gap": 12,
+                "width": "fill"
+              },
+              "blocks": {
+                "botao": {
+                  "type": "button",
+                  "settings": {
+                    "label": "Ver linha completa",
+                    "link": "/resmed/",
+                    "variant": "primary",
+                    "size": "medium"
+                  }
+                },
+                "logo": {
+                  "type": "image",
+                  "settings": {
+                    "width": "fit",
+                    "link": "/resmed/",
+                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/logo-resmed.png"
+                  }
+                }
+              },
+              "block_order": [
+                "botao",
+                "logo"
+              ]
             }
           },
           "block_order": [
-            "heading",
-            "view_all_button"
+            "rotulo",
+            "titulo",
+            "cta"
           ]
+        },
+        "philips": {
+          "type": "banner",
+          "settings": {
+            "alignment": "start",
+            "text_color": "#FEFDFC",
+            "show_overlay": false,
+            "gap": 10,
+            "vertical_padding": 60,
+            "horizontal_padding": 60,
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/linha-philips.webp"
+          },
+          "blocks": {
+            "rotulo": {
+              "type": "text",
+              "settings": {
+                "text": "Linha"
+              }
+            },
+            "titulo": {
+              "type": "heading",
+              "settings": {
+                "title": "Philips Respironics",
+                "size": "custom",
+                "custom_font_size": 41,
+                "mobile_font_size": true,
+                "custom_mobile_font_size": 28
+              }
+            },
+            "cta": {
+              "type": "group",
+              "settings": {
+                "direction": "row",
+                "alignment": "start",
+                "gap": 12,
+                "width": "fill"
+              },
+              "blocks": {
+                "botao": {
+                  "type": "button",
+                  "settings": {
+                    "label": "Ver linha completa",
+                    "link": "/philips-respironics/",
+                    "variant": "primary",
+                    "size": "medium"
+                  }
+                },
+                "logo": {
+                  "type": "image",
+                  "settings": {
+                    "width": "fit",
+                    "link": "/philips-respironics/",
+                    "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/logo-philips.png"
+                  }
+                }
+              },
+              "block_order": [
+                "botao",
+                "logo"
+              ]
+            }
+          },
+          "block_order": [
+            "rotulo",
+            "titulo",
+            "cta"
+          ]
+        }
+      },
+      "block_order": [
+        "resmed",
+        "philips"
+      ]
+    },
+    "mais_vendidos": {
+      "type": "product-list",
+      "settings": {
+        "alignment": "left",
+        "section_width": "page",
+        "gap": 20,
+        "vertical_padding": 0
+      },
+      "blocks": {
+        "titulo": {
+          "type": "heading",
+          "settings": {
+            "title": "Os mais vendidos",
+            "size": "h4"
+          }
         },
         "products": {
           "type": "products",
           "settings": {
-            "products_source": null,
-            "format": "grid",
-            "columns": "4",
-            "columns_mobile": "2",
+            "format": "slider",
+            "columns": "5",
             "use_different_mobile_format": true,
             "format_mobile": "slider",
-            "max_products": 8
+            "columns_mobile": "2",
+            "max_products": 12
           }
         }
       },
       "block_order": [
-        "header_group",
+        "titulo",
         "products"
       ]
     },
-    "cmp_categorias_circulos": {
-      "type": "custom",
+    "marcas": {
+      "type": "featured-categories",
       "settings": {
-        "section_width": "full",
-        "vertical_padding": 0,
-        "horizontal_padding": 0,
-        "gap": 0
+        "orientation": "vertical",
+        "text_alignment": "center",
+        "section_width": "page",
+        "gap": 40,
+        "vertical_padding": 0
       },
       "blocks": {
-        "code": {
-          "type": "code",
+        "titulo": {
+          "type": "heading",
           "settings": {
-            "code": "<section class=\"container tw:py-10 tw:md:py-14\" aria-label=\"Compre por categorias\">\n  <div class=\"tw:flex tw:items-end tw:justify-between tw:gap-4 tw:border-b tw:border-[#D1D5DB]\">\n    <h2 class=\"tw:m-0 tw:-mb-px tw:border-b-2 tw:border-brand tw:pb-3 tw:font-display tw:text-xl tw:font-black tw:text-[#000066] tw:md:text-2xl\">\n      Compre por <span class=\"tw:text-brand\">categorias</span>\n    </h2>\n    <a href=\"/produtos/\" class=\"tw:pb-3 tw:text-sm tw:font-semibold tw:text-[#1F2937] tw:no-underline tw:hover:text-brand\">\n      Ver tudo <span aria-hidden=\"true\">›</span>\n    </a>\n  </div>\n\n  <ul class=\"tw:m-0 tw:mt-8 tw:flex tw:list-none tw:snap-x tw:gap-5 tw:overflow-x-auto tw:p-0 tw:pb-2 tw:md:gap-10 tw:md:overflow-visible\">\n    <li class=\"tw:w-24 tw:shrink-0 tw:snap-start tw:md:w-32\">\n      <a href=\"/calcas/\" class=\"tw:group tw:flex tw:flex-col tw:items-center tw:gap-3 tw:no-underline\">\n        <span class=\"tw:flex tw:aspect-square tw:w-full tw:items-center tw:justify-center tw:overflow-hidden tw:rounded-full tw:bg-[#F8F9FC] tw:ring-1 tw:ring-[#E5E7EB] tw:transition tw:group-hover:ring-2 tw:group-hover:ring-brand\">\n          <img src=\"https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@c9076d3fda7f15c1cc2d5f924365a7d91b48abb6/design/assets/home/categoria-1.webp\" alt=\"\" width=\"132\" height=\"132\" loading=\"lazy\" class=\"tw:size-full tw:object-cover\">\n        </span>\n        <span class=\"tw:text-sm tw:font-semibold tw:text-[#1F2937] tw:group-hover:text-brand\">Calças</span>\n      </a>\n    </li>\n    <li class=\"tw:w-24 tw:shrink-0 tw:snap-start tw:md:w-32\">\n      <a href=\"/camisas/\" class=\"tw:group tw:flex tw:flex-col tw:items-center tw:gap-3 tw:no-underline\">\n        <span class=\"tw:flex tw:aspect-square tw:w-full tw:items-center tw:justify-center tw:overflow-hidden tw:rounded-full tw:bg-[#F8F9FC] tw:ring-1 tw:ring-[#E5E7EB] tw:transition tw:group-hover:ring-2 tw:group-hover:ring-brand\">\n          <img src=\"https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@c9076d3fda7f15c1cc2d5f924365a7d91b48abb6/design/assets/home/categoria-2.webp\" alt=\"\" width=\"132\" height=\"132\" loading=\"lazy\" class=\"tw:size-full tw:object-cover\">\n        </span>\n        <span class=\"tw:text-sm tw:font-semibold tw:text-[#1F2937] tw:group-hover:text-brand\">Camisas</span>\n      </a>\n    </li>\n    <li class=\"tw:w-24 tw:shrink-0 tw:snap-start tw:md:w-32\">\n      <a href=\"/produtos/\" class=\"tw:group tw:flex tw:flex-col tw:items-center tw:gap-3 tw:no-underline\">\n        <span class=\"tw:flex tw:aspect-square tw:w-full tw:items-center tw:justify-center tw:overflow-hidden tw:rounded-full tw:bg-[#000066] tw:ring-1 tw:ring-[#000066] tw:transition tw:group-hover:ring-2 tw:group-hover:ring-brand\">\n          <span class=\"tw:font-display tw:text-3xl tw:font-black tw:text-white\" aria-hidden=\"true\">+</span>\n        </span>\n        <span class=\"tw:text-center tw:text-sm tw:font-semibold tw:text-[#1F2937] tw:group-hover:text-brand\">Todos os produtos</span>\n      </a>\n    </li>\n  </ul>\n</section>",
-            "width": "fill"
+            "title": "As melhores marcas",
+            "size": "h4"
           }
+        },
+        "lista": {
+          "type": "category-nav",
+          "settings": {
+            "category_type": "image_thumbnail",
+            "format_image": "circular",
+            "image_position": "top",
+            "items_text_alignment": "center",
+            "image_size": 148,
+            "gap": 20,
+            "text_color": "#4A4A48"
+          },
+          "blocks": {
+            "m1": {
+              "type": "category-item",
+              "settings": {
+                "text": "BMC",
+                "link": "/marcas/bmc/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-bmc.png"
+              }
+            },
+            "m2": {
+              "type": "category-item",
+              "settings": {
+                "text": "Covidien",
+                "link": "/marcas/covidien/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-covidien.png"
+              }
+            },
+            "m3": {
+              "type": "category-item",
+              "settings": {
+                "text": "Caire",
+                "link": "/marcas/caire/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-caire.png"
+              }
+            },
+            "m4": {
+              "type": "category-item",
+              "settings": {
+                "text": "Resmed",
+                "link": "/resmed/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-resmed.png"
+              }
+            },
+            "m5": {
+              "type": "category-item",
+              "settings": {
+                "text": "Fisher & Paykel",
+                "link": "/marcas/fisher-paykel/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-fisher-paykel.png"
+              }
+            },
+            "m6": {
+              "type": "category-item",
+              "settings": {
+                "text": "MD",
+                "link": "/marcas/md/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-md.png"
+              }
+            },
+            "m7": {
+              "type": "category-item",
+              "settings": {
+                "text": "Ventcare",
+                "link": "/marcas/ventcare/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/marca-ventcare.png"
+              }
+            }
+          },
+          "block_order": [
+            "m1",
+            "m2",
+            "m3",
+            "m4",
+            "m5",
+            "m6",
+            "m7"
+          ]
         }
       },
       "block_order": [
-        "code"
+        "titulo",
+        "lista"
       ]
     },
-    "cmp_destaques_marcas": {
-      "type": "custom",
-      "settings": {
-        "section_width": "full",
-        "vertical_padding": 0,
-        "horizontal_padding": 0,
-        "gap": 0
-      },
-      "blocks": {
-        "code": {
-          "type": "code",
-          "settings": {
-            "code": "<section class=\"container tw:py-10 tw:md:py-14\" aria-label=\"Destaques da semana\">\n  <div class=\"tw:flex tw:items-end tw:justify-between tw:gap-4 tw:border-b tw:border-[#D1D5DB]\">\n    <h2 class=\"tw:m-0 tw:-mb-px tw:border-b-2 tw:border-brand tw:pb-3 tw:font-display tw:text-xl tw:font-black tw:text-[#000066] tw:md:text-2xl\">\n      Destaques da <span class=\"tw:text-brand\">semana</span>\n    </h2>\n    <a href=\"/produtos/\" class=\"tw:pb-3 tw:text-sm tw:font-semibold tw:text-[#1F2937] tw:no-underline tw:hover:text-brand\">\n      Ver tudo <span aria-hidden=\"true\">›</span>\n    </a>\n  </div>\n\n  <div class=\"tw:mt-8 tw:flex tw:snap-x tw:gap-4 tw:overflow-x-auto tw:pb-2 tw:md:grid tw:md:grid-cols-3 tw:md:overflow-visible\">\n    <a href=\"/produtos/\" class=\"tw:group tw:relative tw:flex tw:h-52 tw:w-[85%] tw:shrink-0 tw:snap-start tw:overflow-hidden tw:rounded-2xl tw:bg-[#000066] tw:p-6 tw:text-white tw:no-underline tw:md:w-auto\">\n      <span class=\"tw:absolute tw:-right-12 tw:-top-16 tw:size-64 tw:rounded-full tw:bg-white/5\" aria-hidden=\"true\"></span>\n      <span class=\"tw:relative tw:z-10 tw:flex tw:max-w-[60%] tw:flex-col tw:items-start\">\n        <span class=\"tw:rounded-md tw:bg-white/10 tw:px-3 tw:py-1.5 tw:text-xs tw:font-bold tw:uppercase tw:tracking-[0.2em]\">Lançamentos</span>\n        <span class=\"tw:mt-4 tw:font-display tw:text-2xl tw:font-black tw:leading-tight\">Chegou agora</span>\n        <span class=\"tw:mt-auto tw:text-lg tw:font-bold\">Até 30% <span class=\"tw:text-brand\">OFF</span></span>\n      </span>\n      <img src=\"https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@c9076d3fda7f15c1cc2d5f924365a7d91b48abb6/design/assets/home/destaque-1.webp\" alt=\"\" width=\"200\" height=\"200\" loading=\"lazy\" class=\"tw:absolute tw:bottom-0 tw:right-0 tw:h-full tw:w-2/5 tw:object-cover tw:transition tw:group-hover:scale-105\">\n    </a>\n\n    <a href=\"/camisas/\" class=\"tw:group tw:relative tw:flex tw:h-52 tw:w-[85%] tw:shrink-0 tw:snap-start tw:overflow-hidden tw:rounded-2xl tw:bg-[#FFF1EC] tw:p-6 tw:text-[#000066] tw:no-underline tw:md:w-auto\">\n      <span class=\"tw:absolute tw:-right-12 tw:-top-16 tw:size-64 tw:rounded-full tw:bg-brand/10\" aria-hidden=\"true\"></span>\n      <span class=\"tw:relative tw:z-10 tw:flex tw:max-w-[60%] tw:flex-col tw:items-start\">\n        <span class=\"tw:rounded-md tw:bg-brand tw:px-3 tw:py-1.5 tw:text-xs tw:font-bold tw:uppercase tw:tracking-[0.2em] tw:text-white\">Mais vendidos</span>\n        <span class=\"tw:mt-4 tw:font-display tw:text-2xl tw:font-black tw:leading-tight\">Camisas</span>\n        <span class=\"tw:mt-auto tw:text-lg tw:font-bold\">Ver <span class=\"tw:text-brand\">coleção</span></span>\n      </span>\n      <img src=\"https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@c9076d3fda7f15c1cc2d5f924365a7d91b48abb6/design/assets/home/destaque-2.webp\" alt=\"\" width=\"200\" height=\"200\" loading=\"lazy\" class=\"tw:absolute tw:bottom-0 tw:right-0 tw:h-full tw:w-2/5 tw:object-cover tw:transition tw:group-hover:scale-105\">\n    </a>\n\n    <a href=\"/calcas/\" class=\"tw:group tw:relative tw:flex tw:h-52 tw:w-[85%] tw:shrink-0 tw:snap-start tw:overflow-hidden tw:rounded-2xl tw:bg-[#F8F9FC] tw:p-6 tw:text-[#000066] tw:no-underline tw:ring-1 tw:ring-[#E5E7EB] tw:md:w-auto\">\n      <span class=\"tw:absolute tw:-right-12 tw:-top-16 tw:size-64 tw:rounded-full tw:bg-[#000066]/5\" aria-hidden=\"true\"></span>\n      <span class=\"tw:relative tw:z-10 tw:flex tw:max-w-[60%] tw:flex-col tw:items-start\">\n        <span class=\"tw:rounded-md tw:bg-[#000066] tw:px-3 tw:py-1.5 tw:text-xs tw:font-bold tw:uppercase tw:tracking-[0.2em] tw:text-white\">Promoção</span>\n        <span class=\"tw:mt-4 tw:font-display tw:text-2xl tw:font-black tw:leading-tight\">Calças e shorts</span>\n        <span class=\"tw:mt-auto tw:text-lg tw:font-bold\">Preços <span class=\"tw:text-brand\">especiais</span></span>\n      </span>\n      <img src=\"https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@c9076d3fda7f15c1cc2d5f924365a7d91b48abb6/design/assets/home/destaque-3.webp\" alt=\"\" width=\"200\" height=\"200\" loading=\"lazy\" class=\"tw:absolute tw:bottom-0 tw:right-0 tw:h-full tw:w-2/5 tw:object-cover tw:transition tw:group-hover:scale-105\">\n    </a>\n  </div>\n</section>",
-            "width": "fill"
-          }
-        }
-      },
-      "block_order": [
-        "code"
-      ]
-    },
-    "cmp_essenciais_titulo": {
-      "type": "custom",
-      "settings": {
-        "section_width": "full",
-        "vertical_padding": 0,
-        "horizontal_padding": 0,
-        "gap": 0
-      },
-      "blocks": {
-        "code": {
-          "type": "code",
-          "settings": {
-            "code": "<div class=\"container tw:pt-10 tw:md:pt-14\">\n  <div class=\"tw:flex tw:items-end tw:justify-between tw:gap-4 tw:border-b tw:border-[#D1D5DB]\">\n    <h2 class=\"tw:m-0 tw:-mb-px tw:border-b-2 tw:border-brand tw:pb-3 tw:font-display tw:text-xl tw:font-black tw:text-[#000066] tw:md:text-2xl\">\n      Essenciais do <span class=\"tw:text-brand\">dia</span>\n    </h2>\n    <a href=\"/produtos/\" class=\"tw:pb-3 tw:text-sm tw:font-semibold tw:text-[#1F2937] tw:no-underline tw:hover:text-brand\">\n      Ver tudo <span aria-hidden=\"true\">›</span>\n    </a>\n  </div>\n</div>",
-            "width": "fill"
-          }
-        }
-      },
-      "block_order": [
-        "code"
-      ]
-    },
-    "banners_grid_3_vertical": {
+    "banners_promo": {
       "type": "banners",
       "settings": {
         "format": "grid",
-        "columns": "3",
-        "columns_mobile": "2",
+        "columns": "2",
+        "columns_mobile": "1",
+        "use_different_mobile_format": true,
+        "format_mobile": "grid",
         "section_width": "page",
-        "banner_aspect_ratio": "square",
-        "gap": 16,
-        "vertical_padding": 24,
+        "banner_aspect_ratio": "custom",
+        "banner_aspect_ratio_height": 38,
+        "use_different_mobile_aspect_ratio": true,
+        "banner_aspect_ratio_mobile": "custom",
+        "banner_aspect_ratio_mobile_height": 36,
+        "gap": 40,
+        "vertical_padding": 60
+      },
+      "blocks": {
+        "promo_1": {
+          "type": "banner",
+          "settings": {
+            "link": "/resmed/",
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/promo-resmed.webp"
+          }
+        },
+        "promo_2": {
+          "type": "banner",
+          "settings": {
+            "link": "/philips-respironics/",
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/promo-philips.webp"
+          }
+        }
+      },
+      "block_order": [
+        "promo_1",
+        "promo_2"
+      ]
+    },
+    "videos": {
+      "type": "custom",
+      "settings": {
+        "direction": "column",
+        "alignment": "start",
+        "section_width": "page",
+        "gap": 20,
+        "vertical_padding": 20,
         "horizontal_padding": 0
       },
       "blocks": {
-        "banner_1": {
-          "type": "banner",
+        "titulo": {
+          "type": "heading",
           "settings": {
-            "text_outside": true,
-            "alignment": "center",
-            "alignment_vertical": "center",
-            "gap": 4,
-            "vertical_padding": 12,
-            "horizontal_padding": 0,
-            "text_color": "#1F2937",
-            "link": "/produtos/"
-          },
-          "blocks": {
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Até 50% OFF",
-                "size": "h6"
-              }
-            },
-            "button": {
-              "type": "button",
-              "settings": {
-                "label": "Ver mais",
-                "variant": "primary",
-                "size": "medium"
-              }
-            },
-            "label": {
-              "type": "text",
-              "settings": {
-                "text": "Mercearia",
-                "size": "paragraph_small"
-              }
-            }
-          },
-          "block_order": [
-            "label",
-            "heading"
-          ]
+            "title": "Dicas & Vídeos",
+            "size": "h4"
+          }
         },
-        "banner": {
-          "type": "banner",
+        "lista": {
+          "type": "group",
           "settings": {
-            "text_outside": true,
+            "direction": "row",
             "alignment": "center",
-            "alignment_vertical": "center",
-            "gap": 4,
-            "vertical_padding": 12,
-            "horizontal_padding": 0,
-            "text_color": "#1F2937",
-            "link": "/produtos/"
+            "gap": 30,
+            "width": "fill"
           },
           "blocks": {
-            "heading": {
-              "type": "heading",
+            "v1": {
+              "type": "group",
               "settings": {
-                "title": "Até 40% OFF",
-                "size": "h6"
-              }
+                "direction": "column",
+                "alignment": "start",
+                "gap": 0,
+                "width": "fit"
+              },
+              "blocks": {
+                "video": {
+                  "type": "video",
+                  "settings": {
+                    "video_type": "manual",
+                    "aspect_ratio": "16by9",
+                    "show_cover_image": true,
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                  }
+                },
+                "legenda": {
+                  "type": "text",
+                  "settings": {
+                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                  }
+                }
+              },
+              "block_order": [
+                "video",
+                "legenda"
+              ]
             },
-            "button": {
-              "type": "button",
+            "v2": {
+              "type": "group",
               "settings": {
-                "label": "Ver mais",
-                "variant": "primary",
-                "size": "medium"
-              }
+                "direction": "column",
+                "alignment": "start",
+                "gap": 0,
+                "width": "fit"
+              },
+              "blocks": {
+                "video": {
+                  "type": "video",
+                  "settings": {
+                    "video_type": "manual",
+                    "aspect_ratio": "16by9",
+                    "show_cover_image": true,
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                  }
+                },
+                "legenda": {
+                  "type": "text",
+                  "settings": {
+                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                  }
+                }
+              },
+              "block_order": [
+                "video",
+                "legenda"
+              ]
             },
-            "label": {
-              "type": "text",
+            "v3": {
+              "type": "group",
               "settings": {
-                "text": "Hortifrúti",
-                "size": "paragraph_small"
-              }
+                "direction": "column",
+                "alignment": "start",
+                "gap": 0,
+                "width": "fit"
+              },
+              "blocks": {
+                "video": {
+                  "type": "video",
+                  "settings": {
+                    "video_type": "manual",
+                    "aspect_ratio": "16by9",
+                    "show_cover_image": true,
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                  }
+                },
+                "legenda": {
+                  "type": "text",
+                  "settings": {
+                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                  }
+                }
+              },
+              "block_order": [
+                "video",
+                "legenda"
+              ]
+            },
+            "v4": {
+              "type": "group",
+              "settings": {
+                "direction": "column",
+                "alignment": "start",
+                "gap": 0,
+                "width": "fit"
+              },
+              "blocks": {
+                "video": {
+                  "type": "video",
+                  "settings": {
+                    "video_type": "manual",
+                    "aspect_ratio": "16by9",
+                    "show_cover_image": true,
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/video-capa.webp"
+                  }
+                },
+                "legenda": {
+                  "type": "text",
+                  "settings": {
+                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                  }
+                }
+              },
+              "block_order": [
+                "video",
+                "legenda"
+              ]
             }
           },
           "block_order": [
-            "label",
-            "heading"
-          ]
-        },
-        "banner_3": {
-          "type": "banner",
-          "settings": {
-            "text_outside": true,
-            "alignment": "center",
-            "text_color": "#1F2937",
-            "gap": 4,
-            "vertical_padding": 12,
-            "horizontal_padding": 0,
-            "link": "/produtos/"
-          },
-          "blocks": {
-            "label": {
-              "type": "text",
-              "settings": {
-                "text": "Frutas",
-                "size": "paragraph_small"
-              }
-            },
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Até 50% OFF",
-                "size": "h6"
-              }
-            }
-          },
-          "block_order": [
-            "label",
-            "heading"
-          ]
-        },
-        "banner_4": {
-          "type": "banner",
-          "settings": {
-            "text_outside": true,
-            "alignment": "center",
-            "text_color": "#1F2937",
-            "gap": 4,
-            "vertical_padding": 12,
-            "horizontal_padding": 0,
-            "link": "/produtos/"
-          },
-          "blocks": {
-            "label": {
-              "type": "text",
-              "settings": {
-                "text": "Bebidas",
-                "size": "paragraph_small"
-              }
-            },
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Até 30% OFF",
-                "size": "h6"
-              }
-            }
-          },
-          "block_order": [
-            "label",
-            "heading"
-          ]
-        },
-        "banner_5": {
-          "type": "banner",
-          "settings": {
-            "text_outside": true,
-            "alignment": "center",
-            "text_color": "#1F2937",
-            "gap": 4,
-            "vertical_padding": 12,
-            "horizontal_padding": 0,
-            "link": "/produtos/"
-          },
-          "blocks": {
-            "label": {
-              "type": "text",
-              "settings": {
-                "text": "Padaria",
-                "size": "paragraph_small"
-              }
-            },
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Até 25% OFF",
-                "size": "h6"
-              }
-            }
-          },
-          "block_order": [
-            "label",
-            "heading"
-          ]
-        },
-        "banner_6": {
-          "type": "banner",
-          "settings": {
-            "text_outside": true,
-            "alignment": "center",
-            "text_color": "#1F2937",
-            "gap": 4,
-            "vertical_padding": 12,
-            "horizontal_padding": 0,
-            "link": "/produtos/"
-          },
-          "blocks": {
-            "label": {
-              "type": "text",
-              "settings": {
-                "text": "Congelados",
-                "size": "paragraph_small"
-              }
-            },
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Até 50% OFF",
-                "size": "h6"
-              }
-            }
-          },
-          "block_order": [
-            "label",
-            "heading"
+            "v1",
+            "v2",
+            "v3",
+            "v4"
           ]
         }
       },
       "block_order": [
-        "banner_1",
-        "banner",
-        "banner_3",
-        "banner_4",
-        "banner_5",
-        "banner_6"
+        "titulo",
+        "lista"
+      ]
+    },
+    "servicos": {
+      "type": "featured-categories",
+      "settings": {
+        "orientation": "vertical",
+        "text_alignment": "center",
+        "section_width": "page",
+        "gap": 40,
+        "vertical_padding": 60,
+        "background_color": "#E5E0D8"
+      },
+      "blocks": {
+        "titulo": {
+          "type": "heading",
+          "settings": {
+            "title": "Serviços",
+            "size": "h4"
+          }
+        },
+        "lista": {
+          "type": "category-nav",
+          "settings": {
+            "category_type": "image_thumbnail",
+            "format_image": "circular",
+            "image_position": "top",
+            "items_text_alignment": "center",
+            "image_size": 188,
+            "gap": 16,
+            "text_color": "#4A4A48"
+          },
+          "blocks": {
+            "s1": {
+              "type": "category-item",
+              "settings": {
+                "text": "Vendas de equipamentos",
+                "link": "/produtos/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-vendas.png"
+              }
+            },
+            "s2": {
+              "type": "category-item",
+              "settings": {
+                "text": "Aluguel de CPAP e BIPAP",
+                "link": "/aluguel-de-cpap-e-bipap/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-aluguel-cpap.png"
+              }
+            },
+            "s3": {
+              "type": "category-item",
+              "settings": {
+                "text": "Acompanhamento clínico",
+                "link": "/acompanhamento-clinico/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-acompanhamento.png"
+              }
+            },
+            "s4": {
+              "type": "category-item",
+              "settings": {
+                "text": "Aluguel de ventiladores",
+                "link": "/aluguel-de-ventiladores/",
+                "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/cpapfit-nuvem@56c9423df99850f2fc493279051b743e10d6bebf/design/assets/home/servico-aluguel-ventiladores.png"
+              }
+            }
+          },
+          "block_order": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        }
+      },
+      "block_order": [
+        "titulo",
+        "lista"
       ]
     }
   },
   "order": [
-    "slideshow",
-    "featured_products_1",
-    "cmp_categorias_circulos",
-    "cmp_destaques_marcas",
-    "cmp_essenciais_titulo",
-    "banners_grid_3_vertical"
+    "hero",
+    "categorias",
+    "cmp_destaques_abas",
+    "destaques_1",
+    "destaques_2",
+    "destaques_3",
+    "destaques_4",
+    "destaques_5",
+    "destaques_6",
+    "linhas",
+    "mais_vendidos",
+    "marcas",
+    "banners_promo",
+    "videos",
+    "servicos"
   ]
 }

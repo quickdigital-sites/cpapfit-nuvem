@@ -1,178 +1,331 @@
-# Home do tema — gera theme/templates/pages/home.json (frontend/compose.mjs).
+# Home CPAP Fit — gera theme/templates/pages/home.json (frontend/compose.mjs).
 #
-# Layout: Figma "Ecommerce Website Design (Community)" — frame "Landing Page" (1:2)
-# Identidade: Quick Digital — laranja #FB4516, azul-marinho #000066 / #000033, Red Hat Display
+# Figma: home desktop 0:326 • mobile 0:630 (file 1P4JHFz4FEG8UEBkDOB1qm)
 #
-# Enquanto a loja não tem produtos/categorias, as seções nativas mostram os placeholders do Ipanema
-# e os componentes usam cópias deles em design/assets/home/.
+# Estratégia (sem fork): quase tudo é SEÇÃO NATIVA do Ipanema — assim as imagens/textos/links
+# ficam editáveis no Brand Editor e as fotos ficam hospedadas na CDN da loja (repo é privado,
+# jsDelivr não serve). O visual do Figma vem do CSS em frontend/src/css/main.css, escopado por
+# [data-section-id="<id da seção>"]. Só as abas de "Destaques" são componente (design/components).
 #
-#   - native: <id>        seção nativa do Ipanema (config do Brand Editor + overrides daqui)
-#   - component: <nome>   design/components/<nome>.html
-#
-# Imagens: "asset:<caminho>" -> design/assets/<caminho> servido pelo jsDelivr.
+# Imagens: exportadas do Figma para design/assets/home/ e servidas pelo jsDelivr a partir do repo
+#    PÚBLICO de assets (design/assets.json + scripts/publish-assets.sh). "asset:home/x" vira a URL.
+#    ⚠️ Como estão no YAML, o repo manda nelas: trocar pelo Brand Editor é desfeito no próximo build
+#    (para passar a controlar pelo Brand Editor, apague a chave image aqui).
+# ⚠️ Links de categoria: slugs presumidos (/mascaras/ etc.) — conferir com as categorias reais.
+# ⚠️ Abas de Destaques: cada aba é uma seção product-list (destaques_1..6). Escolher a CATEGORIA
+#    de cada uma no Brand Editor (campo "Produtos") — o YAML não sobrescreve products_source.
 
 unlisted: remove
 
+# --- blocos reutilizados -----------------------------------------------------------------------
+x-cta-linha: &cta_linha
+  type: group
+  settings: { direction: row, alignment: start, gap: 12, width: fill }
+
+x-vitrine: &vitrine
+  type: products
+  settings:
+    format: slider
+    columns: "5"
+    use_different_mobile_format: true
+    format_mobile: slider
+    columns_mobile: "2"
+    max_products: 12
+
+x-destaque-lista: &destaque_lista
+  type: product-list
+  settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0 }
+
+x-categoria-nav: &categoria_nav
+  category_type: image_thumbnail
+  format_image: circular
+  image_position: top
+  items_text_alignment: center
+  image_size: 188
+  gap: 16
+  text_color: "#4A4A48"
+
 sections:
-  # Figma: carrossel "SMART WEARABLE." — fundo escuro, texto à esquerda, oferta abaixo
-  - native: slideshow
+  # ---------------------------------------------------------------------------------------------
+  # Hero (Figma 0:329 / mobile 0:654) — carrossel nativo; foto no Brand Editor, gradiente azul por CSS
+  - native: hero
+    type: slideshow
     settings:
       section_width: full
+      auto_height: false
+      height_full: 60
+      vertical_padding: 0
       horizontal_padding: 0
       autoplay: true
       autoplay_speed: 6
-      vertical_padding: 0
+    block_order: [slide_1]
     blocks:
       slide_1:
+        type: slide
         settings:
+          image: "asset:home/hero.webp"
           alignment: start
-          text_color: "#FFFFFF"
-          show_overlay: true
-          overlay_color: "#000066"
-          overlay_opacity: 85
-          horizontal_padding: 64
-          link: /produtos/
-        block_order: [kicker, heading, offer, button]
+          text_color: "#FEFDFC"
+          show_overlay: false
+          gap: 10
+          vertical_padding: 0
+          horizontal_padding: 0
+        block_order: [titulo, texto, cta, cupom]
         blocks:
-          kicker:
+          titulo:
+            type: heading
+            settings:
+              title: Conforto e Tecnologia Para Seu Sono
+              size: custom
+              custom_font_size: 51
+              mobile_font_size: true
+              custom_mobile_font_size: 24
+          texto:
             type: text
-            settings:
-              text: Ofertas da semana em smartwatches
-              size: paragraph_big
-          heading:
-            settings:
-              title: Tecnologia no pulso.
-              custom_font_size: 64
-              custom_mobile_font_size: 40
-          offer:
-            type: text
-            settings:
-              text: Até 80% OFF
-              size: paragraph_big
-          button:
-            settings:
-              label: Aproveitar agora
-              link: /produtos/
-              variant: primary
-              size: medium
-      slide_2:
-        settings:
-          alignment: start
-          text_color: "#FFFFFF"
-          show_overlay: true
-          overlay_color: "#000033"
-          overlay_opacity: 85
-          horizontal_padding: 64
-          link: /produtos/
-        block_order: [heading, text, button]
-        blocks:
-          heading:
-            settings:
-              title: Performance que acelera.
-              custom_font_size: 64
-              custom_mobile_font_size: 40
-          text:
-            settings:
-              text: Acessórios com até 50% OFF
-              size: paragraph_big
-          button:
-            settings:
-              label: Ver acessórios
-              link: /produtos/
-              variant: primary
-              size: medium
+            settings: { text: Equipamentos modernos para tratamento domiciliar. }
+          cta:
+            <<: *cta_linha
+            block_order: [botao, logo]
+            blocks:
+              botao:
+                type: button
+                settings: { label: Ver linha completa, link: /resmed/, variant: primary, size: medium }
+              logo:
+                type: image
+                settings: { image: "asset:home/logo-resmed.png", width: fit, link: /resmed/ }
+          cupom:
+            type: group
+            settings: { direction: row, alignment: start, gap: 16, width: fill }
+            block_order: [oferta, codigo]
+            blocks:
+              oferta:
+                type: text
+                settings: { text: "<strong>R$ 200 OFF</strong> na Resmed", width: fit }
+              codigo:
+                type: label
+                settings: { text: QUERO200, variant: primary }
 
-  # Figma: "Grab the best deal on Smartphones" — grade de 5 cards com % OFF
-  - native: featured_products_1
+  # ---------------------------------------------------------------------------------------------
+  # Categorias (Figma 0:351 / mobile 0:668) — círculos sobre fundo bege. Título só no mobile (CSS).
+  - native: categorias
+    type: featured-categories
     settings:
-      alignment: left
-      gap: 24
-      vertical_padding: 48
+      orientation: vertical
+      text_alignment: center
+      section_width: page
+      gap: 40
+      vertical_padding: 60
+      background_color: "#E5E0D8"
+    block_order: [titulo, lista]
     blocks:
-      header_group:
+      titulo:
+        type: heading
+        settings: { title: Categorias, size: h4 }
+      lista:
+        type: category-nav
+        settings: *categoria_nav
+        block_order: [c1, c2, c3, c4, c5, c6, c7]
         blocks:
-          heading:
-            settings:
-              title: Destaques da loja
-              size: h4
-          view_all_button:
-            settings:
-              label: Ver tudo
-              variant: tertiary
-      products:
-        settings:
-          format: grid
-          columns: "4"
-          columns_mobile: "2"
-          use_different_mobile_format: true
-          format_mobile: slider
-          max_products: 8
+          c1: { type: category-item, settings: { text: Máscaras, link: /mascaras/, image: "asset:home/categoria-mascaras.webp" } }
+          c2: { type: category-item, settings: { text: BIPAPs | VPAPs, link: /bipaps/, image: "asset:home/categoria-bipaps.webp" } }
+          c3: { type: category-item, settings: { text: CPAP Automático, link: /cpaps/cpap-automatico/, image: "asset:home/categoria-cpap-automatico.webp" } }
+          c4: { type: category-item, settings: { text: CPAP Dreamstation, link: /cpaps/dreamstation/, image: "asset:home/categoria-dreamstation.webp" } }
+          c5: { type: category-item, settings: { text: CPAP Portátil, link: /cpaps/cpap-portatil/, image: "asset:home/categoria-cpap-portatil.webp" } }
+          c6: { type: category-item, settings: { text: CPAP Pressão Fixa, link: /cpaps/cpap-pressao-fixa/, image: "asset:home/categoria-cpap-pressao-fixa.webp" } }
+          c7: { type: category-item, settings: { text: Umidificador, link: /acessorios/umidificador/, image: "asset:home/categoria-umidificador.webp" } }
 
-  # Figma: "Shop From Top Categories" — categorias em círculos
-  - component: categorias-circulos
+  # ---------------------------------------------------------------------------------------------
+  # Destaques (Figma 0:367 / mobile 0:691) — título + abas (componente) e uma vitrine por aba.
+  - component: destaques-abas
+  - native: destaques_1
+    <<: *destaque_lista
+    blocks: { products: *vitrine }
+  - native: destaques_2
+    <<: *destaque_lista
+    blocks: { products: *vitrine }
+  - native: destaques_3
+    <<: *destaque_lista
+    blocks: { products: *vitrine }
+  - native: destaques_4
+    <<: *destaque_lista
+    blocks: { products: *vitrine }
+  - native: destaques_5
+    <<: *destaque_lista
+    blocks: { products: *vitrine }
+  - native: destaques_6
+    <<: *destaque_lista
+    blocks: { products: *vitrine }
 
-  # Figma: "Top Electronics Brands" — 3 cartões de destaque
-  - component: destaques-marcas
-
-  # Figma: "Daily Essentials" — título + 6 cartões com imagem, nome e desconto
-  # (banners nativo aceita no máximo 4 colunas: 3 no desktop, 2 no celular)
-  - component: essenciais-titulo
-
-  - native: banners_grid_3_vertical
+  # ---------------------------------------------------------------------------------------------
+  # Linhas (Figma 0:393 / mobile 0:765) — 2 banners com foto + gradiente azul (CSS)
+  - native: linhas
+    type: banners
     settings:
       format: grid
-      columns: "3"
-      columns_mobile: "2"
-      banner_aspect_ratio: square
-      gap: 16
-      vertical_padding: 24
-      horizontal_padding: 0
+      columns: "2"
+      columns_mobile: "1"
+      use_different_mobile_format: true
+      format_mobile: grid
+      section_width: page
+      banner_aspect_ratio: custom
+      banner_aspect_ratio_height: 54
+      use_different_mobile_aspect_ratio: true
+      banner_aspect_ratio_mobile: custom
+      banner_aspect_ratio_mobile_height: 56
+      gap: 20
+      vertical_padding: 0
+    block_order: [resmed, philips]
     blocks:
-      banner_1: &essencial
-        settings: &essencial_settings
-          text_outside: true
-          alignment: center
-          text_color: "#1F2937"
-          gap: 4
-          vertical_padding: 12
-          horizontal_padding: 0
-          link: /produtos/
-        block_order: [label, heading]
-        blocks:
-          label: { type: text, settings: { text: Mercearia, size: paragraph_small } }
-          heading: { settings: { title: Até 50% OFF, size: h6 } }
-      banner:
-        settings: *essencial_settings
-        block_order: [label, heading]
-        blocks:
-          label: { type: text, settings: { text: Hortifrúti, size: paragraph_small } }
-          heading: { settings: { title: Até 40% OFF, size: h6 } }
-      banner_3:
+      resmed:
         type: banner
-        settings: *essencial_settings
-        block_order: [label, heading]
+        settings:
+          <<: &linha_settings
+            alignment: start
+            text_color: "#FEFDFC"
+            show_overlay: false
+            gap: 10
+            vertical_padding: 60
+            horizontal_padding: 60
+          image: "asset:home/linha-resmed.webp"
+        block_order: [rotulo, titulo, cta]
         blocks:
-          label: { type: text, settings: { text: Frutas, size: paragraph_small } }
-          heading: { type: heading, settings: { title: Até 50% OFF, size: h6 } }
-      banner_4:
+          rotulo: { type: text, settings: { text: Linha } }
+          titulo: { type: heading, settings: { title: Resmed, size: custom, custom_font_size: 41, mobile_font_size: true, custom_mobile_font_size: 28 } }
+          cta:
+            <<: *cta_linha
+            block_order: [botao, logo]
+            blocks:
+              botao: { type: button, settings: { label: Ver linha completa, link: /resmed/, variant: primary, size: medium } }
+              logo: { type: image, settings: { image: "asset:home/logo-resmed.png", width: fit, link: /resmed/ } }
+      philips:
         type: banner
-        settings: *essencial_settings
-        block_order: [label, heading]
+        settings:
+          <<: *linha_settings
+          image: "asset:home/linha-philips.webp"
+        block_order: [rotulo, titulo, cta]
         blocks:
-          label: { type: text, settings: { text: Bebidas, size: paragraph_small } }
-          heading: { type: heading, settings: { title: Até 30% OFF, size: h6 } }
-      banner_5:
-        type: banner
-        settings: *essencial_settings
-        block_order: [label, heading]
+          rotulo: { type: text, settings: { text: Linha } }
+          titulo: { type: heading, settings: { title: Philips Respironics, size: custom, custom_font_size: 41, mobile_font_size: true, custom_mobile_font_size: 28 } }
+          cta:
+            <<: *cta_linha
+            block_order: [botao, logo]
+            blocks:
+              botao: { type: button, settings: { label: Ver linha completa, link: /philips-respironics/, variant: primary, size: medium } }
+              logo: { type: image, settings: { image: "asset:home/logo-philips.png", width: fit, link: /philips-respironics/ } }
+
+  # ---------------------------------------------------------------------------------------------
+  # Os mais vendidos (Figma 0:414 / mobile 0:786)
+  - native: mais_vendidos
+    type: product-list
+    settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0 }
+    block_order: [titulo, products]
+    blocks:
+      titulo: { type: heading, settings: { title: Os mais vendidos, size: h4 } }
+      products: *vitrine
+
+  # ---------------------------------------------------------------------------------------------
+  # As melhores marcas (Figma 0:427 / mobile 0:848) — logos em círculo + nome
+  - native: marcas
+    type: featured-categories
+    settings:
+      orientation: vertical
+      text_alignment: center
+      section_width: page
+      gap: 40
+      vertical_padding: 0
+    block_order: [titulo, lista]
+    blocks:
+      titulo: { type: heading, settings: { title: As melhores marcas, size: h4 } }
+      lista:
+        type: category-nav
+        settings:
+          <<: *categoria_nav
+          image_size: 148
+          gap: 20
+        block_order: [m1, m2, m3, m4, m5, m6, m7]
         blocks:
-          label: { type: text, settings: { text: Padaria, size: paragraph_small } }
-          heading: { type: heading, settings: { title: Até 25% OFF, size: h6 } }
-      banner_6:
-        type: banner
-        settings: *essencial_settings
-        block_order: [label, heading]
+          m1: { type: category-item, settings: { text: BMC, link: /marcas/bmc/, image: "asset:home/marca-bmc.png" } }
+          m2: { type: category-item, settings: { text: Covidien, link: /marcas/covidien/, image: "asset:home/marca-covidien.png" } }
+          m3: { type: category-item, settings: { text: Caire, link: /marcas/caire/, image: "asset:home/marca-caire.png" } }
+          m4: { type: category-item, settings: { text: Resmed, link: /resmed/, image: "asset:home/marca-resmed.png" } }
+          m5: { type: category-item, settings: { text: Fisher & Paykel, link: /marcas/fisher-paykel/, image: "asset:home/marca-fisher-paykel.png" } }
+          m6: { type: category-item, settings: { text: MD, link: /marcas/md/, image: "asset:home/marca-md.png" } }
+          m7: { type: category-item, settings: { text: Ventcare, link: /marcas/ventcare/, image: "asset:home/marca-ventcare.png" } }
+
+  # ---------------------------------------------------------------------------------------------
+  # Banners promocionais (Figma 0:459 / mobile 0:878) — só imagem (arte completa no Brand Editor)
+  - native: banners_promo
+    type: banners
+    settings:
+      format: grid
+      columns: "2"
+      columns_mobile: "1"
+      use_different_mobile_format: true
+      format_mobile: grid
+      section_width: page
+      banner_aspect_ratio: custom
+      banner_aspect_ratio_height: 38
+      use_different_mobile_aspect_ratio: true
+      banner_aspect_ratio_mobile: custom
+      banner_aspect_ratio_mobile_height: 36
+      gap: 40
+      vertical_padding: 60
+    block_order: [promo_1, promo_2]
+    blocks:
+      promo_1: { type: banner, settings: { link: /resmed/, image: "asset:home/promo-resmed.webp" } }
+      promo_2: { type: banner, settings: { link: /philips-respironics/, image: "asset:home/promo-philips.webp" } }
+
+  # ---------------------------------------------------------------------------------------------
+  # Dicas & Vídeos (Figma 0:462 / mobile 0:881) — seção Personalizada com blocos de vídeo nativos
+  # (URL do YouTube + capa no Brand Editor). Vertical (9:16) no desktop, 16:9 no mobile (CSS).
+  - native: videos
+    type: custom
+    settings:
+      direction: column
+      alignment: start
+      section_width: page
+      gap: 20
+      vertical_padding: 20
+      horizontal_padding: 0
+    block_order: [titulo, lista]
+    blocks:
+      titulo: { type: heading, settings: { title: Dicas & Vídeos, size: h4 } }
+      lista:
+        type: group
+        settings: { direction: row, alignment: center, gap: 30, width: fill }
+        block_order: [v1, v2, v3, v4]
         blocks:
-          label: { type: text, settings: { text: Congelados, size: paragraph_small } }
-          heading: { type: heading, settings: { title: Até 50% OFF, size: h6 } }
-    block_order: [banner_1, banner, banner_3, banner_4, banner_5, banner_6]
+          v1: &video_card
+            type: group
+            settings: { direction: column, alignment: start, gap: 0, width: fit }
+            block_order: [video, legenda]
+            blocks:
+              video: { type: video, settings: { video_type: manual, aspect_ratio: 16by9, show_cover_image: true, cover_image: "asset:home/video-capa.webp" } }
+              legenda: { type: text, settings: { text: NOVA máscara para quem usa CPAP super confortável } }
+          v2: *video_card
+          v3: *video_card
+          v4: *video_card
+
+  # ---------------------------------------------------------------------------------------------
+  # Serviços (Figma 0:478 / mobile 0:907) — círculos sobre fundo bege, título centralizado
+  - native: servicos
+    type: featured-categories
+    settings:
+      orientation: vertical
+      text_alignment: center
+      section_width: page
+      gap: 40
+      vertical_padding: 60
+      background_color: "#E5E0D8"
+    block_order: [titulo, lista]
+    blocks:
+      titulo: { type: heading, settings: { title: Serviços, size: h4 } }
+      lista:
+        type: category-nav
+        settings: *categoria_nav
+        block_order: [s1, s2, s3, s4]
+        blocks:
+          s1: { type: category-item, settings: { text: Vendas de equipamentos, link: /produtos/, image: "asset:home/servico-vendas.png" } }
+          s2: { type: category-item, settings: { text: Aluguel de CPAP e BIPAP, link: /aluguel-de-cpap-e-bipap/, image: "asset:home/servico-aluguel-cpap.png" } }
+          s3: { type: category-item, settings: { text: Acompanhamento clínico, link: /acompanhamento-clinico/, image: "asset:home/servico-acompanhamento.png" } }
+          s4: { type: category-item, settings: { text: Aluguel de ventiladores, link: /aluguel-de-ventiladores/, image: "asset:home/servico-aluguel-ventiladores.png" } }

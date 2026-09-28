@@ -15,6 +15,11 @@
 @import "tailwindcss/theme.css" layer(theme) prefix(tw);
 @import "tailwindcss/utilities.css" prefix(tw);
 
+/* Módulos do tema CPAP Fit (CSS puro, sem prefixo) */
+@import "./icons.css";
+@import "./product-card.css";
+@import "./home.css";
+
 /* Onde o Tailwind procura classes usadas. Sem fork, o HTML próprio entra pelos
    blocks "code" dos templates JSON — por isso eles também são lidos.
    config/ fica de fora: o settings_data.json contém o próprio CSS gerado. */

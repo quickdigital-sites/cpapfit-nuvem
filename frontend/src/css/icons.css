@@ -1,0 +1,14 @@
+/* --------------------------------------------------------------------------
+   Ícones do tema (máscaras SVG em data URI — pintados com currentColor).
+   Uso: .elemento::after { content:""; width:24px; height:24px; background:currentColor;
+        -webkit-mask: var(--qd-ico-arrow) center / contain no-repeat;
+                mask: var(--qd-ico-arrow) center / contain no-repeat; }
+   Obs.: os SVGs originais do Figma não puderam ser exportados (rede do ambiente
+   bloqueia figma.com); estes seguem o mesmo desenho (traço 2px, cantos redondos).
+   -------------------------------------------------------------------------- */
+:root {
+  --qd-ico-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+  --qd-ico-tag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z'/%3E%3Ccircle cx='7.5' cy='7.5' r='1.5'/%3E%3C/svg%3E");
+  --qd-ico-cart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 3.5h2.3l2.6 11.7a1.8 1.8 0 0 0 1.8 1.4h8.3a1.8 1.8 0 0 0 1.8-1.4L21 7.5H6'/%3E%3Ccircle cx='9.5' cy='20' r='1.2'/%3E%3Ccircle cx='17.5' cy='20' r='1.2'/%3E%3C/svg%3E");
+  --qd-ico-play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z'/%3E%3C/svg%3E");
+}
