@@ -230,13 +230,12 @@ export default function initInstitucional() {
     const header = document.querySelector('[data-section-id="heading"]');
     const title = header?.querySelector(".page-header-title")?.textContent.trim() || current?.label || "";
     const content = document.querySelector(".page-content.user-content");
-    if (content) cleanContent(content);
 
-    // Quem somos: só o conteúdo (faixa e vitrines são seções do page.json)
-    if (page === "quem-somos") {
-      content?.classList.add("qd-inst-content", "qd-inst-content--wide");
-      return;
-    }
+    // Quem somos: nada a fazer — faixa e vitrines são seções do page.json e o texto é formatado
+    // pelo CSS a partir da classe page-<slug> que o layout.tpl põe no <body>. Mexer no DOM aqui
+    // (ex.: limpar os estilos inline) mudaria o layout depois da 1ª pintura (CLS).
+    if (page === "quem-somos") return;
+    if (content) cleanContent(content);
 
     const anchor = sectionOf(content ?? document.querySelector(".contact-form-section"));
     if (!anchor) return;

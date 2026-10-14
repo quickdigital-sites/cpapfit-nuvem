@@ -9,7 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     {# Preload critical assets #}
-    <link rel="preload" as="style" href="{{ ([settings.font_headings, settings.font_rest] | merge(additional_fonts)) | google_fonts_url('400,700') }}" />
+    {# CPAP Fit: fontes do Google SEM bloquear a 1ª pintura (display=swap — o texto aparece na fonte
+       de fallback e troca quando a Montserrat chega). Antes era um @import no style-tokens.tpl, que
+       bloqueava a renderização, e só com 400/700: o Figma usa 300/500/600 também. #}
+    {% set qd_fonts_url = ([settings.font_headings, settings.font_rest] | merge(additional_fonts)) | google_fonts_url('300,400,500,600,700') %}
+    <link rel="preload" as="style" href="{{ qd_fonts_url }}" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="{{ qd_fonts_url }}" /></noscript>
     <link rel="preload" href="{{ 'js/libraries-standalone.js' | static_url }}" as="script" />
     <link rel="preload" href="{{ 'css/style-critical.css' | static_url }}" as="style" />
     <link rel="preload" href="{{ 'css/style-utilities.css' | static_url }}" as="style" />
@@ -55,7 +60,7 @@
   {% set cart_favicon_url = settings.cart_favicon ? (settings.cart_favicon | resolve_media).sourceUrl : '' %}
 
   <body
-    class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') | replace('/', '-') }} {% if template == 'password' %}body-password{% endif %}"
+    class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') | replace('/', '-') }} {% if template == 'password' %}body-password{% endif %}{% if template == 'page' %} page-{{ page.url | trim('/') | split('/') | last }}{% endif %}"
     {% if settings.ajax_cart %}data-ajax-cart="true"{% endif %}
     {% if settings.inactive_tab_message %}
       data-inactive-tab-msg1="{{ settings.inactive_tab_message_01 | escape }}"

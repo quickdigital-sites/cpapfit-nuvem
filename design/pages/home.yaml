@@ -30,7 +30,9 @@ x-vitrine: &vitrine
     use_different_mobile_format: true
     format_mobile: slider
     columns_mobile: "2"
-    max_products: 12
+    # 8, não 12: cada card do Ipanema pesa ~24KB de HTML (form de compra rápida embutido) e a home
+    # tem 7 vitrines (6 abas + mais vendidos). Com 12 a home passaria de 2MB e perderia pontos no Lighthouse.
+    max_products: 8
 
 x-destaque-lista: &destaque_lista
   type: product-list

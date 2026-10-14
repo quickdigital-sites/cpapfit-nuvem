@@ -107,8 +107,15 @@
 
 {% else %}
 
-	{% set all_fonts = selected_fonts | merge(additional_fonts) %}
-	@import url('{{ all_fonts | google_fonts_url(font_weights) | raw }}');
+	{# CPAP Fit: a fonte é carregada sem bloquear pelo <link> do layout.tpl (qd_fonts_url) #}
+	@font-face {
+		font-family: "Montserrat Fallback";
+		src: local("Arial");
+		ascent-override: 85.79%;
+		descent-override: 22.25%;
+		line-gap-override: 0%;
+		size-adjust: 112.83%;
+	}
 
 {% endif %}
 

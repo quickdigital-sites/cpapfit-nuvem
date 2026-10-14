@@ -257,7 +257,7 @@
             "use_different_mobile_format": true,
             "format_mobile": "slider",
             "columns_mobile": "2",
-            "max_products": 12
+            "max_products": 8
           }
         }
       },
@@ -282,7 +282,7 @@
             "use_different_mobile_format": true,
             "format_mobile": "slider",
             "columns_mobile": "2",
-            "max_products": 12
+            "max_products": 8
           }
         }
       },
@@ -307,7 +307,7 @@
             "use_different_mobile_format": true,
             "format_mobile": "slider",
             "columns_mobile": "2",
-            "max_products": 12
+            "max_products": 8
           }
         }
       },
@@ -332,7 +332,7 @@
             "use_different_mobile_format": true,
             "format_mobile": "slider",
             "columns_mobile": "2",
-            "max_products": 12
+            "max_products": 8
           }
         }
       },
@@ -357,7 +357,7 @@
             "use_different_mobile_format": true,
             "format_mobile": "slider",
             "columns_mobile": "2",
-            "max_products": 12
+            "max_products": 8
           }
         }
       },
@@ -382,7 +382,7 @@
             "use_different_mobile_format": true,
             "format_mobile": "slider",
             "columns_mobile": "2",
-            "max_products": 12
+            "max_products": 8
           }
         }
       },
@@ -572,7 +572,7 @@
             "use_different_mobile_format": true,
             "format_mobile": "slider",
             "columns_mobile": "2",
-            "max_products": 12
+            "max_products": 8
           }
         }
       },

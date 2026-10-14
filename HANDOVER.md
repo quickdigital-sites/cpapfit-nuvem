@@ -31,10 +31,15 @@ respiratórios) na plataforma **Nuvemshop**, a partir de um layout no **Figma**.
 | Pasta local | `~/Documents/Quick-Digital/Workspace/Nuvemshop/cpapfit-nuvem` |
 | Loja (store_id) | **8074130** |
 | URL da loja | `https://cpapfit4.lojavirtualnuvem.com.br` |
-| Tema **homolog** (dev) | instalação **`14473488`** — "CPAP Fit — Dev" (Ipanema, sectionable, **não** publicada) |
-| Tema publicado (prod atual) | instalação **`14128437`** — "Morelia" (legacy; **será substituída** ao publicar o novo tema) |
+| Tema **publicado** (desde 2026-10-14) | instalação **`14473488`** — "CPAP Fit — Dev" (Ipanema, sectionable, **forkado**) |
+| Tema antigo | instalação **`14128437`** — "Morelia" (legacy, não publicado; pode ser apagado para liberar a vaga de um rascunho/homolog) |
 
-**Limite da plataforma: 2 instalações de tema por loja.** Hoje: Morelia (publicada) + CPAP Fit — Dev (homolog) = 2/2.
+**Limite da plataforma: 2 instalações de tema por loja.** Hoje: CPAP Fit — Dev (publicada) + Morelia (antiga) = 2/2.
+
+> ⚠️ **Desde 2026-10-14 o `THEME_ID_HOMOLOG` (14473488) É o tema publicado** — publicado a pedido do dono, com a loja
+> ainda fora do ar para clientes. Todo `theme push` vai direto para a loja. Antes de abrir para clientes: criar um
+> rascunho de homolog (duplicar o tema — precisa apagar a Morelia para caber no limite de 2), apontar
+> `THEME_ID_HOMOLOG` para ele e `THEME_ID_PROD` (`.env` e secret do GitHub) para 14473488.
 
 ### Credenciais (nunca commitar)
 - `.env` (fora do git) tem `TIENDANUBE_ACCESS_TOKEN`, `TIENDANUBE_STORE_ID`, `THEME_ID_HOMOLOG=14473488`, `THEME_ID_PROD=` (vazio de propósito — a API recusa push em tema legacy).
@@ -227,7 +232,9 @@ Cronológico, do início até agora:
     | PLP | 69 / 93 / 79 / 92 | 79–87 / 96 / 79 / 100 |
     | PDP | 62 / 91 / 79 / 92 | 78–80 / 96 / 79 / 100 |
     | Quem somos | 57–62 / 93 / 79 / 100 | 78–86 / 96 / 79 / 100 |
-    (performance / acessibilidade / boas práticas / SEO.) Limites fora do tema: **TTFB do preview ~1s** (a loja publicada responde em ~0,3s — os números devem subir ao publicar); CSS de fontes da plataforma bloqueando a 1ª pintura (~0,8s); **boas práticas 79** = cookie de terceiros do script da própria plataforma; a acessibilidade só não é 100 por causa da barra "Rascunho" do preview. No **Fale conosco** o Lighthouse simulado (o do PageSpeed) dá ~57 por causa do reCAPTCHA da plataforma; medido com throttling real dá 95.
+    (performance / acessibilidade / boas práticas / SEO.)
+    **Loja publicada (mediana de 5 rodadas, Lighthouse mobile local):** home 73, PLP 84, PDP 83, Quem somos 86, Fale conosco 83 — acessibilidade **100**, SEO **100**, CLS ≈ 0 em todas. Depois de publicar: Montserrat carregada **sem bloquear** (antes era `@import` no `style-tokens.tpl`, e só 400/700 — agora 300–700 de verdade) com fallback de métricas iguais ("Montserrat Fallback", Arial ajustada) para a troca de fonte não mexer no layout; classe `page-<slug>` no `<body>` (layout.tpl) para Quem somos sair pronta do servidor; vitrines da home limitadas a 8 produtos. A home fica abaixo das outras porque o HTML tem ~1,6 MB (7 vitrines × ~190 KB — cada card do Ipanema embute o form da compra rápida) e o Swiper inicializa 9 carrosséis; o caminho para subir é carregar as abas escondidas sob demanda. ⚠️ O Twig da plataforma **não aceita** ternário com `replace({...})` dentro do `style-tokens.tpl` — derrubou a loja ~1 min; o fallback de fonte ficou no CSS (`main.css`).
+    Limites fora do tema: **TTFB do preview ~1s** (a loja publicada responde em ~0,3s — os números devem subir ao publicar); CSS de fontes da plataforma bloqueando a 1ª pintura (~0,8s); **boas práticas 79** = cookie de terceiros do script da própria plataforma; a acessibilidade só não é 100 por causa da barra "Rascunho" do preview. No **Fale conosco** o Lighthouse simulado (o do PageSpeed) dá ~57 por causa do reCAPTCHA da plataforma; medido com throttling real dá 95.
 
 Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar o DOM real renderizado (logado no admin) para as classes certas (`.head-row`, `.search-container`, `.nav-desktop-list`, `.desktop-dropdown`, `.nav-desktop-container`, `.menu-container`, `.navigation-bar`, `.sticky-header-wrapper`). A barra de benefícios (`.navigation-bar`) é um **strip de scroll horizontal nativo** (não é overflow de página).
 

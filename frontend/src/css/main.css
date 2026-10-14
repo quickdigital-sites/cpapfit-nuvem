@@ -92,6 +92,12 @@
   --qd-ink: #4a4a48;
   --qd-hairline: #e1dcd7;
   --qd-indigo: #2f3295;
+  /* A Montserrat carrega sem bloquear (layout.tpl); até ela chegar, "Montserrat Fallback" (Arial com
+     as métricas da Montserrat — @font-face em layouts/resources/style-tokens.tpl) ocupa o mesmo espaço,
+     então a troca de fonte não desloca o layout (CLS). Sobrescreve os tokens do Brand Editor: se a
+     fonte da marca mudar, ajuste aqui. */
+  --heading-font: "Montserrat", "Montserrat Fallback", sans-serif;
+  --body-font: "Montserrat", "Montserrat Fallback", sans-serif;
 }
 
 /* .container FLUIDA: 100% da largura até o max-width (--page-width = 1600px),

@@ -11,16 +11,20 @@
   --qd-inst-green: var(--qd-teal-strong);
 }
 
-/* Anti layout shift: o institucional.js monta a coluna lateral, move o conteúdo e decide quais seções
-   do page.json aparecem. Até ele terminar (html.qd-inst-ready) o <main> fica invisível; se o JS falhar,
-   aparece sozinho em 3s (@keyframes qd-reveal em pdp.css). */
-html:not(.qd-inst-ready) :is(.template-page, .template-contact) main { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
+/* Quem somos é identificada no servidor: o layout.tpl põe page-<slug> no <body> (tema forkado).
+   Assim as seções e o texto dela já saem certos na 1ª pintura, sem esperar o JS. */
 
-/* Seções do page.json que só servem a uma página (sem JS ficam escondidas) */
-html:not(.qd-page-quem-somos) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
+/* Anti layout shift: nas outras páginas o institucional.js monta a coluna lateral e move o conteúdo.
+   Até ele terminar (html.qd-inst-ready) o <main> fica invisível; se o JS falhar, aparece sozinho em 3s
+   (@keyframes qd-reveal em pdp.css). */
+html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .template-contact) main { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
+
+/* Seções do page.json que só servem a Quem somos */
+body:not(.page-quem-e-a-cpap-fit) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
   [data-section-id="servicos"], [data-section-id="videos"], [data-section-id="marcas"]) { display: none !important; }
 [data-section-id="cmp_nossas_lojas"] { display: none !important; } /* conteúdo vai para a coluna (JS) */
-.qd-inst-page [data-section-id="heading"],
+/* o título vai para a coluna de conteúdo (JS); em Quem somos, a faixa já tem o título */
+:is(.template-page, .template-contact) [data-section-id="heading"],
 .qd-inst-source { display: none !important; }
 
 /* --- Layout: coluna lateral 280px + conteúdo (gap 100px, largura útil 1360px) ---- */
@@ -63,23 +67,24 @@ html:not(.qd-page-quem-somos) :is([data-section-id="quem_somos_hero"], [data-sec
 .qd-inst-aside .qd-footer-whatsapp:hover { background: var(--qd-cream); }
 
 /* --- Conteúdo do admin (Troca, políticas, Quem somos) ----------------------- */
-.qd-inst-content { display: flex; flex-direction: column; gap: 26px; font-family: var(--heading-font); }
-.qd-inst-content :is(p, li, span, div, td) {
-  font-family: inherit !important; font-size: 16px; font-weight: 500; line-height: 22px; letter-spacing: .16px; color: var(--qd-inst-text);
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) { display: flex; flex-direction: column; gap: 26px; font-family: var(--heading-font); }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(p, li, span, div, td) {
+  font-family: inherit !important; font-size: 16px !important; font-weight: 500; line-height: 22px !important; letter-spacing: .16px; color: var(--qd-inst-text) !important;
+  /* !important: o texto do admin traz font-size/cor inline (o JS limpa, mas a 1ª pintura é antes) */
 }
-.qd-inst-content :is(p, ul, ol) { margin: 0; }
-.qd-inst-content :is(ul, ol) { padding-left: 1.25em; }
-.qd-inst-content :is(ul, ol):has(> li[style*="list-style"]) { padding-left: 0; }
-.qd-inst-content li[style*="list-style"] + li { margin-top: 15px; }
-.qd-inst-content :is(strong, b) { font-weight: 700; }
-.qd-inst-content a { color: var(--qd-indigo); text-decoration: underline; }
-.qd-inst-content :is(h1, h2, h3, h4) {
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(p, ul, ol) { margin: 0; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(ul, ol) { padding-left: 1.25em; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(ul, ol):has(> li[style*="list-style"]) { padding-left: 0; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) li[style*="list-style"] + li { margin-top: 15px; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(strong, b) { font-weight: 700; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) a { color: var(--qd-indigo); text-decoration: underline; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(h1, h2, h3, h4) {
   margin: 0; padding-top: 26px; border-top: 1px solid var(--qd-inst-line);
   font-family: inherit; font-size: 20px; font-weight: 500; line-height: 20px; letter-spacing: .35px; color: var(--qd-inst-navy);
 }
-.qd-inst-content > :is(h1, h2, h3, h4):first-child { padding-top: 0; border-top: 0; }
-.qd-inst-content hr { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--qd-inst-line); }
-.qd-inst-content img { max-width: 100%; height: auto; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) > :is(h1, h2, h3, h4):first-child { padding-top: 0; border-top: 0; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) hr { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--qd-inst-line); }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) img { max-width: 100%; height: auto; }
 
 /* --- Nossas lojas ----------------------------------------------------------- */
 .qd-stores { display: flex; flex-direction: column; gap: 20px; }
@@ -165,12 +170,12 @@ div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
 }
 [data-section-id="quem_somos_hero"] :is(.text-block p, .text-content) { margin: 0; font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--qd-offwhite); }
 [data-section-id="quem_somos_hero"] .heading-block { font-family: var(--heading-font); font-weight: 700; line-height: 56px; color: var(--qd-offwhite); }
-.qd-page-quem-somos [data-section-id="page_content"] { padding: 40px 10px 60px !important; }
-.qd-inst-content--wide { max-width: 1280px; margin: 0 auto; }
+.page-quem-e-a-cpap-fit [data-section-id="page_content"] { padding: 40px 10px 60px !important; }
+.page-quem-e-a-cpap-fit .page-content { max-width: 1280px; margin: 0 auto; }
 /* 1º parágrafo em destaque (o conteúdo atual do admin é uma <ul> com um <li> por parágrafo) */
-:is(.qd-inst-content--wide > p:first-child, .qd-inst-content--wide > :is(ul, ol):first-child > li:first-child),
-:is(.qd-inst-content--wide > p:first-child, .qd-inst-content--wide > :is(ul, ol):first-child > li:first-child) * {
-  font-size: 20px; font-weight: 700; line-height: 26px;
+:is(.page-quem-e-a-cpap-fit .page-content > p:first-child, .page-quem-e-a-cpap-fit .page-content > :is(ul, ol):first-child > li:first-child),
+:is(.page-quem-e-a-cpap-fit .page-content > p:first-child, .page-quem-e-a-cpap-fit .page-content > :is(ul, ol):first-child > li:first-child) * {
+  font-size: 20px !important; font-weight: 700; line-height: 26px !important;
 }
 
 /* --- Responsivo: tablet (< 1200px) e mobile (< 768px) ----------------------- */
@@ -199,9 +204,9 @@ div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
   [data-section-id="quem_somos_hero"] .media-visual img { object-position: 70% center; }
   [data-section-id="quem_somos_hero"] .media-content-floating { justify-content: flex-end; padding: 30px 30px 40px !important; }
   [data-section-id="quem_somos_hero"] .heading-block { line-height: 1.2; }
-  .qd-page-quem-somos [data-section-id="page_content"] { padding: 30px 20px 20px !important; }
-  :is(.qd-inst-content--wide > p:first-child, .qd-inst-content--wide > :is(ul, ol):first-child > li:first-child),
-  :is(.qd-inst-content--wide > p:first-child, .qd-inst-content--wide > :is(ul, ol):first-child > li:first-child) * {
-    font-size: 18px; line-height: 24px;
+  .page-quem-e-a-cpap-fit [data-section-id="page_content"] { padding: 30px 20px 20px !important; }
+  :is(.page-quem-e-a-cpap-fit .page-content > p:first-child, .page-quem-e-a-cpap-fit .page-content > :is(ul, ol):first-child > li:first-child),
+  :is(.page-quem-e-a-cpap-fit .page-content > p:first-child, .page-quem-e-a-cpap-fit .page-content > :is(ul, ol):first-child > li:first-child) * {
+    font-size: 18px !important; line-height: 24px !important;
   }
 }
