@@ -81,7 +81,7 @@ sections:
           c1: { type: category-item, settings: { text: Máscaras, link: /mascaras/, image: "asset:home/categoria-mascaras.webp" } }
           c2: { type: category-item, settings: { text: BIPAPs | VPAPs, link: /cpap-e-bipap/bipap-vpap/, image: "asset:home/categoria-bipaps.webp" } }
           c3: { type: category-item, settings: { text: CPAP Automático, link: /cpap-e-bipap/cpap-automatico/, image: "asset:home/categoria-cpap-automatico.webp" } }
-          c4: { type: category-item, settings: { text: CPAP Dreamstation, link: /cpap-e-bipap/, image: "asset:home/categoria-dreamstation.webp" } }
+          c4: { type: category-item, settings: { text: CPAP Dreamstation, link: /search/?q=dreamstation, image: "asset:home/categoria-dreamstation.webp" } }
           c5: { type: category-item, settings: { text: CPAP Portátil, link: /cpap-e-bipap/cpap-portatil/, image: "asset:home/categoria-cpap-portatil.webp" } }
           c6: { type: category-item, settings: { text: CPAP Pressão Fixa, link: /cpap-e-bipap/cpap-pressao-fixa/, image: "asset:home/categoria-cpap-pressao-fixa.webp" } }
           c7: { type: category-item, settings: { text: Umidificador, link: /cpap-e-bipap/umidificadores/, image: "asset:home/categoria-umidificador.webp" } }
@@ -155,10 +155,10 @@ sections:
           gap: 20
         block_order: [m1, m2, m3, m4, m5, m6, m7]
         blocks:
-          m1: { type: category-item, settings: { text: BMC, link: /marcas/bmc/, image: "asset:home/marca-bmc.png" } }
-          m2: { type: category-item, settings: { text: Covidien, link: /marcas/covidien/, image: "asset:home/marca-covidien.png" } }
-          m3: { type: category-item, settings: { text: Caire, link: /marcas/caire/, image: "asset:home/marca-caire.png" } }
-          m4: { type: category-item, settings: { text: Resmed, link: /resmed/, image: "asset:home/marca-resmed.png" } }
-          m5: { type: category-item, settings: { text: Fisher & Paykel, link: /marcas/fisher-paykel/, image: "asset:home/marca-fisher-paykel.png" } }
-          m6: { type: category-item, settings: { text: MD, link: /marcas/md/, image: "asset:home/marca-md.png" } }
-          m7: { type: category-item, settings: { text: Ventcare, link: /marcas/ventcare/, image: "asset:home/marca-ventcare.png" } }
+          m1: { type: category-item, settings: { text: BMC, link: /produtos/?brand=Bmc, image: "asset:home/marca-bmc.png" } }
+          m2: { type: category-item, settings: { text: Covidien, link: /produtos/?brand=Covidien, image: "asset:home/marca-covidien.png" } }
+          m3: { type: category-item, settings: { text: Caire, link: /produtos/?brand=Caire, image: "asset:home/marca-caire.png" } }
+          m4: { type: category-item, settings: { text: Resmed, link: /produtos/?brand=Resmed, image: "asset:home/marca-resmed.png" } }
+          m5: { type: category-item, settings: { text: Fisher & Paykel, link: /produtos/?brand=Fisher%20%26%20Paykel, image: "asset:home/marca-fisher-paykel.png" } }
+          m6: { type: category-item, settings: { text: MD, link: /produtos/?brand=Md, image: "asset:home/marca-md.png" } }
+          m7: { type: category-item, settings: { text: Ventcare, link: /produtos/?brand=Ventcare, image: "asset:home/marca-ventcare.png" } }

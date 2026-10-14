@@ -5,9 +5,9 @@
  * progressive-enhancement: injeta o elemento no .head-row nativo por JS.
  * Estilo em frontend/src/css/main.css (.qd-plans-pill*).
  *
- * TODO: trocar PLANS_URL pela URL real da página de planos de assinatura.
+ * PLANS_URL: página de conteúdo do admin (Loja online → Páginas, slug planos-de-assinatura).
  */
-const PLANS_URL = "#";
+const PLANS_URL = "/planos-de-assinatura/";
 
 const ICON = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 10h16"/><path d="M8 15h4"/></svg>`;
 const ARROW = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>`;

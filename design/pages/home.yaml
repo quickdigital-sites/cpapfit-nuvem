@@ -11,7 +11,8 @@
 #    PÚBLICO de assets (design/assets.json + scripts/publish-assets.sh). "asset:home/x" vira a URL.
 #    ⚠️ Como estão no YAML, o repo manda nelas: trocar pelo Brand Editor é desfeito no próximo build
 #    (para passar a controlar pelo Brand Editor, apague a chave image aqui).
-# ⚠️ Links de categoria: slugs presumidos (/mascaras/ etc.) — conferir com as categorias reais.
+# Links conferidos contra a loja (2026-10-14): categorias reais (/cpap-e-bipap/...), marcas pelo filtro
+#    /produtos/?brand=<Marca> (a loja não tem página de marca), serviços em /servicos/...
 # Abas de Destaques: cada aba é uma seção product-list (destaques_1..6). As abas 2–6 apontam para as
 #    categorias reais (products_source, ids da loja) — e por isso o product-list.tpl as renderiza só como
 #    placeholder; home-tabs.js carrega a vitrine da categoria quando o visitante vai usar as abas.
@@ -96,10 +97,10 @@ sections:
             blocks:
               botao:
                 type: button
-                settings: { label: Ver linha completa, link: /resmed/, variant: primary, size: medium }
+                settings: { label: Ver linha completa, link: /produtos/?brand=Resmed, variant: primary, size: medium }
               logo:
                 type: image
-                settings: { image: "asset:home/logo-resmed.png", width: fit, link: /resmed/ }
+                settings: { image: "asset:home/logo-resmed.png", width: fit, link: /produtos/?brand=Resmed }
           cupom:
             type: group
             settings: { direction: row, alignment: start, gap: 16, width: fill }
@@ -134,12 +135,12 @@ sections:
         block_order: [c1, c2, c3, c4, c5, c6, c7]
         blocks:
           c1: { type: category-item, settings: { text: Máscaras, link: /mascaras/, image: "asset:home/categoria-mascaras.webp" } }
-          c2: { type: category-item, settings: { text: BIPAPs | VPAPs, link: /bipaps/, image: "asset:home/categoria-bipaps.webp" } }
-          c3: { type: category-item, settings: { text: CPAP Automático, link: /cpaps/cpap-automatico/, image: "asset:home/categoria-cpap-automatico.webp" } }
-          c4: { type: category-item, settings: { text: CPAP Dreamstation, link: /cpaps/dreamstation/, image: "asset:home/categoria-dreamstation.webp" } }
-          c5: { type: category-item, settings: { text: CPAP Portátil, link: /cpaps/cpap-portatil/, image: "asset:home/categoria-cpap-portatil.webp" } }
-          c6: { type: category-item, settings: { text: CPAP Pressão Fixa, link: /cpaps/cpap-pressao-fixa/, image: "asset:home/categoria-cpap-pressao-fixa.webp" } }
-          c7: { type: category-item, settings: { text: Umidificador, link: /acessorios/umidificador/, image: "asset:home/categoria-umidificador.webp" } }
+          c2: { type: category-item, settings: { text: BIPAPs | VPAPs, link: /cpap-e-bipap/bipap-vpap/, image: "asset:home/categoria-bipaps.webp" } }
+          c3: { type: category-item, settings: { text: CPAP Automático, link: /cpap-e-bipap/cpap-automatico/, image: "asset:home/categoria-cpap-automatico.webp" } }
+          c4: { type: category-item, settings: { text: CPAP Dreamstation, link: /search/?q=dreamstation, image: "asset:home/categoria-dreamstation.webp" } }
+          c5: { type: category-item, settings: { text: CPAP Portátil, link: /cpap-e-bipap/cpap-portatil/, image: "asset:home/categoria-cpap-portatil.webp" } }
+          c6: { type: category-item, settings: { text: CPAP Pressão Fixa, link: /cpap-e-bipap/cpap-pressao-fixa/, image: "asset:home/categoria-cpap-pressao-fixa.webp" } }
+          c7: { type: category-item, settings: { text: Umidificador, link: /cpap-e-bipap/umidificadores/, image: "asset:home/categoria-umidificador.webp" } }
 
   # ---------------------------------------------------------------------------------------------
   # Destaques (Figma 0:367 / mobile 0:691) — título + abas (componente) e uma vitrine por aba.
@@ -217,8 +218,8 @@ sections:
             <<: *cta_linha
             block_order: [botao, logo]
             blocks:
-              botao: { type: button, settings: { label: Ver linha completa, link: /resmed/, variant: primary, size: medium } }
-              logo: { type: image, settings: { image: "asset:home/logo-resmed.png", width: fit, link: /resmed/ } }
+              botao: { type: button, settings: { label: Ver linha completa, link: /produtos/?brand=Resmed, variant: primary, size: medium } }
+              logo: { type: image, settings: { image: "asset:home/logo-resmed.png", width: fit, link: /produtos/?brand=Resmed } }
       philips:
         type: banner
         settings:
@@ -232,8 +233,8 @@ sections:
             <<: *cta_linha
             block_order: [botao, logo]
             blocks:
-              botao: { type: button, settings: { label: Ver linha completa, link: /philips-respironics/, variant: primary, size: medium } }
-              logo: { type: image, settings: { image: "asset:home/logo-philips.png", width: fit, link: /philips-respironics/ } }
+              botao: { type: button, settings: { label: Ver linha completa, link: /produtos/?brand=Philips%20Respironics, variant: primary, size: medium } }
+              logo: { type: image, settings: { image: "asset:home/logo-philips.png", width: fit, link: /produtos/?brand=Philips%20Respironics } }
 
   # ---------------------------------------------------------------------------------------------
   # Os mais vendidos (Figma 0:414 / mobile 0:786)
@@ -266,13 +267,13 @@ sections:
           gap: 20
         block_order: [m1, m2, m3, m4, m5, m6, m7]
         blocks:
-          m1: { type: category-item, settings: { text: BMC, link: /marcas/bmc/, image: "asset:home/marca-bmc.png" } }
-          m2: { type: category-item, settings: { text: Covidien, link: /marcas/covidien/, image: "asset:home/marca-covidien.png" } }
-          m3: { type: category-item, settings: { text: Caire, link: /marcas/caire/, image: "asset:home/marca-caire.png" } }
-          m4: { type: category-item, settings: { text: Resmed, link: /resmed/, image: "asset:home/marca-resmed.png" } }
-          m5: { type: category-item, settings: { text: Fisher & Paykel, link: /marcas/fisher-paykel/, image: "asset:home/marca-fisher-paykel.png" } }
-          m6: { type: category-item, settings: { text: MD, link: /marcas/md/, image: "asset:home/marca-md.png" } }
-          m7: { type: category-item, settings: { text: Ventcare, link: /marcas/ventcare/, image: "asset:home/marca-ventcare.png" } }
+          m1: { type: category-item, settings: { text: BMC, link: /produtos/?brand=Bmc, image: "asset:home/marca-bmc.png" } }
+          m2: { type: category-item, settings: { text: Covidien, link: /produtos/?brand=Covidien, image: "asset:home/marca-covidien.png" } }
+          m3: { type: category-item, settings: { text: Caire, link: /produtos/?brand=Caire, image: "asset:home/marca-caire.png" } }
+          m4: { type: category-item, settings: { text: Resmed, link: /produtos/?brand=Resmed, image: "asset:home/marca-resmed.png" } }
+          m5: { type: category-item, settings: { text: Fisher & Paykel, link: /produtos/?brand=Fisher%20%26%20Paykel, image: "asset:home/marca-fisher-paykel.png" } }
+          m6: { type: category-item, settings: { text: MD, link: /produtos/?brand=Md, image: "asset:home/marca-md.png" } }
+          m7: { type: category-item, settings: { text: Ventcare, link: /produtos/?brand=Ventcare, image: "asset:home/marca-ventcare.png" } }
 
   # ---------------------------------------------------------------------------------------------
   # Banners promocionais (Figma 0:459 / mobile 0:878) — só imagem (arte completa no Brand Editor)
@@ -294,8 +295,8 @@ sections:
       vertical_padding: 60
     block_order: [promo_1, promo_2]
     blocks:
-      promo_1: { type: banner, settings: { link: /resmed/, image: "asset:home/promo-resmed.webp" } }
-      promo_2: { type: banner, settings: { link: /philips-respironics/, image: "asset:home/promo-philips.webp" } }
+      promo_1: { type: banner, settings: { link: /produtos/?brand=Resmed, image: "asset:home/promo-resmed.webp" } }
+      promo_2: { type: banner, settings: { link: /produtos/?brand=Philips%20Respironics, image: "asset:home/promo-philips.webp" } }
 
   # ---------------------------------------------------------------------------------------------
   # Dicas & Vídeos (Figma 0:462 / mobile 0:881) — seção Personalizada com blocos de vídeo nativos
@@ -348,6 +349,6 @@ sections:
         block_order: [s1, s2, s3, s4]
         blocks:
           s1: { type: category-item, settings: { text: Vendas de equipamentos, link: /produtos/, image: "asset:home/servico-vendas.png" } }
-          s2: { type: category-item, settings: { text: Aluguel de CPAP e BIPAP, link: /aluguel-de-cpap-e-bipap/, image: "asset:home/servico-aluguel-cpap.png" } }
-          s3: { type: category-item, settings: { text: Acompanhamento clínico, link: /acompanhamento-clinico/, image: "asset:home/servico-acompanhamento.png" } }
-          s4: { type: category-item, settings: { text: Aluguel de ventiladores, link: /aluguel-de-ventiladores/, image: "asset:home/servico-aluguel-ventiladores.png" } }
+          s2: { type: category-item, settings: { text: Aluguel de CPAP e BIPAP, link: /servicos/aluguel-de-equipamentos/, image: "asset:home/servico-aluguel-cpap.png" } }
+          s3: { type: category-item, settings: { text: Acompanhamento clínico, link: /servicos/apoio-e-monitoramento-de-cpap1/, image: "asset:home/servico-acompanhamento.png" } }
+          s4: { type: category-item, settings: { text: Aluguel de ventiladores, link: /servicos/aluguel-de-equipamentos/, image: "asset:home/servico-aluguel-ventiladores.png" } }

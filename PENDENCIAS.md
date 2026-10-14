@@ -24,9 +24,12 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
   `quickdigital-sites/quickdigital-sites-cpapfit-assets` (commit fixado em `design/assets.json`, gravado
   por `scripts/publish-assets.sh`). Trocar imagem = substituir o arquivo, rodar o script, build e push.
   Faltam só as URLs de vídeo (YouTube). Categorias receberam fundo branco quadrado; Serviços, recorte redondo.
-- [ ] **Home — links de categoria presumidos** (`/mascaras/`, `/bipaps/`, `/cpaps/cpap-automatico/`,
-  `/marcas/...`, serviços etc. em `design/pages/home.yaml` e `design/components/destaques-abas.html`).
-  Conferir com as categorias/páginas reais da loja e corrigir.
+- [x] **Links do site conferidos (2026-10-14):** rastreados home, PLP, PDP e institucionais (82 links internos).
+  Corrigidos 13: categorias reais (`/cpap-e-bipap/...`), marcas pelo filtro `/produtos/?brand=<Marca>` (a loja não
+  tem página de marca; `/resmed/` era a subcategoria de CPAP automático), serviços em `/servicos/...`, Dreamstation e
+  Kits por busca (não há categoria), pílula "Planos" → `/planos-de-assinatura/`. **Faltam 5 páginas no admin**
+  (Loja online → Páginas): `nossas-lojas`, `planos-de-assinatura`, `politica-de-entrega`, `politica-de-privacidade`
+  e publicar `trocas-e-devolucoes`. Os textos de privacidade, entrega e troca existem em cpapfit.com.br.
 - [x] **Home — abas de Destaques (2026-10-14):** abas 2–6 ligadas às categorias reais (Máscaras, CPAP e BiPAP,
   Concentradores de oxigênio, Acessórios para polissonografia, Acessórios para CPAP e BiPAP — `products_source` em
   `design/pages/home.yaml`) e carregadas sob demanda. **Falta:** a aba 1 "Kits promocionais" não tem categoria na loja

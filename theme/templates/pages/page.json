@@ -145,7 +145,7 @@
               "type": "category-item",
               "settings": {
                 "text": "CPAP Dreamstation",
-                "link": "/cpap-e-bipap/",
+                "link": "/search/?q=dreamstation",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/categoria-dreamstation.webp"
               }
             },
@@ -460,7 +460,7 @@
               "type": "category-item",
               "settings": {
                 "text": "BMC",
-                "link": "/marcas/bmc/",
+                "link": "/produtos/?brand=Bmc",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-bmc.png"
               }
             },
@@ -468,7 +468,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Covidien",
-                "link": "/marcas/covidien/",
+                "link": "/produtos/?brand=Covidien",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-covidien.png"
               }
             },
@@ -476,7 +476,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Caire",
-                "link": "/marcas/caire/",
+                "link": "/produtos/?brand=Caire",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-caire.png"
               }
             },
@@ -484,7 +484,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Resmed",
-                "link": "/resmed/",
+                "link": "/produtos/?brand=Resmed",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-resmed.png"
               }
             },
@@ -492,7 +492,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Fisher & Paykel",
-                "link": "/marcas/fisher-paykel/",
+                "link": "/produtos/?brand=Fisher%20%26%20Paykel",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-fisher-paykel.png"
               }
             },
@@ -500,7 +500,7 @@
               "type": "category-item",
               "settings": {
                 "text": "MD",
-                "link": "/marcas/md/",
+                "link": "/produtos/?brand=Md",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-md.png"
               }
             },
@@ -508,7 +508,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Ventcare",
-                "link": "/marcas/ventcare/",
+                "link": "/produtos/?brand=Ventcare",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-ventcare.png"
               }
             }

@@ -55,7 +55,7 @@
                   "type": "button",
                   "settings": {
                     "label": "Ver linha completa",
-                    "link": "/resmed/",
+                    "link": "/produtos/?brand=Resmed",
                     "variant": "primary",
                     "size": "medium"
                   }
@@ -64,7 +64,7 @@
                   "type": "image",
                   "settings": {
                     "width": "fit",
-                    "link": "/resmed/",
+                    "link": "/produtos/?brand=Resmed",
                     "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/logo-resmed.png"
                   }
                 }
@@ -158,7 +158,7 @@
               "type": "category-item",
               "settings": {
                 "text": "BIPAPs | VPAPs",
-                "link": "/bipaps/",
+                "link": "/cpap-e-bipap/bipap-vpap/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/categoria-bipaps.webp"
               }
             },
@@ -166,7 +166,7 @@
               "type": "category-item",
               "settings": {
                 "text": "CPAP Automático",
-                "link": "/cpaps/cpap-automatico/",
+                "link": "/cpap-e-bipap/cpap-automatico/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/categoria-cpap-automatico.webp"
               }
             },
@@ -174,7 +174,7 @@
               "type": "category-item",
               "settings": {
                 "text": "CPAP Dreamstation",
-                "link": "/cpaps/dreamstation/",
+                "link": "/search/?q=dreamstation",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/categoria-dreamstation.webp"
               }
             },
@@ -182,7 +182,7 @@
               "type": "category-item",
               "settings": {
                 "text": "CPAP Portátil",
-                "link": "/cpaps/cpap-portatil/",
+                "link": "/cpap-e-bipap/cpap-portatil/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/categoria-cpap-portatil.webp"
               }
             },
@@ -190,7 +190,7 @@
               "type": "category-item",
               "settings": {
                 "text": "CPAP Pressão Fixa",
-                "link": "/cpaps/cpap-pressao-fixa/",
+                "link": "/cpap-e-bipap/cpap-pressao-fixa/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/categoria-cpap-pressao-fixa.webp"
               }
             },
@@ -198,7 +198,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Umidificador",
-                "link": "/acessorios/umidificador/",
+                "link": "/cpap-e-bipap/umidificadores/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/categoria-umidificador.webp"
               }
             }
@@ -231,7 +231,7 @@
         "code": {
           "type": "code",
           "settings": {
-            "code": "<section class=\"container qd-tabs\" aria-label=\"Destaques\" data-qd-tabs>\n  <div class=\"qd-tabs-row\">\n    <h2 class=\"qd-section-title\">Destaques</h2>\n    <div class=\"qd-tabs-list\" role=\"tablist\">\n      <a href=\"/kits-promocionais/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_1\">Kits promocionais</a>\n      <a href=\"/mascaras/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_2\">Máscaras</a>\n      <a href=\"/cpap-e-bipap/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_3\">Tops CPAPS</a>\n      <a href=\"/oxigenoterapia/concentradores-de-oxigenio/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_4\">Concentradores De Oxigênio</a>\n      <a href=\"/diagnostico-do-sono/acessorios-para-polissonografia/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_5\">Acessórios Para Polissonografia</a>\n      <a href=\"/acessorios-para-cpap-e-bipap/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_6\">Acessórios</a>\n    </div>\n  </div>\n</section>",
+            "code": "<section class=\"container qd-tabs\" aria-label=\"Destaques\" data-qd-tabs>\n  <div class=\"qd-tabs-row\">\n    <h2 class=\"qd-section-title\">Destaques</h2>\n    <div class=\"qd-tabs-list\" role=\"tablist\">\n      <a href=\"/search/?q=kit\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_1\">Kits promocionais</a>\n      <a href=\"/mascaras/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_2\">Máscaras</a>\n      <a href=\"/cpap-e-bipap/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_3\">Tops CPAPS</a>\n      <a href=\"/oxigenoterapia/concentradores-de-oxigenio/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_4\">Concentradores De Oxigênio</a>\n      <a href=\"/diagnostico-do-sono/acessorios-para-polissonografia/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_5\">Acessórios Para Polissonografia</a>\n      <a href=\"/acessorios-para-cpap-e-bipap/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_6\">Acessórios</a>\n    </div>\n  </div>\n</section>",
             "width": "fill"
           }
         }
@@ -469,7 +469,7 @@
                   "type": "button",
                   "settings": {
                     "label": "Ver linha completa",
-                    "link": "/resmed/",
+                    "link": "/produtos/?brand=Resmed",
                     "variant": "primary",
                     "size": "medium"
                   }
@@ -478,7 +478,7 @@
                   "type": "image",
                   "settings": {
                     "width": "fit",
-                    "link": "/resmed/",
+                    "link": "/produtos/?brand=Resmed",
                     "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/logo-resmed.png"
                   }
                 }
@@ -536,7 +536,7 @@
                   "type": "button",
                   "settings": {
                     "label": "Ver linha completa",
-                    "link": "/philips-respironics/",
+                    "link": "/produtos/?brand=Philips%20Respironics",
                     "variant": "primary",
                     "size": "medium"
                   }
@@ -545,7 +545,7 @@
                   "type": "image",
                   "settings": {
                     "width": "fit",
-                    "link": "/philips-respironics/",
+                    "link": "/produtos/?brand=Philips%20Respironics",
                     "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/logo-philips.png"
                   }
                 }
@@ -634,7 +634,7 @@
               "type": "category-item",
               "settings": {
                 "text": "BMC",
-                "link": "/marcas/bmc/",
+                "link": "/produtos/?brand=Bmc",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-bmc.png"
               }
             },
@@ -642,7 +642,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Covidien",
-                "link": "/marcas/covidien/",
+                "link": "/produtos/?brand=Covidien",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-covidien.png"
               }
             },
@@ -650,7 +650,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Caire",
-                "link": "/marcas/caire/",
+                "link": "/produtos/?brand=Caire",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-caire.png"
               }
             },
@@ -658,7 +658,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Resmed",
-                "link": "/resmed/",
+                "link": "/produtos/?brand=Resmed",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-resmed.png"
               }
             },
@@ -666,7 +666,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Fisher & Paykel",
-                "link": "/marcas/fisher-paykel/",
+                "link": "/produtos/?brand=Fisher%20%26%20Paykel",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-fisher-paykel.png"
               }
             },
@@ -674,7 +674,7 @@
               "type": "category-item",
               "settings": {
                 "text": "MD",
-                "link": "/marcas/md/",
+                "link": "/produtos/?brand=Md",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-md.png"
               }
             },
@@ -682,7 +682,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Ventcare",
-                "link": "/marcas/ventcare/",
+                "link": "/produtos/?brand=Ventcare",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/marca-ventcare.png"
               }
             }
@@ -724,14 +724,14 @@
         "promo_1": {
           "type": "banner",
           "settings": {
-            "link": "/resmed/",
+            "link": "/produtos/?brand=Resmed",
             "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/promo-resmed.webp"
           }
         },
         "promo_2": {
           "type": "banner",
           "settings": {
-            "link": "/philips-respironics/",
+            "link": "/produtos/?brand=Philips%20Respironics",
             "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/promo-philips.webp"
           }
         }
@@ -944,7 +944,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Aluguel de CPAP e BIPAP",
-                "link": "/aluguel-de-cpap-e-bipap/",
+                "link": "/servicos/aluguel-de-equipamentos/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/servico-aluguel-cpap.png"
               }
             },
@@ -952,7 +952,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Acompanhamento clínico",
-                "link": "/acompanhamento-clinico/",
+                "link": "/servicos/apoio-e-monitoramento-de-cpap1/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/servico-acompanhamento.png"
               }
             },
@@ -960,7 +960,7 @@
               "type": "category-item",
               "settings": {
                 "text": "Aluguel de ventiladores",
-                "link": "/aluguel-de-ventiladores/",
+                "link": "/servicos/aluguel-de-equipamentos/",
                 "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/servico-aluguel-ventiladores.png"
               }
             }
