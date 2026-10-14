@@ -34,17 +34,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: homolog
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Build do frontend
         working-directory: frontend
-        env:
-          ASSETS_REPO: ${{ github.repository }}
-          ASSETS_REF: ${{ github.event.pull_request.head.sha }}
+        # Imagens (asset:) vêm do repo público de assets fixado em design/assets.json (publicado e
+        # aquecido no jsDelivr por scripts/publish-assets.sh). Não sobrescrever com ASSETS_REPO/ASSETS_REF:
+        # um commit novo dá 503 no jsDelivr até ele buscar cada arquivo (imagens quebradas na loja).
         run: |
           npm ci
           npm run build
@@ -83,17 +83,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Build do frontend
         working-directory: frontend
-        env:
-          ASSETS_REPO: ${{ github.repository }}
-          ASSETS_REF: ${{ github.sha }}
+        # Imagens (asset:) vêm do repo público de assets fixado em design/assets.json (publicado e
+        # aquecido no jsDelivr por scripts/publish-assets.sh). Não sobrescrever com ASSETS_REPO/ASSETS_REF:
+        # um commit novo dá 503 no jsDelivr até ele buscar cada arquivo (imagens quebradas na loja).
         run: |
           npm ci
           npm run build

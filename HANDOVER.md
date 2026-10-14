@@ -280,6 +280,7 @@ Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar
 - **Menu/config do admin** pode demorar (cache) a refletir no preview — recarregar.
 - **Header nativo:** o form de busca fica com `pointer-events:none` fechado; foi preciso forçar `pointer-events:auto` + handler próprio de submit.
 - **Preview perde `theme_installation_id`** ao navegar (ex.: busca) → cai no tema publicado. `header-search.js` re-injeta o parâmetro.
+- **CI e imagens:** o workflow `theme-deploy` **não** pode sobrescrever `ASSETS_REPO`/`ASSETS_REF` — as imagens vêm do repo de assets fixado em `design/assets.json` (publicado e aquecido por `scripts/publish-assets.sh`). Até 2026-10-14 o CI apontava para o commit do repo do tema, o que daria imagens quebradas (503 do jsDelivr) no primeiro push de prod.
 - **Não usar seletor de ID em CSS** (regra da plataforma; IDs são reservados) — usar classes/`js-*`.
 - **Deleção via MCP/CLI** (produto, cliente, webhook) não pede confirmação — cuidado.
 
