@@ -1408,6 +1408,11 @@ input[type=number] {
   font-size: var(--font-medium);
 }
 
+/* Hide the slide counter only under a transparent header, and only on the page's first section */
+body:has(.head-transparent-page) .main-container > :first-child .swiper-fractions {
+  display: none;
+}
+
 /* // Group */
 
 .group-content {
@@ -1528,10 +1533,11 @@ input[type=number] {
   top: -14px;
   right: -10px;
   min-width: 16px;
+  height: 16px;
   padding: 0 3px;
   font-size: 10px;
   font-weight: bold;
-  line-height: 14px;
+  line-height: 16px;
   text-align: center;
   border-radius: 50%;
 }
@@ -2401,6 +2407,44 @@ input[type=number] {
   z-index: 1000;
 }
 
+/* Positions the whole `.header` group, not just `.head-main`, so sibling sections move
+   with it instead of being overlapped. Sticky = fixed; non-sticky = scrolls like normal. */
+.header:has(.head-main.head-transparent-page) {
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+.header:has(.head-main.head-transparent-page[data-sticky-header="true"]) {
+  position: fixed;
+}
+.header:has(.head-main.head-transparent-page[data-sticky-header="false"]) {
+  position: absolute;
+}
+
+.head-main.head-transparent-page {
+  position: relative;
+}
+
+/* Collapses and slides up all sections below transparent header on scroll */
+.transparent-below-group {
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  transition: var(--transition-normal);
+}
+.transparent-below-group-inner {
+  align-self: start;
+  min-height: 0;
+  transition: var(--transition-normal);
+}
+.sticky-header-wrapper.hide-announcements .transparent-below-group {
+  grid-template-rows: 0fr;
+}
+.sticky-header-wrapper.hide-announcements .transparent-below-group-inner {
+  transform: translateY(-100%);
+}
+
 .header.sticky-disabled {
   position: relative;
 }
@@ -2613,6 +2657,30 @@ input[type=number] {
   font-size: var(--h5);
 }
 
+/* Transparent header — alternate logo floats over the default one and cross-fades via opacity */
+.has-transparent-logo .logo-transparent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.has-transparent-logo .logo-transparent .logo-img {
+  max-width: none;
+}
+.logo-center .has-transparent-logo .logo-transparent {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.head-transparent-active .has-transparent-logo .logo-default {
+  opacity: 0;
+}
+.head-transparent-active .has-transparent-logo .logo-transparent {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* Logo left — menu first, logo fills remaining space */
 .logo-left .menu-container {
   order: -1;
@@ -2707,9 +2775,9 @@ input[type=number] {
 }
 
 .head-main .badge {
-  color: var(--header-background);
-  background-color: var(--header-foreground);
-  border: var(--border-solid) var(--header-foreground);
+  color: var(--header-badge-background);
+  background-color: var(--header-badge-foreground);
+  border: var(--border-solid) var(--header-badge-foreground);
 }
 
 .header-icon {
@@ -2718,7 +2786,9 @@ input[type=number] {
 .utility-icon {
   font-size: var(--utility-icon-size-mobile, 20px);
   color: var(--header-utilities-foreground, inherit);
+  fill: var(--header-utilities-foreground, inherit);
 }
+
 .header-cart-text {
   display: none;
   align-items: center;
@@ -2804,6 +2874,34 @@ input[type=number] {
 }
 .head-main .form-control:-ms-input-placeholder {
   color: var(--main-foreground-opacity-30);
+}
+
+/* Suggestions dropdown stays opaque on transparent header */
+.head-transparent-active .form-control {
+  background-color: transparent;
+  color: var(--header-foreground);
+  fill: var(--header-foreground);
+  border-color: var(--header-foreground);
+}
+.head-transparent-active .form-control::-webkit-input-placeholder {
+  color: var(--header-foreground);
+  opacity: 0.6;
+}
+.head-transparent-active .form-control:-moz-placeholder {
+  color: var(--header-foreground);
+  opacity: 0.6;
+}
+.head-transparent-active .form-control::-moz-placeholder {
+  color: var(--header-foreground);
+  opacity: 0.6;
+}
+.head-transparent-active .form-control:-ms-input-placeholder {
+  color: var(--header-foreground);
+  opacity: 0.6;
+}
+.head-transparent-active .search-submit-btn .icon-inline,
+.head-transparent-active .search-empty-btn .icon-inline {
+  color: var(--header-foreground);
 }
 
 .search-suggestions-text:before {
@@ -3170,6 +3268,14 @@ input[type=number] {
   color: var(--label-secondary-foreground);
   border: var(--label-secondary-border, 0);
   border-radius: var(--label-secondary-border-radius, var(--border-radius-small));
+}
+.label-default {
+  background-color: var(--main-foreground-opacity-10);
+  color: var(--main-foreground);
+}
+.label-success {
+  background-color: var(--success);
+  color: var(--main-background);
 }
 
 .label-block {
@@ -4237,6 +4343,12 @@ input[type=number] {
     display: grid;
     align-items: center;
     grid-auto-flow: column;
+    opacity: 1;
+    transition: var(--transition-fast);
+  }
+  .head-row.search-icon-md .search-trigger.visible {
+    opacity: 0;
+    pointer-events: none;
   }
   /* Icon mode: floating form expands on click */
   .head-row.search-icon-md .search-floating-container {

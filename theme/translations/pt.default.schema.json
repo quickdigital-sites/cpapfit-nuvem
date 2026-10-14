@@ -27,6 +27,7 @@
     "browser_tab": "Aba do navegador",
     "inactive_tab": "Mensagem para aba inativa",
     "advanced_css": "CSS personalizado",
+    "checkout": "Checkout",
     "text_settings": "Ajustes de texto",
     "video_properties": "Propriedades do vídeo",
     "image_properties": "Propriedades da imagem",
@@ -159,7 +160,8 @@
     "navbar_menu": "Menu",
     "navbar_icons": "Ícones informativos",
     "page_width": "Largura da página",
-    "primary_label": "Etiqueta principal"
+    "primary_label": "Etiqueta principal",
+    "account_subscription_address": "Endereço de envio da assinatura"
   },
   "settings": {
     "code": "Adicione HTML, CSS ou JS",
@@ -374,7 +376,10 @@
     "show_contact": "Mostrar contato",
     "show_submenus": "Mostrar um menu secundário",
     "slide_link": "Link do slide",
-    "sticky_header": "Cabeçalho sempre visível ao navegar na loja",
+        "sticky_header": "Cabeçalho sempre visível ao navegar na loja",
+    "transparent_header": "Cabeçalho transparente",
+    "transparent_text_color": "Cor dos textos e ícones",
+    "transparent_logo": "Logo alternativo",
     "utility_display": "Exibição de utilidades",
     "columns": "Colunas",
     "menu_banner_desktop": "Imagem do banner",
@@ -593,6 +598,7 @@
     "navbar_mobile_in_header": "No cabeçalho"
   },
   "info": {
+    "transparent_header": "Mostra o fundo transparente no início da página inicial.",
     "heading_size_visual_only": "Define apenas o tamanho visual. Não afeta a estrutura SEO da página.",
     "video_url": "Cole a URL de um vídeo do YouTube ou Vimeo",
     "video_cover_image": "Substitui a miniatura do vídeo e melhora o desempenho de carregamento.",

@@ -206,6 +206,8 @@
 
 					{% set show_product_quantity = product.available and product.display_price %}
 
+					{{ component('nubesdk-slot', { type: "before_quick_buy_add_to_cart" }) }}
+
 					<div class="quickshop-actions {% if show_product_quantity %}grid grid-auto-1{% endif %}">
 						{% if show_product_quantity %}
 							{% include "snippets/product/product-quantity.tpl" with {quickshop: true} %}

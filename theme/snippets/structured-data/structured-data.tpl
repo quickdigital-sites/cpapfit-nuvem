@@ -64,7 +64,7 @@
 		{% endif %}
 		"offers": {
 			"@type": "Offer",
-			"url": "{{ product.url }}",
+			"url": "{{ product.canonical_url }}",
 			"priceCurrency": "{{ product.currency }}",
 			"price": "{{ structured_data_price / 100 }}",
 			{% if product.stock_control %}
@@ -238,7 +238,7 @@
 			{% endif %}
 			"offers": {
 				"@type": "Offer",
-				"url": "{{ product.url }}",
+				"url": "{{ product.canonical_url }}",
 				"priceCurrency": "{{ product.currency }}",
 				"price": "{{ structured_data_price / 100 }}",
 				{% if product.stock_control %}

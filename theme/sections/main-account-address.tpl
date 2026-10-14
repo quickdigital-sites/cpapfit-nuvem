@@ -16,6 +16,11 @@
     <div class="container">
   {% endif %}
     <div class="account-form-container">
+      {% if has_active_subscriptions %}
+        <div class="alert alert-info">
+          {{ 'subscriptions.customer_subscriptions.account_address_notice' | t }}
+        </div>
+      {% endif %}
       {% embed "snippets/forms/form.tpl" with{form_id: 'address-form', submit_custom_class: 'btn-block', submit_text: 'address.save' | t } %}
         {% block form_body %}
           {% embed "snippets/forms/form-input.tpl" with{type_text: true, input_for: 'name', input_value: result.name | default(address.name), input_name: 'name', input_id: 'name', input_label_text: 'address.name_alias' | t, input_placeholder: 'address.name_placeholder' | t } %}

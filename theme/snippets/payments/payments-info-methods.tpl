@@ -31,8 +31,14 @@
         {% endif %}
 
         {# Payment Method Discount #}
+        {% set method_discount = payment_methods_config[method].payment_method_discounts[paymentMethod.id] ?? null %}
+        {% set max_installments = method_discount ? method_discount.max_installments : null %}
         <div class="js-payment-method-discount payments-method-discount" style="{{discountStyle}}">
-            <span><strong>{{ paymentMethod.discount }}% {{ 'payments.off_discount' | t }}</strong> {{ 'payments.paying_with' | t }} {{ paymentMethod.name }}</span>
+            <span><strong>{{ paymentMethod.discount }}% {{ 'payments.off_discount' | t }}</strong> {{ 'payments.paying_with' | t }} {{ paymentMethod.name }}
+                {% if max_installments and paymentMethod.id == 'credit_card' %}
+                    <span class="js-payment-discount-installments">{{ (max_installments == 1 ? 'product.in_installments_singular' : 'product.in_installments_plural') | t(max_installments) }}</span>
+                {% endif %}
+            </span>
         </div>
 
         {# Payment Method Total #}

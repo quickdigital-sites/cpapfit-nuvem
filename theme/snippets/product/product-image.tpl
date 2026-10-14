@@ -21,6 +21,11 @@
 		{# Placeholder products skip labels, nubesdk slots, and fancybox — those need a real product. #}
 		{% set is_placeholder = product.isPlaceholder() %}
 		{% set disable_link = home_main_product or is_placeholder %}
+
+		<div class="w-100 order-md-first">
+			{{ component('nubesdk-slot', { type: "before_product_detail_image" }) }}
+		</div>
+
 		<div class="product-images-slider {% if is_grid %}product-images-grid product-images-grid-columns-{{ columns_class }}{% endif %}" {% if is_grid %}data-gallery-format="grid" style="--product-images-grid-gap: {{ gap }}px;"{% endif %}>
 			{% if not is_placeholder %}
 				{% include 'snippets/labels.tpl' with {
@@ -116,4 +121,8 @@
 		</button>
 			</div>
 		{% endif %}
+
+		<div class="w-100 order-md-last">
+			{{ component('nubesdk-slot', { type: "after_product_detail_image" }) }}
+		</div>
 {% endif %}

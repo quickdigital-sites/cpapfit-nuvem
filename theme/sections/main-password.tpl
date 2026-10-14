@@ -18,17 +18,19 @@
     <div class="password-form-wrapper">
       <div class="password-form-content">
         <h2 class="password-page-title">{{ message }}</h2>
-        {% embed "snippets/forms/form.tpl" with{form_id: 'password-form', submit_text: 'general.unlock' | t, submit_custom_class: 'btn-block btn-big', form_custom_class: 'w-100' } %}
-          {% block form_body %}
-            {% embed "snippets/forms/form-input.tpl" with{input_for: 'password', type_password: true, input_name: 'password', input_label_text: 'general.access_password' | t, input_placeholder: 'general.password_placeholder' | t } %}
-              {% block input_form_alert %}
-                {% if invalid_password == true %}
-                  <div class="account-form-alert alert alert-danger">{{ 'general.wrong_password' | t }}</div>
-                {% endif %}
-              {% endblock input_form_alert %}
-            {% endembed %}
-          {% endblock %}
-        {% endembed %}
+        {% if has_password %}
+          {% embed "snippets/forms/form.tpl" with{form_id: 'password-form', submit_text: 'general.unlock' | t, submit_custom_class: 'btn-block btn-big', form_custom_class: 'w-100' } %}
+            {% block form_body %}
+              {% embed "snippets/forms/form-input.tpl" with{input_for: 'password', type_password: true, input_name: 'password', input_label_text: 'general.access_password' | t, input_placeholder: 'general.password_placeholder' | t } %}
+                {% block input_form_alert %}
+                  {% if invalid_password == true %}
+                    <div class="account-form-alert alert alert-danger">{{ 'general.wrong_password' | t }}</div>
+                  {% endif %}
+                {% endblock input_form_alert %}
+              {% endembed %}
+            {% endblock %}
+          {% endembed %}
+        {% endif %}
       </div>
     </div>
   {% if page_width %}

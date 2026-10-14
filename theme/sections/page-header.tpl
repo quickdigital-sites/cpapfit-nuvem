@@ -12,6 +12,10 @@
 {% set text_color = section.settings.text_color %}
 
 
+{% if template == 'account/order' %}
+  {{ component('nubesdk-slot', { type: "before_account_order_header" }) }}
+{% endif %}
+
 <div
   class="page-header"
   data-store="page-title"
@@ -61,7 +65,11 @@
                 {% elseif template == 'account/orders' %}
                   {{ 'general.my_account_title' | t }}
                 {% elseif template == 'account/order' %}
-                  {{ 'general.order_title' | t }} #{{ order.number }}
+                  {% if is_subscription %}
+                    {{ subscription.id }}
+                  {% else %}
+                    {{ 'general.order_title' | t }} #{{ order.number }}
+                  {% endif %}
                 {% elseif template == 'account/info' %}
                   {{ 'general.my_info' | t }}
                 {% elseif template == 'account/addresses' %}
@@ -72,6 +80,8 @@
                   {% else %}
                     {{ 'general.new_address' | t }}
                   {% endif %}
+                {% elseif template == 'account/subscription-address' %}
+                  {{ 'subscriptions.customer_subscriptions.address_page_title' | t }}
                 {% endif %}
               </h1>
               {% if (template == 'category' or template == 'search') and products | length > 1 %}
@@ -92,6 +102,10 @@
     </div>
   {% endif %}
 </div>
+
+{% if template == 'account/order' %}
+  {{ component('nubesdk-slot', { type: "after_account_order_header" }) }}
+{% endif %}
 
 
 {% schema %}
@@ -178,7 +192,8 @@
       "account/order",
       "account/info",
       "account/addresses",
-      "account/address"
+      "account/address",
+      "account/subscription-address"
     ]
   },
   "presets": [

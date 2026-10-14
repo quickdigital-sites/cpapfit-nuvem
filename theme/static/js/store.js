@@ -955,6 +955,9 @@
       return;
     }
 
+    // Transparent header must overlay content from the first paint, not just past-scroll
+    const isTransparentHeader = header.dataset.transparentHeader === 'true';
+
     // Classify sections in the header group relative to the header
     const sectionWrappers = headerGroup.querySelectorAll('[data-section-type]');
     const sectionsAbove = [];
@@ -991,14 +994,28 @@
     headerGroup.insertBefore(placeholder, headerGroup.firstChild);
     headerGroup.insertBefore(stickyWrapper, placeholder.nextSibling);
 
-    // Move announcements below the header to a non-sticky container
     if (sectionsBelow.length > 0) {
-      const staticContainer = document.createElement('div');
-      staticContainer.className = 'static-announcements';
-      sectionsBelow.forEach(function(section) {
-        staticContainer.appendChild(section);
-      });
-      headerGroup.appendChild(staticContainer);
+      if (isTransparentHeader) {
+        // Keeps them part of the fixed group instead of static flow, so they overlay the
+        // hero instead of blocking it. Inner div is what CSS animates to hide them away.
+        const belowGroup = document.createElement('div');
+        belowGroup.className = 'transparent-below-group';
+        const belowGroupInner = document.createElement('div');
+        belowGroupInner.className = 'transparent-below-group-inner';
+        sectionsBelow.forEach(function(section) {
+          belowGroupInner.appendChild(section);
+        });
+        belowGroup.appendChild(belowGroupInner);
+        stickyWrapper.appendChild(belowGroup);
+      } else {
+        // Non-sticky content: a plain sibling of headerGroup, scrolls away normally
+        const staticContainer = document.createElement('div');
+        staticContainer.className = 'static-announcements';
+        sectionsBelow.forEach(function(section) {
+          staticContainer.appendChild(section);
+        });
+        headerGroup.parentNode.insertBefore(staticContainer, headerGroup.nextSibling);
+      }
     }
 
     let lastScrollY = window.scrollY;
@@ -1006,6 +1023,12 @@
     let isHidden = false;
     const scrollThreshold = 10;
     const hideThreshold = 100;
+
+    // Skip the scroll-triggered toggle: go fixed immediately, no placeholder height reserved
+    if (isTransparentHeader) {
+      stickyWrapper.classList.add('is-fixed');
+      isFixed = true;
+    }
 
     // Calculate combined height of announcements above the header for CSS offset
     function updateAnnouncementsHeight() {
@@ -1031,7 +1054,7 @@
         if (!isFixed) {
           originalTop = stickyWrapper.getBoundingClientRect().top + window.scrollY;
         }
-        if (isFixed) {
+        if (isFixed && !isTransparentHeader) {
           placeholder.style.height = stickyWrapper.offsetHeight + 'px';
         }
       }, 100);
@@ -1056,24 +1079,28 @@
     // Toggle fixed positioning and hide announcements on scroll down
     function handleScroll() {
       const currentScrollY = window.scrollY;
-      const shouldBeFixed = currentScrollY > originalTop;
 
-      if (shouldBeFixed && !isFixed) {
-        placeholder.style.height = stickyWrapper.offsetHeight + 'px';
-        placeholder.classList.add('is-active');
-        stickyWrapper.classList.add('is-fixed');
-        isFixed = true;
-      } else if (!shouldBeFixed && isFixed) {
-        stickyWrapper.classList.remove('is-fixed');
-        placeholder.classList.remove('is-active');
-        placeholder.style.height = '0';
-        stickyWrapper.classList.remove('hide-announcements');
-        isFixed = false;
-        isHidden = false;
+      if (!isTransparentHeader) {
+        const shouldBeFixed = currentScrollY > originalTop;
+
+        if (shouldBeFixed && !isFixed) {
+          placeholder.style.height = stickyWrapper.offsetHeight + 'px';
+          placeholder.classList.add('is-active');
+          stickyWrapper.classList.add('is-fixed');
+          isFixed = true;
+        } else if (!shouldBeFixed && isFixed) {
+          stickyWrapper.classList.remove('is-fixed');
+          placeholder.classList.remove('is-active');
+          placeholder.style.height = '0';
+          stickyWrapper.classList.remove('hide-announcements');
+          isFixed = false;
+          isHidden = false;
+        }
       }
 
-      // Hide announcements above the header when scrolling down past threshold
-      if (isFixed && sectionsAbove.length > 0) {
+      // Hide announcements above (and, for transparent headers, below) the header when
+      // scrolling down past threshold
+      if (isFixed && (sectionsAbove.length > 0 || sectionsBelow.length > 0)) {
         const delta = currentScrollY - lastScrollY;
 
         if (Math.abs(delta) >= scrollThreshold) {
@@ -1083,6 +1110,12 @@
           }
           lastScrollY = currentScrollY;
         }
+      }
+
+      // isFixed stays permanently true here, so reveal hidden announcements on our own
+      if (isTransparentHeader && isHidden && currentScrollY <= hideThreshold) {
+        stickyWrapper.classList.remove('hide-announcements');
+        isHidden = false;
       }
     }
 
@@ -1321,6 +1354,80 @@
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
+  }
+
+  /**
+   * Transparent Header
+   * Header renders transparent by default at the top of the homepage (already set by
+   * header.tpl, no flash on first paint). Goes opaque past a scroll threshold or on
+   * desktop hover only.
+   */
+  function initTransparentHeader() {
+    const header = document.querySelector('.js-head-main');
+    if (!header) return;
+
+    const isTransparentEnabled = header.dataset.transparentHeader === 'true';
+    if (!isTransparentEnabled) return;
+
+    // Remove admin preview toolbar's margin-top on main container to keep header on top position.
+    const main = document.querySelector('#MainContent');
+
+    function syncRootOffset() {
+      if (!main) return;
+      const rootOffset = parseFloat(getComputedStyle(document.documentElement).marginTop) || 0;
+      main.style.marginTop = rootOffset > 0 ? '-' + rootOffset + 'px' : '';
+    }
+
+    syncRootOffset();
+    new MutationObserver(syncRootOffset).observe(document.documentElement, {
+      attributes: true, attributeFilter: ['style', 'class']
+    });
+
+    // Capture the style header.tpl already set, before any mutation
+    const transparentStyle = header.getAttribute('style') || '';
+    const normalStyle = header.dataset.normalStyle || '';
+    const scrollThreshold = 100;
+    const isDesktop = window.matchMedia('(min-width: 768px)');
+
+    // A non-sticky header scrolls away with the hero it overlays, so the scroll
+    // threshold that turns a sticky header opaque doesn't apply: it should stay
+    // transparent regardless of scroll position.
+    const isSticky = header.getAttribute('data-sticky-header') === 'true';
+
+    let isHovering = false;
+
+    function applyState() {
+      const scrolledPosition = window.pageYOffset || document.documentElement.scrollTop;
+      const isAtTop = !isSticky || scrolledPosition < scrollThreshold;
+      const shouldBeTransparent = isAtTop && !isHovering;
+
+      header.classList.toggle('head-transparent-active', shouldBeTransparent);
+      header.setAttribute('style', shouldBeTransparent ? transparentStyle : normalStyle);
+    }
+
+    if (isSticky) {
+      window.addEventListener('scroll', applyState, { passive: true });
+    }
+
+    header.addEventListener('mouseenter', function() {
+      if (!isDesktop.matches) return;
+      isHovering = true;
+      applyState();
+    });
+    header.addEventListener('mouseleave', function() {
+      if (!isDesktop.matches) return;
+      isHovering = false;
+      applyState();
+    });
+
+    // Crossing the breakpoint mid-session (resize, tablet rotation) can leave a stale
+    // hover state from the desktop-only interaction, so clear it and reapply
+    isDesktop.addEventListener('change', function() {
+      isHovering = false;
+      applyState();
+    });
+
+    applyState();
   }
 
   // Unified search trigger: desktop expands inline form, mobile opens modal.
@@ -3007,6 +3114,13 @@
    */
   function initShippingCalculator() {
 
+    // ServicesUrlsProvider falls back to #cart-shipping-container which doesn't exist on PDP without ajax_cart
+    const shippingContainer = document.querySelector('#product-shipping-container');
+    if (shippingContainer) {
+      window.urls = window.urls || {};
+      window.urls.shippingUrl = window.urls.shippingUrl || shippingContainer.dataset.shippingUrl;
+    }
+
     // Restore saved zipcode from cookie and auto-calculate shipping on page load
     const zipcodeCookie = cookieService.get('calculator_zipcode');
     if (zipcodeCookie) {
@@ -3206,25 +3320,23 @@
       input.value = zipcode;
     });
     
-    const cartItems = document.querySelectorAll('.js-cart-item');
-    if (cartItems.length > 0) {
-      const cartShippingEl = document.querySelector('#cart-shipping-container');
-      if (cartShippingEl) {
-        const cartInput = cartShippingEl.querySelector('.js-shipping-input');
-        LS.calculateShippingAjax(
-          cartInput ? cartInput.value : '',
-          url,
-          cartShippingEl.closest('.js-shipping-calculator-container')
-        );
-      }
+    // Only recalculate the cart widget when the click actually came from it
+    const cartShippingEl = container.closest('#cart-shipping-container');
+    if (cartShippingEl) {
+      const cartInput = cartShippingEl.querySelector('.js-shipping-input');
+      LS.calculateShippingAjax(
+        cartInput ? cartInput.value : '',
+        url,
+        cartShippingEl.closest('.js-shipping-calculator-container')
+      );
     }
-    
-    const productContainer = container.closest('.js-shipping-calculator-container');
-    if (productContainer && !cartItems.length) {
+
+    const productContainer = container.closest('#product-shipping-container');
+    if (productContainer) {
       LS.calculateShippingAjax(
         zipcode,
         url,
-        productContainer
+        productContainer.closest('.js-shipping-calculator-container')
       );
     }
   }
@@ -3702,6 +3814,7 @@
     initNavigationBars();
     initNavToggles();
     initSlimHeaderOnScroll();
+    initTransparentHeader();
     initSearchTrigger();
     initNotificationObserver();
     initNotificationScrollListener();

@@ -2477,6 +2477,9 @@ style-async.css
 .account-logout-link {
   font-size: var(--font-big);
 }
+.account-subscriptions-list {
+  margin-bottom: var(--spacing-5);
+}
 .account-orders-heading {
   margin-bottom: var(--spacing-3);
   font-size: var(--h6);
@@ -2504,6 +2507,7 @@ style-async.css
 .account-order-header-content {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .account-order-number {
   margin-right: var(--spacing-2);
@@ -2511,6 +2515,7 @@ style-async.css
 .account-order-date {
   font-size: var(--font-small);
   text-align: right;
+  margin-right: var(--spacing-2);
 }
 .account-order-status-container {
   margin-right: var(--spacing-3);
@@ -2553,7 +2558,6 @@ style-async.css
   padding-left: var(--spacing-5);
   padding-right: var(--spacing-5);
 }
-
 .form-description {
   display: flex;
   flex-direction: column;
@@ -2564,6 +2568,10 @@ style-async.css
   display: flex;
   gap: var(--spacing-2);
   justify-content: flex-end;
+}
+.modal-body .form-actions {
+  margin-top: var(--spacing-4);
+  gap: var(--spacing-3);
 }
 .account-addresses-grid {
   margin-left: 0;
@@ -2976,6 +2984,7 @@ style-async.css
 
   .nav-desktop-container {
     border-top: 1px solid var(--header-nav-divider-color, transparent);
+    transition: var(--transition-fast);
   }
 
   .nav-dropdown-content:hover,

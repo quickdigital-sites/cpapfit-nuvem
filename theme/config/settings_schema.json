@@ -1120,6 +1120,80 @@
     ]
   },
   {
+    "name": "t:names.checkout",
+    "icon": "CashierIcon",
+    "group": "t:names.advanced_settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:content.main_colors"
+      },
+      {
+        "type": "setting",
+        "setting_type": "color",
+        "id": "checkout_main_background",
+        "label": "t:settings.background",
+        "default_setting": "background_color"
+      },
+      {
+        "type": "setting",
+        "setting_type": "color",
+        "id": "checkout_main_foreground",
+        "label": "t:settings.text_color",
+        "default_setting": "text_color"
+      },
+      {
+        "type": "setting",
+        "setting_type": "color",
+        "id": "checkout_accent_color",
+        "label": "t:settings.accent_color",
+        "default_setting": "accent_color"
+      },
+      {
+        "type": "header",
+        "content": "t:names.primary_button"
+      },
+      {
+        "type": "setting",
+        "setting_type": "color",
+        "id": "checkout_button_background",
+        "label": "t:settings.background",
+        "default_setting": "button_primary_background_color"
+      },
+      {
+        "type": "setting",
+        "setting_type": "color",
+        "id": "checkout_button_foreground",
+        "label": "t:settings.text_color",
+        "default_setting": "button_primary_foreground_color",
+        "label_variants": [
+          {
+            "label": "t:settings.line_and_text",
+            "visible_if": "{{ settings.button_primary_style == 'outline' }}"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:names.header"
+      },
+      {
+        "type": "setting",
+        "setting_type": "color",
+        "id": "checkout_header_background",
+        "label": "t:settings.background",
+        "default_setting": "background_color"
+      },
+      {
+        "type": "setting",
+        "setting_type": "color",
+        "id": "checkout_header_foreground",
+        "label": "t:settings.text_color",
+        "default_setting": "text_color"
+      }
+    ]
+  },
+  {
     "name": "t:names.advanced_css",
     "icon": "CodeIcon",
     "group": "t:names.advanced_settings",

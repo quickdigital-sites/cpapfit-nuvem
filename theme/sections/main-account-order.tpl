@@ -10,12 +10,18 @@
 
 <div
   class="account-order-section"
-  data-store="account-order-detail-{{ order.id }}"
+  data-store="{{ is_subscription ? 'account-subscription-detail-' ~ subscription.id : 'account-order-detail-' ~ order.id }}"
   style="padding: {{ vertical_padding }}px {{ horizontal_padding }}px;"
 >
   {% if page_width %}
     <div class="container">
   {% endif %}
+    {% if is_subscription %}
+      {% include 'snippets/subscriptions/subscription-detail.tpl' %}
+    {% else %}
+
+      {{ component('nubesdk-slot', { type: "before_account_order_detail" }) }}
+
     {% if cancel_error == 'in_review' %}
       <div class="alert alert-info">
         <p class="font-weight-bold">{{ 'order.cancel_review_title' | t }}</p>
@@ -77,9 +83,15 @@
             </span>
           </div>
         {% endif %}
+        {% if order_subscription %}
+          {% include 'snippets/subscriptions/subscription-summary.tpl' with { order_subscription: order_subscription } %}
+        {% endif %}
         {% include 'snippets/modals/cancel-order-modal.tpl' with { order: order, cancellation_type: order.cancellation_type } %}
       </div>
       <div class="order-detail-items-container">
+
+        {{ component('nubesdk-slot', { type: "before_account_order_items" }) }}
+
         <div class="order-items-header bottom-line d-none d-md-grid">
           <div>{{ 'order.product' | t }}</div>
           <div class="order-items-header-center">{{ 'general.price' | t }}</div>
@@ -109,6 +121,9 @@
             </div>
           {% endfor %}
         </div>
+
+        {{ component('nubesdk-slot', { type: "after_account_order_items" }) }}
+
         {% set totals_text_classes = 'order-totals-line' %}
         <div class="order-totals-container">
           {% if order.show_shipping_price %}
@@ -150,6 +165,10 @@
         </div>
       </div>
     </div>
+
+      {{ component('nubesdk-slot', { type: "after_account_order_detail" }) }}
+
+    {% endif %}
   {% if page_width %}
     </div>
   {% endif %}

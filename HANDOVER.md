@@ -76,7 +76,18 @@ O `.mcp.json` na raiz liga o servidor MCP da Nuvemshop no Claude Code automatica
 
 O tema **não roda local** — a Nuvemshop renderiza Twig + SASS no servidor. O build local só cobre CSS/JS estáticos.
 
-### 4.1. Fork INDISPONÍVEL (a maior restrição)
+### 4.1. Fork — LIBERADO em 2026-10-14 (instalação homolog 14473488)
+> **Atualização:** `nuvemshop theme fork --theme-id 14473488 --yes` funcionou em 2026-10-14. Agora o push grava
+> **todos** os arquivos (sections, snippets, static, layouts, translations…), e nada mais é "Skipped".
+> Consequências: (1) a instalação **não recebe mais atualizações automáticas do Ipanema** (`theme update` aplica
+> manualmente; `theme unfork` volta ao base num rascunho novo); (2) **o `theme/` local precisa estar igual ao remoto**
+> antes de cada push — os arquivos do Ipanema foram sincronizados com o `theme pull` logo após o fork (vinham de uma
+> versão antiga do kit e teriam sobrescrito o remoto); (3) a estratégia "sem fork" abaixo (CSS/JS injetados no footer,
+> componentes em block "code") continua valendo, mas agora dá para migrar aos poucos: CSS crítico no `<head>` (FOUC),
+> marca/favoritos no card de produto, campos nativos no formulário de contato etc.
+> O texto abaixo descreve a situação até 2026-10-14.
+
+### Situação anterior: fork INDISPONÍVEL
 A plataforma **ainda não libera fork** (`theme fork` → HTTP 400 "Forking not yet allowed. Coming soon...").
 Sem fork, o `theme push/watch` só grava:
 ```
@@ -243,7 +254,7 @@ Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar
 
 ## 10. Armadilhas (gotchas)
 
-- **Fork indisponível** → só `custom/`, `templates/`, `settings_data.json` são graváveis. HTML de header/footer/sections = só CSS/JS/Brand Editor.
+- **Fork liberado (2026-10-14, homolog 14473488)** → o push grava tudo: **sempre `theme pull` / conferir o diff do `theme/` antes de push**, senão arquivos locais antigos sobrescrevem o remoto. Antes do fork, só `custom/`, `templates/` e `settings_data.json` eram graváveis.
 - **`css_code` tem limite de 15.000 chars** → por isso o CSS vai no `<style>` do footer.
 - **Block "code" (custom_code) tem limite de 50.000 chars** → o `inject.mjs` quebra o CSS em vários `<style>` (cortes entre regras de nível 0), um block por pedaço (`code`, `code_2`…), e o JS no último. Erro típico no push: `Setting "code" of type "custom_code" exceeds limit: 50000 characters`.
 - **Dois tokens** (Admin API ≠ CLI de tema). CLI usa `theme/.nuvem`.

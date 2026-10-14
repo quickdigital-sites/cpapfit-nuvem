@@ -28,5 +28,12 @@
 		</span>
 		<span>{{ 'payment_discount.with' | t }}</span>
 		<span class="{% if is_cart %}js-payment-discount-name-cart{% else %}js-payment-discount-name-product{% endif %} {{ text_classes.payment_method }}">{{ max_discount.paymentProviderName }}</span>
+		{% set max_installments = max_discount.maxInstallments %}
+		<span
+			class="js-payment-discount-installments"
+			data-text-singular="{{ 'product.in_installments_singular' | t('{1}') }}"
+			data-text-plural="{{ 'product.in_installments_plural' | t('{1}') }}"
+			{% if not max_installments %}style="display: none;"{% endif %}
+		>{{ (max_installments == 1 ? 'product.in_installments_singular' : 'product.in_installments_plural') | t(max_installments) }}</span>
 	</div>
 {% endif %}

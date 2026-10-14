@@ -83,6 +83,7 @@
         </div>
       </div>
       <div data-store="account-orders">
+        {% include 'snippets/subscriptions/subscription-list.tpl' %}
         {% if cancel_success %}
           <div class="alert alert-success ml-4">{{ 'order.cancel_success_message' | t }}</div>
         {% elseif cancel_error %}
@@ -98,6 +99,9 @@
             {% for order in customer.orders %}
               {% set add_checkout_link = order.pending %}
               <div class="account-order-card" data-store="account-order-item-{{ order.id }}">
+
+                {{ component('nubesdk-slot', { type: "before_account_order_item", pick: order.id }) }}
+
                 {% embed "snippets/card.tpl" with{card_footer: true, card_custom_class: 'card-collapse', card_collapse: true} %}
                   {% block card_head %}
                     <div class="account-order-header-content">
@@ -164,6 +168,9 @@
                     {% include 'snippets/modals/cancel-order-modal.tpl' with { redirect_to: store.customer_order_url(order), cancellation_type: order.cancellation_type } %}
                   {% endblock %}
                 {% endembed %}
+
+                {{ component('nubesdk-slot', { type: "after_account_order_item", pick: order.id }) }}
+
               </div>
             {% endfor %}
           </div>

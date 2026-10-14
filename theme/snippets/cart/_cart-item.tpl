@@ -8,6 +8,8 @@
 {% set discount_percentage = item.discount_percentage %}
 {% set is_gift = item.is_gift %}
 
+{{ component('nubesdk-slot', { type: "before_line_item", pick: item.id }) }}
+
 <div class="js-cart-item {{ item_type_classes }} cart-item {{ item_page_classes }}" data-item-id="{{ item.id }}" data-gift="{{ is_gift ? 'true' : 'false' }}" {% if not cart_page %}data-cart-ajax{% endif %} data-confirm-remove="{{ 'cart.remove_confirm' | t }}" data-store="cart-item-{{ item.product.id }}" data-component="cart.line-item">
 
     {# Cart item image #}

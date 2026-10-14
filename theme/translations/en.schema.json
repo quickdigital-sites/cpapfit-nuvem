@@ -27,6 +27,7 @@
     "browser_tab": "Browser tab",
     "inactive_tab": "Inactive tab message",
     "advanced_css": "Custom CSS",
+    "checkout": "Checkout",
     "text_settings": "Text settings",
     "video_properties": "Video properties",
     "image_properties": "Image properties",
@@ -159,7 +160,8 @@
     "navbar_menu": "Menu",
     "navbar_icons": "Informative icons",
     "page_width": "Page width",
-    "primary_label": "Primary label"
+    "primary_label": "Primary label",
+    "account_subscription_address": "Subscription shipping address"
   },
   "settings": {
     "code": "Add HTML, CSS, or JS",
@@ -258,7 +260,10 @@
     "use_custom_colors": "Use custom colors",
     "content_position": "Content position",
     "text_outside": "Place text outside image",
-    "sticky_header": "Header always visible when browsing",
+        "sticky_header": "Header always visible when browsing",
+    "transparent_header": "Transparent header",
+    "transparent_text_color": "Text and icon color",
+    "transparent_logo": "Alternative logo",
     "logo_position_mobile": "Logo position on mobile",
     "logo_position_desktop": "Logo position",
     "nav_uppercase": "Use uppercase text",
@@ -593,6 +598,7 @@
     "navbar_mobile_in_header": "In the header"
   },
   "info": {
+    "transparent_header": "Shows a transparent background at the top of the homepage.",
     "heading_size_visual_only": "Defines visual size only. Does not affect the page's SEO structure.",
     "video_url": "Paste a YouTube or Vimeo video URL",
     "video_cover_image": "Replaces the video thumbnail and improves loading performance.",

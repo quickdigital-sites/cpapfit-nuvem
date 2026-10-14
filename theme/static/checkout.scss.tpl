@@ -24,20 +24,21 @@ checkout.scss.tpl
 
   {# Main colors #}
 
-  {% set main_background = settings.background_color %}
-  {% set main_foreground = settings.text_color %}
-  {% set accent_color = settings.accent_color %}
+  {% set main_background = settings.checkout_main_background | default(settings.background_color) %}
+  {% set main_foreground = settings.checkout_main_foreground | default(settings.text_color) %}
+  {% set accent_color = settings.checkout_accent_color | default(settings.accent_color) %}
 
-  {% set button_background = settings.button_primary_background_color %}
-  {% set button_foreground = settings.button_primary_foreground_color %}
-  
+  {% set button_background = settings.checkout_button_background | default(settings.button_primary_background_color) %}
+  {% set button_foreground = settings.checkout_button_foreground | default(settings.button_primary_foreground_color) %}
+  {% set button_style = settings.button_primary_style | default('filled') %}
+
   {% set label_background = settings.label_background_color %}
   {% set label_foreground = settings.label_foreground_color %}
   {% set label_border_radius = settings.label_border_radius | default(4) %}
   {% set label_style = settings.label_style | default('filled') %}
 
-  {% set header_background = main_background %}
-  {% set header_foreground = main_foreground %}
+  {% set header_background = settings.checkout_header_background | default(settings.background_color) %}
+  {% set header_foreground = settings.checkout_header_foreground | default(settings.text_color) %}
 
   {#### Color tokens #}
 
@@ -95,7 +96,7 @@ checkout.scss.tpl
   {# Buttons #}
   --button-foreground: {{ button_foreground }};
   --button-background: {{ button_background }};
-  --button-border-color: var(--button-background);
+  --button-border-color: {{ button_style == 'outline' ? 'var(--button-foreground)' : 'var(--button-background)' }};
   --button-border-radius: var(--border-radius);
 
   {# Labels #}
@@ -178,7 +179,7 @@ a {
   text-decoration: none;
   &:hover, &:focus {
     color: var(--main-foreground-opacity-60);
-    
+
     svg {
       fill: var(--main-foreground);
     }
@@ -206,7 +207,7 @@ a {
 
 {# /* // Header */ #}
 
-.header { 
+.header {
   background-color: var(--main-background);
   border-color: var(--accent-color);
 }
@@ -301,7 +302,7 @@ a {
 
   &:focus {
     border-color: var(--main-foreground);
-    outline: none;    
+    outline: none;
   }
 }
 .form-group.form-group-error .form-control {
@@ -322,11 +323,11 @@ a {
 .form-group input[type="radio"]:checked + .form-options-content {
   border: 1px solid var(--accent-color);
   border-color: var(--main-foreground-opacity-10);
-  
+
   + .form-options-accordion {
     border-color: var(--main-foreground-opacity-10);
   }
-  
+
   .checked {
     fill: var(--accent-color);
   }
@@ -336,7 +337,7 @@ a {
 }
 .form-group input[disabled] + .form-options-content {
   border-color: var(--main-foreground-opacity-10) !important;
-  
+
   .form-options-label {
     color: var(--main-foreground) !important;
   }
@@ -393,6 +394,9 @@ a {
   font-size: var(--font-medium);
   line-height: 18px;
   text-transform: none !important;
+  {% if button_style == 'outline' %}
+  border: 1px solid var(--button-border-color);
+  {% endif %}
 
   &:hover,
   &:focus,
@@ -435,7 +439,7 @@ a {
   &:hover {
     color: var(--main-foreground);
     opacity: .6;
-    
+
     .btn-icon-right {
       fill: var(--main-foreground);
     }
@@ -480,7 +484,7 @@ a {
 
 .breadcrumb {
   max-width: 100%;
-  margin: 0;
+
   li .breadcrumb-step {
     margin: 0;
     font-size: var(--font-small);
@@ -520,7 +524,7 @@ a {
   background-color: var(--main-background);
   border-radius: var(--border-radius);
   box-shadow: 0 1px 3px -1px var(--main-foreground-opacity-10);
-  border-color: var(--main-foreground-opacity-15); 
+  border-color: var(--main-foreground-opacity-15);
 }
 
 .accordion-section-header-icon {
@@ -551,7 +555,7 @@ a {
   border-radius: var(--border-radius);
   border-color: var(--main-foreground-opacity-10);
   color: var(--main-foreground-opacity-80);
-  
+
   .icon {
     color: var(--main-foreground-opacity-80);
   }
@@ -931,7 +935,7 @@ a {
     }
   }
 }
-  
+
 
 {# /* // History */ #}
 
@@ -1069,7 +1073,7 @@ a {
 
 {# /* // WhatsApp Opt-in */ #}
 
-.whatsapp-form input, 
+.whatsapp-form input,
 .whatsapp-form .input-group-addon {
   border-color: var(--accent-color);
 }
@@ -1199,7 +1203,7 @@ a {
 .round-spinner {
   border-color: var(--accent-color);
   border-left-color: var(--accent-color-opacity-50);
-  
+
   &:after {
     border-color: var(--accent-color);
     border-left-color: var(--accent-color-opacity-50);

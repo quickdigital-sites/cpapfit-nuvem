@@ -26,6 +26,9 @@
 {% set horizontal_padding_mobile = full_width and use_different_mobile_padding ? section.settings.horizontal_padding_mobile | default(horizontal_padding) : horizontal_padding %}
 {% set background_color = section.settings.background_color %}
 {% set text_color = section.settings.text_color %}
+{% set transparent_header = section.settings.transparent_header %}
+{% set transparent_text_color = section.settings.transparent_text_color %}
+{% set transparent_logo = section.settings.transparent_logo %}
 
 {# Logo settings for CSS variables #}
 {% set logo_height = logo_block ? logo_block.settings.height | default(50) : 50 %}
@@ -75,13 +78,17 @@
 {% set header_styles %}
 	{% if background_color %}--header-background: {{ background_color }}; background-color: {{ background_color }};{% endif %}
 	{% if text_color %}--header-foreground: {{ text_color }}; color: {{ text_color }}; --header-foreground-opacity-10: {{ text_color }}1A; --header-foreground-opacity-20: {{ text_color }}33;{% endif %}
-	{% if nav_background %}--header-desktop-nav-background: {{ nav_background }};{% endif %}
-	{% if nav_foreground %}--header-desktop-nav-foreground: {{ nav_foreground }};{% endif %}
+	
+  {# Always declared to keep a smooth transition between colors #}
+	--header-desktop-nav-background: {{ nav_background ? nav_background : 'var(--header-background)' }};
+	--header-desktop-nav-foreground: {{ nav_foreground ? nav_foreground : 'var(--header-foreground)' }};
 	--nav-item-vertical-padding: {{ nav_vertical_padding }}px;
 	--nav-item-horizontal-padding: {{ nav_items_gap }}px;
-	{% if utilities_icon_foreground %}--header-utilities-foreground: {{ utilities_icon_foreground }};{% endif %}
-	{% if featured_link_color %}--header-featured-link-foreground: {{ featured_link_color }};{% endif %}
-	{% if nav_divider_color %}--header-nav-divider-color: {{ nav_divider_color }};{% endif %}
+	--header-utilities-foreground: {{ utilities_icon_foreground ? utilities_icon_foreground : 'var(--header-foreground)' }};
+	--header-featured-link-foreground: {{ featured_link_color ? featured_link_color : 'var(--header-foreground)' }};
+	--header-nav-divider-color: {{ nav_divider_color ? nav_divider_color : 'transparent' }};
+	--header-badge-background: {{ background_color ? background_color : 'var(--header-background)' }};
+	--header-badge-foreground: {{ text_color ? text_color : 'var(--header-foreground)' }};
 	--logo-height-mobile: {{ logo_height_mobile }}px;
 	--logo-height-desktop: {{ logo_height }}px;
 	--utility-icon-size: {{ utilities_icon_size }}px;
@@ -92,20 +99,40 @@
 	{% if full_width %}--header-padding-x: {{ horizontal_padding }}px; --header-padding-x-mobile: {{ horizontal_padding_mobile }}px;{% endif %}
 {% endset %}
 
+{% set is_transparent_eligible = transparent_header and template == 'home' %}
+
+{# Already in the initial style below so the first paint is already transparent #}
+{% set transparent_styles %}
+	--header-background: transparent; background-color: transparent;
+	--header-desktop-nav-background: transparent;
+	--header-nav-divider-color: transparent;
+	--header-foreground-opacity-10: transparent;
+	{% if transparent_text_color %}
+		--header-foreground: {{ transparent_text_color }}; color: {{ transparent_text_color }}; fill: {{ transparent_text_color }};
+		--header-desktop-nav-foreground: {{ transparent_text_color }};
+		--header-utilities-foreground: {{ transparent_text_color }};
+		--header-featured-link-foreground: {{ transparent_text_color }};
+	{% endif %}
+{% endset %}
+
+{% set initial_styles = is_transparent_eligible ? (header_styles ~ ';' ~ transparent_styles) : header_styles %}
+
 <div
-	class="js-head-main head-main {{ header_with_categories_classes }}"
+	class="js-head-main head-main {{ header_with_categories_classes }} {% if is_transparent_eligible %}head-transparent-active head-transparent-page{% endif %}"
 	data-store="head"
 	data-section-id="{{ section.id }}"
 	data-section-type="header"
 	data-sticky-header="{{ is_sticky ? 'true' : 'false' }}"
-	{% if header_styles | trim %}style="{{ header_styles | trim }}"{% endif %}
+	data-transparent-header="{{ is_transparent_eligible ? 'true' : 'false' }}"
+	data-normal-style="{{ header_styles | trim }}"
+	{% if initial_styles | trim %}style="{{ initial_styles | trim }}"{% endif %}
 >
-	<div class="head-row {% if page_width %}container{% endif %} {{ header_logo_classes }} {{ header_logo_md_classes }} {{ header_search_icon_class }} {{ header_search_icon_mobile_class }}{% if not show_text %} utilities-icons{% endif %}">
+	<div class="head-row {% if page_width %}container{% endif %} {{ header_logo_classes }} {{ header_logo_md_classes }} {{ header_search_icon_class }} {{ header_search_icon_mobile_class }} {% if not show_text %}utilities-icons{% endif %}">
 
 		{# Blocks: logo and utilities #}
 		{% for block in section.blocks %}
 			{% if block.type == 'header-logo' %}
-				{% include 'blocks/header-logo.tpl' with { block: block } %}
+				{% include 'blocks/header-logo.tpl' with { block: block, transparent_logo: transparent_logo } %}
 			{% endif %}
 			{% if block.type == 'header-utilities' %}
 				{% include 'blocks/header-utilities.tpl' with {
@@ -303,6 +330,30 @@
       "id": "text_color",
       "label": "t:settings.text",
       "default_setting": "text_color"
+    },
+    {
+      "type": "setting",
+      "setting_type": "toggle",
+      "id": "transparent_header",
+      "label": "t:settings.transparent_header",
+      "info": "t:info.transparent_header",
+      "default": false,
+      "header_toggle": true
+    },
+    {
+      "type": "setting",
+      "setting_type": "color",
+      "id": "transparent_text_color",
+      "label": "t:settings.transparent_text_color",
+      "default_setting": "text_color",
+      "visible_if": "{{ section.settings.transparent_header }}"
+    },
+    {
+      "type": "setting",
+      "setting_type": "image_picker",
+      "id": "transparent_logo",
+      "label": "t:settings.transparent_logo",
+      "visible_if": "{{ section.settings.transparent_header }}"
     }
   ],
   "default": {

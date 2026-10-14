@@ -161,6 +161,13 @@
 
 		<div class="js-product-discount-container product-payment-discount" {% if hideDiscountContainer %}style="display: none;"{% endif %}>
 			<span class="text-accent">{{ product.maxPaymentDiscount.value }}% {{ 'product.discount_off' | t }}</span> {{ 'product.paying_with' | t }} {{ product.maxPaymentDiscount.paymentProviderName }}
+			{% set max_installments = product.maxPaymentDiscount.maxInstallments %}
+			<span
+				class="js-payment-discount-installments"
+				data-text-singular="{{ 'product.in_installments_singular' | t('{1}') }}"
+				data-text-plural="{{ 'product.in_installments_plural' | t('{1}') }}"
+				{% if not max_installments %}style="display: none;"{% endif %}
+			>{{ (max_installments == 1 ? 'product.in_installments_singular' : 'product.in_installments_plural') | t(max_installments) }}</span>
 			<div class="js-product-discount-disclaimer product-payment-discount-disclaimer" {% if hideDiscountDisclaimer %}style="display: none;"{% endif %}>
                 {{ product.showMaxPaymentDiscountCombinesWithSomeDiscounts
                     ? 'product.not_combinable_some' | t

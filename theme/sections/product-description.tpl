@@ -58,7 +58,6 @@
 	"class": "section section-product-description section-margin",
 	"deletable": false,
 	"limit": 1,
-	"hidden": true,
 	"settings": [
 		{
 			"type": "setting",

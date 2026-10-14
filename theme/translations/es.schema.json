@@ -27,6 +27,7 @@
     "browser_tab": "Pestaña del navegador",
     "inactive_tab": "Mensaje para pestaña inactiva",
     "advanced_css": "CSS personalizado",
+    "checkout": "Checkout",
     "text_settings": "Ajustes de texto",
     "video_properties": "Propiedades del video",
     "image_properties": "Propiedades de la imagen",
@@ -158,7 +159,8 @@
     "navbar_menu": "Menú",
     "navbar_icons": "Íconos informativos",
     "page_width": "Ancho de página",
-    "primary_label": "Etiqueta principal"
+    "primary_label": "Etiqueta principal",
+    "account_subscription_address": "Dirección de envío de suscripción"
   },
   "settings": {
     "code": "Agrega HTML, CSS o JS",
@@ -380,7 +382,10 @@
     "show_contact": "Mostrar contacto",
     "show_submenus": "Mostrar submenús",
     "slide_link": "Link de la diapositiva",
-    "sticky_header": "Encabezado fijo",
+        "sticky_header": "Encabezado fijo",
+    "transparent_header": "Encabezado transparente",
+    "transparent_text_color": "Color de textos e íconos",
+    "transparent_logo": "Logo alternativo",
     "utility_display": "Visualización de utilidades",
     "columns": "Columnas",
     "menu_banner_desktop": "Imagen del banner",
@@ -590,6 +595,7 @@
     "navbar_mobile_in_header": "En el encabezado"
   },
   "info": {
+    "transparent_header": "Muestra el fondo transparente al comienzo de la página de inicio.",
     "heading_size_visual_only": "Define solo el tamaño visual. No afecta la estructura SEO de la página.",
     "video_url": "Pega la URL de un video de YouTube o Vimeo",
     "video_cover_image": "Reemplaza la miniatura del video y genera un mejor rendimiento de carga.",
