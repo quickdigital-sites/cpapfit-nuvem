@@ -27,9 +27,19 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 - [x] **Links do site conferidos (2026-10-14):** rastreados home, PLP, PDP e institucionais (82 links internos).
   Corrigidos 13: categorias reais (`/cpap-e-bipap/...`), marcas pelo filtro `/produtos/?brand=<Marca>` (a loja não
   tem página de marca; `/resmed/` era a subcategoria de CPAP automático), serviços em `/servicos/...`, Dreamstation e
-  Kits por busca (não há categoria), pílula "Planos" → `/planos-de-assinatura/`. **Faltam 5 páginas no admin**
-  (Loja online → Páginas): `nossas-lojas`, `planos-de-assinatura`, `politica-de-entrega`, `politica-de-privacidade`
-  e publicar `trocas-e-devolucoes`. Os textos de privacidade, entrega e troca existem em cpapfit.com.br.
+  Kits por busca (não há categoria), pílula "Planos" → `/planos-de-assinatura/`. As 5 páginas que
+  faltavam foram criadas/publicadas no admin (ver item abaixo). Rastreio final: **0 links quebrados**.
+- [ ] **Páginas de conteúdo criadas no admin (2026-10-14)** — Política de Privacidade, Política de Entrega e Troca,
+  Devolução, Garantia com os textos de cpapfit.com.br (limpos: sem fontes inline, seções viraram títulos);
+  Nossas lojas com uma frase de introdução. Conferir/ajustar:
+  - **Planos de assinatura** está com texto provisório ("em breve…" + contatos) — falta o conteúdo real.
+  - Política de Privacidade cita `laura@cpapfit.com` e `laura@cpapfit.com.br` (assim no texto original) — confirmar
+    o e-mail do encarregado de dados (DPO).
+  - "Trocas e Devoluções" tinha só uma imagem sem relação ("Tratamento individualizado", WhatsApp de 28/07); foi trocada
+    pelo texto da política. A imagem continua no CDN da loja se for útil em outro lugar.
+  - Publicação no admin: página só publica marcando "Criar um link para esta página no menu…". Foi criado o menu
+    **"Institucional (páginas de conteúdo)"** com as 5 páginas — **não apagar** (o tema não o exibe; o header usa o Menu
+    principal e o footer/coluna lateral têm links próprios).
 - [x] **Home — abas de Destaques (2026-10-14):** abas 2–6 ligadas às categorias reais (Máscaras, CPAP e BiPAP,
   Concentradores de oxigênio, Acessórios para polissonografia, Acessórios para CPAP e BiPAP — `products_source` em
   `design/pages/home.yaml`) e carregadas sob demanda. **Falta:** a aba 1 "Kits promocionais" não tem categoria na loja
