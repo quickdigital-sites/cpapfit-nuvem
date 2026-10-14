@@ -4,7 +4,8 @@
 #   footer_topo (componente)  redes sociais + barra de benefícios com cupom (COPIAR)
 #   footer (nativo)           Lista VIP (newsletter NATIVA — envia pro admin) + contato + menus (blocks "code")
 #   footer_base (componente)  endereço/CNPJ/© + Nuvemshop / Quick Digital + faixa em degradê
-#   nuvemshop_dev_js          CSS/JS do build (frontend/inject.mjs) — manter por último
+#   (CSS/JS do build vão no <head> do layout.tpl — frontend/inject.mjs, modo head; no modo footer,
+#    o inject.mjs acrescenta a seção nuvemshop_dev_js sozinho)
 #
 # O legal nativo (copyright/pagamentos) fica escondido por CSS. Visual em frontend/src/css/footer.css.
 template: layout/footer
@@ -37,4 +38,3 @@ sections:
   - component: footer-base
     settings: { custom_background_color: "#2F3295" }
 
-  - native: nuvemshop_dev_js

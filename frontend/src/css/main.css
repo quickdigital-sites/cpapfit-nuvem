@@ -85,7 +85,10 @@
    ========================================================================== */
 :root {
   --qd-cream: #f4f1ed;
-  --qd-gold: #ad9361;
+  --qd-gold: #ad9361;        /* ícones, bordas e detalhes */
+  /* dourado de FUNDO com texto branco por cima: #ad9361 dá 2.9:1 (abaixo do WCAG AA 4.5:1);
+     este tom, o mais claro que passa, dá 4.7:1. Para voltar ao Figma, troque por var(--qd-gold). */
+  --qd-gold-solid: #887146;
   --qd-ink: #4a4a48;
   --qd-hairline: #e1dcd7;
   --qd-indigo: #2f3295;
@@ -149,7 +152,7 @@
   display: inline-flex; align-items: center; justify-content: center;
   border: 0;
   border-radius: 9999px;
-  background: var(--qd-gold);
+  background: var(--qd-gold-solid);
   color: #fff;
   position: static;
 }
@@ -174,7 +177,7 @@
   position: absolute; top: -4px; right: -4px; bottom: auto; left: auto;
   min-width: 20px; height: 20px; padding: 0 5px;
   display: inline-flex; align-items: center; justify-content: center;
-  background: var(--qd-gold) !important;
+  background: var(--qd-gold-solid) !important;
   color: #fff !important;
   font: 700 11px/1 var(--body-font);
   border-radius: 9999px;
@@ -206,7 +209,7 @@
   }
   .qd-plans-pill__icon {
     flex: 0 0 auto; width: 40px; height: 40px; border-radius: 9999px;
-    background: var(--qd-gold); color: #fff;
+    background: var(--qd-gold-solid); color: #fff;
     display: inline-flex; align-items: center; justify-content: center;
   }
   .qd-plans-pill__title { display: block; font: 700 13px/15px var(--heading-font); text-transform: uppercase; color: var(--qd-ink); }
@@ -236,7 +239,7 @@
   /* hambúrguer dourado */
   .menu-container .header-icon {
     width: 44px; height: 44px; border-radius: 9999px;
-    background: var(--qd-gold);
+    background: var(--qd-gold-solid);
     display: inline-flex; align-items: center; justify-content: center;
   }
   .menu-container .header-icon svg { color: #fff; }
@@ -291,7 +294,7 @@
   }
   .nav-desktop-list > li.nav-main-item:first-child > a.nav-list-link:hover { color: var(--qd-gold); }
   .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child):hover > a.nav-list-link {
-    background: var(--qd-gold); color: #fff;
+    background: var(--qd-gold-solid); color: #fff;
   }
   /* chevron dourado encorpado (o do sprite é fino); vira branco e "pra cima" no hover */
   .nav-desktop-list .nav-list-link-icon { display: none; }
@@ -311,7 +314,7 @@
   .nav-desktop-list > li.nav-main-item:first-child > a.nav-list-link::before {
     content: ""; flex: 0 0 auto;
     width: 30px; height: 30px; border-radius: 9999px;
-    background-color: var(--qd-gold);
+    background-color: var(--qd-gold-solid);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 6h16M4 12h16M4 18h16'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: center; background-size: 16px;
   }
@@ -378,7 +381,7 @@
   }
   .nav-desktop-container .nav-banner-item::after {
     content: "VER LINHA COMPLETA  →"; position: absolute; left: 24px; bottom: 28px;
-    background: var(--qd-gold); color: #fff; text-transform: uppercase;
+    background: var(--qd-gold-solid); color: #fff; text-transform: uppercase;
     font: 700 12px/1 var(--heading-font);
     padding: 12px 18px; border-radius: 9999px;
   }

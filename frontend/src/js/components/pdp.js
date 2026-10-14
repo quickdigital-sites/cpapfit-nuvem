@@ -10,7 +10,16 @@ const WHATSAPP = "554840421861";
 const COUPON = { text: "<strong>R$ 100 OFF</strong> na linha Philips", code: "QUERO100" };
 
 export default function initPdp() {
+  // qd-pdp-ready libera o que o CSS esconde até aqui (evita layout shift — ver pdp.css)
+  const ready = () => document.documentElement.classList.add("qd-pdp-ready");
   const run = () => {
+    try {
+      enhance();
+    } finally {
+      ready();
+    }
+  };
+  const enhance = () => {
     const detail = document.querySelector("#single-product.js-product-detail, .js-product-detail");
     const columns = detail?.querySelector(".product-columns");
     if (!detail || !columns || detail.dataset.qdPdp) return;

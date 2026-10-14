@@ -1,23 +1,23 @@
 /**
- * Leva o build para o tema SEM fork.
+ * Leva o build (theme/static/css/tailwind.css + theme/static/js/app.js) para o tema.
  *
- * A plataforma ainda não libera fork ("Forking not yet allowed"), e sem fork o
- * `theme push/watch` só envia templates/ e config/settings_data.json — static/,
- * layouts/ e sections/ são ignorados. Então o build entra por esses dois arquivos:
+ * Dois modos (INJECT_MODE):
  *
- *   theme/static/css/tailwind.css -> config/settings_data.json  settings.css_code
- *     (o layout do Ipanema imprime {{ settings.css_code | raw }} em todas as páginas;
- *      o CSS gerado fica entre marcadores e o resto do campo é preservado)
+ *   head (padrão, tema FORKADO — liberado em 2026-10-14): o push grava static/ e layouts/, então
+ *     o layout.tpl ganha, entre marcadores no <head>, o <link> do tailwind.css e o <script defer>
+ *     do app.js servidos pelo CDN da loja (static_url → cache longo). CSS no <head> = sem flash
+ *     de estilo nem layout shift. A seção antiga do footer (nuvemshop_dev_js) é removida.
  *
- *   theme/static/js/app.js -> templates/layout/footer.json
- *     (section "custom" + block "code" com o JS inline e o Alpine via CDN,
- *      na versão travada no package-lock)
+ *   footer (tema SEM fork): o push só grava templates/ e settings_data.json, então o CSS e o JS
+ *     vão inline em blocks "code" de uma seção do footer.json (limite de 50.000 caracteres por
+ *     block — o CSS é quebrado em vários <style>).
  *
+ * Em ambos, o Alpine (+ collapse) só é carregado se algum template usar diretivas x-*.
  * Só grava quando o conteúdo muda, para não entrar em loop com os watchers.
  *
- * Uso: node inject.mjs [--watch]
+ * Uso: node inject.mjs [--watch]      INJECT_MODE=footer node inject.mjs
  */
-import { existsSync, readFileSync, watch, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, watch, writeFileSync } from "node:fs";
 import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -26,6 +26,10 @@ const CSS_OUT = resolve(root, "theme/static/css/tailwind.css");
 const JS_OUT = resolve(root, "theme/static/js/app.js");
 const SETTINGS = resolve(root, "theme/config/settings_data.json");
 const FOOTER = resolve(root, "theme/templates/layout/footer.json");
+const LAYOUT = resolve(root, "theme/layouts/layout.tpl");
+const MODE = process.env.INJECT_MODE === "footer" ? "footer" : "head";
+const HEAD_START = "{# nuvemshop-dev:start — gerado por frontend/inject.mjs, não edite este trecho #}";
+const HEAD_END = "{# nuvemshop-dev:end #}";
 
 const CSS_START = "/* nuvemshop-dev:start — gerado por frontend/inject.mjs, não edite este trecho */";
 const CSS_END = "/* nuvemshop-dev:end */";
@@ -99,11 +103,7 @@ function injectJs() {
 
   // Ordem importa: <style> primeiro; depois o inline registra o listener de
   // alpine:init antes dos scripts defer (plugin, depois core) executarem.
-  const scripts = [
-    `<script>${js}</script>`,
-    `<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@${version("@alpinejs/collapse")}/dist/cdn.min.js"></script>`,
-    `<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@${version("alpinejs")}/dist/cdn.min.js"></script>`,
-  ].join("\n");
+  const scripts = [`<script>${js}</script>`, ...alpineTags()].join("\n");
 
   // O setting "code" (custom_code) aceita no máximo 50.000 caracteres por block. O CSS é
   // quebrado em vários <style> (cortes só entre regras de nível 0) e cada pedaço vai num
@@ -132,6 +132,54 @@ function injectJs() {
   if (writeJson(FOOTER, data)) console.log(`inject: footer (código) atualizado — css ${kb(css)} + js ${kb(js)} em ${order.length} blocks`);
 }
 
+// Alpine só se algum template usar diretivas (x-data etc.) — hoje nenhum usa.
+function usesAlpine() {
+  const dirs = ["theme/templates/pages", "theme/templates/layout", "theme/sections", "theme/snippets", "theme/blocks", "design/components"];
+  const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory() ? walk(resolve(d, e.name)) : [resolve(d, e.name)]);
+  return dirs.map((d) => resolve(root, d)).filter(existsSync).flatMap(walk)
+    .some((f) => /\sx-(data|show|on:|bind|collapse)/.test(readFileSync(f, "utf8")));
+}
+
+function alpineTags() {
+  if (!usesAlpine()) return [];
+  return [
+    `<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@${version("@alpinejs/collapse")}/dist/cdn.min.js"></script>`,
+    `<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@${version("alpinejs")}/dist/cdn.min.js"></script>`,
+  ];
+}
+
+// Modo head (tema forkado): <link>/<script> no <head> do layout, arquivos servidos pelo CDN da loja.
+function injectHead() {
+  const tags = [
+    HEAD_START,
+    // imagens do design (asset:) vêm do jsDelivr: abre a conexão cedo (LCP do hero)
+    `    <link rel="preconnect" href="https://cdn.jsdelivr.net">`,
+    // (static_inline foi testado: nesta loja ele vira um <link> igual — sem ganho)
+    `    <link rel="stylesheet" href="{{ 'css/tailwind.css' | static_url }}">`,
+    `    <script defer src="{{ 'js/app.js' | static_url }}"></script>`,
+    ...alpineTags().map((t) => `    ${t}`),
+    `    ${HEAD_END}`,
+  ].join("\n");
+  let layout = readFileSync(LAYOUT, "utf8");
+  const re = new RegExp(`${escapeRe(HEAD_START)}[\\s\\S]*?${escapeRe(HEAD_END)}`);
+  // depois do CSS do tema (critical/utilities/async/css_code) para ganhar na cascata
+  if (re.test(layout)) layout = layout.replace(re, tags.trimStart());
+  else layout = layout.replace(/(\n\s*\{% set async_js = true %\})/, `\n    ${tags.trimStart()}\n$1`);
+  if (!layout.includes(HEAD_START)) throw new Error("não achei onde inserir no layout.tpl");
+  if (readFileSync(LAYOUT, "utf8") !== layout) {
+    writeFileSync(LAYOUT, layout);
+    console.log("inject: layout.tpl atualizado (<link> tailwind.css + <script> app.js no <head>)");
+  }
+  // remove a seção do modo footer, se ainda estiver lá
+  const data = JSON.parse(readFileSync(FOOTER, "utf8"));
+  if (data.sections[SECTION_ID]) {
+    delete data.sections[SECTION_ID];
+    data.order = data.order.filter((id) => id !== SECTION_ID);
+    if (writeJson(FOOTER, data)) console.log("inject: seção nuvemshop_dev_js removida do footer (modo head)");
+  }
+}
+
 function run(fn) {
   try {
     fn();
@@ -141,8 +189,9 @@ function run(fn) {
   }
 }
 
+const inject = MODE === "head" ? injectHead : injectJs;
 run(injectCss);
-run(injectJs);
+run(inject);
 
 if (process.argv.includes("--watch")) {
   const timers = {};
@@ -152,7 +201,7 @@ if (process.argv.includes("--watch")) {
     timers[file] = setTimeout(() => run(fn), 150);
   };
   // observa a pasta, não o arquivo: tailwind/esbuild podem recriar o arquivo
-  watch(dirname(CSS_OUT), onChange(CSS_OUT, () => { injectCss(); injectJs(); }));
-  watch(dirname(JS_OUT), onChange(JS_OUT, injectJs));
-  console.log("inject em watch — tailwind.css + app.js -> bloco <style>/<script> do footer.json");
+  watch(dirname(CSS_OUT), onChange(CSS_OUT, () => { injectCss(); inject(); }));
+  watch(dirname(JS_OUT), onChange(JS_OUT, inject));
+  console.log(`inject em watch (modo ${MODE})`);
 }

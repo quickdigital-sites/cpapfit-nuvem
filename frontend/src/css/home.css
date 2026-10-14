@@ -125,7 +125,7 @@ div[data-section-id="hero"] { min-height: 0 !important; } /* o tema imprime min-
   display: inline-flex; align-items: center; justify-content: space-between; gap: 12px;
   width: 262px; height: 44px; padding: 0 20px;
   border: 0; border-radius: 60px;
-  background: var(--qd-gold) !important;
+  background: var(--qd-gold-solid) !important;
   color: var(--qd-offwhite) !important;
   font-family: var(--heading-font);
   font-size: 12px; font-weight: 700; line-height: 17px;
@@ -313,7 +313,7 @@ div[data-section-id="marcas"] { padding: 60px 0 20px; }
   transition: background-color .15s, border-color .15s, color .15s;
 }
 .qd-chip:hover { border-color: var(--qd-gold); color: var(--qd-ink); text-decoration: none; }
-.qd-chip.is-active { background: var(--qd-gold); border-color: var(--qd-gold); color: var(--qd-offwhite); font-weight: 700; }
+.qd-chip.is-active { background: var(--qd-gold-solid); border-color: var(--qd-gold-solid); color: var(--qd-offwhite); font-weight: 700; }
 
 /* só a vitrine da aba ativa aparece (sem JS: a 1ª) */
 section[data-section-id^="destaques_"]:not([data-section-id="destaques_1"]) { display: none; }

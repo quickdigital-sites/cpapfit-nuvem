@@ -26,6 +26,9 @@ function bind() {
   document.querySelectorAll(".search-container form.js-search-form").forEach((form) => {
     if (form.dataset.qdSearch) return;
     form.dataset.qdSearch = "1";
+    // a busca fica sempre visível (CSS), mas o tema marca o container como aria-hidden: tira,
+    // senão leitores de tela ignoram um campo que recebe foco (Lighthouse: aria-hidden-focus)
+    form.closest(".js-search-expand-form")?.removeAttribute("aria-hidden");
     const input = form.querySelector(".js-search-input");
     // capture: roda antes do handler do tema, que faz preventDefault no Enter
     if (input) {

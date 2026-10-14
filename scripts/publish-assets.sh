@@ -53,4 +53,20 @@ cd - >/dev/null
 
 printf '{\n  "repo": "%s",\n  "ref": "%s"\n}\n' "$SLUG" "$SHA" > design/assets.json
 echo "assets: publicado $SLUG@$SHA → design/assets.json"
+
+# Aquece o jsDelivr: um commit novo responde 503 ("No healthy backends") até o jsDelivr buscar
+# cada arquivo no GitHub — e a loja mostraria imagem quebrada. Repete até todos darem 200.
+BASE="https://cdn.jsdelivr.net/gh/$SLUG@$SHA/design/assets"
+FILES="$(cd design/assets && find . -type f ! -name '.*' | sed 's#^\./##')"
+for round in 1 2 3 4 5 6 7 8; do
+  bad=0
+  for f in $FILES; do
+    [ "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/$f")" = 200 ] || bad=$((bad + 1))
+  done
+  [ "$bad" = 0 ] && { echo "assets: jsDelivr pronto (todos os arquivos 200)"; break; }
+  echo "assets: jsDelivr aquecendo — $bad arquivo(s) ainda sem resposta (tentativa $round)"
+  sleep 10
+done
+[ "$bad" = 0 ] || echo "assets: ⚠ $bad arquivo(s) ainda falhando no jsDelivr; rode o script de novo antes do push" >&2
+
 echo "próximo: (cd frontend && npm run build) e theme push"

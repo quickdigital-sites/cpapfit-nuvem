@@ -34,6 +34,12 @@
         {{ settings.css_code | raw }}
       </style>
     {% endif %}
+    {# nuvemshop-dev:start — gerado por frontend/inject.mjs, não edite este trecho #}
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="{{ 'css/tailwind.css' | static_url }}">
+    <script defer src="{{ 'js/app.js' | static_url }}"></script>
+    {# nuvemshop-dev:end #}
+
 
     {% set async_js = true %}
 

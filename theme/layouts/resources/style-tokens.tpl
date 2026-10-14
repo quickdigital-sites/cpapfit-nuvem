@@ -270,7 +270,7 @@
 
   --success: #4bb98c;
   --danger: #dd7774;
-  --warning: #dc8f38;
+  --warning: #a5651d; /* CPAP Fit: #dc8f38 dava 2.6:1 (abaixo do WCAG AA) */
 
   {#/*============================================================================
     #Fonts

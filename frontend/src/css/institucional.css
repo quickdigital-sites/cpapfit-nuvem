@@ -8,8 +8,13 @@
   --qd-inst-text: #1f1f1f;
   --qd-inst-navy: #0c2340;
   --qd-inst-line: #ccc;
-  --qd-inst-green: #00a58c;
+  --qd-inst-green: var(--qd-teal-strong);
 }
+
+/* Anti layout shift: o institucional.js monta a coluna lateral, move o conteúdo e decide quais seções
+   do page.json aparecem. Até ele terminar (html.qd-inst-ready) o <main> fica invisível; se o JS falhar,
+   aparece sozinho em 3s (@keyframes qd-reveal em pdp.css). */
+html:not(.qd-inst-ready) :is(.template-page, .template-contact) main { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
 
 /* Seções do page.json que só servem a uma página (sem JS ficam escondidas) */
 html:not(.qd-page-quem-somos) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
@@ -43,7 +48,7 @@ html:not(.qd-page-quem-somos) :is([data-section-id="quem_somos_hero"], [data-sec
   font-size: 14px; font-weight: 500; line-height: 32px; color: var(--qd-ink); text-decoration: none;
 }
 .qd-inst-menu a:hover { color: var(--qd-gold); }
-.qd-inst-menu li.is-active a { background: var(--qd-gold); font-weight: 700; color: #fff; }
+.qd-inst-menu li.is-active a { background: var(--qd-gold-solid); font-weight: 700; color: #fff; }
 .qd-inst-pick { display: none; }
 
 /* bloco de contato (clone do footer) */
@@ -85,7 +90,7 @@ html:not(.qd-page-quem-somos) :is([data-section-id="quem_somos_hero"], [data-sec
   font-family: var(--heading-font); font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--qd-ink);
 }
 .qd-stores-chip:first-child { min-width: 160px; }
-.qd-stores-chip[aria-pressed="true"] { border-color: var(--qd-gold); background: var(--qd-gold); color: #fff; }
+.qd-stores-chip[aria-pressed="true"] { border-color: var(--qd-gold-solid); background: var(--qd-gold-solid); color: #fff; }
 .qd-stores-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 448px)); gap: 20px; }
 .qd-store {
   display: flex; flex-direction: column; gap: 20px; padding: 20px 16px;

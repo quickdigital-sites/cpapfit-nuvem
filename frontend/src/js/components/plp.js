@@ -156,12 +156,18 @@ function setupFilterModal() {
 export default function initPlp() {
   const run = () => {
     const grid = document.querySelector(".section-main-products-grid");
-    if (!grid) return;
+    // qd-plp-ready libera o que o CSS esconde até aqui (evita layout shift — ver plp.css)
+    const ready = () => document.documentElement.classList.add("qd-plp-ready");
+    if (!grid) return ready();
     document.documentElement.classList.add("qd-plp");
-    buildHead(grid);
-    buildPagination();
-    setupFilterToggles();
-    setupFilterModal();
+    try {
+      buildHead(grid);
+      buildPagination();
+      setupFilterToggles();
+      setupFilterModal();
+    } finally {
+      ready();
+    }
   };
   if (document.readyState !== "loading") run();
   else document.addEventListener("DOMContentLoaded", run);

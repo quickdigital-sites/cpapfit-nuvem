@@ -64,6 +64,9 @@ sections:
         type: slide
         settings:
           image: "asset:home/hero.webp"
+          # versão leve (840px) para o celular: é o LCP da home no mobile
+          use_mobile_image: true
+          image_mobile: "asset:home/hero-mobile.webp"
           alignment: start
           text_color: "#FEFDFC"
           show_overlay: false

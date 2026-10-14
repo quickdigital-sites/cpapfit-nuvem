@@ -19,9 +19,9 @@
 					value="{{ params['min_price'] }}"
 					placeholder="{{ product_filter.custom_data.price_range['min_price'] }}"
 				>
-				<a class="js-price-filter-empty input-clear-content" style="display:none" aria-label="{{ 'general.clear' | t }}">
+				<button type="button" class="js-price-filter-empty input-clear-content" style="display:none" aria-label="{{ 'general.clear' | t }}">
 						<svg class="icon-inline"><use xlink:href="#times"/></svg>
-				</a>  
+				</button>  
 			</span>
 			<span class="js-filter-input-price-container filter-input-price-container">
 				<label class="form-label">{{ 'filters.price.to' | t }}</label>
@@ -36,9 +36,9 @@
 					value="{{ params['max_price'] }}"
 					placeholder="{{ product_filter.custom_data.price_range['max_price'] }}"
 				>
-				<a class="js-price-filter-empty input-clear-content" style="display:none" aria-label="{{ 'general.clear' | t }}">
+				<button type="button" class="js-price-filter-empty input-clear-content" style="display:none" aria-label="{{ 'general.clear' | t }}">
 						<svg class="icon-inline"><use xlink:href="#times"/></svg>
-				</a>
+				</button>
 			</span>
 			<button type="submit" class="js-price-filter-btn btn btn-inline price-filter-btn disabled" disabled data-component="list.filter-price.submit">
 				{{ 'filters.price.apply' | t }}

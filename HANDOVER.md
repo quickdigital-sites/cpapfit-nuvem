@@ -220,6 +220,15 @@ Cronológico, do início até agora:
 
 13. **Institucionais (2026-10-14).** Todas as páginas de conteúdo usam o template `page` (não há template por página) e o Fale conosco usa o `contact`. `frontend/src/js/components/institucional.js` monta, pelo slug da URL, a coluna lateral (menu **Institucional** ou **Atendimento** com a página atual em pílula dourada; no Atendimento, um clone do bloco de contato do footer; no mobile vira `<select>`) e põe o título na coluna de conteúdo (o `page-header` nativo fica escondido). O conteúdo do admin perde os estilos inline do editor. `design/pages/page.yaml` acrescenta as seções que só servem a uma página, escondidas por CSS fora dela: **Quem somos** (`quem_somos_hero` + `categorias`/`servicos`/`videos`/`marcas` com os mesmos ids da home, herdando `home.css`) e **Nossas lojas** (componente `nossas-lojas`, cards + filtro por UF). **Fale conosco:** formulário nativo em grade com os campos do Figma; motivo/cidade/UF/assunto entram no início da mensagem (o nativo só envia nome/e-mail/telefone/mensagem). CSS em `frontend/src/css/institucional.css`. Links do footer/PDP passaram para os slugs reais (`/quem-e-a-cpap-fit/`, `/trocas-e-devolucoes/`). Pendências de conteúdo em [PENDENCIAS.md](PENDENCIAS.md).
 
+14. **Performance / Lighthouse (2026-10-14, mobile, preview).** Com o fork, o `inject.mjs` passou ao **modo head**: `<link>` do `tailwind.css` e `<script defer>` do `app.js` no `<head>` do `layout.tpl` (CDN da loja, cache de 1 ano) em vez de `<style>/<script>` inline no footer — acabou o flash de estilo e o layout shift. Alpine só é carregado se algum template usar `x-*` (hoje nenhum). Outros ajustes: guarda anti layout shift nos blocos que o JS reorganiza (PDP, PLP, institucionais: invisíveis até `html.qd-*-ready`, com fallback de 3s); hero com imagem mobile de 840px; variantes e "limpar preço" viraram `<button>` (eram `<a>` sem href); cores com texto passaram no WCAG AA (`--qd-gold-solid #887146`, `--qd-teal-strong #00816e`, `--warning #a5651d` — reverter = trocar os tokens); `preconnect` do jsDelivr; `publish-assets.sh` aquece o jsDelivr (commit novo dá 503 até ele buscar cada arquivo).
+    | Página | Antes | Depois |
+    |---|---|---|
+    | Home | 61 / 93 / 79 / 92 | 84–89 / 97 / 79 / 100 |
+    | PLP | 69 / 93 / 79 / 92 | 79–87 / 96 / 79 / 100 |
+    | PDP | 62 / 91 / 79 / 92 | 78–80 / 96 / 79 / 100 |
+    | Quem somos | 57–62 / 93 / 79 / 100 | 78–86 / 96 / 79 / 100 |
+    (performance / acessibilidade / boas práticas / SEO.) Limites fora do tema: **TTFB do preview ~1s** (a loja publicada responde em ~0,3s — os números devem subir ao publicar); CSS de fontes da plataforma bloqueando a 1ª pintura (~0,8s); **boas práticas 79** = cookie de terceiros do script da própria plataforma; a acessibilidade só não é 100 por causa da barra "Rascunho" do preview. No **Fale conosco** o Lighthouse simulado (o do PageSpeed) dá ~57 por causa do reCAPTCHA da plataforma; medido com throttling real dá 95.
+
 Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar o DOM real renderizado (logado no admin) para as classes certas (`.head-row`, `.search-container`, `.nav-desktop-list`, `.desktop-dropdown`, `.nav-desktop-container`, `.menu-container`, `.navigation-bar`, `.sticky-header-wrapper`). A barra de benefícios (`.navigation-bar`) é um **strip de scroll horizontal nativo** (não é overflow de página).
 
 ---
@@ -243,7 +252,7 @@ Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar
 - [x] **Banners no submenu desktop** — mecanismo (nativo `navigation-banner`) + estilo prontos; falta o **lojista cadastrar** os banners reais no admin (ver [PENDENCIAS.md](PENDENCIAS.md)).
 - [ ] **Tablet (768–1199):** hoje usa o padrão mobile completo (esconde "Planos" e conta). Reavaliar se quer um layout híbrido que preserve esses itens no tablet.
 - [ ] **Barra de benefícios no mobile:** hoje é um strip de scroll horizontal nativo; avaliar quebrar em 2 linhas.
-- [ ] **FOUC:** separar CSS crítico (header/menu) para o `<head>` (via `css_code`, respeitando o limite de 15k) e manter o resto no footer.
+- [x] **FOUC:** resolvido com o fork (2026-10-14) — CSS do build no `<head>` (inject.mjs, modo head).
 - [x] **Home:** estrutura + CSS prontos (2026-09-28). Falta **push no homolog, conferência visual** e o conteúdo no Brand Editor (imagens, categorias das abas, URLs de vídeo) — ver [PENDENCIAS.md](PENDENCIAS.md).
 - [ ] **Footer** (Figma 24:806 desktop / 24:948 mobile) — próximo passo.
 - [ ] **PLP e PDP** (catálogo e produto), desktop + mobile.

@@ -3,6 +3,11 @@
    Restiliza o main-product NATIVO + frontend/src/js/components/pdp.js
    (card do topo, preços + cupom, botão WhatsApp).
    ========================================================================== */
+/* Anti layout shift: o pdp.js reorganiza o topo (card do título, preços, WhatsApp) depois do parse.
+   Até ele terminar (html.qd-pdp-ready) o bloco fica invisível — elemento invisível não conta CLS.
+   Se o JS falhar, aparece sozinho em 3s. */
+@keyframes qd-reveal { to { visibility: visible; } }
+html:not(.qd-pdp-ready) .template-product .js-product-detail { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
 .qd-pdp .js-product-detail { background: var(--qd-offwhite); color: var(--qd-ink); }
 .qd-pdp .js-product-detail > .container > .breadcrumbs {
   margin: 0 0 26px; opacity: 1; gap: 4px;
@@ -116,7 +121,7 @@
   display: flex; align-items: center; gap: 8px; width: max-content; height: 56px; padding: 8px 12px 8px 10px;
   border: 1px solid #e1dcd7; border-radius: 60px;
 }
-.qd-pdp-coupon-icon { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50px; background: var(--qd-gold); position: relative; }
+.qd-pdp-coupon-icon { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50px; background: var(--qd-gold-solid); position: relative; }
 .qd-pdp-coupon-icon::after {
   content: ""; position: absolute; inset: 10px; background: #fff;
   -webkit-mask: var(--qd-ico-coupon) center / contain no-repeat; mask: var(--qd-ico-coupon) center / contain no-repeat;
@@ -134,7 +139,7 @@
   margin: 0 10px 10px 0; padding: 9px 17px; border: 1px solid #ccc; border-radius: 170px; background: #fff; color: var(--qd-ink);
 }
 .qd-pdp .btn-variant .btn-variant-content { font-family: var(--heading-font); font-size: 13px; font-weight: 600; line-height: 15px; white-space: nowrap; }
-.qd-pdp .btn-variant.selected { background: var(--qd-gold); border-color: var(--qd-gold); color: #fff; }
+.qd-pdp .btn-variant.selected { background: var(--qd-gold-solid); border-color: var(--qd-gold-solid); color: #fff; }
 
 /* --- Comprar + WhatsApp (sem seletor de quantidade no Figma) --------------- */
 .qd-pdp .qd-pdp-actions { display: flex !important; align-items: center; gap: 16px; }
@@ -190,7 +195,7 @@
 }
 .qd-pdp .product-shipping-calculator .js-shipping-input::placeholder { color: var(--qd-ink); opacity: 1; }
 .qd-pdp .product-shipping-calculator .js-calculate-shipping {
-  position: static; height: 30px; min-width: 40px; padding: 0 12px; border: 0; border-radius: 170px; background: var(--qd-gold); color: #fff;
+  position: static; height: 30px; min-width: 40px; padding: 0 12px; border: 0; border-radius: 170px; background: var(--qd-gold-solid); color: #fff;
   font-family: var(--heading-font); font-size: 11px; font-weight: 600; line-height: 30px;
 }
 .qd-pdp .js-shipping-calculator-form .js-shipping-zipcode-help { flex-basis: 100%; padding: 0; font-size: 11px; text-align: left; }

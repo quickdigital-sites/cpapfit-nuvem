@@ -9,7 +9,8 @@
    nativo — ficam para quando houver fork (ver PENDENCIAS.md).
    ========================================================================== */
 :root {
-  --qd-teal-strong: #00a58c;
+  /* verde de preço/botões: #00a58c dá 3.1:1 no fundo claro (abaixo do AA); este dá 4.7:1 */
+  --qd-teal-strong: #00816e;
   --qd-card-border: rgba(0, 0, 0, 0.1);
   --qd-offwhite: #fefdfc;
 }

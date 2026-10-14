@@ -37,6 +37,8 @@ sections:
         type: slide
         settings:
           image: "asset:institucional/quem-somos-hero.webp"
+          use_mobile_image: true
+          image_mobile: "asset:institucional/quem-somos-hero-mobile.webp"
           alignment: start
           text_color: "#FEFDFC"
           show_overlay: false

@@ -202,7 +202,15 @@ function initContactForm(main) {
 }
 
 export default function initInstitucional() {
+  // qd-inst-ready libera o <main> que o CSS esconde até aqui (evita layout shift — ver institucional.css)
   const run = () => {
+    try {
+      enhance();
+    } finally {
+      document.documentElement.classList.add("qd-inst-ready");
+    }
+  };
+  const enhance = () => {
     const body = document.body;
     const isContact = body.classList.contains("template-contact");
     if (!(isContact || body.classList.contains("template-page")) || body.dataset.qdInst) return;

@@ -32,7 +32,7 @@
 			{{ component('nubesdk-slot', { type: "before_product_description" }) }}
 
 			{% if show_title %}
-				<h3 class="product-description-heading">{{ 'product.description' | t }}</h3>
+				<h2 class="product-description-heading">{{ 'product.description' | t }}</h2>
 			{% endif %}
 			<div class="js-product-description product-description-content user-content">
 				{{ product.description }}
