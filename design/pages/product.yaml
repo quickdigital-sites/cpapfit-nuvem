@@ -24,7 +24,7 @@ sections:
                 settings:
                   icon: security
                   title: Garantia de 3 meses
-                  description: '<a href="/troca-devolucao-garantia/">ver regras</a>'
+                  description: '<a href="/trocas-e-devolucoes/">ver regras</a>'
           description:
             settings: { show_title: true, show_social: false }
 

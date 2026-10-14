@@ -150,7 +150,7 @@ docker compose up   # frontend (watch) + theme (watch -> homolog) + mcp
 - **Figma file key:** `1P4JHFz4FEG8UEBkDOB1qm`
   <https://www.figma.com/design/1P4JHFz4FEG8UEBkDOB1qm/-Quick--Redesign-CPAP-Fit---Nuvemshop>
 - Acesso via **Figma MCP oficial** (autenticado como Quick Digital).
-- Telas principais (nodeId): home desktop `0:326` / mobile `0:630`; catálogo/PLP desktop `24:2370` / mobile `24:2687`; produto/PDP desktop `35:10696` / mobile `66:17596`; header desktop `24:586` / mobile `24:1079`; menu desktop `24:621`; mega-menu `0:1068`.
+- Telas principais (nodeId): home desktop `0:326` / mobile `0:630`; institucionais — nossas lojas `271:6244` / `271:6399`, fale conosco `271:8536` / `305:5991`, troca e devolução `271:9547` / `305:6364`, quem somos `271:10421` / `305:6755`; catálogo/PLP desktop `24:2370` / mobile `24:2687`; produto/PDP desktop `35:10696` / mobile `66:17596`; header desktop `24:586` / mobile `24:1079`; menu desktop `24:621`; mega-menu `0:1068`.
 - **Não há variáveis de design no Figma** — cores são fills diretos (extrair ao implementar cada seção).
 
 ### Tokens de marca (aplicados em `settings_data.json`)
@@ -206,6 +206,8 @@ Cronológico, do início até agora:
     - `linhas` (banners 2 col: Linha Resmed / Philips, gradiente por CSS, CTA + logo), `mais_vendidos` (product-list), `banners_promo` (2 artes), `videos` (seção Personalizada com 4 blocos de vídeo; 9:16 no desktop e 16:9 no mobile via CSS).
     - **Card de produto** restilizado globalmente (vale também para PLP/busca): selo % OFF, preço Pix em destaque, parcelas, botão COMPRAR verde. `promotion_labels_position` → `below` no `settings_data.json`.
     - Verificado com **mock estático** do DOM nativo + CSS real do Ipanema (Playwright, 1440 e 390px, sem scroll horizontal). **Ainda não conferido na loja** (sem credenciais da CLI neste checkout).
+
+13. **Institucionais (2026-10-14).** Todas as páginas de conteúdo usam o template `page` (não há template por página) e o Fale conosco usa o `contact`. `frontend/src/js/components/institucional.js` monta, pelo slug da URL, a coluna lateral (menu **Institucional** ou **Atendimento** com a página atual em pílula dourada; no Atendimento, um clone do bloco de contato do footer; no mobile vira `<select>`) e põe o título na coluna de conteúdo (o `page-header` nativo fica escondido). O conteúdo do admin perde os estilos inline do editor. `design/pages/page.yaml` acrescenta as seções que só servem a uma página, escondidas por CSS fora dela: **Quem somos** (`quem_somos_hero` + `categorias`/`servicos`/`videos`/`marcas` com os mesmos ids da home, herdando `home.css`) e **Nossas lojas** (componente `nossas-lojas`, cards + filtro por UF). **Fale conosco:** formulário nativo em grade com os campos do Figma; motivo/cidade/UF/assunto entram no início da mensagem (o nativo só envia nome/e-mail/telefone/mensagem). CSS em `frontend/src/css/institucional.css`. Links do footer/PDP passaram para os slugs reais (`/quem-e-a-cpap-fit/`, `/trocas-e-devolucoes/`). Pendências de conteúdo em [PENDENCIAS.md](PENDENCIAS.md).
 
 Aprendizado importante: sobrescrever o header/menu **nativos** exige inspecionar o DOM real renderizado (logado no admin) para as classes certas (`.head-row`, `.search-container`, `.nav-desktop-list`, `.desktop-dropdown`, `.nav-desktop-container`, `.menu-container`, `.navigation-bar`, `.sticky-header-wrapper`). A barra de benefícios (`.navigation-bar`) é um **strip de scroll horizontal nativo** (não é overflow de página).
 

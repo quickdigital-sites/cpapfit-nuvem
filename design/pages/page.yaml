@@ -1,0 +1,162 @@
+# Páginas de conteúdo (institucionais) — gera theme/templates/pages/page.json (frontend/compose.mjs).
+# Figma: Nossas lojas 271:6244 / 271:6399 • Troca e devolução 271:9547 / 305:6364
+#        Quem somos 271:10421 / 305:6755 (Fale conosco é o template contact — ver contact.json)
+#
+# Todas as páginas de conteúdo usam ESTE template (não há template por página). O layout do Figma
+# (menu lateral "Institucional"/"Atendimento", título na coluna de conteúdo) é montado por
+# frontend/src/js/components/institucional.js a partir do slug da URL. As seções abaixo que só
+# servem a uma página ficam escondidas por CSS fora dela (frontend/src/css/institucional.css):
+#   - quem_somos_hero, categorias, servicos, videos, marcas → só em Quem somos
+#   - cmp_nossas_lojas → só em Nossas lojas
+# categorias/servicos/videos/marcas usam os MESMOS ids da home para herdar o CSS de home.css.
+unlisted: keep
+
+x-categoria-nav: &categoria_nav
+  category_type: image_thumbnail
+  format_image: circular
+  image_position: top
+  items_text_alignment: center
+  image_size: 188
+  gap: 16
+  text_color: "#4A4A48"
+
+sections:
+  # Quem somos — faixa com foto + gradiente azul (CSS)
+  - native: quem_somos_hero
+    type: slideshow
+    settings:
+      section_width: full
+      auto_height: false
+      height_full: 40
+      vertical_padding: 0
+      horizontal_padding: 0
+      autoplay: false
+    block_order: [slide_1]
+    blocks:
+      slide_1:
+        type: slide
+        settings:
+          image: "asset:institucional/quem-somos-hero.webp"
+          alignment: start
+          text_color: "#FEFDFC"
+          show_overlay: false
+          gap: 10
+          vertical_padding: 0
+          horizontal_padding: 0
+        block_order: [rotulo, titulo]
+        blocks:
+          rotulo: { type: text, settings: { text: Quem somos } }
+          titulo:
+            type: heading
+            settings: { title: Quem é a CPAP FIT, size: custom, custom_font_size: 51, mobile_font_size: true, custom_mobile_font_size: 40 }
+
+  - native: heading
+    settings: { section_width: page, vertical_padding: 0 }
+  - native: page_content
+    settings: { section_width: page, vertical_padding: 0 }
+
+  # Nossas lojas — cards das lojas físicas (dados no componente)
+  - component: nossas-lojas
+
+  # Quem somos — mesmas vitrines da home
+  - native: categorias
+    type: featured-categories
+    settings:
+      orientation: vertical
+      text_alignment: center
+      section_width: page
+      gap: 40
+      vertical_padding: 60
+      background_color: "#E5E0D8"
+    block_order: [titulo, lista]
+    blocks:
+      titulo: { type: heading, settings: { title: Categorias, size: h4 } }
+      lista:
+        type: category-nav
+        settings: *categoria_nav
+        block_order: [c1, c2, c3, c4, c5, c6, c7]
+        blocks:
+          c1: { type: category-item, settings: { text: Máscaras, link: /mascaras/, image: "asset:home/categoria-mascaras.webp" } }
+          c2: { type: category-item, settings: { text: BIPAPs | VPAPs, link: /cpap-e-bipap/bipap-vpap/, image: "asset:home/categoria-bipaps.webp" } }
+          c3: { type: category-item, settings: { text: CPAP Automático, link: /cpap-e-bipap/cpap-automatico/, image: "asset:home/categoria-cpap-automatico.webp" } }
+          c4: { type: category-item, settings: { text: CPAP Dreamstation, link: /cpap-e-bipap/, image: "asset:home/categoria-dreamstation.webp" } }
+          c5: { type: category-item, settings: { text: CPAP Portátil, link: /cpap-e-bipap/cpap-portatil/, image: "asset:home/categoria-cpap-portatil.webp" } }
+          c6: { type: category-item, settings: { text: CPAP Pressão Fixa, link: /cpap-e-bipap/cpap-pressao-fixa/, image: "asset:home/categoria-cpap-pressao-fixa.webp" } }
+          c7: { type: category-item, settings: { text: Umidificador, link: /cpap-e-bipap/umidificadores/, image: "asset:home/categoria-umidificador.webp" } }
+
+  - native: servicos
+    type: featured-categories
+    settings:
+      orientation: vertical
+      text_alignment: center
+      section_width: page
+      gap: 40
+      vertical_padding: 60
+      background_color: "#E5E0D8"
+    block_order: [titulo, lista]
+    blocks:
+      titulo: { type: heading, settings: { title: Serviços, size: h4 } }
+      lista:
+        type: category-nav
+        settings: *categoria_nav
+        block_order: [s1, s2, s3, s4]
+        blocks:
+          s1: { type: category-item, settings: { text: Vendas de equipamentos, link: /produtos/, image: "asset:home/servico-vendas.png" } }
+          s2: { type: category-item, settings: { text: Aluguel de CPAP e BIPAP, link: /servicos/aluguel-de-equipamentos/, image: "asset:home/servico-aluguel-cpap.png" } }
+          s3: { type: category-item, settings: { text: Acompanhamento clínico, link: /servicos/apoio-e-monitoramento-de-cpap1/, image: "asset:home/servico-acompanhamento.png" } }
+          s4: { type: category-item, settings: { text: Aluguel de ventiladores, link: /servicos/aluguel-de-equipamentos/, image: "asset:home/servico-aluguel-ventiladores.png" } }
+
+  - native: videos
+    type: custom
+    settings:
+      direction: column
+      alignment: start
+      section_width: page
+      gap: 20
+      vertical_padding: 20
+      horizontal_padding: 0
+    block_order: [titulo, lista]
+    blocks:
+      titulo: { type: heading, settings: { title: Dicas & Vídeos, size: h4 } }
+      lista:
+        type: group
+        settings: { direction: row, alignment: center, gap: 30, width: fill }
+        block_order: [v1, v2, v3, v4]
+        blocks:
+          v1: &video_card
+            type: group
+            settings: { direction: column, alignment: start, gap: 0, width: fit }
+            block_order: [video, legenda]
+            blocks:
+              video: { type: video, settings: { video_type: manual, aspect_ratio: 16by9, show_cover_image: true, cover_image: "asset:home/video-capa.webp" } }
+              legenda: { type: text, settings: { text: NOVA máscara para quem usa CPAP super confortável } }
+          v2: *video_card
+          v3: *video_card
+          v4: *video_card
+
+  - native: marcas
+    type: featured-categories
+    settings:
+      orientation: vertical
+      text_alignment: center
+      section_width: page
+      gap: 40
+      vertical_padding: 60
+    block_order: [titulo, lista]
+    blocks:
+      titulo: { type: heading, settings: { title: As melhores marcas, size: h4 } }
+      lista:
+        type: category-nav
+        settings:
+          <<: *categoria_nav
+          image_size: 148
+          gap: 20
+        block_order: [m1, m2, m3, m4, m5, m6, m7]
+        blocks:
+          m1: { type: category-item, settings: { text: BMC, link: /marcas/bmc/, image: "asset:home/marca-bmc.png" } }
+          m2: { type: category-item, settings: { text: Covidien, link: /marcas/covidien/, image: "asset:home/marca-covidien.png" } }
+          m3: { type: category-item, settings: { text: Caire, link: /marcas/caire/, image: "asset:home/marca-caire.png" } }
+          m4: { type: category-item, settings: { text: Resmed, link: /resmed/, image: "asset:home/marca-resmed.png" } }
+          m5: { type: category-item, settings: { text: Fisher & Paykel, link: /marcas/fisher-paykel/, image: "asset:home/marca-fisher-paykel.png" } }
+          m6: { type: category-item, settings: { text: MD, link: /marcas/md/, image: "asset:home/marca-md.png" } }
+          m7: { type: category-item, settings: { text: Ventcare, link: /marcas/ventcare/, image: "asset:home/marca-ventcare.png" } }

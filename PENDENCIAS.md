@@ -50,6 +50,23 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 - [ ] **PDP — cupom "Aproveite também"** (R$ 100 OFF na linha Philips / QUERO100) e WhatsApp estão fixos em
   `frontend/src/js/components/pdp.js` — confirmar e ajustar quando a campanha mudar.
 
+- [ ] **Institucionais — páginas que faltam no admin (2026-10-14).** O menu lateral e o footer apontam para
+  `/nossas-lojas/`, `/politica-de-privacidade/`, `/politica-de-entrega/` e `/planos-de-assinatura/`, que **não
+  existem** na loja (só `quem-e-a-cpap-fit` e `contato` respondem 200). Criar em Admin → Páginas com esses slugs
+  (Nossas lojas pode ficar com o conteúdo vazio: os cards vêm do componente). **`/trocas-e-devolucoes/`** está no
+  sitemap mas dá **404** (provavelmente não publicada) — publicar no admin.
+- [ ] **Institucionais — conteúdo do admin** (Quem somos, Troca): o texto veio do editor antigo (lista `<ul>` com
+  um `<li>` por parágrafo, Arial 12px inline). O JS remove os estilos inline, mas a estrutura do Figma
+  (parágrafos, subtítulos "Como funciona?", "Termo de Garantia", "Nossos Produtos e Serviços") só aparece se o
+  conteúdo for reescrito no admin com parágrafos e títulos (H2/H3).
+- [ ] **Nossas lojas — dados das lojas:** só a loja de Florianópolis é conhecida (o Figma repete o mesmo card
+  4×, com telefones diferentes no desktop e no mobile). Confirmar a lista real, telefone/e-mail/horário de cada
+  loja e uma foto por loja (`design/components/nossas-lojas.html`; a foto atual é a do Figma, 290px).
+- [ ] **Fale conosco — opções de "Motivo"** são palpite (`MOTIVOS` em `frontend/src/js/components/institucional.js`).
+  O formulário nativo só envia nome/e-mail/telefone/mensagem: motivo, cidade/UF e assunto vão no início da
+  mensagem. Confirmar com a loja se o e-mail que chega atende.
+- [ ] **Quem somos — CPAP Dreamstation** aponta para `/cpap-e-bipap/` (não há categoria própria na loja).
+
 ---
 
 ## Resolvido

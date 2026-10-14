@@ -17,6 +17,7 @@ import initHomeTabs from "./components/home-tabs.js";
 import initFooter from "./components/footer.js";
 import initPlp from "./components/plp.js";
 import initPdp from "./components/pdp.js";
+import initInstitucional from "./components/institucional.js";
 
 document.addEventListener("alpine:init", () => {
   // Componentes ficam disponíveis nos templates como x-data="miniCart()"
@@ -30,6 +31,7 @@ initHeaderSearch(); // garante submit da busca (Enter/clique) + preserva o previ
 initHomeTabs();     // abas de "Destaques" da home (troca a vitrine nativa visível)
 initPlp();          // PLP: cabeçalho da listagem, paginação numerada, filtros recolhíveis, texto SEO
 initPdp();          // PDP: card do topo, preços + cupom, botão WhatsApp
+initInstitucional(); // páginas institucionais + Fale conosco: menu lateral, lojas, campos do formulário
 initFooter();       // footer: copiar cupom, menus (acordeão no mobile), "Seu nome" na newsletter
 
 // Overlay escuro atrás do submenu do menu desktop (mostrado por CSS :has no hover)
