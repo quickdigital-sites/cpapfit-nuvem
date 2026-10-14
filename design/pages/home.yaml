@@ -12,8 +12,10 @@
 #    ⚠️ Como estão no YAML, o repo manda nelas: trocar pelo Brand Editor é desfeito no próximo build
 #    (para passar a controlar pelo Brand Editor, apague a chave image aqui).
 # ⚠️ Links de categoria: slugs presumidos (/mascaras/ etc.) — conferir com as categorias reais.
-# ⚠️ Abas de Destaques: cada aba é uma seção product-list (destaques_1..6). Escolher a CATEGORIA
-#    de cada uma no Brand Editor (campo "Produtos") — o YAML não sobrescreve products_source.
+# Abas de Destaques: cada aba é uma seção product-list (destaques_1..6). As abas 2–6 apontam para as
+#    categorias reais (products_source, ids da loja) — e por isso o product-list.tpl as renderiza só como
+#    placeholder; home-tabs.js carrega a vitrine da categoria quando o visitante vai usar as abas.
+#    A aba 1 (Kits promocionais) não tem categoria na loja: usa a coleção padrão e sai renderizada.
 
 unlisted: remove
 
@@ -24,7 +26,7 @@ x-cta-linha: &cta_linha
 
 x-vitrine: &vitrine
   type: products
-  settings:
+  settings: &vitrine_settings
     format: slider
     columns: "5"
     use_different_mobile_format: true
@@ -145,21 +147,36 @@ sections:
   - native: destaques_1
     <<: *destaque_lista
     blocks: { products: *vitrine }
-  - native: destaques_2
+  - native: destaques_2   # Máscaras
     <<: *destaque_lista
-    blocks: { products: *vitrine }
-  - native: destaques_3
+    blocks:
+      products:
+        type: products
+        settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40897020" } }
+  - native: destaques_3   # Tops CPAPs → CPAP e BiPAP
     <<: *destaque_lista
-    blocks: { products: *vitrine }
-  - native: destaques_4
+    blocks:
+      products:
+        type: products
+        settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40896991" } }
+  - native: destaques_4   # Concentradores de oxigênio
     <<: *destaque_lista
-    blocks: { products: *vitrine }
-  - native: destaques_5
+    blocks:
+      products:
+        type: products
+        settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40897252" } }
+  - native: destaques_5   # Acessórios para polissonografia
     <<: *destaque_lista
-    blocks: { products: *vitrine }
-  - native: destaques_6
+    blocks:
+      products:
+        type: products
+        settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40897279" } }
+  - native: destaques_6   # Acessórios para CPAP e BiPAP
     <<: *destaque_lista
-    blocks: { products: *vitrine }
+    blocks:
+      products:
+        type: products
+        settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40897213" } }
 
   # ---------------------------------------------------------------------------------------------
   # Linhas (Figma 0:393 / mobile 0:765) — 2 banners com foto + gradiente azul (CSS)

@@ -27,9 +27,10 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 - [ ] **Home — links de categoria presumidos** (`/mascaras/`, `/bipaps/`, `/cpaps/cpap-automatico/`,
   `/marcas/...`, serviços etc. em `design/pages/home.yaml` e `design/components/destaques-abas.html`).
   Conferir com as categorias/páginas reais da loja e corrigir.
-- [ ] **Home — abas de Destaques:** escolher no Brand Editor a **categoria** de cada vitrine
-  `destaques_1..6` (Kits promocionais, Máscaras, Tops CPAPs, Concentradores, Acessórios p/ Polissonografia,
-  Acessórios). Hoje todas usam a coleção padrão. Depois dar `theme pull` para não sobrescrever no push.
+- [x] **Home — abas de Destaques (2026-10-14):** abas 2–6 ligadas às categorias reais (Máscaras, CPAP e BiPAP,
+  Concentradores de oxigênio, Acessórios para polissonografia, Acessórios para CPAP e BiPAP — `products_source` em
+  `design/pages/home.yaml`) e carregadas sob demanda. **Falta:** a aba 1 "Kits promocionais" não tem categoria na loja
+  (usa a coleção padrão; o link `/kits-promocionais/` dá 404) — criar a categoria ou trocar a aba.
 - [ ] **Home — Dicas & Vídeos:** preencher a URL (YouTube) e a legenda dos 4 vídeos no Brand Editor.
 - [ ] **Home — cupom do hero:** confirmar texto/código ("R$ 200 OFF na Resmed" / `QUERO200`) e o link
   do botão "Ver linha completa".

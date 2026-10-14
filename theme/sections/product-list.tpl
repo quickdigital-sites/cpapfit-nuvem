@@ -51,8 +51,17 @@
 {% endset %}
 
 
+{# CPAP Fit: na home, as abas escondidas dos Destaques (destaques_2..6) não são renderizadas — cada vitrine
+   pesa ~190KB de HTML. Sai só um placeholder com a URL da categoria escolhida no Brand Editor (view_all_url);
+   frontend/src/js/components/home-tabs.js busca essa página quando o visitante vai usar as abas e monta o
+   carrossel com os primeiros cards. (Query string não serve: o cache da plataforma a ignora.)
+   No Brand Editor (is_preview) renderiza tudo, para dar para editar. #}
+{% set qd_lazy_tab = template == 'home' and not is_preview and view_all_url and section.id in ['destaques_2', 'destaques_3', 'destaques_4', 'destaques_5', 'destaques_6'] %}
+
 {# Hide the section when theres nothing to show. Placeholders kick in for preview or when the store has zero active products at all. #}
-{% if has_block_products or is_preview or not has_products %}
+{% if qd_lazy_tab %}
+	<div class="qd-tab-lazy" data-qd-lazy-tab="{{ section.id }}" data-qd-source="{{ view_all_url }}" data-qd-max="{{ products_block.settings.max_products | default(8) }}"></div>
+{% elseif has_block_products or is_preview or not has_products %}
 	<div
 		class="js-products-list-slider section-featured-home {% if full_width %}section-full-width{% endif %}"
 		data-store="{{ data_store_value }}"

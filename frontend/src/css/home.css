@@ -319,6 +319,16 @@ div[data-section-id="marcas"] { padding: 60px 0 20px; }
 section[data-section-id^="destaques_"]:not([data-section-id="destaques_1"]) { display: none; }
 .qd-tab-panel { display: none !important; }
 .qd-tab-panel.qd-tab-panel-active { display: block !important; }
+/* aba carregada sob demanda (home-tabs.js): reserva a altura da vitrine enquanto busca a categoria */
+.qd-tab-lazy { min-height: 420px; display: flex; align-items: center; justify-content: center; }
+.is-loading .qd-tab-lazy::after {
+  content: ""; width: 32px; height: 32px; border-radius: 50%;
+  border: 3px solid var(--qd-hairline); border-top-color: var(--qd-gold-solid);
+  animation: qd-spin .8s linear infinite;
+}
+@keyframes qd-spin { to { transform: rotate(360deg); } }
+.qd-tab-lazy-link { font-weight: 700; color: var(--qd-indigo); text-decoration: underline; }
+@media (max-width: 767px) { .qd-tab-lazy { min-height: 330px; } }
 
 div[data-section-id^="destaques_"] { padding: 20px 0 70px; }
 div[data-section-id="mais_vendidos"] { padding: 60px 0 70px; }
