@@ -32,9 +32,15 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 - [ ] **Páginas de conteúdo criadas no admin (2026-10-14)** — Política de Privacidade, Política de Entrega e Troca,
   Devolução, Garantia com os textos de cpapfit.com.br (limpos: sem fontes inline, seções viraram títulos);
   Nossas lojas com uma frase de introdução. Conferir/ajustar:
-  - **Planos de assinatura** está com texto provisório ("em breve…" + contatos) — falta o conteúdo real.
-  - Política de Privacidade cita `laura@cpapfit.com` e `laura@cpapfit.com.br` (assim no texto original) — confirmar
-    o e-mail do encarregado de dados (DPO).
+  - [x] **Planos de assinatura** (2026-10-14): texto provisório trocado pelo conteúdo real da página
+    `cpapfit.com.br/pages/clube-de-assinatura-cpap-fit` (planos Sono Bom 06/12/24 — R$ 399/349/289 por mês —,
+    benefícios e condições, copiados sem alterar). Os botões "Assinar agora" do site antigo iam para o checkout da
+    **Vindi, que hoje dá 404**; na página nova vão para o WhatsApp (48) 4042-1861 com o nome do plano.
+    **Cliente:** confirmar se preços/condições continuam valendo e se há um novo link de contratação (Vindi).
+  - [x] **E-mail do DPO na Política de Privacidade** (2026-10-14): padronizado em `laura@cpapfit.com.br`.
+    Motivo: `cpapfit.com` não tem registro MX (não recebe e-mail); `cpapfit.com.br` tem (Google/Zoho) e todos os
+    outros endereços da loja e do site antigo usam `.com.br`. O `laura@cpapfit.com` era erro de digitação do texto
+    original.
   - "Trocas e Devoluções" tinha só uma imagem sem relação ("Tratamento individualizado", WhatsApp de 28/07); foi trocada
     pelo texto da política. A imagem continua no CDN da loja se for útil em outro lugar.
   - Publicação no admin: página só publica marcando "Criar um link para esta página no menu…". Foi criado o menu
@@ -95,3 +101,8 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
   **Como o lojista cadastra:** Brand Editor → navegação (menu) → adicionar bloco **"Banner"** → escolher o
   **item de menu** (categoria), a **imagem** (foto), o **título** (nome da marca, ex.: "Resmed") e o **link**.
   O rótulo "Linha" e o botão são do CSS — usar imagem só com a foto (sem texto embutido).
+
+- [ ] **Menu principal com 2 itens a mais (2026-10-14):** ao publicar as páginas de conteúdo (caixa "Criar um link
+  para esta página no menu…"), o admin acrescentou **"Trocas e Devoluções"** e **"Planos de assinatura"** ao Menu
+  principal — aparecem no header desktop depois de "Serviços" e o menu passa da largura. Não removido sem aval (as
+  páginas continuam publicadas pelo menu "Institucional (páginas de conteúdo)"). Decidir com o Denis.
