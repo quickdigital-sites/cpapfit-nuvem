@@ -102,7 +102,7 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
   **item de menu** (categoria), a **imagem** (foto), o **título** (nome da marca, ex.: "Resmed") e o **link**.
   O rótulo "Linha" e o botão são do CSS — usar imagem só com a foto (sem texto embutido).
 
-- [ ] **Menu principal com 2 itens a mais (2026-10-14):** ao publicar as páginas de conteúdo (caixa "Criar um link
+- [x] **Menu principal com 2 itens a mais (2026-10-14):** ao publicar as páginas de conteúdo (caixa "Criar um link
   para esta página no menu…"), o admin acrescentou **"Trocas e Devoluções"** e **"Planos de assinatura"** ao Menu
-  principal — aparecem no header desktop depois de "Serviços" e o menu passa da largura. Não removido sem aval (as
-  páginas continuam publicadas pelo menu "Institucional (páginas de conteúdo)"). Decidir com o Denis.
+  principal. **Removidos** com aval do Denis (Admin → Menus → lixeira → **Salvar** no fim da página — sem o Salvar
+  a exclusão não persiste). As 5 páginas continuam publicadas pelo menu "Institucional (páginas de conteúdo)" (200).
