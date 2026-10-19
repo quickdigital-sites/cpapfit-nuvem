@@ -10,6 +10,11 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
+- [ ] **Checkout (2026-10-19):** app NubeSDK `nube-apps/checkout-quick` refeito nas cores da CPAP Fit (ambiente
+  seguro, nota de pagamento, rodapé azul com benefícios e rodapé legal, pós-compra; barra de frete grátis desligada até
+  existir valor mínimo). **Falta (Denis):** subir `dist/main.min.js` como nova versão no portal de parceiros, publicar,
+  confirmar que o app está instalado na cpapfit4 (hoje não aparece no checkout) e preencher `whatsapp` / cupom nas
+  configurações do app. O que não dá para mudar no checkout está no README do app.
 - [x] **Tema publicado mudou (2026-10-19):** a loja tinha passado a usar o **14688507 "CPAP Fit — Dev (1.4.2)"**
   (criado e publicado fora da sessão). O **14473488** foi publicado de novo a pedido do Denis; o 14688507 ficou como
   rascunho (base Ipanema 1.4.2, sem o trabalho de 2026-10-19). Se um dia for preciso atualizar a base do Ipanema, as

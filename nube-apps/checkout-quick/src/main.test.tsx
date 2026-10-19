@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 // Componentes do SDK viram objetos simples para inspecionar a árvore (mesma técnica do template oficial).
 vi.mock("@tiendanube/nube-sdk-jsx", () => {
 	const make = (type: string) => (props: Record<string, unknown>) => ({ type, props });
-	return { Column: make("col"), Row: make("row"), Text: make("txt"), Progress: make("progress"), Link: make("link") };
+	return { Column: make("col"), Row: make("row"), Text: make("txt"), Progress: make("progress"), Link: make("link"), Icon: make("icon") };
 });
 
 import { faixaTopo } from "./features/faixa-topo";
@@ -42,13 +42,13 @@ const state = (step: "start" | "payment" | "success" | null, subtotal = 174.9) =
 const all = (node: unknown) => texts(node).join(" ");
 const defaults = readSettings(undefined);
 const withWhats = readSettings({ whatsapp: { type: "string", value: "5521999998888" } });
+const withThreshold = readSettings({ free_shipping_threshold: { type: "string", value: "299" } });
 
 describe("partes", () => {
-	it("faixa-topo: segurança, frete grátis pelo valor mínimo e parcelamento", () => {
-		const t = all(faixaTopo.render(state("start"), defaults));
-		expect(t).toContain("Compra 100% segura");
-		expect(t).toContain("Frete grátis acima de R$ 299,00");
-		expect(t).toContain("Até 6x sem juros no cartão");
+	it("faixa-topo: ambiente seguro com cadeado", () => {
+		const node = faixaTopo.render(state("start"), defaults);
+		expect(all(node)).toBe("Ambiente 100% seguro");
+		expect(findAll(node, "icon")[0].props.name).toBe("lock");
 	});
 
 	it("faixa-topo: textos próprios substituem os padrões", () => {
@@ -56,25 +56,49 @@ describe("partes", () => {
 		expect(all(faixaTopo.render(state("start"), s))).toBe("Entrega expressa");
 	});
 
-	it("frete-gratis: quanto falta e parabéns", () => {
-		expect(all(freteGratis.render(state("start", 174.9), defaults))).toContain("Faltam R$ 124,10");
-		expect(all(freteGratis.render(state("start", 320), defaults))).toContain("Parabéns");
-		expect(findAll(freteGratis.render(state("start", 174.9), defaults), "progress")[0].props.value).toBe(58);
+	it("frete-gratis: desligada sem valor mínimo configurado", () => {
+		expect(freteGratis.render(state("start", 174.9), defaults)).toBeNull();
+	});
+
+	it("frete-gratis: quanto falta e parabéns, com valor mínimo configurado", () => {
+		expect(all(freteGratis.render(state("start", 174.9), withThreshold))).toContain("Faltam R$ 124,10");
+		expect(all(freteGratis.render(state("start", 320), withThreshold))).toContain("Parabéns");
+		expect(findAll(freteGratis.render(state("start", 174.9), withThreshold), "progress")[0].props.value).toBe(58);
 	});
 
 	it("selos-pagamento: segurança + condição configurável", () => {
 		const t = all(selosPagamento.render(state("payment"), defaults));
 		expect(t).toContain("Pagamento rápido e protegido");
-		expect(t).toContain("Até 6x sem juros no cartão");
+		expect(t).toContain("Até 12x sem juros no cartão de crédito");
 	});
 
-	it("rodape: contato da loja; WhatsApp só se configurado", () => {
-		const sem = rodape.render(state("start"), defaults);
-		expect(findAll(sem, "link").map((l) => l.props.href)).toEqual(["https://quickstart2.lojavirtualnuvem.com.br/contato/"]);
-		const com = rodape.render(state("start"), withWhats);
-		const whats = findAll(com, "link").find((l) => String(l.props.href).startsWith("https://wa.me/5521999998888"));
+	it("rodape: benefícios, regras do frete, contato, legal; sem Pix e sem cupom por padrão", () => {
+		const node = rodape.render(state("start"), defaults);
+		const t = all(node);
+		expect(t).toContain("12x sem juros no cartão de crédito");
+		expect(t).toContain("Frete grátis");
+		expect(t).toContain("CNPJ: 29.695.217/0001-45");
+		expect(t).not.toMatch(/pix/i);
+		expect(findAll(node, "link").map((l) => l.props.href)).toEqual([
+			"https://quickstart2.lojavirtualnuvem.com.br/politica-de-entrega/",
+			"https://quickstart2.lojavirtualnuvem.com.br/contato/",
+		]);
+	});
+
+	it("rodape: cupom e WhatsApp só se configurados", () => {
+		const s = readSettings({
+			whatsapp: "5521999998888",
+			coupon_text: "R$ 100 OFF na linha Philips",
+			coupon_code: "QUERO100",
+			footer_benefits: ["Entrega para todo o Brasil"],
+		});
+		const node = rodape.render(state("start"), s);
+		const t = all(node);
+		expect(t).toContain("Entrega para todo o Brasil");
+		expect(t).not.toContain("12x sem juros");
+		expect(t).toContain("QUERO100");
+		const whats = findAll(node, "link").find((l) => String(l.props.href).startsWith("https://wa.me/5521999998888"));
 		expect(whats?.props.target).toBe("_blank");
-		expect(all(com)).toContain("A gente resolve rápido");
 	});
 
 	it("pos-compra: confirmação e próximos passos", () => {
@@ -119,5 +143,9 @@ describe("App", () => {
 		expect(calls.has("after_main_content")).toBe(false);
 		expect(calls.has("after_header")).toBe(false);
 		expect(all(calls.get("after_line_items_price")?.(state("start", 100)))).toContain("Faltam R$ 99,00");
+	});
+
+	it("sem valor mínimo, o slot do frete grátis fica vazio", () => {
+		expect(all(setup().get("after_line_items_price")?.(state("start", 100)))).toBe("");
 	});
 });

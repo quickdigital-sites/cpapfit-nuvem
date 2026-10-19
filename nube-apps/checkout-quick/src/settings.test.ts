@@ -4,8 +4,11 @@ import { DEFAULTS, readSettings } from "./settings";
 describe("readSettings", () => {
 	it("sem configuração usa os padrões", () => {
 		const s = readSettings(undefined);
-		expect(s.freeShippingThreshold).toBe(299);
+		expect(s.freeShippingThreshold).toBeNull();
 		expect(s.disabled.size).toBe(0);
+		expect(s.footerBenefits).toBeNull();
+		expect(s.coupon).toBeNull();
+		expect(s.companyInfo).toBe(DEFAULTS.companyInfo);
 		expect(s.topBarMessages).toBeNull();
 		expect(s.paymentNote).toBe(DEFAULTS.paymentNote);
 		expect(s.whatsapp).toBeNull();
@@ -35,8 +38,13 @@ describe("readSettings", () => {
 
 	it("valor mínimo com milhar e inválido", () => {
 		expect(readSettings({ free_shipping_threshold: "1.299,90" }).freeShippingThreshold).toBe(1299.9);
-		expect(readSettings({ free_shipping_threshold: "abc" }).freeShippingThreshold).toBe(299);
-		expect(readSettings({ free_shipping_threshold: "-5" }).freeShippingThreshold).toBe(299);
+		expect(readSettings({ free_shipping_threshold: "abc" }).freeShippingThreshold).toBeNull();
+		expect(readSettings({ free_shipping_threshold: "-5" }).freeShippingThreshold).toBeNull();
+	});
+
+	it("cupom precisa do código; texto tem padrão", () => {
+		expect(readSettings({ coupon_text: "R$ 100 OFF" }).coupon).toBeNull();
+		expect(readSettings({ coupon_code: "QUERO100" }).coupon).toEqual({ code: "QUERO100", text: "Cupom de desconto" });
 	});
 
 	it("WhatsApp curto demais é ignorado", () => {
