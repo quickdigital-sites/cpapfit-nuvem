@@ -2487,6 +2487,10 @@ a {
   :root #address-form-section > * {
     grid-column: 1 / 3;
   }
+  :root #address-form-section .row.third-gutters {
+    flex-direction: column;
+    gap: 26px;
+  }
   :root #address-form-section > .form-group:nth-child(2),
   :root #address-form-section > .form-group:nth-child(3) {
     grid-column: auto;
