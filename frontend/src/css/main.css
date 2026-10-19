@@ -285,6 +285,9 @@
    ========================================================================== */
 @media (min-width: 1200px) {
   .nav-desktop-container { background: #fefdfc; border-top: 1px solid #ccc; }
+  /* Desempenho: o tema imprime o menu com height:0 e o JS só depois o mostra — a página descia 60px
+     (CLS ~0.11 na página de produto). A altura fica reservada desde o começo; o menu segue invisível até o JS. */
+  .js-nav-desktop-container { height: auto !important; }
 
 
   /* fora as setas nativas de rolagem lateral */
