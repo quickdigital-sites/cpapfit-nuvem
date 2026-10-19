@@ -1,6 +1,7 @@
 /**
  * Rodapé da marca no fim do checkout (Figma 363:9230, rodapé azul de 367:13649): benefícios da loja,
- * ajuda para quem travou, rodapé legal com os créditos e a faixa em degradê.
+ * rodapé legal com os créditos e a faixa em degradê. O tema (theme/static/checkout.scss.tpl) estica o
+ * slot para a largura da tela, que o app sozinho não consegue.
  *
  * Ordem dos benefícios do Figma: Pix · 12x · frete grátis · cupom. Pix e cupom só aparecem quando
  * ligados em DEFAULTS (settings.ts): o checkout não informa o desconto Pix e o cupom depende da loja.
@@ -10,7 +11,7 @@
 import { Box, Column, Link, Row, Svg, Text } from "@tiendanube/nube-sdk-jsx";
 import type { NubeComponent } from "@tiendanube/nube-sdk-types";
 import { GOLD, INDIGO, OFFWHITE } from "../brand";
-import { storeUrl, whatsappUrl } from "../checkout";
+import { storeUrl } from "../checkout";
 import type { Feature } from "./types";
 
 // caminhos 20x20 dos ícones do tema (mesmos do Figma)
@@ -58,7 +59,7 @@ function benefit(key: string, iconName: keyof typeof ICONS | null, strong: strin
 }
 
 const separator = (key: string) => (
-	<Box key={key} style={{ width: "1px", height: "8px", background: "rgba(254, 253, 252, 0.5)" }} />
+	<Box key={key} style={{ width: "1px", height: "8px", background: GOLD }} />
 );
 
 export const rodape: Feature = {
@@ -66,7 +67,6 @@ export const rodape: Feature = {
 	slot: "after_main_content",
 	steps: ["start", "payment"],
 	render(state, settings) {
-		const contact = storeUrl(state, "/contato/");
 		const rules = storeUrl(state, "/politica-de-entrega/");
 
 		const coupon = settings.coupon;
@@ -122,29 +122,6 @@ export const rodape: Feature = {
 		];
 		const benefits = items.flatMap((item, i) => (i ? [separator(`separador-${i}`), item] : [item]));
 
-		const help = [
-			...(contact
-				? [
-						<Link key="contato" href={contact} variant="link" style={{ color: OFFWHITE, fontWeight: 700 }}>
-							Fale com a gente
-						</Link>,
-					]
-				: []),
-			...(settings.whatsapp
-				? [
-						<Link
-							key="whatsapp"
-							href={whatsappUrl(settings.whatsapp, "Oi! Preciso de ajuda para finalizar minha compra.")}
-							target="_blank"
-							variant="link"
-							style={{ color: OFFWHITE, fontWeight: 700 }}
-						>
-							Chamar no WhatsApp
-						</Link>,
-					]
-				: []),
-		];
-
 		const credit = (key: string, label: string, href: string) => (
 			<Link
 				key={key}
@@ -157,38 +134,38 @@ export const rodape: Feature = {
 			</Link>
 		);
 
+		// medidas do Figma (363:9230); no celular o tema (checkout.scss.tpl) reduz as margens e tira os separadores
 		return (
-			<Column key="rodape" gap={0} background={INDIGO} alignItems="stretch" style={{ width: "100%", marginTop: "40px" }}>
+			<Column key="rodape" gap={60} background={INDIGO} alignItems="center" style={{ width: "100%" }}>
 				{[
-					<Column key="conteudo" gap={20} alignItems="stretch" style={{ padding: "40px 24px 32px" }}>
+					<Column key="conteudo" gap={20} alignItems="stretch" style={{ width: "100%", maxWidth: "1920px", padding: "60px 80px 0" }}>
 						{[
 							<Row
 								key="beneficios"
+								justifyContent="center"
+								alignItems="center"
+								style={{ minHeight: "120px", borderBottom: "1px solid rgba(255, 255, 255, 0.3)" }}
+							>
+								<Row
+									key="lista"
+									gap={66}
+									justifyContent="center"
+									alignItems="center"
+									style={{ flexWrap: "wrap", width: "100%", maxWidth: "1600px", padding: "0 12px" }}
+								>
+									{benefits}
+								</Row>
+							</Row>,
+							<Row
+								key="legal"
 								gap={24}
 								justifyContent="space-between"
 								alignItems="center"
-								style={{ flexWrap: "wrap", padding: "0 12px 32px", borderBottom: "1px solid rgba(255, 255, 255, 0.3)" }}
-							>
-								{benefits}
-							</Row>,
-							<Column key="ajuda" gap={8} alignItems="center" style={{ padding: "8px 0 12px", textAlign: "center" }}>
-								{[
-									<Text key="texto" color={OFFWHITE} style={{ fontSize: "14px", margin: 0 }}>
-										Travou em alguma etapa? A gente resolve rápido.
-									</Text>,
-									...(help.length ? [<Row key="links" gap={24} justifyContent="center" style={{ flexWrap: "wrap" }}>{help}</Row>] : []),
-								]}
-							</Column>,
-							<Row
-								key="legal"
-								gap={20}
-								justifyContent="space-between"
-								alignItems="center"
-								style={{ flexWrap: "wrap", paddingTop: "20px", borderTop: "1px solid rgba(255, 255, 255, 0.04)" }}
+								style={{ flexWrap: "wrap", minHeight: "69px", margin: "0 60px", borderTop: "1px solid rgba(255, 255, 255, 0.04)" }}
 							>
 								{[
 									<Text key="texto" color={OFFWHITE} style={{ fontSize: "12px", lineHeight: "16px", whiteSpace: "pre-line", margin: 0 }}>
-										{`${settings.companyInfo} | © Todos os direitos reservados - ${state.store?.name ?? "CPAP FIT"} - ${new Date().getFullYear()}`}
+										{`${settings.companyInfo} | © Todos os direitos reservados - ${(state.store?.name ?? "CPAP FIT").toUpperCase()} - ${new Date().getFullYear()}`}
 									</Text>,
 									<Row key="creditos" gap={20} alignItems="center">
 										{[credit("nuvemshop", "Nuvemshop", "https://www.nuvemshop.com.br"), credit("quick", "Quick Digital", "https://quickdigital.com.br")]}

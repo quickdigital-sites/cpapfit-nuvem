@@ -72,22 +72,21 @@ describe("partes", () => {
 		expect(t).toContain("Até 12x sem juros no cartão de crédito");
 	});
 
-	it("rodape: benefícios do Figma, regras do frete, contato e créditos; sem Pix e sem cupom por padrão", () => {
+	it("rodape: benefícios do Figma, regras do frete e créditos; sem Pix e sem cupom por padrão", () => {
 		const node = rodape.render(state("start"), defaults);
 		const t = all(node);
 		expect(t.indexOf("12x sem juros")).toBeLessThan(t.indexOf("Frete grátis"));
 		expect(t).toContain("no cartão de crédito");
 		expect(t).toContain("ver regras");
-		expect(t).toContain("Travou em alguma etapa?");
+		expect(t).not.toContain("Travou em alguma etapa?");
 		expect(t).toContain("CNPJ: 29.695.217/0001-45");
-		expect(t).toContain(`© Todos os direitos reservados - QuickStart - ${new Date().getFullYear()}`);
+		expect(t).toContain(`© Todos os direitos reservados - QUICKSTART - ${new Date().getFullYear()}`);
 		expect(t).not.toMatch(/pix/i);
 		expect(t).not.toContain("QUERO100");
 		expect(t).not.toMatch(/copiar/i);
 		expect(findAll(node, "svg")).toHaveLength(2);
 		expect(findAll(node, "link").map((l) => l.props.href)).toEqual([
 			"https://quickstart2.lojavirtualnuvem.com.br/politica-de-entrega/",
-			"https://quickstart2.lojavirtualnuvem.com.br/contato/",
 			"https://www.nuvemshop.com.br",
 			"https://quickdigital.com.br",
 		]);
@@ -106,7 +105,7 @@ describe("partes", () => {
 		expect(findAll(node, "box")).toHaveLength(4);
 	});
 
-	it("rodape: cupom e WhatsApp só se configurados", () => {
+	it("rodape: cupom só se configurado; benefícios próprios substituem os padrões", () => {
 		const s = readSettings({
 			whatsapp: "5521999998888",
 			coupon_text: "R$ 100 OFF na linha Philips",
@@ -118,8 +117,8 @@ describe("partes", () => {
 		expect(t).toContain("Entrega para todo o Brasil");
 		expect(t).not.toContain("12x sem juros");
 		expect(t).toContain("QUERO100");
-		const whats = findAll(node, "link").find((l) => String(l.props.href).startsWith("https://wa.me/5521999998888"));
-		expect(whats?.props.target).toBe("_blank");
+		// o Figma não tem WhatsApp no rodapé
+		expect(findAll(node, "link").some((l) => String(l.props.href).startsWith("https://wa.me/"))).toBe(false);
 	});
 
 	it("pos-compra: confirmação e próximos passos", () => {
