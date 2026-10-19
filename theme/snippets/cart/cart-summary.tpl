@@ -3,10 +3,7 @@
 	{# Gift progress bar #}
 	{% include "snippets/promotions/gift-promotion-progress.tpl" with {container_class: 'cart-summary-gift-promotion-bar'} %}
 
-	{# Free shipping progress bar #}
-	<div class="js-visible-on-cart-filled" {% if cart.items_count == 0 %}style="display:none;"{% endif %}>
-		{% include "snippets/shipping/shipping-free-rest.tpl" with {bar_classes: 'cart-summary-free-shipping-bar'} %}
-	</div>
+	{# Free shipping progress bar: no carrinho lateral fica no topo (snippets/cart/cart-panel.tpl, Figma 363:11409) #}
 
 	{# Cart shipping and pickup #}
 
@@ -44,13 +41,17 @@
 
 		{# Cart totals #}
 
-		{% include "snippets/cart/cart-totals.tpl" %}
-
-		{# Cart main CTA #}
-
-		{% set cart_page_value = cart_page ? true : false %}
-
-		{% include "snippets/cart/cart-button.tpl" with {cart_page: cart_page_value} %}
+		{% if cart_page %}
+			{% include "snippets/cart/cart-totals.tpl" %}
+			{% include "snippets/cart/cart-button.tpl" with {cart_page: true} %}
+		{% else %}
+			{# Carrinho lateral (Figma 363:11206): subtotal no corpo; total, Pix e botão no rodapé fixo #}
+			{% include "snippets/cart/cart-totals.tpl" with {qd_part: 'subtotals'} %}
+			<div class="qd-cart-footer">
+				{% include "snippets/cart/cart-totals.tpl" with {qd_part: 'total'} %}
+				{% include "snippets/cart/cart-button.tpl" with {cart_page: false} %}
+			</div>
+		{% endif %}
 
 {% if cart_page %}
 	{# End of sticky module #}

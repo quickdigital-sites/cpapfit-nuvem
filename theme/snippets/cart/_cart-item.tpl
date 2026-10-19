@@ -30,6 +30,7 @@
             {# Cart item name #}
 
             <div class="cart-item-name-container" data-component="line-item.name">
+                {% if item.product.brand %}<span class="qd-cart-item-brand">{{ item.product.brand }}</span>{% endif %}
                 <a href="{{ item.url }}" data-component="name.short-name" class="cart-item-name" data-component="line-item.name">
                     {{ item.short_name }}
                 </a>

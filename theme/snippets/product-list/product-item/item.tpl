@@ -103,6 +103,11 @@
 
 			{{ component('nubesdk-slot', { type: "before_product_grid_item_name" }) }}
 
+			{# CPAP Fit (Figma 24:492): marca acima do nome #}
+			{% if product.brand %}
+				<div class="qd-item-brand">{{ product.brand }}</div>
+			{% endif %}
+
 			<div class="js-item-name product-item-name" data-store="product-item-name-{{ product.id }}">{{ product.name }}</div>
 
 			{{ component('nubesdk-slot', { type: "after_product_grid_item_name" }) }}

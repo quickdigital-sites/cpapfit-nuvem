@@ -3,6 +3,10 @@
 	Displays cart subtotal, price without taxes, promotions, coupon discount, shipping costs and grand total.
 #}
 
+{# CPAP Fit: no carrinho lateral este snippet entra duas vezes (cart-summary.tpl): qd_part "subtotals"
+   no corpo e "total" no rodapé fixo (Figma 363:11267). Sem qd_part (página do carrinho) sai inteiro. #}
+{% set qd_part = qd_part | default('all') %}
+{% if qd_part != 'total' %}
 {# IMPORTANT Do not remove this hidden subtotal, it is used by JS to calculate cart total #}
 <div class="js-subtotal-price subtotal-price hidden" data-priceraw="{{ cart.total }}" style="display: none;"></div>
 
@@ -12,8 +16,11 @@
 {% set show_shipping = settings.shipping_calculator_cart_page and (store.has_shipping or store.branches) %}
 {% set is_shipping_coupon = cart.coupon_includes_shipping %}
 
+{% endif %}
+
 <div class="js-visible-on-cart-filled" {% if cart.items_count == 0 %}style="display:none;"{% endif %}>
 
+	{% if qd_part != 'total' %}
 	<div class="cart-subtotals-container">
 
 		{# Cart subtotal #}
@@ -124,9 +131,11 @@
 	</div>
 
 	{{ component('nubesdk-slot', { type: "after_cart_summary" }) }}
+	{% endif %}
 
 	{# Cart total #}
 
+	{% if qd_part != 'subtotals' %}
 	<div class="js-cart-total-container" data-store="cart-total">
 
 		<div class="cart-totals-row cart-totals-total">
@@ -158,5 +167,6 @@
 		{% endif %}
 
 	</div>
+	{% endif %}
 
 </div>

@@ -27,7 +27,8 @@
 			{# Shipping calculator input #}
 
 			<div class="form-label">
-				{{ 'shipping.shipping_methods' | t }}
+				{# CPAP Fit: no carrinho, o título do Figma (363:11206) #}
+				{{ product_detail ? 'shipping.shipping_methods' | t : 'Calcular frete e prazos' }}
 			</div>
 
 			<div class="input-append">

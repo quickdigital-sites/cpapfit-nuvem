@@ -43,9 +43,9 @@
     "latest_products_available": 5,
     "shipping_calculator_product_page": true,
     "ajax_cart": true,
-    "cart_open_type": "show_notification",
+    "cart_open_type": "show_cart",
     "add_to_cart_recommendations": true,
-    "show_cart_shipping": false,
+    "show_cart_shipping": true,
     "inactive_tab_message": true,
     "cart_favicon": null,
     "background_color": "#FFFFFF",
@@ -81,7 +81,7 @@
     "product_informative_banner_02_title": null,
     "product_informative_banner_02_description": null,
     "stock_foreground_color": "#C90109",
-    "cart_action": "show_notification",
+    "cart_action": "show_cart",
     "label_border_radius": 0,
     "label_shipping_border_radius": 0
   }

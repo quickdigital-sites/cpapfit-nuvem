@@ -3,6 +3,11 @@
   Cart items list and empty state for the AJAX cart modal.
 #}
 
+{# CPAP Fit (Figma 363:11409): barra de frete grátis acima dos itens #}
+<div class="js-visible-on-cart-filled qd-cart-free-shipping" {% if cart.items_count == 0 %}style="display:none;"{% endif %}>
+	{% include "snippets/shipping/shipping-free-rest.tpl" with {bar_classes: 'cart-summary-free-shipping-bar'} %}
+</div>
+
 {{ component('nubesdk-slot', { type: "before_line_items" }) }}
 
 <div class="js-ajax-cart-list">
