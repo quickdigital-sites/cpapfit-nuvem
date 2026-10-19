@@ -13,16 +13,17 @@ do tema da loja). Referência visual: Figma `1P4JHFz4FEG8UEBkDOB1qm`, frame `367
 | **faixa-topo** | `after_header` | entrega, pagamento | "AMBIENTE 100% SEGURO" + cadeado dourado, alinhado à direita (no Figma fica dentro do cabeçalho, que é da Nuvemshop) |
 | **frete-gratis** | `after_line_items_price` | entrega, pagamento | **desligada** até `free_shipping_threshold` ser configurado; aí mostra quanto falta + barra |
 | **selos-pagamento** | `before_payment_options` | pagamento | cadeado · "Pagamento rápido e protegido" · texto de segurança · "Até 12x sem juros no cartão de crédito" |
-| **rodape** | `after_main_content` | entrega, pagamento | rodapé azul do Figma (`363:9230`), ícones do tema: [10% OFF no Pix] · 12x sem juros no cartão de crédito · Frete grátis (ver regras → `/politica-de-entrega/`) · [R$ 100 OFF na linha Philips + QUERO100] · "Travou em alguma etapa?" com Fale com a gente / WhatsApp · endereço, CNPJ e "© Todos os direitos reservados - loja - ano" com os créditos Nuvemshop e Quick Digital · faixa em degradê. Entre colchetes: desligado por padrão |
+| **rodape** | `after_main_content` | entrega, pagamento | rodapé azul do Figma (`363:9230`), ícones do tema: 10% OFF no Pix · 12x sem juros no cartão de crédito · Frete grátis (ver regras → `/politica-de-entrega/`) · R$ 100 OFF na linha Philips + QUERO100 (sem botão Copiar) · endereço, CNPJ e "© Todos os direitos reservados - LOJA - ano" com os créditos Nuvemshop e Quick Digital · faixa em degradê |
 | **pos-compra** | `after_order_number` | pedido confirmado | "Pedido confirmado!" · "Cada atualização do seu pedido chega no seu e-mail." · WhatsApp se configurado |
 
-**Sem prometer o que a loja não garante:** o "10% OFF no Pix" fica desligado porque o desconto Pix está em 0% nos
-meios de pagamento, e o estado do checkout não informa descontos por meio de pagamento antes de o cliente escolher
-(só `prices.discount_gateway`, depois de escolhido). O cupom QUERO100 também fica desligado até estar ativo na loja.
-A barra de frete grátis fica desligada porque não há valor mínimo cadastrado.
+**Sem prometer o que a loja não garante:** "10% OFF no Pix" e o cupom QUERO100 foram ligados em 2026-10-19, com o
+Denis confirmando 10% no Pix (Configurações > Meios de pagamento) e o cupom ativo. Se um dos dois sair da loja,
+desligue no código (`pixDiscount: null` / `coupon: null`): o estado do checkout não informa descontos por meio de
+pagamento antes de o cliente escolher (só `prices.discount_gateway`, depois). A barra de frete grátis fica desligada
+porque não há valor mínimo cadastrado.
 
 **Padrões no código:** o app em produção (QuickDevTool) não tem tela de configurações, então `getAppSettings()` volta
-vazio e vale `DEFAULTS` em `src/settings.ts`. Para ligar o Pix: `pixDiscount: 10`; o cupom: `coupon: PHILIPS_COUPON`;
+vazio e vale `DEFAULTS` em `src/settings.ts`. Pix e cupom: `pixDiscount` e `coupon`;
 o WhatsApp: `whatsapp: "554840421861"`. Depois, nova versão (ver "Publicar uma versão").
 
 Cada parte se refaz sozinha quando carrinho, etapa ou frete mudam (`render` com função do estado).
@@ -36,8 +37,8 @@ sobre `DEFAULTS` — o SDK entrega `{ chave: { type, value } }` e só tem os tip
 | Chave | Tipo | Padrão | Sugestão para a CPAP Fit |
 |---|---|---|---|
 | `whatsapp` | string (com DDI) | `DEFAULTS.whatsapp` (sem WhatsApp) | `554840421861` |
-| `coupon_text` + `coupon_code` | string | `DEFAULTS.coupon` (sem cupom) | `R$ 100 OFF na linha Philips` + `QUERO100` (se o cupom estiver ativo) |
-| `footer_benefits` | collection de string | Pix (se ligado) · 12x sem juros · Frete grátis (ver regras); o cupom vem depois | — |
+| `coupon_text` + `coupon_code` | string | `DEFAULTS.coupon` (QUERO100) | `R$ 100 OFF na linha Philips` + `QUERO100` (se o cupom estiver ativo) |
+| `footer_benefits` | collection de string | Pix · 12x sem juros · Frete grátis (ver regras); o cupom vem depois | — |
 | `top_bar_messages` | collection de string | `Ambiente 100% seguro` | — |
 | `payment_note` | string | `Até 12x sem juros no cartão de crédito` | — |
 | `free_shipping_threshold` | string | vazio = barra desligada | o mesmo valor da regra de frete grátis do admin, quando existir |

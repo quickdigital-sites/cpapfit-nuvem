@@ -12,7 +12,7 @@
  * | top_bar_messages         | collection de string  | "Ambiente 100% seguro" |
  * | payment_note             | string                | "Até 12x sem juros no cartão de crédito" |
  * | whatsapp                 | string (só números)   | DEFAULTS.whatsapp (sem link de WhatsApp) |
- * | footer_benefits          | collection de string  | Pix (se ligado) · 12x · frete grátis · cupom (se ligado) |
+ * | footer_benefits          | collection de string  | Pix · 12x · frete grátis · cupom (DEFAULTS) |
  * | coupon_text, coupon_code | string                | DEFAULTS.coupon (sem cupom no rodapé) |
  * | company_info             | string                | razão social, endereço e CNPJ da CPAP Fit |
  *
@@ -45,7 +45,7 @@ export type Settings = {
 /** text em negrito, detail em peso normal (Figma: "R$ 100 OFF" + "na linha Philips") */
 export type Coupon = { text: string; detail?: string; code: string };
 
-/** Cupom do Figma (rodapé 363:9230). Para mostrar no checkout: DEFAULTS.coupon = PHILIPS_COUPON. */
+/** Cupom do Figma (rodapé 363:9230), usado em DEFAULTS.coupon. */
 export const PHILIPS_COUPON: Coupon = { text: "R$ 100 OFF", detail: "na linha Philips", code: "QUERO100" };
 
 export const DEFAULTS: {
@@ -61,11 +61,11 @@ export const DEFAULTS: {
 	companyInfo:
 		"DSP Equipamentos, Rua Emílio Blum - 131 - Sala 206 Torre A - Centro - 88020-010 - Florianópolis - SC\nCNPJ: 29.695.217/0001-45",
 	// O estado do checkout não informa descontos por meio de pagamento antes de o cliente escolher
-	// (só prices.discount_gateway, depois). Por isso o "10% OFF no Pix" fica no código: ligue com 10
-	// quando o desconto Pix estiver ativo em Configurações > Meios de pagamento (hoje está 0%).
-	pixDiscount: null,
-	// desligado: ligar só com o cupom ativo na loja (PHILIPS_COUPON)
-	coupon: null,
+	// (só prices.discount_gateway, depois). Por isso o "10% OFF no Pix" fica no código; ligado em
+	// 2026-10-19 a pedido do Denis (10% no Pix em Configurações > Meios de pagamento). null desliga.
+	pixDiscount: 10,
+	// QUERO100 ativo na loja (Denis, 2026-10-19); null desliga
+	coupon: PHILIPS_COUPON,
 	// só dígitos com DDI, ex.: "554840421861"; null = sem link de WhatsApp
 	whatsapp: null,
 };

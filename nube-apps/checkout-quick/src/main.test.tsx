@@ -72,8 +72,8 @@ describe("partes", () => {
 		expect(t).toContain("Até 12x sem juros no cartão de crédito");
 	});
 
-	it("rodape: benefícios do Figma, regras do frete e créditos; sem Pix e sem cupom por padrão", () => {
-		const node = rodape.render(state("start"), defaults);
+	it("rodape: com Pix e cupom desligados, só 12x e frete; regras do frete e créditos", () => {
+		const node = rodape.render(state("start"), { ...defaults, pixDiscount: null, coupon: null });
 		const t = all(node);
 		expect(t.indexOf("12x sem juros")).toBeLessThan(t.indexOf("Frete grátis"));
 		expect(t).toContain("no cartão de crédito");
@@ -92,14 +92,17 @@ describe("partes", () => {
 		]);
 	});
 
-	it("rodape: Pix e cupom ligados no código aparecem na ordem do Figma", () => {
-		const node = rodape.render(state("start"), { ...defaults, pixDiscount: 10, coupon: PHILIPS_COUPON });
+	it("rodape: por padrão os 4 benefícios do Figma, na ordem, sem botão Copiar", () => {
+		expect(defaults.pixDiscount).toBe(10);
+		expect(defaults.coupon).toEqual(PHILIPS_COUPON);
+		const node = rodape.render(state("start"), defaults);
 		const t = all(node);
 		const order = ["10% OFF", "12x sem juros", "Frete grátis", "R$ 100 OFF"].map((x) => t.indexOf(x));
 		expect(order.every((pos, i) => pos >= 0 && (i === 0 || pos > order[i - 1]))).toBe(true);
 		expect(t).toContain("no Pix");
 		expect(t).toContain("na linha Philips");
 		expect(t).toContain("QUERO100");
+		expect(t).not.toMatch(/copiar/i);
 		expect(findAll(node, "svg")).toHaveLength(4);
 		// um separador entre cada benefício + a faixa em degradê
 		expect(findAll(node, "box")).toHaveLength(4);

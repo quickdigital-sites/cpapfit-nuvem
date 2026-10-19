@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { DEFAULTS, readSettings } from "./settings";
+import { DEFAULTS, PHILIPS_COUPON, readSettings } from "./settings";
 
 describe("readSettings", () => {
 	it("sem configuração usa os padrões", () => {
@@ -7,8 +7,8 @@ describe("readSettings", () => {
 		expect(s.freeShippingThreshold).toBeNull();
 		expect(s.disabled.size).toBe(0);
 		expect(s.footerBenefits).toBeNull();
-		expect(s.coupon).toBeNull();
-		expect(s.pixDiscount).toBeNull();
+		expect(s.coupon).toEqual(PHILIPS_COUPON);
+		expect(s.pixDiscount).toBe(10);
 		expect(s.companyInfo).toBe(DEFAULTS.companyInfo);
 		expect(s.topBarMessages).toBeNull();
 		expect(s.paymentNote).toBe(DEFAULTS.paymentNote);
@@ -44,7 +44,8 @@ describe("readSettings", () => {
 	});
 
 	it("cupom precisa do código; texto tem padrão", () => {
-		expect(readSettings({ coupon_text: "R$ 100 OFF" }).coupon).toBeNull();
+		// só o texto não basta: fica o cupom padrão
+		expect(readSettings({ coupon_text: "R$ 100 OFF" }).coupon).toEqual(PHILIPS_COUPON);
 		expect(readSettings({ coupon_code: "QUERO100" }).coupon).toEqual({ code: "QUERO100", text: "Cupom de desconto" });
 	});
 
