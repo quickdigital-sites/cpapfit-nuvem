@@ -2491,6 +2491,10 @@ a {
     flex-direction: column;
     gap: 26px;
   }
+  {#/* em coluna o flex: 1 1 0 do computador zera a altura dos campos */#}
+  :root #address-form-section .row.third-gutters > .form-group {
+    flex: 0 0 auto;
+  }
   :root #address-form-section > .form-group:nth-child(2),
   :root #address-form-section > .form-group:nth-child(3) {
     grid-column: auto;
