@@ -2355,6 +2355,17 @@ a {
 {#/* o app não tem media query: em telas menores o tema reduz as margens e empilha os benefícios.
    Estrutura do app: rodapé > conteúdo > (benefícios > lista > itens, legal) + faixa em degradê.
    Seletores só até o nível do item: cada item tem linhas internas (ícone + textos) que não podem herdar isto. */#}
+{#/* com os 4 benefícios (Pix e cupom ligados) a linha só cabe a partir de ~1600px; abaixo disso eles quebram
+   centralizados, sem os separadores */#}
+@media (max-width: 1599.98px) {
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row {
+    gap: 20px 40px !important;
+    padding: 24px 0 !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-box {
+    display: none !important;
+  }
+}
 @media (max-width: 1199.98px) {
   :root #nube-sdk-slot-after_main_content > .nube-column {
     gap: 40px !important;
@@ -2362,12 +2373,9 @@ a {
   :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column {
     padding: 40px 24px 0 !important;
   }
-  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row {
-    gap: 20px 40px !important;
-    padding: 24px 0 !important;
-  }
-  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-box {
-    display: none !important;
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row {
+    flex-wrap: wrap !important;
+    row-gap: 12px !important;
   }
   :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:last-child {
     margin: 0 !important;
@@ -2388,10 +2396,16 @@ a {
     gap: 0 !important;
     padding: 16px 20px !important;
   }
+  {#/* ícone + texto numa linha; a pílula do cupom desce para a linha de baixo, alinhada ao texto */#}
   :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row {
-    flex-wrap: nowrap !important;
-    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    row-gap: 12px !important;
     padding: 16px 0 !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row > .nube-txt:last-child,
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row > p:last-child {
+    margin-left: 36px !important;
   }
   :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row ~ .nube-row {
     border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
