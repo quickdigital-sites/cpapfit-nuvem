@@ -18,6 +18,7 @@ import initFooter from "./components/footer.js";
 import initPlp from "./components/plp.js";
 import initPriceRange from "./components/price-range.js";
 import initPdp from "./components/pdp.js";
+import initPixPrice from "./components/pix-price.js";
 import initInstitucional from "./components/institucional.js";
 
 document.addEventListener("alpine:init", () => {
@@ -33,6 +34,7 @@ initHomeTabs();     // abas de "Destaques" da home (troca a vitrine nativa visí
 initPriceRange();   // faixa de preço com slider (filtro da listagem)
 initPlp();          // PLP: cabeçalho da listagem, paginação numerada, filtros recolhíveis, texto SEO
 initPdp();          // PDP: card do topo, preços + cupom, botão WhatsApp
+initPixPrice();     // PDP: preço no Pix acompanha a variação escolhida
 initInstitucional(); // páginas institucionais + Fale conosco: menu lateral, lojas, campos do formulário
 initFooter();       // footer: copiar cupom, menus (acordeão no mobile), "Seu nome" na newsletter
 

@@ -77,6 +77,13 @@ Para abrir uma loja nova: **Adicionar bloco › Loja**.
 Página **Categoria** › **Banner da categoria**. Por padrão usa a imagem cadastrada na própria categoria
 (**Produtos › Categorias**). Categoria sem imagem: o banner não aparece.
 
+### Preço no Pix
+Na página do produto, o preço com desconto no Pix vem sozinho do desconto configurado em
+**Configurações › Meios de pagamento** (Mercado Pago › Desconto › PIX).
+Nos cards das vitrines e categorias, a Nuvemshop não informa esse desconto: use
+**Configurações do tema › Vitrines de produtos › Desconto no Pix mostrado nos cards (%)** com o **mesmo** número.
+Mudou o desconto do Pix no Mercado Pago? Mude este campo também. 0 esconde o preço no Pix dos cards.
+
 ### Pop-up promocional
 **Configurações do tema › Pop-up promocional** › ligue **Mostrar o pop-up**. Imagem 800 × 800 px
 (celular 700 × 500 px). Botão sem texto não aparece.

@@ -156,6 +156,14 @@
         "id": "last_product_category",
         "label": "Avisar \"Última peça!\" quando restar 1 unidade",
         "default": true
+      },
+      {
+        "type": "setting",
+        "setting_type": "number",
+        "id": "qd_pix_discount",
+        "label": "Desconto no Pix mostrado nos cards (%)",
+        "default": 10,
+        "info": "Use o mesmo percentual configurado no Pix em Configurações › Meios de pagamento. O cartão mostra \"R$ X com Pix\" acima do preço cheio. 0 esconde. Na página do produto o valor vem direto do meio de pagamento."
       }
     ]
   },
