@@ -10,11 +10,12 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
-- [ ] **Checkout (2026-10-19):** app NubeSDK `nube-apps/checkout-quick` refeito nas cores da CPAP Fit (ambiente
-  seguro, nota de pagamento, rodapé azul com benefícios e rodapé legal, pós-compra; barra de frete grátis desligada até
-  existir valor mínimo). **Falta (Denis):** subir `dist/main.min.js` como nova versão no portal de parceiros, publicar,
-  confirmar que o app está instalado na cpapfit4 (hoje não aparece no checkout) e preencher `whatsapp` / cupom nas
-  configurações do app. O que não dá para mudar no checkout está no README do app.
+- [ ] **Checkout (2026-10-19):** visual do Figma `367:13649` no ar pelo tema (bloco "CPAP Fit" no fim de
+  `theme/static/checkout.scss.tpl`; script de checkout é sempre NubeSDK, então JS no checkout não serve). O rodapé
+  azul vem do app NubeSDK `nube-apps/checkout-quick`. **Falta (Denis):** subir o `dist/main.min.js` atual como v.3
+  do script #11515 (QuickDevTool #42989), testar no demo501 e instalar nas lojas — até lá o rodapé fica no layout da
+  v.2. **Falta conferir:** etapa de pagamento e pedido confirmado com o CSS novo. Não usar `static_url` no
+  checkout.scss.tpl: no primeiro envio o checkout perdeu o CSS do tema (revertido em minutos).
 - [x] **Tema publicado mudou (2026-10-19):** a loja tinha passado a usar o **14688507 "CPAP Fit — Dev (1.4.2)"**
   (criado e publicado fora da sessão). O **14473488** foi publicado de novo a pedido do Denis; o 14688507 ficou como
   rascunho (base Ipanema 1.4.2, sem o trabalho de 2026-10-19). Se um dia for preciso atualizar a base do Ipanema, as
