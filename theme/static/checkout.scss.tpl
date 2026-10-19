@@ -2425,6 +2425,13 @@ a {
   :root #address-form-section {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  :root #address-form-section > * {
+    grid-column: 1 / 3;
+  }
+  :root #address-form-section > .form-group:nth-child(2),
+  :root #address-form-section > .form-group:nth-child(3) {
+    grid-column: auto;
+  }
   :root #address-form-section > .form-group:nth-child(4) {
     grid-column: 1 / 3;
   }
