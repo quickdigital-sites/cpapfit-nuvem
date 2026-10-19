@@ -20,7 +20,7 @@
 html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .template-contact) main { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
 
 /* Seções do page.json que só servem a Quem somos */
-body:not(.page-quem-e-a-cpap-fit) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
+.template-page:not(.page-quem-e-a-cpap-fit) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
   [data-section-id="servicos"], [data-section-id="videos"], [data-section-id="marcas"]) { display: none !important; }
 [data-section-id="cmp_nossas_lojas"] { display: none !important; } /* conteúdo vai para a coluna (JS) */
 /* o título vai para a coluna de conteúdo (JS); em Quem somos, a faixa já tem o título */
