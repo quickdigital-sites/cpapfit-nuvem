@@ -455,6 +455,10 @@
   .nav-desktop-list > li.nav-main-item:first-child { padding-right: 10px; }
   .nav-desktop-list { gap: 4px; }
 }
+@media (min-width: 1200px) and (max-width: 1239.98px) {
+  /* entre 1200 e 1239px os 8 itens não cabiam (sobravam ~36px e a página rolava para o lado) */
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 8px 6px; }
+}
 
 /* ==========================================================================
    Menu mobile (hambúrguer lateral) — painéis deslizantes nativos, mas com o

@@ -211,6 +211,11 @@ html:not(.qd-pdp-ready) .template-product .js-product-detail { visibility: hidde
 .qd-pdp-details-body p { margin: 0 0 30px; }
 .qd-pdp-details-body img, .qd-pdp-details-body iframe { max-width: 100%; height: auto; border-radius: 14px; }
 .qd-pdp-details-body iframe { aspect-ratio: 16 / 9; width: 100%; }
+/* tabelas coladas na descrição vêm com largura fixa (ex.: width: 984px) e faziam a página inteira rolar
+   para o lado no celular; em telas menores que a tabela ela rola dentro da própria caixa */
+@media (max-width: 1059.98px) {
+  .qd-pdp-details-body table { display: block; max-width: 100%; overflow-x: auto; }
+}
 
 /* --- Relacionados ("Veja também") ------------------------------------------ */
 .qd-pdp :is([data-section-id="complementary_products"], [data-section-id="alternative_products"]) .heading-block {

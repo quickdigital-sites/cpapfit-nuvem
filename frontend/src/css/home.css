@@ -391,7 +391,7 @@ div[data-section-id="videos"] { padding: 20px 0 70px !important; }
 [data-section-id="videos"] .custom-section-content > .group-block > .group-content { width: 100%; justify-content: center !important; flex-wrap: nowrap !important; }
 [data-section-id="videos"] .custom-section-content > .group-block > .group-content > .group-block > .group-content { width: 100%; align-items: center !important; gap: 1px !important; }
 [data-section-id="videos"] .custom-section-content > .group-block > .group-content > .group-block {
-  flex: 0 0 284px; width: 284px;
+  flex: 0 1 284px; width: 284px; /* encolhe só se os 4 não couberem (1200–1270px rolava para o lado) */
   padding-top: 10px; gap: 1px !important; align-items: center;
   background: var(--qd-offwhite);
   border: 1px solid var(--qd-card-border); border-radius: 20px;
