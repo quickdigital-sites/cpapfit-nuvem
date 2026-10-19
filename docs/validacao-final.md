@@ -49,4 +49,4 @@ estrutura, cores, tipografia e ordem das seções batem. Diferenças que restam:
 | Home celular, banner | Título em 2 linhas (Figma quebra em 3) | texto do editor; fonte e tamanho iguais |
 | Produto | Sem logo da marca no topo; ficha técnica, perguntas e vídeo só aparecem se a descrição/cadastro tiver | cadastro (ver gap-report) |
 | Fale conosco | Sem a foto abaixo do título; sem campo de anexo | foto pendente; anexo = plataforma |
-| Checkout, rodapé | Computador: 2 benefícios na faixa azul (Figma: 4, com Pix e cupom). Celular: benefícios empilhados com espaços grandes | app do checkout |
+| Checkout, rodapé | Computador: 2 benefícios na faixa azul (Figma: 4). "10% OFF no Pix" e "R$ 100 OFF / QUERO100" estão prontos e desligados: o desconto Pix está em 0% nos meios de pagamento e falta confirmar o cupom; o botão Copiar não é possível no checkout (NubeSDK sem área de transferência). Celular: corrigido (faixa compacta, um benefício por linha) | aguarda confirmação do Pix 10% e do cupom |
