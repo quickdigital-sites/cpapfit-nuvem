@@ -452,3 +452,29 @@ div[data-section-id="videos"] { padding: 20px 0 70px !important; }
   }
   [data-section-id="videos"] .custom-section-content > .group-block > .group-content > .group-block { scroll-snap-align: start; }
 }
+
+/* ==========================================================================
+   Ajustes da home (auditoria 2026-10-19)
+   ========================================================================== */
+/* Hero e Linhas em tablet (768–1199): título menor e conteúdo com menos respiro */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  [data-section-id="hero"] .heading-block { max-width: 380px; font-size: 40px !important; }
+  [data-section-id="linhas"] .media-content-floating { padding: 28px !important; }
+  [data-section-id="linhas"] .heading-block { font-size: 32px !important; }
+  [data-section-id="linhas"] .group-block:has(.btn) { margin-top: 16px; }
+  :is([data-section-id="hero"], [data-section-id="linhas"]) .group-block:has(.btn) > .group-content { flex-wrap: wrap; }
+  [data-section-id="linhas"] .btn.btn-primary { width: auto; gap: 10px; padding: 0 16px; }
+}
+/* Marcas: o respiro de cima já vem da vitrine anterior (Figma 0:427) */
+@media (min-width: 768px) { div[data-section-id="marcas"] { padding-top: 0; } }
+@media (max-width: 767.98px) {
+  /* círculos brancos sobre fundo claro precisam de borda (Figma 0:848) */
+  [data-section-id="marcas"] .category-item-image { border: 1px solid #ccc; }
+  /* Serviços: os 4 itens cabem em 390px (Figma 0:907) */
+  [data-section-id="servicos"] .category-item-text { max-width: 76px; }
+}
+@media (max-width: 767.98px) {
+  /* banners promocionais empilhados com 12px entre eles (Figma 0:878) */
+  div[data-section-id="banners_promo"] .flex-grid { row-gap: 12px !important; gap: 12px !important; }
+  div[data-section-id="banners_promo"] .flex-grid > .banner-item { margin: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+}

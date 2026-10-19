@@ -33,7 +33,7 @@ function makeMold(sections) {
   return { copy, slideClass };
 }
 
-// Mesmos parâmetros do initProductSliderByElement do store.js (Ipanema).
+// Mesmos parâmetros do initProductSliderByElement do store.js (fork: 2.2 no mobile, 3 no tablet).
 function initSwiper(section) {
   const wrapper = section.querySelector(".js-swiper-products-slider");
   const slider = wrapper?.closest(".js-products-list-swiper");
@@ -41,11 +41,14 @@ function initSwiper(section) {
   const desktop = parseInt(wrapper.dataset.desktopColumns, 10) || 5;
   const mobile = parseInt(wrapper.dataset.mobileColumns, 10) || 2;
   const parent = slider.closest(".js-products-list-slider-container");
+  const isMobile = window.innerWidth < 768;
+  const tablet = Math.min(3, desktop);
   window.createSwiper(slider, {
     lazy: true,
-    slidesPerView: mobile,
+    slidesPerView: mobile === 2 ? 2.2 : mobile,
+    slidesPerGroup: mobile === 2 ? 2 : 1,
     spaceBetween: 16,
-    loop: slider.querySelectorAll(".swiper-slide").length > desktop,
+    loop: !isMobile && slider.querySelectorAll(".swiper-slide").length > desktop,
     watchOverflow: true,
     watchSlidesVisibility: true,
     slideVisibleClass: "js-swiper-slide-visible",
@@ -54,7 +57,10 @@ function initSwiper(section) {
       prevEl: parent?.querySelector(".js-swiper-products-list-prev") ?? null,
     },
     pagination: { el: slider.querySelector(".js-swiper-products-list-pagination"), clickable: true },
-    breakpoints: { 768: { slidesPerView: desktop, slidesPerGroup: desktop } },
+    breakpoints: {
+      768: { slidesPerView: tablet, slidesPerGroup: tablet },
+      1200: { slidesPerView: desktop, slidesPerGroup: desktop },
+    },
   });
   window.LS?.productItemSlider?.({ pagination_type: "fraction" }); // fotos dentro dos cards
 }

@@ -195,13 +195,18 @@
 
       const parentContainer = slider.closest('.js-products-list-slider-container');
       const slideCount = slider.querySelectorAll('.swiper-slide').length;
-      const needsLoop = slideCount > columnsDesktop;
+      // CPAP Fit: no mobile o Figma mostra um pedaço do 3º card (2.2) e passa de 2 em 2; com
+      // fração não dá para usar loop, então o loop fica só a partir de 768px.
+      const isMobile = window.innerWidth < 768;
+      const needsLoop = !isMobile && slideCount > columnsDesktop;
+      const columnsTablet = Math.min(3, columnsDesktop);
 
       // Create Swiper instance
 
       createSwiper(slider, {
         lazy: true,
-        slidesPerView: columnsMobile,
+        slidesPerView: columnsMobile === 2 ? 2.2 : columnsMobile,
+        slidesPerGroup: columnsMobile === 2 ? 2 : 1,
         spaceBetween: 16,
         loop: needsLoop,
         watchOverflow: true,
@@ -217,6 +222,10 @@
         },
         breakpoints: {
           768: {
+            slidesPerView: columnsTablet,
+            slidesPerGroup: columnsTablet
+          },
+          1200: {
             slidesPerView: columnsDesktop,
             slidesPerGroup: columnsDesktop
           }
