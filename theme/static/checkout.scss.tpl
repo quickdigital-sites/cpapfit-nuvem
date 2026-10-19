@@ -2353,7 +2353,8 @@ a {
   padding: 0;
 }
 {#/* o app não tem media query: em telas menores o tema reduz as margens e empilha os benefícios.
-   Estrutura do app: rodapé > conteúdo > (benefícios > lista, legal) + faixa em degradê */#}
+   Estrutura do app: rodapé > conteúdo > (benefícios > lista > itens, legal) + faixa em degradê.
+   Seletores só até o nível do item: cada item tem linhas internas (ícone + textos) que não podem herdar isto. */#}
 @media (max-width: 1199.98px) {
   :root #nube-sdk-slot-after_main_content > .nube-column {
     gap: 40px !important;
@@ -2361,26 +2362,48 @@ a {
   :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column {
     padding: 40px 24px 0 !important;
   }
-  :root #nube-sdk-slot-after_main_content .nube-row > .nube-row {
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row {
     gap: 20px 40px !important;
-    padding: 0 0 32px !important;
+    padding: 24px 0 !important;
   }
-  :root #nube-sdk-slot-after_main_content .nube-row > .nube-row > .nube-box {
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-box {
     display: none !important;
   }
   :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:last-child {
     margin: 0 !important;
   }
 }
+{#/* celular: como o rodapé da loja (frontend/src/css/footer.css) — um benefício por linha, linhas finas entre eles */#}
 @media (max-width: 767.98px) {
-  :root #nube-sdk-slot-after_main_content .nube-row > .nube-row {
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column {
+    padding: 30px 0 0 !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child {
+    min-height: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row {
     flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    padding: 16px 20px !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row {
+    flex-wrap: nowrap !important;
     align-items: flex-start !important;
+    padding: 16px 0 !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row ~ .nube-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:first-child > .nube-row > .nube-row > .nube-row {
+    flex-wrap: wrap !important;
   }
   :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:last-child {
     flex-direction: column !important;
     align-items: flex-start !important;
-    padding: 20px 0 !important;
+    gap: 16px !important;
+    padding: 24px !important;
   }
 }
 
