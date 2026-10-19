@@ -11,8 +11,8 @@
  */
 import miniCart from "./components/mini-cart.js";
 import productGallery from "./components/product-gallery.js";
-import initHeaderPlans from "./components/header-plans.js";
 import initHeaderSearch from "./components/header-search.js";
+import initHeaderBar from "./components/header-bar.js";
 import initHomeTabs from "./components/home-tabs.js";
 import initFooter from "./components/footer.js";
 import initPlp from "./components/plp.js";
@@ -26,7 +26,7 @@ document.addEventListener("alpine:init", () => {
 });
 
 // Enhancements do header nativo
-initHeaderPlans();  // injeta a pílula "Planos de Assinatura"
+initHeaderBar();    // barra de benefícios: um item por vez no mobile
 initHeaderSearch(); // garante submit da busca (Enter/clique) + preserva o preview
 initHomeTabs();     // abas de "Destaques" da home (troca a vitrine nativa visível)
 initPlp();          // PLP: cabeçalho da listagem, paginação numerada, filtros recolhíveis, texto SEO

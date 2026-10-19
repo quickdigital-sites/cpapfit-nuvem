@@ -35,10 +35,28 @@
 	</span>
 {% endif %}
 
+{# CPAP Fit: pílula "Planos de assinatura" e atalho para as lojas físicas (Figma 24:594 / 24:603).
+   Textos e links editáveis no Brand Editor (bloco Utilitários). Só aparecem no desktop (CSS). #}
+{% if block.settings.plans_url %}
+	<a href="{{ block.settings.plans_url }}" class="qd-plans-pill" data-block-id="{{ block_id }}" data-block-type="{{ block_type }}">
+		<span class="qd-plans-pill__icon"><svg class="icon-inline" aria-hidden="true"><use xlink:href="#qd-bookmark"/></svg></span>
+		<span class="qd-plans-pill__text">
+			<span class="qd-plans-pill__title">{{ block.settings.plans_title }}</span>
+			{% if block.settings.plans_subtitle %}<span class="qd-plans-pill__sub">{{ block.settings.plans_subtitle }}</span>{% endif %}
+		</span>
+		<span class="qd-plans-pill__arrow"><svg class="icon-inline" aria-hidden="true"><use xlink:href="#qd-arrow-right"/></svg></span>
+	</a>
+{% endif %}
+{% if block.settings.stores_url %}
+	<a href="{{ block.settings.stores_url }}" class="qd-stores-link header-icon" aria-label="{{ block.settings.stores_label | default('Nossas lojas') }}" data-block-id="{{ block_id }}" data-block-type="{{ block_type }}">
+		<svg class="utility-icon icon-inline" aria-hidden="true"><use xlink:href="#qd-pin"/></svg>
+	</a>
+{% endif %}
+
 {# Account #}
 <span class="js-header-dropdown header-account header-utility nav-dropdown {% if not show_account_mobile %}d-none d-md-grid{% endif %}" data-block-id="{{ block_id }}" data-block-type="{{ block_type }}">
 	<a href="{{ customer ? store.customer_home_url : store.customer_login_url }}" class="header-icon" aria-label="{{ 'general.my_account' | t }}">
-		<svg class="utility-icon icon-inline"><use xlink:href="#user"/></svg>
+		<svg class="utility-icon icon-inline"><use xlink:href="#qd-user"/></svg>
 	</a>
 	{% if show_text %}
 		<span class="utility-text header-account-label d-none d-md-inline">
@@ -67,7 +85,7 @@
 
 {% set cart_content %}
 	<span class="header-icon">
-		<svg class="utility-icon icon-inline"><use xlink:href="#{{ cart_icon }}"/></svg>
+		<svg class="utility-icon icon-inline"><use xlink:href="#{{ cart_icon == 'cart' ? 'qd-cart' : cart_icon }}"/></svg>
 		<span class="js-cart-widget-amount badge {% if cart_icon == 'bag' %}badge-bottom{% endif %}" {% if cart.items_count == 0 %}style="display: none;"{% endif %}>{{ cart.items_count }}</span>
 	</span>
 	{% if show_text %}
@@ -139,6 +157,39 @@
       ],
       "default": "expanded",
       "visible_if": "{{ block.settings.use_different_mobile_search }}"
+    },
+    {
+      "type": "header",
+      "content": "Planos de assinatura"
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "plans_title",
+      "label": "Título",
+      "default": "Planos de assinatura"
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "plans_subtitle",
+      "label": "Subtítulo"
+    },
+    {
+      "type": "setting",
+      "setting_type": "url",
+      "id": "plans_url",
+      "label": "Link (vazio esconde a pílula)"
+    },
+    {
+      "type": "header",
+      "content": "Lojas físicas"
+    },
+    {
+      "type": "setting",
+      "setting_type": "url",
+      "id": "stores_url",
+      "label": "Link do ícone de localização (vazio esconde)"
     },
     {
       "type": "header",

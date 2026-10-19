@@ -10,7 +10,7 @@
 				{% if use_submit_text %}
 					{{ submit_text }}
 				{% else %}
-					{% include 'snippets/icon.tpl' with { name: 'search', size: 16 } %}
+					{% include 'snippets/icon.tpl' with { name: 'qd-search' } %}
 				{% endif %}
 			</button>
 			{% if use_delete_btn %}

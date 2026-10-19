@@ -5,10 +5,11 @@
     "navigation_bar": {
       "type": "navigation-bar",
       "settings": {
-        "section_width": "full",
+        "section_width": "page",
         "horizontal_padding": 32,
-        "background_color": "#000066",
-        "text_color": "#FFFFFF"
+        "background_color": "#2F3295",
+        "text_color": "#FEFDFC",
+        "vertical_padding": 10
       },
       "blocks": {
         "nav_icon_text": {
@@ -22,22 +23,43 @@
               "type": "nav-icon-text-item",
               "settings": {
                 "icon_source": "design",
-                "icon": "shipping",
-                "description": "Frete grátis acima de R$ 299"
+                "icon": "qd-pix",
+                "description": "<strong>10% off</strong> no pix"
               }
             },
             "item_2": {
               "type": "nav-icon-text-item",
               "settings": {
                 "icon_source": "design",
-                "icon": "card",
-                "description": "Até 6x sem juros no cartão"
+                "icon": "qd-card",
+                "description": "<strong>12x sem juros</strong> no cartão de crédito"
+              }
+            },
+            "item_3": {
+              "type": "nav-icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "qd-box",
+                "description": "<strong>Frete grátis</strong>",
+                "link": "/politica-de-entrega/",
+                "link_label": "ver regras"
+              }
+            },
+            "item_4": {
+              "type": "nav-icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "qd-tag",
+                "description": "<strong>R$ 100 off</strong> na linha Philips",
+                "coupon_code": "QUERO100"
               }
             }
           },
           "block_order": [
             "item_1",
-            "item_2"
+            "item_2",
+            "item_3",
+            "item_4"
           ]
         }
       },
@@ -62,8 +84,9 @@
         "logo": {
           "type": "header-logo",
           "settings": {
-            "height": 42,
-            "use_different_mobile_height": false
+            "height": 74,
+            "use_different_mobile_height": true,
+            "height_mobile": 48
           }
         },
         "utilities": {
@@ -71,8 +94,12 @@
           "settings": {
             "format": "icons",
             "search_type": "icon",
-            "cart_icon": "bag",
-            "show_languages_header": false
+            "cart_icon": "cart",
+            "show_languages_header": false,
+            "plans_title": "Planos de assinatura",
+            "plans_subtitle": "Descontos e benefícios exclusivos!",
+            "plans_url": "/planos-de-assinatura/",
+            "stores_url": "/nossas-lojas/"
           }
         },
         "navigation": {
@@ -102,7 +129,7 @@
     }
   },
   "order": [
-    "navigation_bar",
-    "header"
+    "header",
+    "navigation_bar"
   ]
 }

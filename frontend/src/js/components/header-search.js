@@ -8,6 +8,8 @@
  * botão, e preservamos o theme_installation_id para o preview do rascunho não
  * cair no tema publicado.
  */
+const MOBILE = window.matchMedia("(max-width: 1199.98px)");
+
 function go(form) {
   const input = form.querySelector(".js-search-input");
   const q = (input && input.value || "").trim();
@@ -30,6 +32,15 @@ function bind() {
     // senão leitores de tela ignoram um campo que recebe foco (Lighthouse: aria-hidden-focus)
     form.closest(".js-search-expand-form")?.removeAttribute("aria-hidden");
     const input = form.querySelector(".js-search-input");
+    // Figma: "Buscar" no desktop, "O que você procura hoje?" no mobile (24:1079)
+    if (input) {
+      const desktop = input.placeholder;
+      const setPlaceholder = () => {
+        input.placeholder = MOBILE.matches ? "O que você procura hoje?" : desktop;
+      };
+      setPlaceholder();
+      MOBILE.addEventListener("change", setPlaceholder);
+    }
     // capture: roda antes do handler do tema, que faz preventDefault no Enter
     if (input) {
       input.addEventListener(

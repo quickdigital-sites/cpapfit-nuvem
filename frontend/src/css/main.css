@@ -92,6 +92,7 @@
   --qd-ink: #4a4a48;
   --qd-hairline: #e1dcd7;
   --qd-indigo: #2f3295;
+  --qd-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 13.17 4.95-4.95 1.41 1.41L12 16 5.64 9.64l1.41-1.42L12 13.17Z'/%3E%3C/svg%3E");
   /* A Montserrat carrega sem bloquear (layout.tpl); até ela chegar, "Montserrat Fallback" (Arial com
      as métricas da Montserrat — @font-face em layouts/resources/style-tokens.tpl) ocupa o mesmo espaço,
      então a troca de fonte não desloca o layout (CLS). Sobrescreve os tokens do Brand Editor: se a
@@ -162,13 +163,22 @@
   color: #fff;
   position: static;
 }
-.search-container .search-submit-btn svg { width: 20px; height: 20px; color: #fff; }
-.search-container .search-empty-btn { display: none !important; }
+.search-container .search-submit-btn svg { width: 24px; height: 24px; color: #fefdfc; }
+/* o tema esconde o botão de buscar enquanto há texto e mostra o "limpar": mantemos os dois (Figma 24:1739) */
+.search-container .search-submit-btn { display: inline-flex !important; order: 3; }
+.search-container .search-empty-btn {
+  order: 2; flex: 0 0 auto; width: 28px; height: 28px; padding: 0; position: static;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 9999px; background: transparent; color: var(--qd-ink);
+}
+.search-container .search-empty-btn[style*="none"] { display: none !important; }
+.search-container .search-empty-btn svg { width: 14px; height: 14px; }
 .search-container .search-suggestions {
   position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 60;
 }
 
 /* --- Conta e carrinho como círculos creme --- */
+.head-row .qd-stores-link,
 .head-row .header-account > .header-icon,
 .head-row .header-cart .header-icon {
   position: relative;
@@ -177,11 +187,12 @@
   border-radius: 9999px;
   background: var(--qd-cream);
 }
+.head-row .qd-stores-link svg,
 .head-row .header-account > .header-icon svg,
-.head-row .header-cart .header-icon svg { width: 20px; height: 20px; }
+.head-row .header-cart .header-icon svg { width: 20px; height: 20px; color: var(--qd-gold); }
 .head-row .header-cart .js-cart-widget-amount.badge {
-  position: absolute; top: -4px; right: -4px; bottom: auto; left: auto;
-  min-width: 20px; height: 20px; padding: 0 5px;
+  position: absolute; top: -6px; left: 22px; right: auto; bottom: auto;
+  min-width: 24px; height: 20px; padding: 0 5px;
   display: inline-flex; align-items: center; justify-content: center;
   background: var(--qd-gold-solid) !important;
   color: #fff !important;
@@ -194,17 +205,22 @@
 
 /* --- Linha 1 no desktop: logo | busca (cresce) | planos | conta | carrinho --- */
 @media (min-width: 1200px) {
+  /* Figma 24:586: linha de 110px, logo | busca 497px | Planos | ícones (gap 26px), de ponta a ponta */
   .head-main > .head-row.container {
     display: flex;
     align-items: center;
     gap: 24px;
     flex-wrap: nowrap;
+    min-height: 110px;
+    padding-top: 0; padding-bottom: 0;
   }
   .head-row .logo-container { order: 0; flex: 0 0 auto; margin: 0; }
-  .head-row .search-container { order: 1; flex: 1 1 auto; min-width: 0; }
-  .head-row .qd-plans-pill { order: 2; }
-  .head-row .header-account { order: 3; flex: 0 0 auto; }
-  .head-row .header-cart { order: 4; flex: 0 0 auto; }
+  /* espaços do Figma: 88px logo→busca e Planos→ícones; o resto do espaço fica antes da pílula */
+  .head-row .search-container { order: 1; flex: 0 1 497px; min-width: 260px; margin-left: clamp(0px, 4.6vw - 24px, 64px); }
+  .head-row .qd-plans-pill { order: 2; margin-left: auto; }
+  .head-row .qd-stores-link { order: 3; flex: 0 0 auto; margin-left: clamp(0px, 4.6vw - 24px, 64px); }
+  .head-row .header-account { order: 4; flex: 0 0 auto; margin-left: 2px; }
+  .head-row .header-cart { order: 5; flex: 0 0 auto; margin-left: 2px; }
 
   .qd-plans-pill {
     display: inline-flex; align-items: center; gap: 8px;
@@ -215,12 +231,14 @@
   }
   .qd-plans-pill__icon {
     flex: 0 0 auto; width: 40px; height: 40px; border-radius: 9999px;
-    background: var(--qd-gold-solid); color: #fff;
+    background: var(--qd-gold-solid); color: #fefdfc;
     display: inline-flex; align-items: center; justify-content: center;
   }
+  .qd-plans-pill__icon svg { width: 22px; height: 22px; }
+  .qd-plans-pill__arrow svg { width: 24px; height: 24px; }
   .qd-plans-pill__title { display: block; font: 700 13px/15px var(--heading-font); text-transform: uppercase; color: var(--qd-ink); }
   .qd-plans-pill__sub   { display: block; font: 400 13px/15px var(--body-font); color: var(--qd-ink); }
-  .qd-plans-pill__arrow { flex: 0 0 auto; color: var(--qd-ink); display: inline-flex; }
+  .qd-plans-pill__arrow { flex: 0 0 auto; color: var(--qd-gold); display: inline-flex; }
 
   /* Linha 2: menu com borda-topo cinza neutra (#ccc), conforme Figma 0:1109 */
   .head-main > .nav-desktop-container { border-top: 1px solid #ccc; }
@@ -250,9 +268,13 @@
   }
   .menu-container .header-icon svg { color: #fff; }
 
-  /* touch targets >= 44px */
-  .head-row .header-cart .header-icon { width: 44px; height: 44px; }
-  .search-container .search-submit-btn { width: 44px; height: 44px; }
+  /* alvos de toque >= 44px sem mudar o desenho (círculos de 32px no Figma) */
+  .menu-container .header-icon,
+  .head-row .header-cart > .header-utility,
+  .search-container .search-submit-btn { position: relative; }
+  .menu-container .header-icon::after,
+  .head-row .header-cart > .header-utility::after,
+  .search-container .search-submit-btn::after { content: ""; position: absolute; inset: -6px; }
 }
 
 /* ==========================================================================
@@ -263,13 +285,6 @@
 @media (min-width: 1200px) {
   .nav-desktop-container { background: #fefdfc; border-top: 1px solid #ccc; }
 
-  /* Ordem das linhas (Figma 24:584): 1) header  2) menu  3) barra de benefícios.
-     No nativo a barra de navegação vem no topo; reordenamos com flex. */
-  .sticky-header-wrapper { display: flex; flex-direction: column; }
-  .sticky-header-wrapper > .js-head-main { order: 0; }
-  .sticky-header-wrapper > #ns-section-navigation_bar,
-  .sticky-header-wrapper > .section-navigation-bar,
-  .sticky-header-wrapper > .js-navigation-bar { order: 1; }
 
   /* fora as setas nativas de rolagem lateral */
   .nav-desktop-container .nav-desktop-list-arrow { display: none !important; }
@@ -304,16 +319,17 @@
   }
   /* chevron dourado encorpado (o do sprite é fino); vira branco e "pra cima" no hover */
   .nav-desktop-list .nav-list-link-icon { display: none; }
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { gap: 8px; }
   .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link::after {
     content: ""; flex: 0 0 auto;
-    width: 7px; height: 7px; margin-top: -3px;
-    border-right: 2.5px solid var(--qd-gold);
-    border-bottom: 2.5px solid var(--qd-gold);
-    transform: rotate(45deg);
+    width: 24px; height: 24px; margin: -4px 0;
+    background-color: var(--qd-gold);
+    -webkit-mask: var(--qd-chevron-down) center / 24px no-repeat;
+            mask: var(--qd-chevron-down) center / 24px no-repeat;
+    transition: transform .15s ease;
   }
   .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child):hover > a.nav-list-link::after {
-    border-color: #fff; margin-top: 3px;
-    transform: rotate(-135deg);
+    background-color: #fff; transform: rotate(180deg);
   }
 
   /* 1º item = "Menu": círculo dourado + hambúrguer, sem caret, com divisória */
@@ -341,36 +357,37 @@
     box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18);
     padding: 0;
   }
-  /* Conteúdo do submenu (Figma 0:1070): "Categorias" + colunas de subcategorias
-     à esquerda + banners (blocos navigation-banner) à direita. Alinhado ao container. */
+  /* Conteúdo do submenu (Figma 0:1070): "Categorias" + subcategorias em 2 colunas
+     (lista simples, sem o 3º nível) a 178px da margem; banners à direita. */
   .nav-desktop-container .desktop-dropdown-container {
     background: transparent;
-    display: flex; align-items: flex-start; gap: 48px;
-    padding-top: 28px; padding-bottom: 36px;
+    display: flex; align-items: flex-start; gap: 150px;
+    padding: 30px 0 34px 178px;
   }
-  /* coluna "Categorias" (subcategorias em 2 colunas) */
   .nav-desktop-container .desktop-list-subitems {
-    flex: 1 1 auto; min-width: 0; margin: 0;
-    column-count: 2; column-gap: 48px;
+    flex: 0 0 auto; width: 366px; min-width: 0; margin: 0;
+    column-count: 2; column-gap: 26px;
   }
   .nav-desktop-container .desktop-list-subitems::before {
     content: "Categorias";
     column-span: all; display: block;
-    font: 700 18px/1 var(--heading-font); color: var(--qd-ink);
-    margin-bottom: 20px;
+    font: 400 20px/20px var(--heading-font); color: var(--qd-ink);
+    margin: 10px 0 26px;
   }
-  .nav-desktop-container .desktop-list-subitems > li { break-inside: avoid; margin-bottom: 12px; }
-  .nav-desktop-container .desktop-dropdown .nav-list-link-heading {
-    font: 600 15px/1.4 var(--body-font); color: var(--qd-ink);
+  .nav-desktop-container .desktop-list-subitems > li { break-inside: avoid; margin: 0 0 12px; }
+  .nav-desktop-container .desktop-list-subitems .list-subitems { display: none; } /* 3º nível: só na listagem */
+  .nav-desktop-container .desktop-dropdown .nav-list-link-heading,
+  .nav-desktop-container .desktop-list-subitems > li > a {
+    font: 400 14px/17px var(--body-font); color: var(--qd-ink);
   }
-  .nav-desktop-container .desktop-dropdown a:hover { color: var(--qd-gold); }
+  .nav-desktop-container .desktop-dropdown a:hover { color: var(--qd-gold-solid); }
 
   /* Banners à direita (navigation-banner). Imagem = foto; título = marca ("Resmed");
      "Linha" e o botão são adicionados via CSS. */
-  .nav-desktop-container .nav-desktop-banners { flex: 0 0 auto; display: flex; gap: 16px; }
+  .nav-desktop-container .nav-desktop-banners { flex: 0 1 auto; display: flex; gap: 20px; margin-left: auto; }
   .nav-desktop-container .nav-banner-item {
     position: relative; display: block; overflow: hidden;
-    width: 340px; height: 300px; border-radius: 16px; text-decoration: none;
+    width: 398px; max-width: 26vw; height: 360px; border-radius: 12px; text-decoration: none;
   }
   .nav-desktop-container .nav-banner-item-img { width: 100%; height: 100%; object-fit: cover; }
   .nav-desktop-container .nav-banner-item::before {
@@ -417,6 +434,13 @@
   .nav-desktop-list > li.nav-main-item > a.nav-list-link { font-size: 14px; }
   .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 9px 12px; }
   .nav-desktop-list > li.nav-main-item:first-child { padding-right: 12px; }
+}
+@media (min-width: 1200px) and (max-width: 1599.98px) {
+  /* chevron menor para os 8 itens caberem */
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { gap: 4px; }
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link::after {
+    width: 18px; height: 18px; -webkit-mask-size: 18px; mask-size: 18px;
+  }
 }
 @media (min-width: 1200px) and (max-width: 1365.98px) {
   .nav-desktop-list > li.nav-main-item > a.nav-list-link { font-size: 13px; gap: 4px; }
@@ -481,4 +505,114 @@
     color: var(--qd-gold); fill: var(--qd-gold); width: 22px; height: 22px; flex: 0 0 auto;
   }
   #nav-hamburger .nav-panel-link { font-family: var(--heading-font); font-weight: 700; color: var(--qd-ink); }
+}
+
+/* ==========================================================================
+   Header flutuante (Figma 24:689): só linhas 1 e 2, com sombra. A barra de
+   benefícios fica DEPOIS do header no layout (templates/layout/header.json),
+   então o store.js a trata como conteúdo que rola junto com a página.
+   ========================================================================== */
+.sticky-header-wrapper.is-fixed { box-shadow: 0 4px 5px rgba(0, 0, 0, .14); }
+
+/* ==========================================================================
+   Barra de benefícios (Figma 24:661 desktop / 0:649 mobile) — seção NATIVA
+   navigation-bar com itens nav-icon-text-item (textos, ícones, link "ver regras"
+   e cupom editáveis no Brand Editor).
+   ========================================================================== */
+.js-navigation-bar.navigation-bar {
+  background: var(--qd-indigo);
+  color: #fefdfc;
+  border-bottom: 1px solid rgba(255, 255, 255, .16);
+}
+.js-navigation-bar .nav-desktop-list-arrow { display: none !important; }
+.js-navigation-bar .navigation-bar-inner,
+.js-navigation-bar .navigation-bar-list,
+.js-navigation-bar .navigation-bar-group { width: 100%; }
+.js-navigation-bar .nav-icon-text-group,
+.js-navigation-bar .navigation-bar-group > div {
+  display: flex; align-items: center; justify-content: space-between !important; width: 100%; gap: 24px;
+}
+.js-navigation-bar .navigation-bar-item {
+  position: relative;
+  display: flex; align-items: center; gap: 16px;
+  font: 400 13px/15px var(--heading-font); text-transform: uppercase; white-space: nowrap;
+  color: #fefdfc;
+}
+.js-navigation-bar .navigation-bar-item > svg { width: 20px; height: 20px; flex: 0 0 auto; }
+.js-navigation-bar .navigation-bar-item p { margin: 0; }
+.js-navigation-bar .navigation-bar-item strong { font-weight: 700; }
+.js-navigation-bar .qd-nav-item-link { font-size: 11px; text-decoration: underline; color: inherit; }
+.js-navigation-bar .qd-nav-coupon { display: inline-flex; align-items: center; gap: 0; }
+.js-navigation-bar .qd-coupon-code {
+  display: inline-flex; align-items: center; height: 30px; padding: 3px 5px 3px 15px;
+  border: 1px dashed #fefdfc; border-radius: 50px;
+  font-size: 11px; font-weight: 600; line-height: 16.5px; letter-spacing: 10px;
+}
+.js-navigation-bar .qd-coupon-copy {
+  height: 30px; padding: 6px 12px; border: 0; border-radius: 60px; cursor: pointer;
+  background: var(--qd-gold-solid); color: #fefdfc;
+  font: 700 11px/16.5px var(--heading-font); text-transform: uppercase;
+}
+.js-navigation-bar .qd-coupon-copy.is-copied { background: var(--qd-teal-strong, #00816e); }
+
+@media (min-width: 1200px) {
+  .js-navigation-bar.navigation-bar { min-height: 64px; display: flex; align-items: center; padding-left: 0; padding-right: 0; }
+  .js-navigation-bar .navigation-bar-inner { padding: 0 12px; }
+  /* divisória de 8px entre os itens (Figma) */
+  .js-navigation-bar .navigation-bar-item + .navigation-bar-item::before {
+    content: ""; position: absolute; left: -12px; top: 50%;
+    width: 1px; height: 8px; margin-top: -4px; background: var(--qd-gold);
+  }
+}
+@media (min-width: 1200px) and (max-width: 1439.98px) {
+  .js-navigation-bar .navigation-bar-block { gap: 16px !important; }
+  .js-navigation-bar .navigation-bar-item { gap: 8px; font-size: 12px; }
+  .js-navigation-bar .navigation-bar-item + .navigation-bar-item::before { left: -8px; }
+  .js-navigation-bar .qd-coupon-code { letter-spacing: 2px; padding-left: 10px; margin-left: 4px; }
+  .js-navigation-bar .qd-coupon-copy { padding: 6px 10px; }
+}
+
+/* Mobile/tablet: um item por vez (40px), passando sozinho (frontend/src/js/components/header-bar.js) */
+@media (max-width: 1199.98px) {
+  .js-navigation-bar.navigation-bar { padding: 0 !important; }
+  .js-navigation-bar .navigation-bar-list { overflow: hidden; }
+  .js-navigation-bar .nav-icon-text-group,
+  .js-navigation-bar .navigation-bar-group > div {
+    display: flex; flex-wrap: nowrap; gap: 0 !important; justify-content: flex-start !important;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  .js-navigation-bar .nav-icon-text-group::-webkit-scrollbar,
+  .js-navigation-bar .navigation-bar-group > div::-webkit-scrollbar { display: none; }
+  .js-navigation-bar .navigation-bar-item {
+    flex: 0 0 100%; justify-content: center; min-height: 40px; padding: 8px 16px;
+    scroll-snap-align: center;
+  }
+  .js-navigation-bar .qd-coupon-code { height: 26px; letter-spacing: 3px; padding-left: 10px; }
+  .js-navigation-bar .qd-coupon-copy { height: 26px; padding: 4px 10px; }
+}
+
+/* ==========================================================================
+   Header mobile (Figma 24:1079): hambúrguer 32px dourado | logo 120×36 | carrinho
+   32px cinza com contador; busca de 42px embaixo.
+   ========================================================================== */
+@media (max-width: 1199.98px) {
+  .head-main > .head-row.container { padding: 12px 16px; gap: 12px 8px; }
+  .menu-container .header-icon { width: 32px; height: 32px; }
+  .menu-container .header-icon svg { width: 16px; height: 16px; color: #fefdfc; fill: #fefdfc; stroke: #fefdfc; }
+  .head-row .header-cart .header-icon { width: 32px; height: 32px; background: #f1f1f1; }
+  .head-row .header-cart .header-icon svg { width: 18px; height: 18px; }
+  .head-row .header-cart .js-cart-widget-amount.badge {
+    top: -4px; left: auto; right: -4px; min-width: 16px; height: 16px; padding: 0 4px; font-size: 9px;
+  }
+  .search-container .search-form-field { padding: 5px 5px 5px 16px; min-height: 42px; }
+  .search-container .search-input { font-size: 13px; padding: 6px 0; }
+  .search-container .search-submit-btn { width: 32px; height: 32px; }
+  .search-container .search-submit-btn svg { width: 16px; height: 16px; }
+  .head-row .qd-plans-pill, .head-row .qd-stores-link { display: none !important; }
+}
+
+/* Figma 24:689: o header flutuante mantém a logo do mesmo tamanho (o tema encolhe com .compress) */
+.head-main.compress .logo-img { max-height: var(--logo-height-desktop) !important; height: var(--logo-height-desktop) !important; }
+@media (max-width: 767.98px) {
+  .head-main.compress .logo-img { max-height: var(--logo-height-mobile) !important; height: var(--logo-height-mobile) !important; }
 }

@@ -5,12 +5,15 @@
 {% set is_mobile_menu = type == 'mobile_menu' %}
 
 {% set wrapper_class = is_mobile_menu ? 'secondary-menu-link secondary-menu-link-icon' : 'navigation-bar-item' %}
+{# CPAP Fit: com "texto do link" o item não vira link inteiro; o link aparece como "ver regras" ao lado #}
+{% set separate_link = item.link and item.link_label %}
+{% set wrap_link = item.link and not separate_link %}
 
 {% if is_mobile_menu %}
 	<li class="secondary-menu-item">
 {% endif %}
 
-  {% if item.link %}
+  {% if wrap_link %}
     <a href="{{ item.link }}" class="{{ wrapper_class }}" {% if not is_mobile_menu %}{{ block | block_attributes }}{% endif %}>
   {% elseif is_mobile_menu %}
     <span class="{{ wrapper_class }}">
@@ -33,7 +36,18 @@
       <span>{{ item.description | raw }}</span>
     {% endif %}
 
-  {% if item.link %}
+    {% if separate_link %}
+      <a href="{{ item.link }}" class="qd-nav-item-link">{{ item.link_label }}</a>
+    {% endif %}
+
+    {% if item.coupon_code and not is_mobile_menu %}
+      <span class="qd-nav-coupon">
+        <span class="qd-coupon-code">{{ item.coupon_code }}</span>
+        <button type="button" class="qd-coupon-copy" data-qd-copy="{{ item.coupon_code }}">Copiar</button>
+      </span>
+    {% endif %}
+
+  {% if wrap_link %}
     </a>
   {% elseif is_mobile_menu %}
     </span>
@@ -85,7 +99,11 @@
         { "value": "world", "label": "t:options.icon_world" },
         { "value": "calendar", "label": "t:options.icon_calendar" },
         { "value": "check", "label": "t:options.icon_check" },
-        { "value": "whatsapp", "label": "WhatsApp", "sprite_id": "whatsapp-alt" }
+        { "value": "whatsapp", "label": "WhatsApp", "sprite_id": "whatsapp-alt" },
+        { "value": "qd-pix", "label": "Pix", "sprite_id": "qd-pix" },
+        { "value": "qd-card", "label": "Cartão (CPAP Fit)", "sprite_id": "qd-card" },
+        { "value": "qd-box", "label": "Caixa (CPAP Fit)", "sprite_id": "qd-box" },
+        { "value": "qd-tag", "label": "Etiqueta (CPAP Fit)", "sprite_id": "qd-tag" }
       ],
       "default": "shipping",
       "visible_if": "{{ block.settings.icon_source == 'design' }}"
@@ -109,6 +127,18 @@
       "setting_type": "url",
       "id": "link",
       "label": "t:settings.link"
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "link_label",
+      "label": "Texto do link (ex.: ver regras). Vazio: o item inteiro vira link"
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "coupon_code",
+      "label": "Cupom com botão Copiar"
     }
   ]
 }
