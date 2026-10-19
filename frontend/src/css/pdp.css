@@ -258,3 +258,89 @@ div:is([data-section-id="complementary_products"], [data-section-id="alternative
   .qd-pdp-coupon { padding: 16px 0 0; border-left: 0; border-top: 1px solid #e1dcd7; }
   .qd-pdp-coupon-box { max-width: 100%; }
 }
+
+/* --- Seções da descrição (Figma 35:13959 / 59:14364 / 55:14231 / 55:14214) ------------------------- */
+/* títulos e alinhamento do editor do admin perdem para o tema (estilos inline) */
+.qd-pdp-details-body :is(h1, h2, h3, h4) { font-size: 25px !important; line-height: 36px !important; text-align: left !important; }
+.qd-pdp-details-body :is(p, li, div, span) { text-align: left !important; }
+.qd-pdp-details-body table { width: 100%; margin: 0 0 30px; border-collapse: collapse; font-size: 14px; line-height: 20px; }
+.qd-pdp-details-body :is(td, th) { padding: 10px 12px; border-bottom: 1px solid #ccc; text-align: left; vertical-align: top; }
+.qd-pdp-section { padding: 40px 0 20px; color: var(--qd-ink); }
+.qd-pdp-section-body { max-width: 1026px; margin: 0 auto; }
+
+/* Ficha técnica: linhas de 60px, rótulo 12px + valor 15px negrito */
+.qd-pdp-manual {
+  display: flex; align-items: center; gap: 8px; width: max-content; max-width: 100%; height: 42px; margin: 0 0 26px auto; padding: 0 17px;
+  border: 1px solid var(--qd-ink); border-radius: 20px; color: var(--qd-ink);
+  font: 500 13px/16.5px var(--heading-font); text-transform: uppercase; text-decoration: none;
+}
+.qd-pdp-manual::before {
+  content: ""; width: 24px; height: 24px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 10h5l-6 6-6-6h5V3h2v7Zm-9 9h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7Z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 10h5l-6 6-6-6h5V3h2v7Zm-9 9h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.qd-pdp-spec-list { margin: 0; }
+.qd-pdp-spec-list > div { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 10px; align-items: center; min-height: 60px; padding: 10px 0; border-bottom: 1px solid #ccc; }
+.qd-pdp-spec-list dt { font-size: 12px; font-weight: 500; }
+.qd-pdp-spec-list dd { margin: 0; font-family: var(--heading-font); font-size: 15px; font-weight: 700; line-height: 22px; letter-spacing: 1.5px; }
+
+/* Perguntas frequentes: sanfona com borda em cima e chevron num círculo branco */
+.qd-pdp-faq .qd-pdp-section-body { display: flex; flex-direction: column; gap: 24px; }
+.qd-pdp-faq-item { border-top: 1px solid #c0c0c0; }
+.qd-pdp-faq-item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0 12px; cursor: pointer; list-style: none;
+  font: 700 25px/36px var(--heading-font); color: var(--qd-ink);
+}
+.qd-pdp-faq-item summary::-webkit-details-marker { display: none; }
+.qd-pdp-faq-item summary::after {
+  content: ""; flex: 0 0 40px; height: 40px; border-radius: 86px; background: #fff var(--qd-chevron-down) center / 24px no-repeat;
+  transform: rotate(180deg); transition: transform .15s ease;
+}
+.qd-pdp-faq-item:not([open]) summary::after { transform: none; }
+.qd-pdp-faq-answer { padding-bottom: 6px; font-size: 15px; font-weight: 500; line-height: 26px; }
+.qd-pdp-faq-answer p { margin: 0 0 10px; }
+
+/* Vídeo do produto: capa do YouTube com play; o player só carrega no clique */
+.qd-pdp-video-box {
+  position: relative; display: block; width: 100%; max-width: 862px; margin: 0 auto; padding: 0; border: 0;
+  aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer;
+}
+.qd-pdp-video-box img, .qd-pdp-video-box iframe { width: 100%; height: 100%; object-fit: cover; border: 0; }
+.qd-pdp-video-play {
+  position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px;
+  border: 1px solid rgba(255, 255, 255, .8); border-radius: 60px; background: rgba(255, 255, 255, .1); backdrop-filter: blur(22px);
+}
+.qd-pdp-video-play::after {
+  content: ""; position: absolute; inset: 8px; background: #fff;
+  -webkit-mask: var(--qd-ico-play) center / 60% no-repeat; mask: var(--qd-ico-play) center / 60% no-repeat;
+}
+
+/* variante com uma opção só */
+.qd-pdp .qd-pdp-single-variant { display: none !important; }
+
+/* barra de compra fixa (mobile, Figma 66:17863) */
+.qd-pdp-sticky { display: none; }
+@media (max-width: 767.98px) {
+  .qd-pdp-sticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+    display: flex; gap: 16px; align-items: center; padding: 12px 26px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--qd-indigo); box-shadow: 0 -8px 7px rgba(0, 0, 0, .15);
+    transform: translateY(110%); transition: transform .2s ease;
+  }
+  .qd-pdp-sticky.is-visible { transform: none; }
+  .qd-pdp-sticky-buy {
+    flex: 1 1 auto; height: 44px; border: 1px solid #fff; border-radius: 100px; background: transparent var(--qd-ico-cart-white) no-repeat calc(50% - 50px) center / 24px;
+    padding-left: 30px; color: #fff; font: 700 15px/1 var(--heading-font); text-transform: uppercase;
+  }
+  .qd-pdp-sticky-wa {
+    flex: 0 0 44px; height: 44px; border: 1px solid #fff; border-radius: 20px; position: relative;
+  }
+  .qd-pdp-sticky-wa::after { content: ""; position: absolute; inset: 9px; background: #fff; -webkit-mask: var(--qd-ico-whatsapp, none) center / contain no-repeat; mask: var(--qd-ico-whatsapp, none) center / contain no-repeat; }
+  .qd-pdp-section { padding: 30px 0 10px; }
+  .qd-pdp-spec-list > div { grid-template-columns: 120px minmax(0, 1fr); }
+  .qd-pdp-spec-list dd { font-size: 13px; letter-spacing: .5px; }
+  .qd-pdp-faq-item summary { font-size: 17px; line-height: 24px; }
+  .qd-pdp-faq-item summary::after { flex-basis: 32px; height: 32px; }
+  .qd-pdp-manual { margin-left: 0; font-size: 11px; }
+  .qd-pdp-details-body :is(h1, h2, h3, h4) { font-size: 19px !important; line-height: 26px !important; }
+}

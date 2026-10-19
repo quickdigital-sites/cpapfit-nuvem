@@ -298,3 +298,33 @@ button.input-clear-content { border: 0; background: none; padding: 0; cursor: po
 @media (min-width: 1200px) and (max-width: 1439.98px) {
   .qd-plp-title .page-header-title { font-size: clamp(32px, 3vw, 44px); line-height: 1.3; }
 }
+
+/* --- Faixa de preço com slider (Figma 35:10301) — campos nativos ficam escondidos ---------------- */
+.qd-has-price-range .form-group { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.qd-price-range { position: relative; height: 52px; margin: 4px 12px 8px; }
+.qd-price-range-track { position: absolute; left: 0; right: 0; top: 8px; height: 10px; border-radius: 60px; background: #eeeff2; }
+.qd-price-range-fill { position: absolute; top: 0; bottom: 0; border-radius: 60px; background: var(--qd-gold); }
+.qd-price-range-input {
+  position: absolute; left: -12px; right: -12px; top: 0; width: calc(100% + 24px); height: 26px; margin: 0;
+  background: transparent; pointer-events: none; -webkit-appearance: none; appearance: none;
+}
+.qd-price-range-input::-webkit-slider-runnable-track { background: transparent; height: 26px; }
+.qd-price-range-input::-moz-range-track { background: transparent; }
+.qd-price-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none; pointer-events: auto; cursor: grab;
+  width: 25px; height: 25px; border: 0; border-radius: 50%; background: #4a4a48;
+}
+.qd-price-range-input::-moz-range-thumb {
+  pointer-events: auto; cursor: grab; width: 25px; height: 25px; border: 0; border-radius: 50%; background: #4a4a48;
+}
+.qd-price-range-input:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--qd-indigo); outline-offset: 2px; }
+.qd-price-range-labels {
+  position: absolute; left: -12px; right: -12px; top: 26px; display: flex; justify-content: space-between;
+  font-size: 13px; font-weight: 500; line-height: 26px; color: var(--qd-ink);
+}
+
+/* Gaveta de filtros no mobile: painel de 338px (Figma 35:10503), não tela cheia */
+@media (max-width: 767.98px) {
+  .qd-plp [data-component="modal-filters"] { width: 338px !important; max-width: 87vw; }
+  .qd-plp [data-component="modal-filters"] .qd-price-range { margin-left: 14px; margin-right: 14px; }
+}

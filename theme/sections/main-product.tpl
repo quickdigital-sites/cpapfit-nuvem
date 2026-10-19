@@ -13,7 +13,7 @@
 {% endset %}
 
 
-<section id="single-product" class="js-product-detail js-product-container js-has-new-shipping js-shipping-calculator-container {% if full_width %}section-full-width{% endif %}" data-variants="{{ product.variants_object | json_encode }}" data-section-id="{{ section.id }}" data-store="product-detail" {% if section_styles | trim %}style="{{ section_styles | trim }}"{% endif %}>
+<section id="single-product" class="js-product-detail js-product-container js-has-new-shipping js-shipping-calculator-container {% if full_width %}section-full-width{% endif %}" data-variants="{{ product.variants_object | json_encode }}" data-section-id="{{ section.id }}" data-store="product-detail" data-qd-whatsapp="{{ store.whatsapp }}" data-qd-coupon-text="{{ settings.qd_pdp_coupon_text }}" data-qd-coupon-code="{{ settings.qd_pdp_coupon_code }}" {% if section_styles | trim %}style="{{ section_styles | trim }}"{% endif %}>
 	{% if page_width %}
 		<div class="container">
 	{% endif %}

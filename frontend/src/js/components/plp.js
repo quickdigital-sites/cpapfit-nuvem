@@ -9,7 +9,8 @@
  *  - Descrição da categoria vira o bloco de "texto SEO" no fim, com "+ ver mais".
  */
 const mq = window.matchMedia("(min-width: 768px)");
-const PER_PAGE = 60; // paginação "classic" do tema pagina de 60 em 60 (sem fork não dá para mudar)
+// itens por página: vem do {% paginate %} de theme/sections/main-products-grid.tpl (data-per-page)
+const perPage = () => parseInt(document.querySelector("[data-per-page]")?.dataset.perPage, 10) || 24;
 
 function buildHead(grid) {
   const header = document.querySelector(".page-header");
@@ -32,7 +33,7 @@ function buildHead(grid) {
   const onPage = productsCol.querySelectorAll(".js-product-table > .js-item-product").length;
   if (total && onPage) {
     const current = parseInt(document.querySelector(".pagination-counter span")?.textContent || "1", 10) || 1;
-    const start = (current - 1) * PER_PAGE + 1;
+    const start = (current - 1) * perPage() + 1;
     const end = start + onPage - 1;
     const count = document.createElement("p");
     count.className = "qd-plp-count";

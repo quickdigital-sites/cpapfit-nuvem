@@ -8,7 +8,8 @@
 {% if section.settings.pagination == 'infinite' %}
 	{% paginate by 12 %}
 {% else %}
-	{% paginate by 60 %}
+	{# CPAP Fit: 24 por página (Figma 24:2370) — frontend/src/js/components/plp.js lê data-per-page #}
+	{% paginate by 24 %}
 {% endif %}
 
 {% set has_real_products = products and (products | length) > 0 %}
@@ -42,7 +43,7 @@
 {% set horizontal_padding = page_width ? 0 : section.settings.horizontal_padding | default(32) %}
 
 
-<div class="products-grid section-main-products-grid"
+<div class="products-grid section-main-products-grid" data-per-page="{{ section.settings.pagination == 'infinite' ? 12 : 24 }}"
   style="{% if full_width %}--section-horizontal-padding: {{ horizontal_padding }}px;{% endif %} padding: {{ vertical_padding }}px {{ horizontal_padding }}px;"
   data-store="{{ grid_id }}">
   {% if page_width %}
@@ -267,3 +268,4 @@
   ]
 }
 {% endschema %}
+

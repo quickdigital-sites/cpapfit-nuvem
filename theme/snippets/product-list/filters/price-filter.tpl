@@ -5,6 +5,18 @@
 <div class="js-price-filter-container {{ accordion ? 'price-filter-container filter-accordion' : 'price-filter-container' }}" data-store="filters-group" data-component="list.filter-price">
 	<form>
 		<div class="{{ accordion ? 'price-filter-label' : 'filters-title' }}">{{ 'filters.price.label' | t }}</div>
+		{# CPAP Fit (Figma 35:10301): faixa de preço com dois controles deslizantes. Grava nos campos
+		   nativos min_price/max_price abaixo (que ficam escondidos) e aplica ao soltar — mesmo contrato
+		   de URL do filtro nativo. Script: frontend/src/js/components/price-range.js #}
+		{% set qd_range = product_filter.custom_data.price_range %}
+		{% if qd_range and qd_range['max_price'] and qd_range['max_price'] > qd_range['min_price'] %}
+			<div class="js-qd-price-range qd-price-range" data-min="{{ qd_range['min_price'] | round(0, 'floor') }}" data-max="{{ qd_range['max_price'] | round(0, 'ceil') }}">
+				<div class="qd-price-range-track"><span class="qd-price-range-fill"></span></div>
+				<input type="range" class="qd-price-range-input" data-bound="min" aria-label="{{ 'filters.price.from' | t }}" step="1">
+				<input type="range" class="qd-price-range-input" data-bound="max" aria-label="{{ 'filters.price.to' | t }}" step="1">
+				<div class="qd-price-range-labels"><span data-label="min"></span><span data-label="max"></span></div>
+			</div>
+		{% endif %}
 		<div class="form-group">
 			<span class="js-filter-input-price-container filter-input-price-container">
 				<label class="form-label">{{ 'filters.price.from' | t }}</label>

@@ -1049,6 +1049,24 @@
         "id": "shipping_calculator_product_page",
         "label": "t:settings.shipping_calculator",
         "default": true
+      },
+      {
+        "type": "header",
+        "content": "CPAP Fit — cupom na página de produto"
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_pdp_coupon_text",
+        "label": "Texto do cupom (ex.: R$ 100 OFF na linha Philips)",
+        "default": "R$ 100 OFF na linha Philips"
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_pdp_coupon_code",
+        "label": "Código do cupom (vazio esconde o bloco)",
+        "default": "QUERO100"
       }
     ]
   },
