@@ -78,7 +78,9 @@ topo da home idênticas pixel a pixel.
 no HTML ou na rede da home. Se a loja deveria ter rastreamento ativo, vale conferir: pode estar só depois
 do consentimento de cookies, ou não estar instalado.
 
-## Achado à parte
+## Achado à parte (corrigido)
 
-A página de produto no celular tem rolagem lateral (página com 448px numa tela de 390px), e home e produto
-ficam com 1220px numa tela de 1200px. Já era assim antes destas mudanças.
+A página de produto no celular tinha rolagem lateral (448px numa tela de 390px, por causa de uma tabela com
+`width: 984px` colada na descrição) e home, categoria e produto ficavam com 1220px numa tela de 1200px (menu
+com 8 itens não cabia entre 1200 e 1239px; cartões de vídeo da home até ~1270px). Corrigido no commit seguinte:
+sem rolagem lateral em 390/768/1024/1200/1220/1240/1280/1440px nas três páginas.
