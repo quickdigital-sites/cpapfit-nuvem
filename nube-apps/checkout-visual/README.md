@@ -1,5 +1,11 @@
 # checkout-visual — checkout da CPAP Fit igual ao Figma (script clássico)
 
+> **Não funciona como script do portal (2026-10-19).** A documentação de Scripts diz que, com local
+> *checkout*, "Uses Nube SDK" é obrigatório e fica travado: o arquivo roda no Web Worker, sem `document`.
+> Publicado como script #11529 (LayoutCheck), não estilizou nada e o checkout ficou sem os blocos do app
+> #11515. O CSS (`src/checkout.css`) continua válido se um dia entrar pelo `theme/static/checkout.scss.tpl`
+> do tema (exige tema forkado) — sem os ajustes que dependem de JS (textos, marca do produto, "× 1").
+
 O app NubeSDK (`../checkout-quick`) só acrescenta blocos em slots: roda num Web Worker, sem acesso à página.
 Para o checkout ficar igual ao Figma (`1P4JHFz4FEG8UEBkDOB1qm`, frame `367:13649`) este é um **script clássico**
 (sem NubeSDK), que roda na própria página do checkout e:
