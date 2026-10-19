@@ -397,6 +397,14 @@ Guia completo: **[docs/frontend.md](docs/frontend.md)**.
 4. Merge em `main` → CI faz push em **prod**
 5. `workflow_dispatch` com `publish=true` (ou `scripts/theme-push.sh prod --publish`) para ativar
 
+**O editor da loja é dono do conteúdo.** Antes de cada push, `scripts/sync-content.sh <theme_id>` baixa do tema
+de destino os arquivos que o editor grava (`templates/pages/*.json`, `templates/pages/account/*.json`,
+`templates/layout/*.json`, `config/settings_data.json`) por cima do build local — assim um deploy nunca apaga
+banners, textos e abas que o gerente mudou no editor. O `theme-push.sh` e os dois jobs do CI fazem isso sozinhos.
+Quando a mudança **é** no conteúdo (ex.: seção nova em `design/pages/*.yaml`), pule a proteção uma vez:
+`FORCE_CONTENT=1 scripts/theme-push.sh prod` ou `workflow_dispatch` com `force_content=true`.
+Guia do editor para o gerente: [docs/guia-editor.md](docs/guia-editor.md); mapa campo a campo: [docs/editor-mapa.md](docs/editor-mapa.md).
+
 Secrets do GitHub (Settings → Secrets and variables → Actions):
 
 | Secret | Valor |
