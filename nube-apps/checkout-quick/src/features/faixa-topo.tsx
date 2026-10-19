@@ -7,6 +7,8 @@ import { Column, Icon, Row, Text } from "@tiendanube/nube-sdk-jsx";
 import { GOLD, INK, LINE, OFFWHITE } from "../brand";
 import type { Feature } from "./types";
 
+const FONT = { fontSize: "13px", letterSpacing: "0.3px", textTransform: "uppercase", margin: 0 } as const;
+
 export const faixaTopo: Feature = {
 	name: "faixa-topo",
 	slot: "after_header",
@@ -20,9 +22,25 @@ export const faixaTopo: Feature = {
 				{messages.map((message, i) => (
 					<Row key={`faixa-${i}`} gap={10} alignItems="center">
 						{[
-							<Text key="texto" color={INK} style={{ fontSize: "13px", fontWeight: 600, letterSpacing: "0.3px", textTransform: "uppercase", margin: 0 }}>
-								{message}
-							</Text>,
+							...(settings.topBarMessages
+								? [
+										<Text key="texto" color={INK} style={{ ...FONT, fontWeight: 600 }}>
+											{message}
+										</Text>,
+									]
+								: [
+										// Figma: "AMBIENTE" em peso normal, "100% SEGURO" em negrito
+										<Row key="texto" gap={4} alignItems="center">
+											{[
+												<Text key="normal" color={INK} style={{ ...FONT, fontWeight: 400 }}>
+													Ambiente
+												</Text>,
+												<Text key="negrito" color={INK} style={{ ...FONT, fontWeight: 700 }}>
+													100% seguro
+												</Text>,
+											]}
+										</Row>,
+									]),
 							...(i === 0 ? [<Icon key="cadeado" name="lock" size={24} color={GOLD} />] : []),
 						]}
 					</Row>
