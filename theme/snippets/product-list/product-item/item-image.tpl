@@ -84,6 +84,7 @@
     }]) %}
 {% endfor %}
 
+{# CPAP Fit: os cards têm no máximo ~300px de largura em qualquer tela (vitrines e grade); 50vw fazia o computador baixar a foto de 1024px #}
 {% set image_sizes_mobile = ((columns_mobile|default('')) == '1' and (format_mobile|default('')) == 'slider') ? '100vw' : '50vw' %}
 
 {% set common_image_params = {
@@ -93,7 +94,7 @@
     product_image: true,
     image_lazy: true,
     image_lazy_js: true,
-    image_sizes: '(min-width: 768px) 50vw, ' ~ image_sizes_mobile,
+    image_sizes: '(min-width: 768px) 300px, ' ~ image_sizes_mobile,
     image_thumbs: image_thumbs,
     image_data_expand: image_data_expand,
     image_data_sizes: image_data_sizes,
