@@ -1462,4 +1462,947 @@ a {
 
 }
 
+{#/*============================================================================
+  CPAP Fit — checkout igual ao Figma 1P4JHFz4FEG8UEBkDOB1qm, frame 367:13649 (etapa Entrega, desktop 1920)
+
+  Script de checkout é sempre NubeSDK (sem acesso à página), então o visual do checkout entra por aqui:
+  este arquivo vira o checkout-*.css que o checkout carrega. Só CSS: preço, frete e pagamento não mudam.
+  O rodapé azul vem do app NubeSDK (nube-apps/checkout-quick); aqui ele só ganha a largura da tela.
+  Seletores do checkout v3 conferidos em 2026-10-19. Tudo sob :root para ganhar dos estilos nativos.
+==============================================================================*/#}
+
+:root {
+  --qd-gold: #ad9361;
+  --qd-cream: #f4f1ed;
+  --qd-ink: #4a4a48;
+  --qd-ink-strong: #2a282b;
+  --qd-teal: #00a58c;
+  --qd-offwhite: #fefdfc;
+  --qd-line: #ccc;
+  --qd-gap: clamp(32px, 6.5vw, 100px);
+  --qd-lock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23AD9361' d='M6 8V7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7V8H20C20.5523 8 21 8.44772 21 9V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V9C3 8.44772 3.44772 8 4 8H6ZM19 10H5V20H19V10ZM11 15.7324C10.4022 15.3866 10 14.7403 10 14C10 12.8954 10.8954 12 12 12C13.1046 12 14 12.8954 14 14C14 14.7403 13.5978 15.3866 13 15.7324V18H11V15.7324ZM8 8H16V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V8Z'/%3E%3C/svg%3E");
+  --qd-tag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M9.08683 1.75021L17.3364 2.92872L18.5149 11.1783L10.8546 18.8386C10.5292 19.1641 10.0016 19.1641 9.67608 18.8386L1.42653 10.5891C1.10109 10.2636 1.10109 9.736 1.42653 9.4105L9.08683 1.75021ZM9.67608 3.51798L3.1943 9.99975L10.2653 17.0708L16.7472 10.5891L15.8633 4.40186L9.67608 3.51798ZM11.4439 8.82125C10.793 8.1704 10.793 7.11513 11.4439 6.46425C12.0948 5.81338 13.15 5.81338 13.8009 6.46425C14.4518 7.11513 14.4518 8.1704 13.8009 8.82125C13.15 9.47217 12.0948 9.47217 11.4439 8.82125Z'/%3E%3C/svg%3E");
+  --qd-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.2l3.2 3.2L15 6.6' fill='none' stroke='%23fefdfc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+:root body {
+  background: #fff;
+  color: var(--qd-ink);
+  font-family: Montserrat, sans-serif;
+  overflow-x: clip;
+}
+
+{#/* ---------- cabeçalho (367:13750): logo "10 anos" 200x60 e selo à direita ---------- */#}
+:root .headbar {
+  display: flex;
+  align-items: center;
+  height: 110px;
+  padding: 0;
+  background: var(--qd-offwhite);
+  border-bottom: 1px solid var(--qd-line);
+  box-shadow: none;
+}
+:root .headbar > .container {
+  width: 100%;
+  max-width: 1624px;
+  padding: 0 12px;
+}
+:root .headbar .row {
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+:root .headbar .row > .col {
+  padding: 0;
+}
+:root #headbar-left {
+  order: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+:root .headbar-logo-img {
+  display: block;
+  width: 200px;
+  height: 60px;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: left center;
+  content: url("{{ 'images/logo-10-anos.png' | static_url }}");
+}
+:root #headbar-right {
+  display: flex !important;
+  order: 1;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  width: auto;
+  max-width: none;
+  background: none !important;
+  font: 400 14px/22px Montserrat, sans-serif;
+  text-transform: uppercase;
+  color: var(--qd-ink);
+  white-space: nowrap;
+}
+:root #headbar-right::before {
+  content: "Ambiente\00a0";
+}
+:root #headbar-right::after {
+  content: "100% seguro";
+  margin-right: 8px;
+  padding-right: 34px;
+  font-weight: 700;
+  line-height: 24px;
+  background: var(--qd-lock) right center / 24px no-repeat;
+}
+{#/* a linha do app NubeSDK vira o selo dentro do cabeçalho, como no Figma */#}
+:root #nube-sdk-slot-after_header {
+  display: none !important;
+}
+
+{#/* ---------- grade: formulário 780 + 100 + resumo 390 (367:13768) ---------- */#}
+:root .main-container {
+  max-width: 1290px;
+  padding: 0 10px 60px;
+}
+:root #breadcrumb {
+  max-width: 1270px;
+  margin: 60px auto 20px;
+  padding: 0;
+  background: none;
+}
+@media (min-width: 768px) {
+  :root #breadcrumb > .row,
+  :root #main-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--qd-gap);
+    justify-content: center;
+    max-width: 1270px;
+    margin: 0 auto !important;
+  }
+  :root #breadcrumb > .row::after {
+    content: "";
+    flex: 0 0 390px;
+  }
+  :root #breadcrumb > .row > .col-md-8,
+  :root #main-column {
+    flex: 0 1 780px;
+    max-width: 780px;
+    padding: 0;
+  }
+  {#/* no Figma o resumo começa na altura das etapas (80 + 20 acima do formulário) */#}
+  :root #secondary-column {
+    flex: 0 0 390px;
+    max-width: 390px;
+    margin-top: -100px;
+    padding: 0;
+  }
+}
+
+{#/* ---------- etapas CARRINHO — ENTREGA — PAGAMENTO (367:13771) ---------- */#}
+:root ul.breadcrumb-timeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 80px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+:root ul.breadcrumb-timeline > li {
+  position: static;
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+:root ul.breadcrumb-timeline > li.breadcrumb-timeline-line {
+  flex: 0 0 40px;
+  width: 40px !important;
+  height: 1px;
+  background: var(--qd-line);
+  border: 0;
+}
+:root ul.breadcrumb-timeline > li.breadcrumb-timeline-line::before,
+:root ul.breadcrumb-timeline > li.breadcrumb-timeline-line::after {
+  display: none;
+}
+:root .breadcrumb-timeline-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 80px;
+  padding: 0 10px;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  opacity: 1;
+}
+:root .breadcrumb-timeline-item-icon {
+  display: none !important;
+}
+:root .breadcrumb-timeline-item-text {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0;
+  padding: 0;
+  font: 500 16px/34px Montserrat, sans-serif;
+  text-transform: uppercase;
+  color: var(--qd-ink) !important;
+  white-space: nowrap;
+}
+:root .breadcrumb-timeline-item.current .breadcrumb-timeline-item-text {
+  font-weight: 700;
+}
+:root .breadcrumb-timeline-item.current .breadcrumb-timeline-item-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 38px;
+  height: 4px;
+  border-radius: 10px;
+  background: var(--qd-gold);
+}
+
+{#/* ---------- seções e títulos (367:13784) ---------- */#}
+:root #main-column .panel {
+  margin: 0 0 26px;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+:root .panel-header {
+  margin: 0;
+  padding: 0 0 26px;
+  font: 500 20px/20px Montserrat, sans-serif;
+  color: var(--qd-ink-strong);
+  background: #fff;
+  border: 0;
+  text-transform: none;
+}
+:root .panel-header-tooltip {
+  display: none;
+}
+:root .form-group {
+  margin-bottom: 20px;
+}
+
+{#/* ---------- campos: rótulo em cima, campo de 50px (367:13997) ---------- */#}
+:root .has-float-label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+:root .has-float-label > label {
+  order: -1;
+  position: static !important;
+  transform: none !important;
+  top: auto !important;
+  left: auto !important;
+  display: block;
+  width: auto;
+  height: auto;
+  min-height: 18.4px;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 1 !important;
+  background: none;
+  font: 700 14px/18.4px Montserrat, sans-serif !important;
+  letter-spacing: 0;
+  color: var(--qd-ink) !important;
+  white-space: normal;
+}
+{#/* obrigatório = todos menos complemento */#}
+:root .has-float-label > label.input-label::after {
+  content: "*";
+  font: 700 14px/18.4px Montserrat, sans-serif;
+}
+:root .has-float-label > label.input-label[for$=".floor"]::after {
+  content: none;
+}
+{#/* textos do Figma no lugar dos nativos (o campo é o mesmo) */#}
+:root .has-float-label > label[for="shippingAddress.phone"],
+:root .has-float-label > label[for="shippingAddress.floor"],
+:root .has-float-label > label[for="billingAddress.id_number"],
+:root #address-form-section > .panel-header,
+:root tr.table-shipping-cost > td:first-child {
+  font-size: 0 !important;
+}
+{#/* flex: sem a linha de base do texto escondido, a altura fica a do texto novo (18.4px) */#}
+:root .has-float-label > label[for="shippingAddress.phone"],
+:root .has-float-label > label[for="shippingAddress.floor"],
+:root .has-float-label > label[for="billingAddress.id_number"] {
+  display: flex;
+}
+:root .has-float-label > label[for="shippingAddress.phone"]::before {
+  content: "Telefone";
+  font: 700 14px/18.4px Montserrat, sans-serif;
+}
+:root .has-float-label > label[for="shippingAddress.floor"]::before {
+  content: "Complemento (opcional)";
+  font: 700 14px/18.4px Montserrat, sans-serif;
+}
+:root .has-float-label > label[for="billingAddress.id_number"]::before {
+  content: "CPF";
+  font: 700 14px/18.4px Montserrat, sans-serif;
+}
+:root #address-form-section > .panel-header::before {
+  content: "Dados para a entrega";
+  font: 500 20px/20px Montserrat, sans-serif;
+}
+:root .form-control {
+  height: 50px;
+  padding: 0 17px;
+  border: 1px solid var(--qd-line);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: none;
+  font: 500 14px/normal Montserrat, sans-serif;
+  letter-spacing: 0.14px;
+  {#/* texto digitado um tom acima do placeholder (#4a4a48 no Figma) para não confundir os dois */#}
+  color: var(--qd-ink-strong);
+}
+:root textarea.form-control {
+  height: auto;
+  padding: 15px 17px;
+}
+:root .form-control:focus {
+  border-color: var(--qd-gold);
+  box-shadow: none;
+  outline: none;
+}
+:root .form-control::placeholder {
+  color: var(--qd-ink);
+  opacity: 1 !important;
+}
+:root .has-error .form-control {
+  border-color: #d0021b;
+}
+:root .has-float-label > .form-control-help {
+  position: absolute;
+  inset: auto 17px 13px auto;
+  font: 500 13px/24px Montserrat, sans-serif;
+  color: var(--qd-ink);
+}
+:root .has-float-label > .input-validation-icon {
+  position: absolute;
+  inset: auto 17px 15px auto;
+  margin: 0;
+}
+:root .has-float-label > .input-button {
+  position: absolute;
+  inset: auto 17px 15px auto;
+  width: auto;
+  white-space: nowrap;
+}
+:root .has-float-label > .input-button .form-group {
+  margin: 0;
+}
+:root .has-float-label > .input-button .form-checkbox {
+  position: static;
+  margin: 0;
+}
+
+{#/* ---------- caixas de seleção (367:14171) ---------- */#}
+:root label.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  margin: -10px 0 0;
+  padding: 0;
+  cursor: pointer;
+}
+:root .form-checkbox > input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+:root .form-checkbox .form-options-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+:root .form-checkbox .form-group-icon {
+  position: relative;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 1px solid var(--qd-ink-strong);
+  border-radius: 4px;
+  background: #fff;
+}
+:root .form-checkbox .form-group-icon svg {
+  display: none !important;
+}
+:root .form-checkbox > input:checked + .form-options-content .form-group-icon {
+  background: var(--qd-ink-strong) var(--qd-check) center / 18px no-repeat;
+}
+:root .form-checkbox > input:focus-visible + .form-options-content .form-group-icon {
+  outline: 2px solid var(--qd-gold);
+  outline-offset: 2px;
+}
+:root .form-checkbox .form-options-label {
+  margin: 1px 0 0;
+  font: 500 13px/18px Montserrat, sans-serif;
+  color: var(--qd-ink);
+}
+
+{#/* ---------- opções de frete (367:13966): cartão creme, rádio com ponto dourado ---------- */#}
+:root .shipping-options-container .panel-subheader {
+  margin: 0 0 10px;
+  font: 700 13px/18px Montserrat, sans-serif;
+  color: var(--qd-ink);
+}
+:root .shipping-options-ship,
+:root .shipping-options-pickup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 10px;
+}
+:root .radio.shipping-option {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+:root .radio.shipping-option > label.label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--qd-cream);
+  cursor: pointer;
+}
+:root .radio.shipping-option input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+:root .radio.shipping-option .selector,
+:root .formless-address .user-detail-icon {
+  position: relative;
+  inset: auto;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--qd-ink-strong);
+  border-radius: 50%;
+  background: #fff;
+}
+:root .radio.shipping-option .selector::before,
+:root .radio.shipping-option .selector::after {
+  display: none;
+}
+:root .radio.shipping-option.active .selector::after,
+:root .formless-address .user-detail-icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 9px;
+  height: 9px;
+  margin: auto;
+  border-radius: 50%;
+  background: var(--qd-gold);
+}
+:root .formless-address .user-detail-icon svg {
+  display: none;
+}
+:root .shipping-method-item {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+:root .shipping-method-item > span {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 16px;
+  row-gap: 4px;
+}
+:root .shipping-method-item-name {
+  grid-column: 1;
+  grid-row: 1;
+  font: 600 14px/18.4px Inter, Montserrat, sans-serif !important;
+  text-transform: uppercase;
+  color: var(--qd-ink);
+}
+:root .shipping-method-item-desc {
+  grid-column: 1;
+  grid-row: 2;
+  font: 500 13px/18px Montserrat, sans-serif !important;
+  color: var(--qd-ink);
+  opacity: 1 !important;
+}
+:root .shipping-method-item-price {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 !important;
+  font: 700 13px/20px Montserrat, sans-serif !important;
+  color: var(--qd-ink);
+  text-align: right;
+  white-space: nowrap;
+}
+:root .shipping-method-item-price *,
+:root .shipping-method-item-desc * {
+  font: inherit;
+  color: inherit;
+}
+{#/* "Mais opções" nativo (367:13961) */#}
+:root #shipping-more-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 700 13px/18px Montserrat, sans-serif;
+  color: var(--qd-ink);
+  text-transform: none;
+}
+:root #shipping-more-options > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+:root #shipping-more-options svg {
+  width: 12px;
+  height: 12px;
+  fill: #2c4372;
+}
+{#/* "Alterar: CEP" ao lado do título Entrega */#}
+:root .panel-header-button {
+  float: right;
+  margin-top: -46px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 700 13px/18px Montserrat, sans-serif;
+  color: var(--qd-ink);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+{#/* ---------- dados para a entrega (367:14034 / 367:13911 / 367:14109) ---------- */#}
+:root #address-form-section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 20px;
+  row-gap: 26px;
+}
+:root #address-form-section > * {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+:root #address-form-section > .panel-header {
+  padding: 0;
+}
+:root #address-form-section > .form-group:has(input[name="shippingAddress.first_name"]),
+:root #address-form-section > .form-group:has(input[name="shippingAddress.last_name"]),
+:root #address-form-section > .form-group:has(input[name="shippingAddress.phone"]) {
+  grid-column: auto;
+}
+:root #address-form-section > .row:empty {
+  display: none;
+}
+:root #address-form-section .row.third-gutters {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+:root #address-form-section .row.third-gutters > .form-group {
+  flex: 1 1 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+:root .formless-address.form-control {
+  height: auto;
+  padding: 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--qd-cream);
+}
+:root .formless-address .review-block-detailed-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+:root .formless-address .center-area {
+  flex: 1;
+  padding: 0;
+}
+:root .formless-address .content p {
+  margin: 0 0 4px;
+  font: 500 13px/18px Montserrat, sans-serif;
+  color: var(--qd-ink);
+}
+:root .formless-address .content p:last-child {
+  margin: 0;
+}
+:root .formless-address .content p:first-child {
+  font: 600 14px/18.4px Inter, Montserrat, sans-serif;
+  text-transform: uppercase;
+}
+:root .formless-address .content .text-bold {
+  font-weight: 500;
+}
+:root .formless-address .change-button-area .btn-link {
+  padding: 0;
+  font: 700 13px/18px Montserrat, sans-serif;
+  color: var(--qd-ink);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+{#/* ---------- botão principal (367:14166) ---------- */#}
+:root .btn-submit-step:not(.hide) {
+  float: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  margin: 6px 0 0 !important;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 60px;
+  background: var(--qd-teal) !important;
+  box-shadow: none;
+  font: 700 12px/17px Montserrat, sans-serif;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--qd-offwhite) !important;
+}
+
+{#/* ---------- resumo: cartões dos produtos (367:13804) ---------- */#}
+:root #secondary-column .summary,
+:root #secondary-column .summary-details.panel {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+:root #secondary-column .summary {
+  top: 20px;
+}
+:root table.table-scrollable,
+:root table.table-scrollable tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+}
+:root table.table-scrollable tr {
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  grid-template-rows: 1fr auto auto 1fr;
+  column-gap: 6px;
+  min-height: 136px;
+  padding: 0 16px 0 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: var(--qd-offwhite);
+}
+:root table.table-scrollable td {
+  display: block;
+  width: auto !important;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left !important;
+}
+:root td.summary-img-wrap {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  align-self: center;
+  padding: 10px 0 !important;
+}
+:root td.summary-img-wrap .summary-img,
+:root td.summary-img-wrap .summary-img-thumb {
+  width: 116px;
+  height: 116px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+:root td.summary-img-wrap img {
+  width: 116px;
+  height: 116px;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  border-radius: 14px;
+}
+:root td.table-product-name {
+  grid-column: 2;
+  grid-row: 2;
+  font: 500 13px/18px Montserrat, sans-serif;
+  color: var(--qd-ink);
+}
+:root td.table-price {
+  grid-column: 2;
+  grid-row: 3;
+  padding-top: 15px !important;
+  font: 700 13px/20px Montserrat, sans-serif;
+  color: var(--qd-teal);
+}
+:root td.table-price * {
+  font: inherit;
+  color: inherit;
+}
+
+{#/* ---------- resumo: totais e cupom (367:13824) ---------- */#}
+:root .table-subtotal {
+  padding: 16px 21px 0;
+  border: 0;
+  background: none;
+}
+:root .table-subtotal table {
+  width: 100%;
+  margin: 0;
+}
+:root .table-subtotal tbody,
+:root .table-subtotal tfoot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 0;
+}
+:root .table-subtotal tfoot {
+  margin-top: 8px;
+}
+:root .table-subtotal tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+:root .table-subtotal tfoot tr {
+  align-items: flex-start;
+  padding: 6px 0;
+}
+:root .table-subtotal td {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 500 13px/18.4px Inter, Montserrat, sans-serif;
+  letter-spacing: 0.13px;
+  color: var(--qd-ink-strong);
+}
+:root tr.table-shipping-cost > td:first-child::before {
+  content: "Frete";
+  font: 500 13px/18.4px Inter, Montserrat, sans-serif;
+}
+:root .table-subtotal td.text-right,
+:root .table-subtotal td.text-right * {
+  font: 700 15px/20px Montserrat, sans-serif;
+  letter-spacing: 0;
+  color: var(--qd-ink);
+}
+:root .table-subtotal tfoot td:first-child {
+  font: 500 13px/16.5px Montserrat, sans-serif;
+  color: var(--qd-ink-strong);
+}
+:root .table-subtotal tfoot td.text-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+:root .table-subtotal tfoot td.text-right > span:first-child,
+:root .table-subtotal tfoot td.text-right > span:first-child * {
+  font: 700 19px/20px Montserrat, sans-serif;
+  color: var(--qd-teal);
+}
+:root #secondary-column .summary-coupon {
+  padding: 8px 21px 20px;
+  border: 0;
+}
+{#/* no celular o cupom aparece acima do formulário */#}
+:root .summary-coupon.d-md-none {
+  margin: 0 0 26px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+:root .box-discount-coupon-applied {
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+:root .box-discount-coupon-applied .row,
+:root .box-discount-coupon-applied .col-12 {
+  margin: 0;
+  padding: 0;
+}
+:root .box-discount-coupon-applied .btn-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 42px;
+  padding: 0 1px;
+  border: 1px solid var(--qd-ink);
+  border-radius: 20px;
+  background: none;
+  text-decoration: none;
+  font: 500 13px/16.5px Montserrat, sans-serif;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--qd-ink);
+}
+:root .box-discount-coupon-applied .btn-link > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+:root .box-discount-coupon-applied .btn-link .text-pre-line {
+  text-decoration: none;
+  letter-spacing: 0;
+}
+:root .box-discount-coupon-applied .coupon-icon {
+  display: none;
+}
+:root .box-discount-coupon-applied .btn-link > span::before {
+  content: "";
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: var(--qd-tag) center / 20px no-repeat;
+  mask: var(--qd-tag) center / 20px no-repeat;
+}
+
+{#/* ---------- rodapé do app NubeSDK (363:9230) na largura da tela ---------- */#}
+:root #nube-sdk-slot-after_main_content {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  padding: 0;
+}
+{#/* o app não tem media query: em telas menores o tema reduz as margens e empilha os benefícios.
+   Estrutura do app: rodapé > conteúdo > (benefícios > lista, legal) + faixa em degradê */#}
+@media (max-width: 1199.98px) {
+  :root #nube-sdk-slot-after_main_content > .nube-column {
+    gap: 40px !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column {
+    padding: 40px 24px 0 !important;
+  }
+  :root #nube-sdk-slot-after_main_content .nube-row > .nube-row {
+    gap: 20px 40px !important;
+    padding: 0 0 32px !important;
+  }
+  :root #nube-sdk-slot-after_main_content .nube-row > .nube-row > .nube-box {
+    display: none !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:last-child {
+    margin: 0 !important;
+  }
+}
+@media (max-width: 767.98px) {
+  :root #nube-sdk-slot-after_main_content .nube-row > .nube-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  :root #nube-sdk-slot-after_main_content > .nube-column > .nube-column > .nube-row:last-child {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 20px 0 !important;
+  }
+}
+
+{#/* ---------- celular (o Figma só tem desktop; mesmo estilo, empilhado) ---------- */#}
+@media (max-width: 767.98px) {
+  :root .headbar {
+    height: 70px;
+  }
+  :root .headbar-logo-img {
+    width: 133px;
+    height: 40px;
+  }
+  :root #headbar-right {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  :root #headbar-right::after {
+    margin-right: 0;
+    padding-right: 26px;
+    line-height: 20px;
+    background-size: 20px;
+  }
+  :root #breadcrumb {
+    margin: 24px auto 8px;
+  }
+  :root ul.breadcrumb-timeline {
+    gap: 8px;
+    height: 56px;
+  }
+  :root ul.breadcrumb-timeline > li.breadcrumb-timeline-line {
+    flex-basis: 20px;
+    width: 20px !important;
+  }
+  :root .breadcrumb-timeline-item {
+    height: 56px;
+    padding: 0 4px;
+  }
+  :root .breadcrumb-timeline-item-text {
+    font-size: 13px;
+  }
+  :root .breadcrumb-timeline-item.current .breadcrumb-timeline-item-text::after {
+    top: 32px;
+    height: 3px;
+  }
+  :root .main-container {
+    padding: 0 16px 40px;
+  }
+  :root .panel-header {
+    padding-bottom: 20px;
+    font-size: 18px;
+  }
+  :root #address-form-section > .panel-header {
+    padding-bottom: 0;
+  }
+  :root #address-form-section > .panel-header::before {
+    font-size: 18px;
+  }
+  :root #address-form-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  :root #address-form-section > .form-group:has(input[name="shippingAddress.phone"]) {
+    grid-column: 1 / -1;
+  }
+}
+
 {% endif %}
