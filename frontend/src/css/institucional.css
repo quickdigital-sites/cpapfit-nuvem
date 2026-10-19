@@ -210,3 +210,52 @@ div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
     font-size: 18px !important; line-height: 24px !important;
   }
 }
+
+/* --- Troca, Devolução, Garantia: sanfona (Figma 271:9547) ----------------------------------- */
+.qd-accordion { display: flex; flex-direction: column; gap: 8px; }
+.qd-accordion-item { border: 1px solid #ccc; border-radius: 4px; background: #fff; }
+.qd-accordion-item[open] { border-color: var(--qd-ink); }
+.qd-accordion-item > summary {
+  display: flex; align-items: center; gap: 16px; padding: 10px 16px; min-height: 48px; cursor: pointer; list-style: none;
+  font: 700 13px/18px var(--heading-font); color: var(--qd-ink);
+}
+.qd-accordion-item > summary::-webkit-details-marker { display: none; }
+.qd-accordion-item > summary::before {
+  content: ""; flex: 0 0 20px; height: 20px; background: var(--qd-ink);
+  -webkit-mask: var(--qd-chevron-down) center / 20px no-repeat; mask: var(--qd-chevron-down) center / 20px no-repeat;
+  transition: transform .15s ease;
+}
+.qd-accordion-item[open] > summary::before { transform: rotate(180deg); }
+.qd-accordion-body { display: flex; flex-direction: column; gap: 14px; padding: 4px 16px 16px; }
+.qd-inst-content .qd-accordion-body :is(p, li, span, strong) { font-size: 12px !important; line-height: 20px !important; }
+.qd-inst-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 20px; }
+.qd-inst-cta p { margin: 0; font: 600 15px/1.3 var(--heading-font); color: var(--qd-ink); }
+.qd-inst-cta-btn {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 210px; height: 32px; padding: 0 20px;
+  border: 1px solid var(--qd-ink); border-radius: 30px; color: var(--qd-ink); text-decoration: none;
+  font: 500 11px/1 var(--heading-font); text-transform: uppercase;
+}
+.qd-inst-cta-btn:hover { background: var(--qd-ink); color: #fff; }
+
+/* --- Fale conosco: reCAPTCHA na coluna do formulário -------------------------------------- */
+.qd-contact .g-recaptcha, .qd-contact [class*="recaptcha"] { margin-left: 0 !important; margin-right: auto !important; }
+
+/* --- Quem somos (Figma 271:10421): título "Categorias" visível e marcadores dentro da coluna --- */
+@media (min-width: 768px) {
+  .page-quem-e-a-cpap-fit [data-section-id="categorias"] .d-flex > div:has(> .heading-block) { display: block; width: 100%; text-align: center !important; }
+}
+.page-quem-e-a-cpap-fit .page-content :is(ul, ol):not(:has(> li[style*="list-style"])) { padding-left: 1.25em; list-style-position: outside; }
+
+@media (max-width: 767px) {
+  /* Fale conosco mobile (Figma 305:5991): bloco de contato acima do formulário */
+  .template-contact .qd-inst-aside .qd-footer-contact { display: flex; padding: 16px 0 0; }
+  /* título com divisória no mobile (Figma 305:6364) */
+  .qd-inst-main > .qd-inst-title { padding-bottom: 16px; border-bottom: 1px solid var(--qd-inst-line); }
+  .qd-inst-content :is(p, li) { font-size: 14px !important; line-height: 22px !important; }
+  /* Quem somos: margem de 20px e texto de 14px */
+  .page-quem-e-a-cpap-fit [data-section-id="page_content"] { padding: 30px 0 20px !important; }
+  .page-quem-e-a-cpap-fit [data-section-id="page_content"] > .container { padding-left: 20px; padding-right: 20px; }
+  .page-quem-e-a-cpap-fit .page-content :is(p, li) { font-size: 14px !important; line-height: 22px !important; }
+  /* card de loja no mobile (Figma 271:3987): sem o subtítulo repetido */
+  .qd-store-title p { display: none; }
+}

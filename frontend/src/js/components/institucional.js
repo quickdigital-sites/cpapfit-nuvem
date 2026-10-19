@@ -101,6 +101,34 @@ function cleanContent(root) {
   root.querySelectorAll("font").forEach((f) => f.replaceWith(...f.childNodes));
 }
 
+function buildAccordion(content, main) {
+  const heads = [...content.querySelectorAll(":scope > :is(h2, h3)")];
+  if (!heads.length) return;
+  const list = el("div", "qd-accordion");
+  heads.forEach((h, i) => {
+    const item = el("details", "qd-accordion-item");
+    if (i === 0) item.open = true;
+    const summary = el("summary", "", "");
+    summary.textContent = h.textContent.trim();
+    const body = el("div", "qd-accordion-body");
+    for (let n = h.nextElementSibling; n && !/^H[23]$/.test(n.tagName); ) {
+      const next = n.nextElementSibling;
+      body.append(n);
+      n = next;
+    }
+    item.append(summary, body);
+    h.replaceWith(item);
+    list.append(item);
+  });
+  // os cartões ficam juntos no fim do texto (o que vem antes do 1º título segue como introdução)
+  content.append(list);
+  const cta = el("div", "qd-inst-cta", `<p>Ainda continua com dúvida?</p>`);
+  const link = el("a", "qd-inst-cta-btn", "Fale conosco");
+  link.href = withPreview("/contato/");
+  cta.append(link);
+  main.append(cta);
+}
+
 function initStores(main) {
   const stores = document.querySelector("[data-qd-stores]");
   if (!stores) return;
@@ -254,6 +282,8 @@ export default function initInstitucional() {
     if (content && content.textContent.trim()) {
       content.classList.add("qd-inst-content");
       main.append(content);
+      // Troca, Devolução, Garantia (Figma 271:9547): cada título h2/h3 vira um cartão em sanfona
+      if (current?.paths?.includes("/trocas-e-devolucoes/")) buildAccordion(content, main);
     }
     if (page === "nossas-lojas") initStores(main);
   };
