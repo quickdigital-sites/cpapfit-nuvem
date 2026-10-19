@@ -10,7 +10,7 @@
  */
 const mq = window.matchMedia("(min-width: 768px)");
 // itens por página: vem do {% paginate %} de theme/sections/main-products-grid.tpl (data-per-page)
-const perPage = () => parseInt(document.querySelector("[data-per-page]")?.dataset.perPage, 10) || 24;
+const perPage = () => parseInt(document.querySelector("[data-per-page]")?.dataset.perPage, 10) || 60;
 
 function buildHead(grid) {
   const header = document.querySelector(".page-header");
