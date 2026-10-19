@@ -14,6 +14,8 @@ TOKEN_FLAG=(); [ -n "${NUVEMSHOP_CLI_TOKEN:-}" ] && TOKEN_FLAG=(--token "$NUVEMS
 
 echo ">> build do frontend"
 ( cd frontend && npm run build )
+# não apagar o que foi editado no editor da Nuvemshop (FORCE_CONTENT=1 para mandar o conteúdo do repo)
+scripts/sync-content.sh "$THEME_ID"
 cd theme
 echo ">> diff ($ENV_NAME / theme $THEME_ID)"
 nuvemshop theme diff --theme-id "$THEME_ID" "${TOKEN_FLAG[@]}"

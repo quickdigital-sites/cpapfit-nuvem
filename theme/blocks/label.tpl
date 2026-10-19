@@ -34,8 +34,10 @@
 
 {% schema %}
 {
-  "name": "t:names.label",
-  "tags": ["general"],
+  "name": "Etiqueta",
+  "tags": [
+    "general"
+  ],
   "category": "basic",
   "icon": "FlagIcon",
   "settings": [
@@ -43,55 +45,9 @@
       "type": "setting",
       "setting_type": "text",
       "id": "text",
-      "label": "t:settings.label_text",
-      "default": "t:defaults.label"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "variant",
-      "label": "t:settings.style",
-      "options": [
-        { "value": "primary", "label": "t:settings.primary_label" },
-        { "value": "secondary", "label": "t:settings.secondary_label" }
-      ],
-      "default": "primary"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_background_color",
-      "label": "t:settings.background",
-      "default_setting": "label_background_color",
-      "visible_if": "{{ block.settings.variant == 'primary' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_text_color",
-      "label": "t:settings.text_color",
-      "default_setting": "label_foreground_color",
-      "visible_if": "{{ block.settings.variant == 'primary' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_background_color_secondary",
-      "label": "t:settings.background",
-      "default_setting": "label_shipping_background_color",
-      "visible_if": "{{ block.settings.variant == 'secondary' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_text_color_secondary",
-      "label": "t:settings.text_color",
-      "default_setting": "label_shipping_foreground_color",
-      "visible_if": "{{ block.settings.variant == 'secondary' }}"
+      "label": "Texto da etiqueta",
+      "default": "t:defaults.label",
+      "info": "No banner principal é o código do cupom (ex.: QUERO200). Vazio: não aparece."
     }
   ],
   "presets": [

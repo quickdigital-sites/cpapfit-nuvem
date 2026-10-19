@@ -22,7 +22,7 @@ html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .templ
 /* Seções do page.json que só servem a Quem somos */
 .template-page:not(.page-quem-e-a-cpap-fit) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
   [data-section-id="servicos"], [data-section-id="videos"], [data-section-id="marcas"]) { display: none !important; }
-[data-section-id="cmp_nossas_lojas"] { display: none !important; } /* conteúdo vai para a coluna (JS) */
+[data-section-id="qd_stores"] { display: none !important; } /* Lojas físicas: a lista vai para a coluna (JS) */
 /* o título vai para a coluna de conteúdo (JS); em Quem somos, a faixa já tem o título */
 :is(.template-page, .template-contact) [data-section-id="heading"],
 .qd-inst-source { display: none !important; }
@@ -112,6 +112,7 @@ html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .templ
 .qd-store-address { font-size: 12px; font-weight: 500; line-height: 20px; color: var(--qd-inst-text); }
 .qd-store-label { font-size: 13px; font-weight: 700; line-height: 18px; color: var(--qd-inst-navy); }
 .qd-store-value { font-size: 13px; font-weight: 500; line-height: 18px; color: #4a5568; }
+.qd-store-value p { margin: 0; font: inherit; color: inherit; } /* horário vem do editor com <p> */
 .qd-store-email { font-size: 12px; font-weight: 500; line-height: 20px; color: var(--qd-dark); }
 .qd-store a { color: inherit; text-decoration: none; }
 .qd-store-actions { display: flex; gap: 10px; padding-top: 20px; border-top: 1px solid var(--qd-hairline); }

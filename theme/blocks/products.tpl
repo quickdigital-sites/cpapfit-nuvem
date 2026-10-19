@@ -85,7 +85,7 @@
 
 {% schema %}
 {
-  "name": "t:names.products",
+  "name": "Produtos",
   "icon": "ListIcon",
   "deletable": false,
   "limit": 1,
@@ -94,78 +94,23 @@
       "type": "setting",
       "setting_type": "product_list",
       "id": "products_source",
-      "label": "t:settings.product_source",
-      "default": {"kind": "collection", "id": "primary"}
+      "label": "Quais produtos mostrar",
+      "default": {
+        "kind": "collection",
+        "id": "primary"
+      },
+      "info": "Escolha uma categoria (ex.: Máscaras) ou uma lista da loja (ex.: Produtos em destaque, marcados no cadastro do produto)."
     },
     {
       "type": "setting",
       "setting_type": "range",
       "id": "max_products",
-      "label": "t:settings.max_products",
+      "label": "Quantos produtos",
       "min": 1,
       "max": 20,
       "step": 1,
-      "default": 12
-    },
-    {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "format",
-      "label": "t:settings.format",
-      "options": [
-        { "value": "grid", "label": "t:options.grid" },
-        { "value": "slider", "label": "t:options.slider" }
-      ],
-      "default": "grid"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_format",
-      "label": "t:settings.use_different_mobile_format",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "format_mobile",
-      "label": "t:settings.format_mobile",
-      "options": [
-        { "value": "grid", "label": "t:options.grid" },
-        { "value": "slider", "label": "t:options.slider" }
-      ],
-      "default": "slider",
-      "visible_if": "{{ block.settings.use_different_mobile_format }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "columns",
-      "label": "t:settings.columns_desktop",
-      "icon": "desktop",
-      "options": [
-        { "value": "3", "label": "t:options.columns_3" },
-        { "value": "4", "label": "t:options.columns_4" },
-        { "value": "5", "label": "t:options.columns_5" },
-        { "value": "6", "label": "t:options.columns_6" }
-      ],
-      "default": "4"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "columns_mobile",
-      "label": "t:settings.columns_mobile",
-      "icon": "mobile",
-      "options": [
-        { "value": "1", "label": "t:options.columns_1" },
-        { "value": "2", "label": "t:options.columns_2" }
-      ],
-      "default": "2"
+      "default": 12,
+      "info": "Até quantos produtos aparecem na fileira."
     }
   ]
 }

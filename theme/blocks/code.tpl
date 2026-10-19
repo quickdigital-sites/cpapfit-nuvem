@@ -11,30 +11,22 @@
 
 {% schema %}
 {
-  "name": "t:names.code",
+  "name": "Conteúdo feito pela agência",
   "icon": "CodeIcon",
-  "tags": ["general"],
+  "tags": [
+    "general"
+  ],
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "Código da página. Não altere: peça mudanças à agência."
+    },
     {
       "type": "setting",
       "setting_type": "custom_code",
       "id": "code",
-      "label": "t:settings.code"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "fit", "label": "t:options.fit" },
-        { "value": "fill", "label": "t:options.fill" }
-      ],
-      "default": "fill"
+      "label": "Código (não altere)",
+      "info": "Alterar este campo pode quebrar a seção."
     }
   ]
 }

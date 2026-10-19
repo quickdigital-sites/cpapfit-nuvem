@@ -85,6 +85,9 @@
     "label_border_radius": 0,
     "label_shipping_border_radius": 0,
     "qd_pdp_coupon_text": "R$ 100 OFF na linha Philips",
-    "qd_pdp_coupon_code": "QUERO100"
+    "qd_pdp_coupon_code": "QUERO100",
+    "button_tertiary_background_color": "transparent",
+    "label_style": "filled",
+    "label_shipping_style": "filled"
   }
 }

@@ -73,141 +73,43 @@
 
 {% schema %}
 {
-  "name": "t:names.navigation_bar",
+  "name": "Barra de benefícios (faixa azul)",
   "icon": "TabletIcon",
   "class": "section-navigation-bar",
   "limit": 3,
   "max_blocks": 3,
   "blocks": [
-    { "type": "nav-announcements", "limit": 2 },
-    { "type": "nav-social", "limit": 1 },
-    { "type": "nav-contact", "limit": 1 },
-    { "type": "nav-menu", "limit": 2 },
-    { "type": "nav-icon-text-group", "limit": 2 }
+    {
+      "type": "nav-announcements",
+      "limit": 2
+    },
+    {
+      "type": "nav-social",
+      "limit": 1
+    },
+    {
+      "type": "nav-contact",
+      "limit": 1
+    },
+    {
+      "type": "nav-menu",
+      "limit": 2
+    },
+    {
+      "type": "nav-icon-text-group",
+      "limit": 2
+    }
   ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "mobile_placement",
-      "label": "t:settings.navbar_mobile_placement",
-      "options": [
-        { "value": "header", "label": "t:options.navbar_mobile_in_header" },
-        { "value": "menu", "label": "t:options.navbar_mobile_in_menu" }
-      ],
-      "default": "header"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "item_gap",
-      "label": "t:settings.navbar_item_gap",
-      "min": 0,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_spacing"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 8,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_spacing",
-      "label": "t:settings.use_different_mobile_padding",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "mobile_vertical_padding",
-      "label": "t:settings.vertical_padding_mobile",
-      "min": 0,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 16,
-      "icon": "vertical_padding",
-      "visible_if": "{{ section.settings.use_different_mobile_spacing }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "mobile_horizontal_padding",
-      "label": "t:settings.horizontal_padding_mobile",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 20,
-      "icon": "horizontal_padding",
-      "visible_if": "{{ section.settings.use_different_mobile_spacing }}",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "background_color",
-      "label": "t:settings.background",
-      "default": "#000000"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "text_color",
-      "label": "t:settings.text",
-      "default": "#ffffff"
+      "type": "paragraph",
+      "content": "Faixa azul abaixo do menu. Cada benefício é um item no bloco \"Ícones com texto\"."
     }
   ],
   "enabled_on": {
-    "layout_templates": ["header"]
+    "layout_templates": [
+      "header"
+    ]
   },
   "presets": [
     {
@@ -224,21 +126,31 @@
       "blocks": [
         {
           "type": "nav-announcements",
-          "settings": { "alignment": "left", "gap": 16 },
+          "settings": {
+            "alignment": "left",
+            "gap": 16
+          },
           "blocks": [
             {
               "type": "announcement",
-              "settings": { "text": "t:defaults.announcements.announcement_1" }
+              "settings": {
+                "text": "t:defaults.announcements.announcement_1"
+              }
             },
             {
               "type": "announcement",
-              "settings": { "text": "t:defaults.announcements.announcement_2" }
+              "settings": {
+                "text": "t:defaults.announcements.announcement_2"
+              }
             }
           ]
         },
         {
           "type": "nav-social",
-          "settings": { "alignment": "right", "gap": 16 }
+          "settings": {
+            "alignment": "right",
+            "gap": 16
+          }
         }
       ]
     }

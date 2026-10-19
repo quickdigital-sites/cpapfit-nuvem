@@ -7,7 +7,7 @@
  *  - Título da página no topo da coluna de conteúdo (o page-header nativo é escondido).
  *  - Conteúdo do admin: tira os estilos inline do editor (fonte/tamanho/cor) para seguir o tema.
  *  - Quem somos: sem coluna lateral; faixa + vitrines da home (seções do page.json, CSS).
- *  - Nossas lojas: cards do componente nossas-lojas + filtro por estado.
+ *  - Nossas lojas: cards da seção "Lojas físicas" (theme/sections/qd-stores.tpl) + filtro por estado.
  *  - Fale conosco: campos do Figma (motivo, cidade, estado, assunto). O formulário nativo só envia
  *    nome/e-mail/telefone/mensagem, então os campos extras vão no começo da mensagem.
  */

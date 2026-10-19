@@ -14,7 +14,8 @@
       "settings": {
         "section_width": "page",
         "vertical_padding": 0,
-        "horizontal_padding": 32
+        "horizontal_padding": 32,
+        "background_color": "transparent"
       }
     },
     "product_list": {

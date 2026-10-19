@@ -116,13 +116,20 @@ function mergeNode(base, over, path) {
 
 // ---------------------------------------------------------------------------
 
+const CUSTOM_DEFAULTS = {
+  direction: "row", mobile_direction_enabled: true, mobile_direction: "column", alignment: "start",
+  custom_background_color: "transparent",
+};
+
 function componentSection(name, entry) {
   const file = resolve(COMPONENTS_DIR, `${name}.html`);
   if (!existsSync(file)) throw new Error(`componente não encontrado: design/components/${name}.html`);
   const html = resolveAssets(readFileSync(file, "utf8").replace(/<!--[\s\S]*?-->/g, "").trim());
   return {
     type: "custom",
-    settings: { section_width: "full", vertical_padding: 0, horizontal_padding: 0, gap: 0, ...(entry.settings ?? {}) },
+    // os campos de layout da seção "custom" saíram do editor (settings_schema enxuto): os padrões antigos
+    // ficam gravados aqui, senão o Twig cairia em outro valor e o layout mudaria
+    settings: { ...CUSTOM_DEFAULTS, section_width: "full", vertical_padding: 0, horizontal_padding: 0, gap: 0, ...(entry.settings ?? {}) },
     blocks: { code: { type: "code", settings: { code: html, width: "fill" } } },
     block_order: ["code"],
   };

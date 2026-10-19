@@ -78,7 +78,7 @@
 
 {% schema %}
 {
-  "name": "t:names.footer",
+  "name": "Rodapé",
   "icon": "FooterIcon",
   "wrapper": "footer",
   "class": "section-footer",
@@ -92,115 +92,39 @@
   ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "background_color",
-      "label": "t:settings.background",
-      "default_setting": "text_color"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "text_color",
-      "label": "t:settings.text",
-      "default_setting": "background_color"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:content.menus"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "menus_toggle",
-      "label": "t:settings.menus_toggle",
-      "info": "t:info.menus_toggle",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:content.shipping_and_payments"
-    },
-    {
       "type": "setting",
       "setting_type": "toggle",
       "id": "footer_payments_show",
-      "label": "t:settings.footer_payments_show",
+      "label": "Mostrar as formas de pagamento",
       "default": true
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "footer_shipping_show",
-      "label": "t:settings.footer_shipping_show",
+      "label": "Mostrar as formas de envio",
       "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:content.custom_seals"
     },
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "footer_seal_img",
-      "label": "t:settings.footer_seal_img"
+      "label": "Selo próprio (imagem)",
+      "info": "Ex.: selo de site seguro. Recomendado: 200 × 80 px, PNG."
     },
     {
       "type": "setting",
       "setting_type": "url",
       "id": "footer_seal_url",
-      "label": "t:settings.footer_seal_url",
+      "label": "Link do selo",
       "visible_if": "{{ section.settings.footer_seal_img }}"
     },
     {
       "type": "setting",
       "setting_type": "custom_code",
       "id": "footer_custom_seal_code",
-      "label": "t:settings.footer_custom_seal_code"
+      "label": "Código de selo de terceiros",
+      "info": "Cole o código fornecido pela empresa do selo (ex.: Reclame Aqui)."
     }
   ],
   "default": {
@@ -222,7 +146,9 @@
     ]
   },
   "enabled_on": {
-    "layout_templates": ["footer"]
+    "layout_templates": [
+      "footer"
+    ]
   }
 }
 {% endschema %}

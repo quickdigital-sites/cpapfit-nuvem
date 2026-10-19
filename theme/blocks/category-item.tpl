@@ -48,27 +48,29 @@
 
 {% schema %}
 {
-  "name": "t:names.category",
+  "name": "Categoria",
   "icon": "link",
   "settings": [
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "image",
-      "label": "t:names.image",
-      "visible_if": "{{ block.parent.settings.category_type == 'image_thumbnail' }}"
+      "label": "Imagem",
+      "info": "Quadrada, 400 × 400 px, JPG, WebP ou PNG. Categorias e serviços: foto do produto em fundo branco. Marcas: logo em PNG com fundo transparente. A imagem é recortada em círculo."
     },
     {
       "type": "setting",
       "setting_type": "richtext",
       "id": "text",
-      "label": "t:names.text"
+      "label": "Nome",
+      "info": "Texto abaixo da imagem. Curto, ex.: Máscaras."
     },
     {
       "type": "setting",
       "setting_type": "url",
       "id": "link",
-      "label": "t:settings.link"
+      "label": "Link",
+      "info": "Página aberta ao clicar. Use o endereço da loja, ex.: /mascaras/ ou /produtos/?brand=Resmed."
     }
   ]
 }

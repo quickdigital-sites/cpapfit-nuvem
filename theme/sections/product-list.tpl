@@ -56,7 +56,15 @@
    frontend/src/js/components/home-tabs.js busca essa página quando o visitante vai usar as abas e monta o
    carrossel com os primeiros cards. (Query string não serve: o cache da plataforma a ignora.)
    No Brand Editor (is_preview) renderiza tudo, para dar para editar. #}
-{% set qd_lazy_tab = template == 'home' and not is_preview and view_all_url and section.id in ['destaques_2', 'destaques_3', 'destaques_4', 'destaques_5', 'destaques_6'] %}
+{# CPAP Fit: "Nome da aba" (campo da seção) transforma esta vitrine numa aba dos Destaques da home.
+   home-tabs.js monta os botões das abas a partir destes marcadores, na ordem da página. #}
+{% set qd_tab_label = section.settings.tab_label | default('') | trim %}
+
+{% set qd_lazy_tab = template == 'home' and not is_preview and view_all_url and qd_tab_label and section.id != 'destaques_1' %}
+
+{% if template == 'home' and qd_tab_label %}
+	<span hidden data-qd-tab-label="{{ qd_tab_label }}" data-qd-tab-for="{{ section.id }}" data-qd-tab-href="{{ view_all_url | default(store.products_url) }}"></span>
+{% endif %}
 
 {# Hide the section when theres nothing to show. Placeholders kick in for preview or when the store has zero active products at all. #}
 {% if qd_lazy_tab %}
@@ -87,12 +95,16 @@
 
 {% schema %}
 {
-  "name": "t:names.featured_products",
+  "name": "Vitrine de produtos",
   "icon": "TagIcon",
   "add_section_order": 5,
   "class": "section section-product-list",
   "blocks": [
-    { "tags": ["general"] },
+    {
+      "tags": [
+        "general"
+      ]
+    },
     {
       "type": "products",
       "limit": 1
@@ -104,83 +116,15 @@
   ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.disposition"
+      "type": "paragraph",
+      "content": "Fileira de produtos que passa para o lado. Escolha os produtos no bloco \"Produtos\"."
     },
     {
       "type": "setting",
-      "setting_type": "text_alignment",
-      "id": "alignment",
-      "label": "t:settings.alignment",
-      "options": [
-        { "value": "left", "label": "t:options.left" },
-        { "value": "center", "label": "t:options.center" },
-        { "value": "right", "label": "t:options.right" }
-      ],
-      "default": "left"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "gap",
-      "label": "t:settings.gap",
-      "min": 0,
-      "max": 50,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "vertical_spacing"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 64,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "background_color",
-      "label": "t:settings.background",
-      "default": "transparent"
+      "setting_type": "text",
+      "id": "tab_label",
+      "label": "Nome da aba (só nos Destaques da página inicial)",
+      "info": "Preenchido: esta vitrine vira uma aba de \"Destaques\", na ordem em que aparece na página. Ex.: Máscaras. Vazio: a vitrine aparece sozinha, com o título dela."
     }
   ],
   "presets": [
@@ -218,7 +162,10 @@
         {
           "type": "products",
           "settings": {
-            "products_source": {"kind": "collection", "id": "primary"},
+            "products_source": {
+              "kind": "collection",
+              "id": "primary"
+            },
             "format": "grid",
             "columns": "4",
             "columns_mobile": "2"
@@ -260,7 +207,10 @@
         {
           "type": "products",
           "settings": {
-            "products_source": {"kind": "category", "id": "0"},
+            "products_source": {
+              "kind": "category",
+              "id": "0"
+            },
             "format": "slider",
             "columns": "4",
             "columns_mobile": "2"
@@ -287,7 +237,10 @@
         {
           "type": "products",
           "settings": {
-            "products_source": {"kind": "category", "id": "0"},
+            "products_source": {
+              "kind": "category",
+              "id": "0"
+            },
             "format": "slider",
             "columns": "5",
             "columns_mobile": "2"
@@ -320,7 +273,10 @@
         {
           "type": "products",
           "settings": {
-            "products_source": {"kind": "collection", "id": "primary"},
+            "products_source": {
+              "kind": "collection",
+              "id": "primary"
+            },
             "format": "grid",
             "columns": "3",
             "columns_mobile": "1"

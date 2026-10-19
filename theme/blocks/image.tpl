@@ -66,50 +66,39 @@
 
 {% schema %}
 {
-  "name": "t:names.image",
-  "tags": ["general"],
+  "name": "Imagem",
+  "tags": [
+    "general"
+  ],
   "category": "basic",
   "settings": [
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "image",
-      "label": "t:settings.image"
+      "label": "Imagem",
+      "info": "No banner principal e nas linhas: logo da marca em PNG com fundo transparente, 240 × 80 px."
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "use_mobile_image",
-      "label": "t:settings.use_mobile_image",
+      "label": "Usar outra imagem no celular",
       "default": false
     },
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "image_mobile",
-      "label": "t:settings.image_mobile",
+      "label": "Imagem para celular",
       "visible_if": "{{ block.settings.use_mobile_image }}"
     },
     {
       "type": "setting",
       "setting_type": "url",
       "id": "link",
-      "label": "t:settings.link"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "fit", "label": "t:options.fit" },
-        { "value": "fill", "label": "t:options.fill" }
-      ],
-      "default": "fill"
+      "label": "Link da imagem",
+      "info": "Página aberta ao clicar. Use o endereço da loja, ex.: /mascaras/ ou /produtos/?brand=Resmed."
     }
   ],
   "presets": [

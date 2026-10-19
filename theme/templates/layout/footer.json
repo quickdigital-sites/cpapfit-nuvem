@@ -5,11 +5,15 @@
     "cmp_footer_topo": {
       "type": "custom",
       "settings": {
+        "direction": "row",
+        "mobile_direction_enabled": true,
+        "mobile_direction": "column",
+        "alignment": "start",
+        "custom_background_color": "#2F3295",
         "section_width": "full",
         "vertical_padding": 0,
         "horizontal_padding": 0,
-        "gap": 0,
-        "custom_background_color": "#2F3295"
+        "gap": 0
       },
       "blocks": {
         "code": {
@@ -68,11 +72,15 @@
     "cmp_footer_base": {
       "type": "custom",
       "settings": {
+        "direction": "row",
+        "mobile_direction_enabled": true,
+        "mobile_direction": "column",
+        "alignment": "start",
+        "custom_background_color": "#2F3295",
         "section_width": "full",
         "vertical_padding": 0,
         "horizontal_padding": 0,
-        "gap": 0,
-        "custom_background_color": "#2F3295"
+        "gap": 0
       },
       "blocks": {
         "code": {

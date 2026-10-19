@@ -7,7 +7,7 @@
 # frontend/src/js/components/institucional.js a partir do slug da URL. As seções abaixo que só
 # servem a uma página ficam escondidas por CSS fora dela (frontend/src/css/institucional.css):
 #   - quem_somos_hero, categorias, servicos, videos, marcas → só em Quem somos
-#   - cmp_nossas_lojas → só em Nossas lojas
+#   - qd_stores (Lojas físicas) → só em Nossas lojas
 # categorias/servicos/videos/marcas usam os MESMOS ids da home para herdar o CSS de home.css.
 unlisted: keep
 
@@ -58,7 +58,24 @@ sections:
     settings: { section_width: page, vertical_padding: 0 }
 
   # Nossas lojas — cards das lojas físicas (dados no componente)
-  - component: nossas-lojas
+  - native: qd_stores
+    type: qd-stores
+    block_order: [loja_1]
+    blocks:
+      loja_1:
+        type: qd-store
+        settings:
+          name: Florianópolis - SC
+          uf: SC
+          image: "asset:institucional/loja.webp"
+          subtitle: SC / Florianópolis
+          address: Rua Emílio Blum, 131 - Ed. Hantei Torre A, Sala 206
+          address_2: Centro, Florianópolis - SC, 88020-010
+          hours: "<p>Seg. a Sex. das 09h às 18h<br>Sáb das 09h às 12h30</p>"
+          phone: (48) 4042-1861
+          email: atendimento@cpapfit.com.br
+          whatsapp: "554840421861"
+          map_url: "https://www.google.com/maps/search/?api=1&query=Rua+Em%C3%ADlio+Blum+131+Florian%C3%B3polis+SC+88020-010"
 
   # Quem somos — mesmas vitrines da home
   - native: categorias

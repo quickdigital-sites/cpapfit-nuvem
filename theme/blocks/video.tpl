@@ -81,80 +81,33 @@
 
 {% schema %}
 {
-  "name": "t:names.video",
+  "name": "Vídeo",
   "icon": "PlayIcon",
   "settings": [
     {
       "type": "setting",
       "setting_type": "video_url",
       "id": "video_url",
-      "label": "t:settings.video_url",
+      "label": "Link do vídeo",
       "icon": "VideoIcon",
-      "info": "t:info.video_url"
+      "info": "Cole o link do YouTube (ex.: https://www.youtube.com/watch?v=...). Sem link, o card mostra só a capa."
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "show_cover_image",
-      "label": "t:settings.video_cover_image",
-      "info": "t:info.video_cover_image",
+      "label": "Usar uma capa própria",
       "default": true,
-      "header_toggle": true
+      "header_toggle": true,
+      "info": "Sem capa própria, usa a imagem do YouTube."
     },
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "cover_image",
-      "label": "t:settings.image",
-      "visible_if": "{{ block.settings.show_cover_image }}"
-    },
-	{
-      "type": "header",
-      "content": "t:names.video_properties"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "video_type",
-      "label": "t:settings.video_type",
-      "options": [
-        { "value": "autoplay", "label": "t:options.autoplay" },
-        { "value": "manual", "label": "t:options.manual" }
-      ],
-      "default": "autoplay"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "aspect_ratio",
-      "label": "t:settings.format",
-      "options": [
-        { "value": "16by9", "label": "t:options.aspect_panoramic" },
-        { "value": "4by3", "label": "t:options.aspect_horizontal" },
-        { "value": "1by1", "label": "t:options.aspect_square" }
-      ],
-      "default": "16by9"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_format",
-      "label": "t:settings.use_different_mobile_format",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "format_mobile",
-      "label": "t:settings.format_mobile",
-      "options": [
-        { "value": "16by9", "label": "t:options.aspect_panoramic" },
-        { "value": "4by3", "label": "t:options.aspect_horizontal" },
-        { "value": "1by1", "label": "t:options.aspect_square" },
-        { "value": "9by16", "label": "t:options.aspect_vertical_portrait" }
-      ],
-      "default": "16by9",
-      "visible_if": "{{ block.settings.use_different_mobile_format }}"
+      "label": "Capa do vídeo",
+      "visible_if": "{{ block.settings.show_cover_image }}",
+      "info": "Vertical, 512 × 908 px, JPG ou WebP."
     }
   ],
   "presets": [

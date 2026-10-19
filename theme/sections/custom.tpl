@@ -78,134 +78,20 @@
 
 {% schema %}
 {
-  "name": "t:names.custom",
+  "name": "Bloco montado pela agência",
   "icon": "LayoutIcon",
   "class": "section section-custom-container",
   "blocks": [
-    { "tags": ["general"] }
+    {
+      "tags": [
+        "general"
+      ]
+    }
   ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "direction",
-      "label": "t:settings.direction",
-      "options": [
-        { "value": "column", "label": "t:options.vertical", "icon": "ArrowDownIcon" },
-        { "value": "row", "label": "t:options.horizontal", "icon": "ArrowRightIcon" }
-      ],
-      "default": "row"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "mobile_direction_enabled",
-      "label": "t:settings.mobile_direction",
-      "default": true
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "mobile_direction",
-      "label": "t:settings.mobile_direction_value",
-      "options": [
-        { "value": "column", "label": "t:options.vertical", "icon": "ArrowDownIcon" },
-        { "value": "row", "label": "t:options.horizontal", "icon": "ArrowRightIcon" }
-      ],
-      "default": "column",
-      "visible_if": "{{ section.settings.mobile_direction_enabled }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "alignment",
-      "id": "alignment",
-      "label": "t:settings.alignment",
-      "options": [
-        { "value": "start", "label": "t:options.left" },
-        { "value": "center", "label": "t:options.center" },
-        { "value": "end", "label": "t:options.right" }
-      ],
-      "default": "start",
-      "vertical_options": [
-        { "value": "top", "label": "t:options.top" },
-        { "value": "center", "label": "t:options.center" },
-        { "value": "bottom", "label": "t:options.bottom" }
-      ],
-      "vertical_default": "center"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "gap",
-      "label": "t:settings.gap",
-      "min": 0,
-      "max": 50,
-      "step": 4,
-      "unit": "px",
-      "default": 16,
-      "icon": "vertical_spacing"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 64,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_background_color",
-      "label": "t:settings.background",
-      "default": "transparent"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_text_color",
-      "label": "t:settings.text_color",
-      "default_setting": "text_color"
+      "type": "paragraph",
+      "content": "Seção com conteúdo próprio. Textos e imagens ficam nos blocos abaixo."
     }
   ],
   "presets": [
@@ -221,8 +107,19 @@
             "horizontal_padding": 0
           },
           "blocks": [
-            { "type": "heading", "settings": { "title": "t:defaults.heading", "size": "h4" } },
-            { "type": "text", "settings": { "text": "t:defaults.text" } }
+            {
+              "type": "heading",
+              "settings": {
+                "title": "t:defaults.heading",
+                "size": "h4"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "t:defaults.text"
+              }
+            }
           ]
         },
         {

@@ -109,171 +109,38 @@
 
 {% schema %}
 {
-  "name": "t:names.utilities",
+  "name": "Busca, Planos, lojas, conta e carrinho",
   "icon": "SearchIcon",
   "limit": 1,
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "format",
-      "label": "t:settings.format_desktop",
-      "options": [
-        { "value": "icons_text", "label": "t:options.icons_with_text" },
-        { "value": "icons", "label": "t:options.icons_only" }
-      ],
-      "default": "icons"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "search_type",
-      "label": "t:settings.search_type",
-      "options": [
-        { "value": "expanded", "label": "t:options.expanded" },
-        { "value": "icon", "label": "t:options.icon_search" }
-      ],
-      "default": "icon"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_search",
-      "label": "t:settings.use_different_mobile_search",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "search_type_mobile",
-      "label": "t:settings.search_type",
-      "options": [
-        { "value": "expanded", "label": "t:options.expanded" },
-        { "value": "icon", "label": "t:options.icon_search" }
-      ],
-      "default": "expanded",
-      "visible_if": "{{ block.settings.use_different_mobile_search }}"
-    },
-    {
-      "type": "header",
-      "content": "Planos de assinatura"
-    },
-    {
       "type": "setting",
       "setting_type": "text",
       "id": "plans_title",
-      "label": "Título",
-      "default": "Planos de assinatura"
+      "label": "Título da pílula de Planos",
+      "default": "Planos de assinatura",
+      "info": "Ex.: Planos de assinatura."
     },
     {
       "type": "setting",
       "setting_type": "text",
       "id": "plans_subtitle",
-      "label": "Subtítulo"
+      "label": "Subtítulo da pílula de Planos",
+      "info": "Ex.: Descontos e benefícios exclusivos!"
     },
     {
       "type": "setting",
       "setting_type": "url",
       "id": "plans_url",
-      "label": "Link (vazio esconde a pílula)"
-    },
-    {
-      "type": "header",
-      "content": "Lojas físicas"
+      "label": "Link da pílula de Planos",
+      "info": "Página dos planos, ex.: /planos-de-assinatura/. Vazio: a pílula some."
     },
     {
       "type": "setting",
       "setting_type": "url",
       "id": "stores_url",
-      "label": "Link do ícone de localização (vazio esconde)"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "cart_icon",
-      "label": "t:settings.cart_icon",
-      "options": [
-        { "value": "bag", "label": "t:options.bag" },
-        { "value": "cart", "label": "t:options.cart" }
-      ],
-      "default": "bag"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "icon_size",
-      "label": "t:settings.icon_size",
-      "min": 16,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 20,
-      "icon": "horizontal_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_size",
-      "label": "t:settings.use_different_mobile_size",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "icon_size_mobile",
-      "label": "t:settings.icon_size",
-      "min": 16,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 20,
-      "icon": "horizontal_padding",
-      "visible_if": "{{ block.settings.use_different_mobile_size }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "items_gap",
-      "label": "t:settings.items_gap",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 20,
-      "icon": "horizontal_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "show_account_mobile",
-      "label": "t:settings.show_account_mobile",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "show_languages_header",
-      "label": "t:settings.show_languages_header",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:content.icon_colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "icon_foreground_color",
-      "label": "t:settings.icon",
-      "default_setting": "text_color"
+      "label": "Link do ícone de localização",
+      "info": "Página das lojas físicas, ex.: /nossas-lojas/. Vazio: o ícone some."
     }
   ]
 }

@@ -11,14 +11,19 @@
         "section_width": "full",
         "gap": 32,
         "horizontal_padding": 16,
-        "background_color": "transparent"
+        "background_color": "transparent",
+        "vertical_padding": 64
       },
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
             "title": "Seu título aqui",
-            "size": "h3"
+            "size": "h3",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "products": {
@@ -27,7 +32,9 @@
             "products_source": null,
             "format": "grid",
             "columns": "4",
-            "columns_mobile": "2"
+            "columns_mobile": "2",
+            "use_different_mobile_format": false,
+            "format_mobile": "slider"
           }
         }
       },

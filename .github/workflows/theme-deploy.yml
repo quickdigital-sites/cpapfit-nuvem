@@ -23,6 +23,10 @@ on:
         description: "Publicar o tema de PROD (ativa na loja)"
         type: boolean
         default: false
+      force_content:
+        description: "Enviar também o conteúdo do repositório (APAGA o que foi editado no editor da loja)"
+        type: boolean
+        default: false
 
 concurrency:
   group: theme-deploy-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
@@ -51,6 +55,13 @@ jobs:
 
       - name: Instalar a CLI da Nuvemshop
         run: npm install -g @tiendanube/cli
+
+      - name: Preservar o conteúdo editado no editor da loja
+        env:
+          NUVEMSHOP_CLI_TOKEN: ${{ secrets.NUVEMSHOP_CLI_TOKEN }}
+          THEME_ID_HOMOLOG: ${{ secrets.THEME_ID_HOMOLOG }}
+        run: |
+          if [ -n "${THEME_ID_HOMOLOG:-}" ]; then scripts/sync-content.sh "$THEME_ID_HOMOLOG"; fi
 
       - name: Diff + push em HOMOLOG
         working-directory: theme
@@ -100,6 +111,15 @@ jobs:
 
       - name: Instalar a CLI da Nuvemshop
         run: npm install -g @tiendanube/cli
+
+      - name: Preservar o conteúdo editado no editor da loja
+        # o editor da Nuvemshop é a fonte dos textos/imagens; o push leva só código (ver scripts/sync-content.sh)
+        env:
+          NUVEMSHOP_CLI_TOKEN: ${{ secrets.NUVEMSHOP_CLI_TOKEN }}
+          THEME_ID_PROD: ${{ secrets.THEME_ID_PROD }}
+          FORCE_CONTENT: ${{ github.event_name == 'workflow_dispatch' && inputs.force_content && '1' || '0' }}
+        run: |
+          if [ -n "${THEME_ID_PROD:-}" ]; then scripts/sync-content.sh "$THEME_ID_PROD"; fi
 
       - name: Push em PROD
         working-directory: theme

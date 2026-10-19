@@ -9,7 +9,12 @@
         "horizontal_padding": 32,
         "background_color": "#2F3295",
         "text_color": "#FEFDFC",
-        "vertical_padding": 10
+        "vertical_padding": 10,
+        "mobile_placement": "header",
+        "item_gap": 32,
+        "use_different_mobile_spacing": false,
+        "mobile_vertical_padding": 16,
+        "mobile_horizontal_padding": 20
       },
       "blocks": {
         "nav_icon_text": {
@@ -78,7 +83,11 @@
         "vertical_padding_mobile": 16,
         "horizontal_padding_mobile": 28,
         "background_color": "#FFFFFF",
-        "text_color": "#000066"
+        "text_color": "#000066",
+        "use_different_mobile_position": false,
+        "logo_position_mobile": "center",
+        "head_fix_desktop": true,
+        "transparent_header": false
       },
       "blocks": {
         "logo": {
@@ -99,7 +108,14 @@
             "plans_title": "Planos de assinatura",
             "plans_subtitle": "Descontos e benefícios exclusivos!",
             "plans_url": "/planos-de-assinatura/",
-            "stores_url": "/nossas-lojas/"
+            "stores_url": "/nossas-lojas/",
+            "use_different_mobile_search": false,
+            "search_type_mobile": "expanded",
+            "icon_size": 20,
+            "use_different_mobile_size": false,
+            "icon_size_mobile": 20,
+            "items_gap": 20,
+            "show_account_mobile": false
           }
         },
         "navigation": {
@@ -115,7 +131,8 @@
             "show_featured_link": true,
             "featured_link_item": "Contato",
             "featured_link_color": "#fb4516",
-            "menu": "submenu"
+            "menu": "submenu",
+            "items_gap": 16
           },
           "blocks": [],
           "block_order": []

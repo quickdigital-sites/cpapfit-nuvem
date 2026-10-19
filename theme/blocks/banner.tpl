@@ -154,158 +154,74 @@
 
 {% schema %}
 {
-  "name": "t:names.banner",
+  "name": "Banner",
   "icon": "pictureIcon",
   "blocks": [
-    { "tags": ["general"] }
+    {
+      "tags": [
+        "general"
+      ]
+    }
   ],
   "settings": [
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "image",
-      "label": "t:settings.image"
+      "label": "Imagem",
+      "info": "Linhas em destaque: 1580 × 846 px (celular 716 × 400). Banners promocionais: 1580 × 812 px (celular 716 × 260). JPG ou WebP, até 300 KB."
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "use_mobile_image",
-      "label": "t:settings.use_mobile_image",
+      "label": "Usar outra imagem no celular",
       "default": false
     },
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "image_mobile",
-      "label": "t:settings.image_mobile",
-      "visible_if": "{{ block.settings.use_mobile_image }}"
+      "label": "Imagem para celular",
+      "visible_if": "{{ block.settings.use_mobile_image }}",
+      "info": "Linhas em destaque: 716 × 400 px. Banners promocionais: 716 × 260 px."
     },
     {
       "type": "setting",
       "setting_type": "url",
       "id": "link",
-      "label": "t:settings.link"
-    },
-    {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "alignment",
-      "id": "alignment",
-      "label": "t:settings.alignment",
-      "options": [
-        { "value": "start", "label": "t:options.left" },
-        { "value": "center", "label": "t:options.center" },
-        { "value": "end", "label": "t:options.right" }
-      ],
-      "default": "start",
-      "vertical_options": [
-        { "value": "top", "label": "t:options.top" },
-        { "value": "center", "label": "t:options.center" },
-        { "value": "bottom", "label": "t:options.bottom" }
-      ],
-      "vertical_default": "bottom",
-      "vertical_disabled_if": "{{ block.settings.text_outside }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "checkbox",
-      "id": "text_outside",
-      "label": "t:settings.text_outside",
-      "default": false
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "text_color",
-      "label": "t:settings.text",
-      "default_setting": "text_color"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "gap",
-      "label": "t:settings.gap",
-      "min": 0,
-      "max": 50,
-      "step": 4,
-      "unit": "px",
-      "default": 16,
-      "icon": "vertical_spacing"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "show_overlay",
-      "label": "t:names.transparent_background",
-      "default": false,
-      "info": "t:settings.add_overlay",
-      "header_toggle": true,
-      "visible_if": "{{ block.settings.text_outside == false }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "overlay_color",
-      "label": "t:settings.color",
-      "default": "#000000",
-      "visible_if": "{{ block.settings.show_overlay }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "overlay_opacity",
-      "label": "t:settings.overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 30,
-      "visible_if": "{{ block.settings.show_overlay }}"
+      "label": "Link do banner",
+      "info": "Página aberta ao clicar. Use o endereço da loja, ex.: /mascaras/ ou /produtos/?brand=Resmed."
     }
   ],
   "presets": [
     {
       "name": "t:names.banner",
-      "settings": { "gap": 16, "vertical_padding": 32, "horizontal_padding": 32 },
+      "settings": {
+        "gap": 16,
+        "vertical_padding": 32,
+        "horizontal_padding": 32
+      },
       "blocks": [
-        { "type": "heading", "settings": { "title": "t:defaults.banner.heading", "size": "h4" } },
-        { "type": "text", "settings": { "text": "t:defaults.banner.description" } },
-        { "type": "button", "settings": { "label": "t:defaults.banner.button" } }
+        {
+          "type": "heading",
+          "settings": {
+            "title": "t:defaults.banner.heading",
+            "size": "h4"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "t:defaults.banner.description"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "label": "t:defaults.banner.button"
+          }
+        }
       ]
     }
   ]

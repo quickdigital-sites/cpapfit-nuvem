@@ -34,7 +34,7 @@
 
 {% schema %}
 {
-  "name": "t:names.newsletter",
+  "name": "Lista de e-mails (Lista VIP)",
   "icon": "MailIcon",
   "limit": 1,
   "deletable": false,
@@ -43,17 +43,21 @@
       "type": "setting",
       "setting_type": "richtext",
       "id": "title",
-      "label": "t:settings.title"
+      "label": "Título",
+      "info": "Ex.: Lista VIP."
     },
     {
       "type": "setting",
       "setting_type": "richtext",
       "id": "description",
-      "label": "t:settings.description"
+      "label": "Texto",
+      "info": "Ex.: Tenha acesso a descontos e condições especiais."
     }
   ],
   "disabled_on": {
-    "templates": ["password"]
+    "templates": [
+      "password"
+    ]
   }
 }
 {% endschema %}

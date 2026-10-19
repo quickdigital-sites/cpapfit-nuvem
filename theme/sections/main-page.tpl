@@ -27,56 +27,26 @@
 
 {% schema %}
 {
-  "name": "t:names.page_content",
+  "name": "Texto da página",
   "class": "section section-main-page",
   "static": true,
   "limit": 1,
-  "presets": [{"name": "t:names.page_content"}],
+  "presets": [
+    {
+      "name": "t:names.page_content"
+    }
+  ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
+      "type": "paragraph",
+      "content": "O texto é editado em Loja online › Páginas, no painel da loja."
     }
   ],
   "blocks": [],
   "enabled_on": {
-    "page_templates": ["page"]
+    "page_templates": [
+      "page"
+    ]
   }
 }
 {% endschema %}

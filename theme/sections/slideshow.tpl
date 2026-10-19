@@ -83,125 +83,41 @@
 
 {% schema %}
 {
-  "name": "t:names.carousel",
+  "name": "Banner principal (fotos que passam sozinhas)",
   "icon": "SlideshowIcon",
   "add_section_order": 2,
   "class": "section section-slideshow",
   "max_blocks": 10,
   "blocks": [
-    { "type": "slide" }
+    {
+      "type": "slide"
+    }
   ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "full"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "height",
-      "label": "t:settings.height",
-      "min": 200,
-      "max": 800,
-      "step": 20,
-      "unit": "px",
-      "default": 400,
-      "icon": "height",
-      "visible_if": "{{ section.settings.section_width == 'page' }}",
-      "disabled_if": "{{ section.settings.auto_height }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "height_full",
-      "label": "t:settings.height",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 90,
-      "icon": "height",
-      "visible_if": "{{ section.settings.section_width == 'full' }}",
-      "disabled_if": "{{ section.settings.auto_height }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "checkbox",
-      "id": "auto_height",
-      "label": "t:settings.auto_height",
-      "default": true
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:names.animation"
+      "type": "paragraph",
+      "content": "Faixa grande de fotos no topo da página. Cada foto é um \"Slide\": edite-os na lista de blocos abaixo."
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "autoplay",
-      "label": "t:settings.autoplay",
-      "default": true
+      "label": "Passar as fotos sozinho",
+      "default": true,
+      "info": "Com mais de uma foto, troca automaticamente."
     },
     {
       "type": "setting",
       "setting_type": "range",
       "id": "autoplay_speed",
-      "label": "t:settings.autoplay_speed",
+      "label": "Tempo de cada foto",
       "min": 3,
       "max": 10,
       "step": 1,
       "unit": "s",
       "default": 5,
-      "disabled_if": "{{ section.settings.autoplay == false }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "content_animation",
-      "label": "t:settings.content_animation",
-      "options": [
-        { "value": "none", "label": "t:options.none" },
-        { "value": "fade", "label": "t:options.fade" },
-        { "value": "slide-up", "label": "t:options.slide_up" },
-        { "value": "slide-down", "label": "t:options.slide_down" }
-      ],
-      "default": "none"
+      "disabled_if": "{{ section.settings.autoplay == false }}",
+      "info": "Em segundos."
     }
   ],
   "presets": [
@@ -212,25 +128,73 @@
         {
           "type": "slide",
           "blocks": [
-            { "type": "heading", "settings": { "title": "t:defaults.slide.heading", "size": "h1" } },
-            { "type": "text", "settings": { "text": "t:defaults.slide.description" } },
-            { "type": "button", "settings": { "label": "t:defaults.slide.button" } }
+            {
+              "type": "heading",
+              "settings": {
+                "title": "t:defaults.slide.heading",
+                "size": "h1"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "t:defaults.slide.description"
+              }
+            },
+            {
+              "type": "button",
+              "settings": {
+                "label": "t:defaults.slide.button"
+              }
+            }
           ]
         },
         {
           "type": "slide",
           "blocks": [
-            { "type": "heading", "settings": { "title": "t:defaults.slide.heading", "size": "h1" } },
-            { "type": "text", "settings": { "text": "t:defaults.slide.description" } },
-            { "type": "button", "settings": { "label": "t:defaults.slide.button" } }
+            {
+              "type": "heading",
+              "settings": {
+                "title": "t:defaults.slide.heading",
+                "size": "h1"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "t:defaults.slide.description"
+              }
+            },
+            {
+              "type": "button",
+              "settings": {
+                "label": "t:defaults.slide.button"
+              }
+            }
           ]
         },
         {
           "type": "slide",
           "blocks": [
-            { "type": "heading", "settings": { "title": "t:defaults.slide.heading", "size": "h1" } },
-            { "type": "text", "settings": { "text": "t:defaults.slide.description" } },
-            { "type": "button", "settings": { "label": "t:defaults.slide.button" } }
+            {
+              "type": "heading",
+              "settings": {
+                "title": "t:defaults.slide.heading",
+                "size": "h1"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "t:defaults.slide.description"
+              }
+            },
+            {
+              "type": "button",
+              "settings": {
+                "label": "t:defaults.slide.button"
+              }
+            }
           ]
         }
       ]

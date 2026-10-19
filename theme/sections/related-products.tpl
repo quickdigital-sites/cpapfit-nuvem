@@ -106,83 +106,30 @@
 
 {% schema %}
 {
-    "name": "t:names.related_products",
-    "icon": "TagIcon",
-    "class": "section-related-products",
-    "deletable": false,
-    "duplicatable": false,
-    "limit": 2,
-    "hidden": true,
-    "enabled_on": {
-        "page_templates": ["product"]
-    },
-    "blocks": [
-        { "tags": ["general"] }
-    ],
-    "settings": [
-        {
-            "type": "header",
-            "content": "t:names.design"
-        },
-        {
-            "type": "setting",
-            "setting_type": "radio",
-            "id": "section_width",
-            "label": "t:settings.section_width",
-            "options": [
-                { "value": "page", "label": "t:options.page" },
-                { "value": "full", "label": "t:options.full" }
-            ],
-            "default": "page"
-        },
-        {
-            "type": "setting",
-            "setting_type": "range",
-            "id": "gap",
-            "label": "t:settings.gap",
-            "min": 0,
-            "max": 50,
-            "step": 4,
-            "unit": "px",
-            "default": 32,
-            "icon": "vertical_spacing"
-        },
-        {
-            "type": "setting",
-            "setting_type": "range",
-            "id": "vertical_padding",
-            "label": "t:settings.vertical_padding",
-            "min": 0,
-            "max": 120,
-            "step": 4,
-            "unit": "px",
-            "default": 32,
-            "icon": "vertical_padding"
-        },
-        {
-            "type": "setting",
-            "setting_type": "range",
-            "id": "horizontal_padding",
-            "label": "t:settings.horizontal_padding",
-            "min": 0,
-            "max": 120,
-            "step": 4,
-            "unit": "px",
-            "default": 32,
-            "icon": "horizontal_padding",
-            "disabled_if": "{{ section.settings.section_width == 'page' }}"
-        },
-        {
-            "type": "header",
-            "content": "t:names.colors"
-        },
-        {
-            "type": "setting",
-            "setting_type": "color",
-            "id": "background_color",
-            "label": "t:settings.background",
-            "default": "transparent"
-        }
+  "name": "Produtos relacionados",
+  "icon": "TagIcon",
+  "class": "section-related-products",
+  "deletable": false,
+  "duplicatable": false,
+  "limit": 2,
+  "hidden": true,
+  "enabled_on": {
+    "page_templates": [
+      "product"
     ]
+  },
+  "blocks": [
+    {
+      "tags": [
+        "general"
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Vitrine com produtos parecidos ou complementares."
+    }
+  ]
 }
 {% endschema %}

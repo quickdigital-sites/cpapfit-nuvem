@@ -186,174 +186,27 @@
 
 {% schema %}
 {
-  "name": "t:names.header",
+  "name": "Cabeçalho",
   "icon": "HeaderIcon",
   "class": "section-header",
   "static": true,
   "locked_blocks": true,
   "limit": 1,
   "blocks": [
-    { "type": "header-logo" },
-    { "type": "header-utilities" },
-    { "type": "header-navigation" }
+    {
+      "type": "header-logo"
+    },
+    {
+      "type": "header-utilities"
+    },
+    {
+      "type": "header-navigation"
+    }
   ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "logo_position_desktop",
-      "label": "t:settings.logo_position_desktop",
-      "options": [
-        { "value": "left", "label": "t:options.left" },
-        { "value": "center", "label": "t:options.center" }
-      ],
-      "default": "left"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_position",
-      "label": "t:settings.use_different_mobile_position",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "logo_position_mobile",
-      "label": "t:settings.logo_position_mobile",
-      "options": [
-        { "value": "left", "label": "t:options.left" },
-        { "value": "center", "label": "t:options.center" }
-      ],
-      "default": "center",
-      "visible_if": "{{ section.settings.use_different_mobile_position }}"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 24,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_padding",
-      "label": "t:settings.use_different_mobile_padding",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding_mobile",
-      "label": "t:settings.vertical_padding_mobile",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 16,
-      "icon": "vertical_padding",
-      "visible_if": "{{ section.settings.use_different_mobile_padding }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding_mobile",
-      "label": "t:settings.horizontal_padding_mobile",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 20,
-      "icon": "horizontal_padding",
-      "visible_if": "{{ section.settings.use_different_mobile_padding }}",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "head_fix_desktop",
-      "label": "t:settings.sticky_header",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "background_color",
-      "label": "t:settings.background",
-      "default_setting": "background_color"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "text_color",
-      "label": "t:settings.text",
-      "default_setting": "text_color"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "transparent_header",
-      "label": "t:settings.transparent_header",
-      "info": "t:info.transparent_header",
-      "default": false,
-      "header_toggle": true
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "transparent_text_color",
-      "label": "t:settings.transparent_text_color",
-      "default_setting": "text_color",
-      "visible_if": "{{ section.settings.transparent_header }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "image_picker",
-      "id": "transparent_logo",
-      "label": "t:settings.transparent_logo",
-      "visible_if": "{{ section.settings.transparent_header }}"
+      "type": "paragraph",
+      "content": "Logo, busca, Planos, conta e carrinho. A logo é trocada em Configurações › Informações da loja."
     }
   ],
   "default": {
@@ -383,7 +236,9 @@
     ]
   },
   "enabled_on": {
-    "layout_templates": ["header"]
+    "layout_templates": [
+      "header"
+    ]
   }
 }
 {% endschema %}

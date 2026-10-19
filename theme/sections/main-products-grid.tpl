@@ -172,95 +172,22 @@
 
 {% schema %}
 {
-  "name": "t:names.products",
+  "name": "Lista de produtos",
   "class": "section section-main-products-grid",
   "limit": 1,
   "deletable": false,
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "columns",
-      "label": "t:settings.columns_desktop",
-      "icon": "DesktopIcon",
-      "options": [
-        { "value": "4", "label": "t:options.columns_4" },
-        { "value": "5", "label": "t:options.columns_5" },
-        { "value": "6", "label": "t:options.columns_6" }
-      ],
-      "default": "4"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "columns_mobile",
-      "label": "t:settings.columns_mobile",
-      "icon": "MobileIcon",
-      "options": [
-        { "value": "1", "label": "t:options.columns_1" },
-        { "value": "2", "label": "t:options.columns_2" }
-      ],
-      "default": "2"
-    },
-    {
-      "type": "setting",
-      "setting_type": "select",
-      "id": "pagination",
-      "label": "t:settings.product_navigation",
-      "options": [
-        { "value": "classic", "label": "t:options.page_navigation" },
-        { "value": "infinite", "label": "t:options.infinite_scroll" }
-      ],
-      "default": "classic"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 64,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
+      "type": "paragraph",
+      "content": "Produtos da categoria ou da busca, com filtros. Não tem opções."
     }
   ],
   "blocks": [],
   "enabled_on": {
-    "page_templates": ["category", "search"]
+    "page_templates": [
+      "category",
+      "search"
+    ]
   },
   "presets": [
     {

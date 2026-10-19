@@ -110,68 +110,14 @@
 
 {% schema %}
 {
-  "name": "t:names.header",
+  "name": "Título da página",
   "class": "section section-page-header",
   "limit": 1,
   "deletable": false,
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 32,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "background_color",
-      "label": "t:content.background",
-      "default": "transparent"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "text_color",
-      "label": "t:settings.text_color",
-      "default_setting": "text_color"
+      "type": "paragraph",
+      "content": "Mostra o nome da página. Não tem opções."
     }
   ],
   "blocks": [],

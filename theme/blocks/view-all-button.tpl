@@ -44,7 +44,7 @@
 
 {% schema %}
 {
-  "name": "t:names.view_all_button",
+  "name": "Botão \"Ver todos\"",
   "icon": "buttons",
   "limit": 1,
   "duplicatable": false,
@@ -54,100 +54,9 @@
       "type": "setting",
       "setting_type": "text",
       "id": "label",
-      "label": "t:settings.button_text",
-      "default": "t:defaults.view_all_button"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "fit", "label": "t:options.fit" },
-        { "value": "fill", "label": "t:options.fill" }
-      ],
-      "default": "fit"
-    },
-    {
-      "type": "header",
-      "content": "t:settings.style"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "variant",
-      "options": [
-        { "value": "primary", "label": "t:settings.primary_button" },
-        { "value": "secondary", "label": "t:settings.secondary_button" },
-        { "value": "tertiary", "label": "t:settings.tertiary_button" }
-      ],
-      "default": "tertiary"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "size",
-      "label": "t:settings.size",
-      "options": [
-        { "value": "small", "label": "t:options.small" },
-        { "value": "medium", "label": "t:options.medium" },
-        { "value": "big", "label": "t:options.large" }
-      ],
-      "default": "medium"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_background_color",
-      "label": "t:settings.background",
-      "default_setting": "button_primary_background_color",
-      "visible_if": "{{ block.settings.variant == 'primary' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_text_color",
-      "label": "t:settings.text_color",
-      "default_setting": "button_primary_foreground_color",
-      "visible_if": "{{ block.settings.variant == 'primary' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_background_color_secondary",
-      "label": "t:settings.background",
-      "default_setting": "button_secondary_background_color",
-      "visible_if": "{{ block.settings.variant == 'secondary' }}",
-      "disabled_if": "{{ settings.button_secondary_style == 'underlined' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_text_color_secondary",
-      "label": "t:settings.text_color",
-      "default_setting": "button_secondary_foreground_color",
-      "visible_if": "{{ block.settings.variant == 'secondary' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_background_color_tertiary",
-      "label": "t:settings.background",
-      "default_setting": "button_tertiary_background_color",
-      "visible_if": "{{ block.settings.variant == 'tertiary' }}",
-      "disabled_if": "{{ settings.button_tertiary_style == 'underlined' }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_text_color_tertiary",
-      "label": "t:settings.text_color",
-      "default_setting": "button_tertiary_foreground_color",
-      "visible_if": "{{ block.settings.variant == 'tertiary' }}"
+      "label": "Texto do botão",
+      "default": "t:defaults.view_all_button",
+      "info": "Leva para a categoria escolhida em \"Quais produtos mostrar\". Vazio: usa \"Ver todos\"."
     }
   ]
 }

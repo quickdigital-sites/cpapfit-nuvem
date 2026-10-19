@@ -75,88 +75,52 @@
 
 {% schema %}
 {
-  "name": "t:names.category_hero",
+  "name": "Banner da categoria",
   "class": "section section-category-hero m-0",
   "limit": 1,
   "deletable": false,
   "settings": [
     {
+      "type": "paragraph",
+      "content": "Imagem no topo das páginas de categoria."
+    },
+    {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "image",
-      "label": "t:settings.image"
+      "label": "Imagem padrão",
+      "info": "Usada quando a categoria não tem imagem própria. Recomendado: 1920 × 400 px, JPG ou WebP."
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "use_mobile_image",
-      "label": "t:settings.use_mobile_image",
+      "label": "Usar outra imagem no celular",
       "default": false
     },
     {
       "type": "setting",
       "setting_type": "image_picker",
       "id": "image_mobile",
-      "label": "t:settings.image",
-      "visible_if": "{{ section.settings.use_mobile_image }}"
+      "label": "Imagem para celular",
+      "visible_if": "{{ section.settings.use_mobile_image }}",
+      "info": "Recomendado: 840 × 400 px, JPG ou WebP."
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "show_category_image",
-      "label": "t:settings.show_category_image",
+      "label": "Usar a imagem cadastrada na categoria",
       "header_toggle": true,
-      "default": true
-    },
-    {
-      "type": "paragraph",
-      "content": "t:info.category_image_description",
-      "visible_if": "{{ section.settings.show_category_image }}"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "page", "label": "t:options.page" },
-        { "value": "full", "label": "t:options.full" }
-      ],
-      "default": "full"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0,
-      "icon": "horizontal_padding",
-      "disabled_if": "{{ section.settings.section_width == 'page' }}"
+      "default": true,
+      "info": "A imagem vem de Produtos › Categorias, no painel da loja."
     }
   ],
   "blocks": [],
   "enabled_on": {
-    "page_templates": ["category"]
+    "page_templates": [
+      "category"
+    ]
   },
   "presets": [
     {

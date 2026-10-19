@@ -1,14 +1,23 @@
 {
   "sections": {
     "heading": {
-      "type": "page-header"
+      "type": "page-header",
+      "settings": {
+        "section_width": "page",
+        "vertical_padding": 32,
+        "horizontal_padding": 32,
+        "background_color": "transparent"
+      }
     },
     "product_list": {
       "type": "main-products-grid",
       "settings": {
         "columns_mobile": "2",
         "columns": "4",
-        "pagination": "infinite"
+        "pagination": "infinite",
+        "section_width": "page",
+        "vertical_padding": 64,
+        "horizontal_padding": 32
       }
     }
   },

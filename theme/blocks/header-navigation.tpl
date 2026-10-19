@@ -163,145 +163,21 @@
 
 {% schema %}
 {
-  "name": "t:names.navigation",
+  "name": "Menu",
   "icon": "MenuIcon",
   "limit": 1,
   "blocks": [
-    { "type": "navigation-banner" }
+    {
+      "type": "navigation-banner"
+    }
   ],
   "settings": [
-    {
-      "type": "header",
-      "content": "t:content.main_navigation"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "nav_uppercase",
-      "label": "t:settings.nav_uppercase",
-      "default": true
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "show_categories_link",
-      "label": "t:settings.show_categories_link",
-      "default": false
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "show_mobile_categories",
-      "label": "t:settings.mobile_categories_bar",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "nav_alignment_desktop",
-      "label": "t:settings.nav_alignment_desktop",
-      "options": [
-        { "value": "left", "label": "t:options.left" },
-        { "value": "center", "label": "t:options.center" }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 16,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "items_gap",
-      "label": "t:settings.space_between_links",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 16,
-      "icon": "horizontal_padding"
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "background_color",
-      "label": "t:settings.background",
-      "default_setting": "background_color"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "foreground_color",
-      "label": "t:settings.text",
-      "default_setting": "text_color"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "nav_divider_color",
-      "label": "t:settings.nav_divider_color",
-      "default_setting": "background_color"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "show_featured_link",
-      "label": "t:names.featured_item",
-      "default": false,
-      "info": "t:info.featured_item_info",
-      "header_toggle": true
-    },
-    {
-      "type": "setting",
-      "setting_type": "menu_item",
-      "id": "featured_link_item",
-      "label": "t:settings.featured_link_item",
-      "visible_if": "{{ block.settings.show_featured_link }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "featured_link_color",
-      "label": "t:settings.featured_item_color",
-      "default_setting": "text_color",
-      "visible_if": "{{ block.settings.show_featured_link }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "show_secondary_menu",
-      "label": "t:names.secondary_navigation",
-      "default": false,
-      "info": "t:info.secondary_navigation_info",
-      "header_toggle": true
-    },
     {
       "type": "setting",
       "setting_type": "menu",
       "id": "menu",
-      "label": "t:settings.menu_to_show",
-      "visible_if": "{{ block.settings.show_secondary_menu }}"
+      "label": "Menu principal",
+      "info": "Os itens do menu são editados em Loja online › Menus, no painel da loja."
     }
   ]
 }

@@ -1,7 +1,13 @@
 {
   "sections": {
     "heading": {
-      "type": "page-header"
+      "type": "page-header",
+      "settings": {
+        "section_width": "page",
+        "vertical_padding": 32,
+        "horizontal_padding": 32,
+        "background_color": "transparent"
+      }
     },
     "account_orders": {
       "type": "main-account-orders",

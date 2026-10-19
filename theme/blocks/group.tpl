@@ -67,133 +67,23 @@
 
 {% schema %}
 {
-  "name": "t:names.group",
-  "tags": ["general"],
+  "name": "Grupo",
+  "tags": [
+    "general"
+  ],
   "category": "layout",
   "icon": "folder",
   "blocks": [
-    { "tags": ["general"] }
+    {
+      "tags": [
+        "general"
+      ]
+    }
   ],
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.disposition"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "direction",
-      "label": "t:settings.direction",
-      "options": [
-        { "value": "column", "label": "t:options.vertical", "icon": "ArrowDownIcon" },
-        { "value": "row", "label": "t:options.horizontal", "icon": "ArrowRightIcon" }
-      ],
-      "default": "column"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "mobile_direction_enabled",
-      "label": "t:settings.mobile_direction"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "mobile_direction",
-      "label": "t:settings.mobile_direction_value",
-      "options": [
-        { "value": "column", "label": "t:options.vertical", "icon": "ArrowDownIcon" },
-        { "value": "row", "label": "t:options.horizontal", "icon": "ArrowRightIcon" }
-      ],
-      "default": "column",
-      "visible_if": "{{ block.settings.mobile_direction_enabled }}"
-    },
-    {
-      "type": "setting",
-      "setting_type": "alignment",
-      "id": "alignment",
-      "label": "t:settings.alignment",
-      "options": [
-        { "value": "start", "label": "t:options.left" },
-        { "value": "center", "label": "t:options.center" },
-        { "value": "end", "label": "t:options.right" }
-      ],
-      "default": "start",
-      "vertical_options": [
-        { "value": "top", "label": "t:options.top" },
-        { "value": "center", "label": "t:options.center" },
-        { "value": "bottom", "label": "t:options.bottom" }
-      ],
-      "vertical_default": "top"
-    },
-    {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "radio",
-      "id": "width",
-      "label": "t:settings.section_width",
-      "options": [
-        { "value": "fit", "label": "t:options.fit" },
-        { "value": "fill", "label": "t:options.fill" }
-      ],
-      "default": "fill"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "gap",
-      "label": "t:settings.gap",
-      "min": 0,
-      "max": 50,
-      "step": 4,
-      "unit": "px",
-      "default": 16,
-      "icon": "vertical_spacing"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "vertical_padding",
-      "label": "t:settings.vertical_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0,
-      "icon": "vertical_padding"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "horizontal_padding",
-      "label": "t:settings.horizontal_padding",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 0,
-      "icon": "horizontal_padding"
-    },
-    {
-      "type": "header",
-      "content": "t:names.colors"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_background_color",
-      "label": "t:settings.background",
-      "default": "transparent"
-    },
-    {
-      "type": "setting",
-      "setting_type": "color",
-      "id": "custom_text_color",
-      "label": "t:settings.text_color",
-      "default_setting": "text_color"
+      "type": "paragraph",
+      "content": "Agrupa os blocos de dentro. Não tem opções: edite os blocos que estão nele."
     }
   ],
   "presets": [

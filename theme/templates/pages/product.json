@@ -84,14 +84,19 @@
         "section_width": "page",
         "gap": 32,
         "vertical_padding": 0,
-        "horizontal_padding": 0
+        "horizontal_padding": 0,
+        "background_color": "transparent"
       },
       "blocks": {
         "complementary_heading": {
           "type": "heading",
           "settings": {
             "title": "Compre junto",
-            "size": "h4"
+            "size": "h4",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "complementary_products_block": {
@@ -114,14 +119,19 @@
         "section_width": "page",
         "gap": 32,
         "vertical_padding": 0,
-        "horizontal_padding": 0
+        "horizontal_padding": 0,
+        "background_color": "transparent"
       },
       "blocks": {
         "alternative_heading": {
           "type": "heading",
           "settings": {
             "title": "Veja também",
-            "size": "h4"
+            "size": "h4",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "alternative_products_block": {

@@ -147,33 +147,39 @@ sections:
   - component: destaques-abas
   - native: destaques_1
     <<: *destaque_lista
+    settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0, tab_label: "Kits promocionais" }
     blocks: { products: *vitrine }
   - native: destaques_2   # Máscaras
     <<: *destaque_lista
+    settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0, tab_label: "Máscaras" }
     blocks:
       products:
         type: products
         settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40897020" } }
   - native: destaques_3   # Tops CPAPs → CPAP e BiPAP
     <<: *destaque_lista
+    settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0, tab_label: "Tops CPAPS" }
     blocks:
       products:
         type: products
         settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40896991" } }
   - native: destaques_4   # Concentradores de oxigênio
     <<: *destaque_lista
+    settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0, tab_label: "Concentradores De Oxigênio" }
     blocks:
       products:
         type: products
         settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40897252" } }
   - native: destaques_5   # Acessórios para polissonografia
     <<: *destaque_lista
+    settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0, tab_label: "Acessórios Para Polissonografia" }
     blocks:
       products:
         type: products
         settings: { <<: *vitrine_settings, products_source: { kind: category, id: "40897279" } }
   - native: destaques_6   # Acessórios para CPAP e BiPAP
     <<: *destaque_lista
+    settings: { alignment: left, section_width: page, gap: 20, vertical_padding: 0, tab_label: "Acessórios" }
     blocks:
       products:
         type: products

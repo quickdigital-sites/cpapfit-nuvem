@@ -32,41 +32,15 @@
 
 {% schema %}
 {
-	"name": "t:names.products",
-	"icon": "ListIcon",
-	"limit": 1,
-	"deletable": false,
-	"settings": [
-		{
-			"type": "header",
-			"content": "t:names.disposition"
-		},
-		{
-			"type": "setting",
-			"setting_type": "select",
-			"id": "columns",
-			"label": "t:settings.columns_desktop",
-			"icon": "DesktopIcon",
-			"options": [
-				{ "value": "3", "label": "t:options.columns_3" },
-				{ "value": "4", "label": "t:options.columns_4" },
-				{ "value": "5", "label": "t:options.columns_5" },
-				{ "value": "6", "label": "t:options.columns_6" }
-			],
-			"default": "4"
-		},
-		{
-			"type": "setting",
-			"setting_type": "select",
-			"id": "columns_mobile",
-			"label": "t:settings.columns_mobile",
-			"icon": "MobileIcon",
-			"options": [
-				{ "value": "1", "label": "t:options.columns_1" },
-				{ "value": "2", "label": "t:options.columns_2" }
-			],
-			"default": "2"
-		}
-	]
+  "name": "Produtos",
+  "icon": "ListIcon",
+  "limit": 1,
+  "deletable": false,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Os produtos são escolhidos pela loja automaticamente."
+    }
+  ]
 }
 {% endschema %}

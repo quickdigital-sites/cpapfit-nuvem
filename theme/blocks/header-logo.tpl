@@ -23,49 +23,13 @@
 
 {% schema %}
 {
-  "name": "t:names.logo",
+  "name": "Logo",
   "icon": "FingerprintIcon",
   "limit": 1,
   "settings": [
     {
-      "type": "header",
-      "content": "t:names.design"
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "height",
-      "label": "t:settings.height",
-      "min": 20,
-      "max": 140,
-      "step": 2,
-      "unit": "px",
-      "default": 50,
-      "icon": "height"
-    },
-    {
-      "type": "setting",
-      "setting_type": "toggle",
-      "id": "use_different_mobile_height",
-      "label": "t:settings.use_different_mobile_height",
-      "default": true
-    },
-    {
-      "type": "setting",
-      "setting_type": "range",
-      "id": "height_mobile",
-      "label": "t:settings.height",
-      "min": 20,
-      "max": 90,
-      "step": 2,
-      "unit": "px",
-      "default": 30,
-      "icon": "height",
-      "visible_if": "{{ block.settings.use_different_mobile_height }}"
-    },
-    {
       "type": "paragraph",
-      "content": "t:content.logo_settings_info"
+      "content": "A imagem da logo é trocada em Configurações › Informações da loja, no painel."
     }
   ]
 }

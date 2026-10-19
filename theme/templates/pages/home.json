@@ -9,7 +9,9 @@
         "vertical_padding": 0,
         "horizontal_padding": 0,
         "autoplay": true,
-        "autoplay_speed": 6
+        "autoplay_speed": 6,
+        "height": 400,
+        "content_animation": "none"
       },
       "blocks": {
         "slide_1": {
@@ -23,7 +25,9 @@
             "horizontal_padding": 0,
             "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/hero.webp",
             "use_mobile_image": true,
-            "image_mobile": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/hero-mobile.webp"
+            "image_mobile": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/hero-mobile.webp",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
           },
           "blocks": {
             "titulo": {
@@ -33,13 +37,17 @@
                 "size": "custom",
                 "custom_font_size": 51,
                 "mobile_font_size": true,
-                "custom_mobile_font_size": 24
+                "custom_mobile_font_size": 24,
+                "width": "fill",
+                "mobile_size": "h4"
               }
             },
             "texto": {
               "type": "text",
               "settings": {
-                "text": "Equipamentos modernos para tratamento domiciliar."
+                "text": "Equipamentos modernos para tratamento domiciliar.",
+                "width": "fill",
+                "size": "paragraph"
               }
             },
             "cta": {
@@ -48,7 +56,11 @@
                 "direction": "row",
                 "alignment": "start",
                 "gap": 12,
-                "width": "fill"
+                "width": "fill",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "botao": {
@@ -57,7 +69,8 @@
                     "label": "Ver linha completa",
                     "link": "/produtos/?brand=Resmed",
                     "variant": "primary",
-                    "size": "medium"
+                    "size": "medium",
+                    "width": "fit"
                   }
                 },
                 "logo": {
@@ -80,14 +93,19 @@
                 "direction": "row",
                 "alignment": "start",
                 "gap": 16,
-                "width": "fill"
+                "width": "fill",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "oferta": {
                   "type": "text",
                   "settings": {
                     "text": "<strong>R$ 200 OFF</strong> na Resmed",
-                    "width": "fit"
+                    "width": "fit",
+                    "size": "paragraph"
                   }
                 },
                 "codigo": {
@@ -124,14 +142,21 @@
         "section_width": "page",
         "gap": 40,
         "vertical_padding": 60,
-        "background_color": "#E5E0D8"
+        "background_color": "#E5E0D8",
+        "use_different_mobile_orientation": false,
+        "orientation_mobile": "horizontal",
+        "horizontal_padding": 32
       },
       "blocks": {
         "titulo": {
           "type": "heading",
           "settings": {
             "title": "Categorias",
-            "size": "h4"
+            "size": "h4",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "lista": {
@@ -143,7 +168,9 @@
             "items_text_alignment": "center",
             "image_size": 188,
             "gap": 16,
-            "text_color": "#4A4A48"
+            "text_color": "#4A4A48",
+            "format_text": "rounded",
+            "background_color": "transparent"
           },
           "blocks": {
             "c1": {
@@ -222,6 +249,11 @@
     "cmp_destaques_abas": {
       "type": "custom",
       "settings": {
+        "direction": "row",
+        "mobile_direction_enabled": true,
+        "mobile_direction": "column",
+        "alignment": "start",
+        "custom_background_color": "transparent",
         "section_width": "full",
         "vertical_padding": 0,
         "horizontal_padding": 0,
@@ -231,7 +263,7 @@
         "code": {
           "type": "code",
           "settings": {
-            "code": "<section class=\"container qd-tabs\" aria-label=\"Destaques\" data-qd-tabs>\n  <div class=\"qd-tabs-row\">\n    <h2 class=\"qd-section-title\">Destaques</h2>\n    <div class=\"qd-tabs-list\" role=\"tablist\">\n      <a href=\"/search/?q=kit\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_1\">Kits promocionais</a>\n      <a href=\"/mascaras/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_2\">Máscaras</a>\n      <a href=\"/cpap-e-bipap/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_3\">Tops CPAPS</a>\n      <a href=\"/oxigenoterapia/concentradores-de-oxigenio/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_4\">Concentradores De Oxigênio</a>\n      <a href=\"/diagnostico-do-sono/acessorios-para-polissonografia/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_5\">Acessórios Para Polissonografia</a>\n      <a href=\"/acessorios-para-cpap-e-bipap/\" class=\"qd-chip\" role=\"tab\" data-qd-tab=\"destaques_6\">Acessórios</a>\n    </div>\n  </div>\n</section>",
+            "code": "<section class=\"container qd-tabs\" aria-label=\"Destaques\" data-qd-tabs>\n  <div class=\"qd-tabs-row\">\n    <h2 class=\"qd-section-title\">Destaques</h2>\n    <div class=\"qd-tabs-list\" role=\"tablist\" data-qd-tabs-list></div>\n  </div>\n</section>",
             "width": "fill"
           }
         }
@@ -246,7 +278,10 @@
         "alignment": "left",
         "section_width": "page",
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 32,
+        "background_color": "transparent",
+        "tab_label": "Kits promocionais"
       },
       "blocks": {
         "products": {
@@ -271,7 +306,10 @@
         "alignment": "left",
         "section_width": "page",
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 32,
+        "background_color": "transparent",
+        "tab_label": "Máscaras"
       },
       "blocks": {
         "products": {
@@ -300,7 +338,10 @@
         "alignment": "left",
         "section_width": "page",
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 32,
+        "background_color": "transparent",
+        "tab_label": "Tops CPAPS"
       },
       "blocks": {
         "products": {
@@ -329,7 +370,10 @@
         "alignment": "left",
         "section_width": "page",
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 32,
+        "background_color": "transparent",
+        "tab_label": "Concentradores De Oxigênio"
       },
       "blocks": {
         "products": {
@@ -358,7 +402,10 @@
         "alignment": "left",
         "section_width": "page",
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 32,
+        "background_color": "transparent",
+        "tab_label": "Acessórios Para Polissonografia"
       },
       "blocks": {
         "products": {
@@ -387,7 +434,10 @@
         "alignment": "left",
         "section_width": "page",
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 32,
+        "background_color": "transparent",
+        "tab_label": "Acessórios"
       },
       "blocks": {
         "products": {
@@ -425,7 +475,9 @@
         "banner_aspect_ratio_mobile": "custom",
         "banner_aspect_ratio_mobile_height": 56,
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 0,
+        "background_color": "transparent"
       },
       "blocks": {
         "resmed": {
@@ -437,13 +489,18 @@
             "gap": 10,
             "vertical_padding": 60,
             "horizontal_padding": 60,
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/linha-resmed.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/linha-resmed.webp",
+            "text_outside": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
           },
           "blocks": {
             "rotulo": {
               "type": "text",
               "settings": {
-                "text": "Linha"
+                "text": "Linha",
+                "width": "fill",
+                "size": "paragraph"
               }
             },
             "titulo": {
@@ -453,7 +510,9 @@
                 "size": "custom",
                 "custom_font_size": 41,
                 "mobile_font_size": true,
-                "custom_mobile_font_size": 28
+                "custom_mobile_font_size": 28,
+                "width": "fill",
+                "mobile_size": "h4"
               }
             },
             "cta": {
@@ -462,7 +521,11 @@
                 "direction": "row",
                 "alignment": "start",
                 "gap": 12,
-                "width": "fill"
+                "width": "fill",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "botao": {
@@ -471,7 +534,8 @@
                     "label": "Ver linha completa",
                     "link": "/produtos/?brand=Resmed",
                     "variant": "primary",
-                    "size": "medium"
+                    "size": "medium",
+                    "width": "fit"
                   }
                 },
                 "logo": {
@@ -504,13 +568,18 @@
             "gap": 10,
             "vertical_padding": 60,
             "horizontal_padding": 60,
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/linha-philips.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/linha-philips.webp",
+            "text_outside": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
           },
           "blocks": {
             "rotulo": {
               "type": "text",
               "settings": {
-                "text": "Linha"
+                "text": "Linha",
+                "width": "fill",
+                "size": "paragraph"
               }
             },
             "titulo": {
@@ -520,7 +589,9 @@
                 "size": "custom",
                 "custom_font_size": 41,
                 "mobile_font_size": true,
-                "custom_mobile_font_size": 28
+                "custom_mobile_font_size": 28,
+                "width": "fill",
+                "mobile_size": "h4"
               }
             },
             "cta": {
@@ -529,7 +600,11 @@
                 "direction": "row",
                 "alignment": "start",
                 "gap": 12,
-                "width": "fill"
+                "width": "fill",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "botao": {
@@ -538,7 +613,8 @@
                     "label": "Ver linha completa",
                     "link": "/produtos/?brand=Philips%20Respironics",
                     "variant": "primary",
-                    "size": "medium"
+                    "size": "medium",
+                    "width": "fit"
                   }
                 },
                 "logo": {
@@ -574,14 +650,20 @@
         "alignment": "left",
         "section_width": "page",
         "gap": 20,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "horizontal_padding": 32,
+        "background_color": "transparent"
       },
       "blocks": {
         "titulo": {
           "type": "heading",
           "settings": {
             "title": "Os mais vendidos",
-            "size": "h4"
+            "size": "h4",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "products": {
@@ -608,14 +690,22 @@
         "text_alignment": "center",
         "section_width": "page",
         "gap": 40,
-        "vertical_padding": 0
+        "vertical_padding": 0,
+        "use_different_mobile_orientation": false,
+        "orientation_mobile": "horizontal",
+        "horizontal_padding": 32,
+        "background_color": "transparent"
       },
       "blocks": {
         "titulo": {
           "type": "heading",
           "settings": {
             "title": "As melhores marcas",
-            "size": "h4"
+            "size": "h4",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "lista": {
@@ -627,7 +717,9 @@
             "items_text_alignment": "center",
             "image_size": 148,
             "gap": 20,
-            "text_color": "#4A4A48"
+            "text_color": "#4A4A48",
+            "format_text": "rounded",
+            "background_color": "transparent"
           },
           "blocks": {
             "m1": {
@@ -718,21 +810,39 @@
         "banner_aspect_ratio_mobile": "custom",
         "banner_aspect_ratio_mobile_height": 36,
         "gap": 40,
-        "vertical_padding": 60
+        "vertical_padding": 60,
+        "horizontal_padding": 0,
+        "background_color": "transparent"
       },
       "blocks": {
         "promo_1": {
           "type": "banner",
           "settings": {
             "link": "/produtos/?brand=Resmed",
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/promo-resmed.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/promo-resmed.webp",
+            "alignment": "start",
+            "text_outside": false,
+            "gap": 16,
+            "vertical_padding": 32,
+            "horizontal_padding": 32,
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
           }
         },
         "promo_2": {
           "type": "banner",
           "settings": {
             "link": "/produtos/?brand=Philips%20Respironics",
-            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/promo-philips.webp"
+            "image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/promo-philips.webp",
+            "alignment": "start",
+            "text_outside": false,
+            "gap": 16,
+            "vertical_padding": 32,
+            "horizontal_padding": 32,
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
           }
         }
       },
@@ -749,14 +859,21 @@
         "section_width": "page",
         "gap": 20,
         "vertical_padding": 20,
-        "horizontal_padding": 0
+        "horizontal_padding": 0,
+        "mobile_direction_enabled": true,
+        "mobile_direction": "column",
+        "custom_background_color": "transparent"
       },
       "blocks": {
         "titulo": {
           "type": "heading",
           "settings": {
             "title": "Dicas & Vídeos",
-            "size": "h4"
+            "size": "h4",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "lista": {
@@ -765,7 +882,11 @@
             "direction": "row",
             "alignment": "center",
             "gap": 30,
-            "width": "fill"
+            "width": "fill",
+            "mobile_direction": "column",
+            "vertical_padding": 0,
+            "horizontal_padding": 0,
+            "custom_background_color": "transparent"
           },
           "blocks": {
             "v1": {
@@ -774,7 +895,11 @@
                 "direction": "column",
                 "alignment": "start",
                 "gap": 0,
-                "width": "fit"
+                "width": "fit",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "video": {
@@ -783,13 +908,17 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp",
+                    "use_different_mobile_format": false,
+                    "format_mobile": "16by9"
                   }
                 },
                 "legenda": {
                   "type": "text",
                   "settings": {
-                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                    "text": "NOVA máscara para quem usa CPAP super confortável",
+                    "width": "fill",
+                    "size": "paragraph"
                   }
                 }
               },
@@ -804,7 +933,11 @@
                 "direction": "column",
                 "alignment": "start",
                 "gap": 0,
-                "width": "fit"
+                "width": "fit",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "video": {
@@ -813,13 +946,17 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp",
+                    "use_different_mobile_format": false,
+                    "format_mobile": "16by9"
                   }
                 },
                 "legenda": {
                   "type": "text",
                   "settings": {
-                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                    "text": "NOVA máscara para quem usa CPAP super confortável",
+                    "width": "fill",
+                    "size": "paragraph"
                   }
                 }
               },
@@ -834,7 +971,11 @@
                 "direction": "column",
                 "alignment": "start",
                 "gap": 0,
-                "width": "fit"
+                "width": "fit",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "video": {
@@ -843,13 +984,17 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp",
+                    "use_different_mobile_format": false,
+                    "format_mobile": "16by9"
                   }
                 },
                 "legenda": {
                   "type": "text",
                   "settings": {
-                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                    "text": "NOVA máscara para quem usa CPAP super confortável",
+                    "width": "fill",
+                    "size": "paragraph"
                   }
                 }
               },
@@ -864,7 +1009,11 @@
                 "direction": "column",
                 "alignment": "start",
                 "gap": 0,
-                "width": "fit"
+                "width": "fit",
+                "mobile_direction": "column",
+                "vertical_padding": 0,
+                "horizontal_padding": 0,
+                "custom_background_color": "transparent"
               },
               "blocks": {
                 "video": {
@@ -873,13 +1022,17 @@
                     "video_type": "manual",
                     "aspect_ratio": "16by9",
                     "show_cover_image": true,
-                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp"
+                    "cover_image": "https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@0f226159057ac2cb72437865c6e4510e67bec7c0/design/assets/home/video-capa.webp",
+                    "use_different_mobile_format": false,
+                    "format_mobile": "16by9"
                   }
                 },
                 "legenda": {
                   "type": "text",
                   "settings": {
-                    "text": "NOVA máscara para quem usa CPAP super confortável"
+                    "text": "NOVA máscara para quem usa CPAP super confortável",
+                    "width": "fill",
+                    "size": "paragraph"
                   }
                 }
               },
@@ -910,14 +1063,21 @@
         "section_width": "page",
         "gap": 40,
         "vertical_padding": 60,
-        "background_color": "#E5E0D8"
+        "background_color": "#E5E0D8",
+        "use_different_mobile_orientation": false,
+        "orientation_mobile": "horizontal",
+        "horizontal_padding": 32
       },
       "blocks": {
         "titulo": {
           "type": "heading",
           "settings": {
             "title": "Serviços",
-            "size": "h4"
+            "size": "h4",
+            "width": "fill",
+            "custom_font_size": 28,
+            "mobile_size": "h4",
+            "custom_mobile_font_size": 28
           }
         },
         "lista": {
@@ -929,7 +1089,9 @@
             "items_text_alignment": "center",
             "image_size": 188,
             "gap": 16,
-            "text_color": "#4A4A48"
+            "text_color": "#4A4A48",
+            "format_text": "rounded",
+            "background_color": "transparent"
           },
           "blocks": {
             "s1": {

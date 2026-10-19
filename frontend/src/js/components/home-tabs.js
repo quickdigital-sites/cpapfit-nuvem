@@ -117,7 +117,23 @@ function loadTab(id) {
   return promise;
 }
 
+// Botões das abas: um por vitrine com "Nome da aba" (marcadores impressos por product-list.tpl), na ordem da página.
+function buildTabs(root) {
+  const list = root.querySelector("[data-qd-tabs-list]");
+  if (!list || list.children.length) return;
+  for (const m of document.querySelectorAll("[data-qd-tab-label]")) {
+    const a = document.createElement("a");
+    a.className = "qd-chip";
+    a.setAttribute("role", "tab");
+    a.href = withPreview(m.dataset.qdTabHref || "/produtos/");
+    a.dataset.qdTab = m.dataset.qdTabFor;
+    a.textContent = m.dataset.qdTabLabel;
+    list.append(a);
+  }
+}
+
 function setup(root) {
+  buildTabs(root);
   const tabs = [...root.querySelectorAll("[data-qd-tab]")].filter((tab) => {
     const ok = !!sectionFor(tab.dataset.qdTab);
     if (!ok) tab.hidden = true;
