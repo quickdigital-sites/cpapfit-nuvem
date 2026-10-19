@@ -1566,7 +1566,7 @@ a {
 {#/* ---------- grade: formulário 780 + 100 + resumo 390 (367:13768) ---------- */#}
 :root .main-container {
   max-width: 1290px;
-  padding: 0 10px 60px;
+  padding: 0 10px;
 }
 :root #breadcrumb {
   max-width: 1270px;
@@ -1622,6 +1622,9 @@ a {
   padding: 0;
 }
 :root ul.breadcrumb-timeline > li.breadcrumb-timeline-line {
+  {#/* o nativo posiciona as linhas soltas no rodapé da faixa; aqui ficam entre as etapas */#}
+  position: static !important;
+  align-self: center;
   flex: 0 0 40px;
   width: 40px !important;
   height: 1px;
@@ -1635,8 +1638,14 @@ a {
 :root .breadcrumb-timeline-item {
   position: relative;
   display: flex;
+  {#/* o nativo é uma coluna (ícone em cima, texto embaixo) */#}
+  flex-direction: row !important;
   align-items: center;
-  width: auto;
+  justify-content: center;
+  {#/* o nativo fixa o botão na largura do ícone (25px) */#}
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
   height: 80px;
   padding: 0 10px;
   background: none;
@@ -1652,7 +1661,7 @@ a {
   top: auto !important;
   left: auto !important;
   transform: none !important;
-  margin: 0;
+  margin: 0 !important;
   padding: 0;
   font: 500 16px/34px Montserrat, sans-serif;
   text-transform: uppercase;
@@ -1667,7 +1676,7 @@ a {
   position: absolute;
   left: 0;
   right: 0;
-  top: 38px;
+  top: 33px;
   height: 4px;
   border-radius: 10px;
   background: var(--qd-gold);
@@ -2026,6 +2035,8 @@ a {
 
 {#/* ---------- dados para a entrega (367:14034 / 367:13911 / 367:14109) ---------- */#}
 :root #address-form-section {
+  {#/* 10px do "Mais opções" + 16px = os 26px entre seções do Figma */#}
+  padding-top: 16px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 20px;
@@ -2165,10 +2176,14 @@ a {
   grid-column: 1;
   grid-row: 1 / 5;
   align-self: center;
+  box-sizing: border-box;
+  width: 116px !important;
+  height: 136px;
   padding: 10px 0 !important;
 }
 :root td.summary-img-wrap .summary-img,
 :root td.summary-img-wrap .summary-img-thumb {
+  position: relative;
   width: 116px;
   height: 116px;
   margin: 0;
@@ -2333,6 +2348,7 @@ a {
 :root #nube-sdk-slot-after_main_content {
   width: 100vw;
   max-width: none;
+  margin-top: 60px;
   margin-left: calc(50% - 50vw);
   padding: 0;
 }
@@ -2406,11 +2422,14 @@ a {
     font-size: 13px;
   }
   :root .breadcrumb-timeline-item.current .breadcrumb-timeline-item-text::after {
-    top: 32px;
+    top: 28px;
     height: 3px;
   }
   :root .main-container {
-    padding: 0 16px 40px;
+    padding: 0 16px;
+  }
+  :root #nube-sdk-slot-after_main_content {
+    margin-top: 40px;
   }
   :root .panel-header {
     padding-bottom: 20px;
