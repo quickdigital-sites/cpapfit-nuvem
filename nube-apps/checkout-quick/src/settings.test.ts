@@ -8,6 +8,7 @@ describe("readSettings", () => {
 		expect(s.disabled.size).toBe(0);
 		expect(s.footerBenefits).toBeNull();
 		expect(s.coupon).toBeNull();
+		expect(s.pixDiscount).toBeNull();
 		expect(s.companyInfo).toBe(DEFAULTS.companyInfo);
 		expect(s.topBarMessages).toBeNull();
 		expect(s.paymentNote).toBe(DEFAULTS.paymentNote);

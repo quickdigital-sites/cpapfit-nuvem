@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 // Componentes do SDK viram objetos simples para inspecionar a árvore (mesma técnica do template oficial).
 vi.mock("@tiendanube/nube-sdk-jsx", () => {
 	const make = (type: string) => (props: Record<string, unknown>) => ({ type, props });
-	return { Column: make("col"), Row: make("row"), Text: make("txt"), Progress: make("progress"), Link: make("link"), Icon: make("icon") };
+	return { Column: make("col"), Row: make("row"), Text: make("txt"), Progress: make("progress"), Link: make("link"), Icon: make("icon"), Box: make("box"), Svg: { Root: make("svg"), Path: make("path") } };
 });
 
 import { faixaTopo } from "./features/faixa-topo";
@@ -12,7 +12,7 @@ import { posCompra } from "./features/pos-compra";
 import { rodape } from "./features/rodape";
 import { selosPagamento } from "./features/selos-pagamento";
 import { App } from "./main";
-import { readSettings } from "./settings";
+import { PHILIPS_COUPON, readSettings } from "./settings";
 
 type Node = { type: unknown; props: Record<string, unknown> };
 const expand = (n: Node): unknown => (typeof n.type === "function" ? (n.type as (p: unknown) => unknown)(n.props) : n);
@@ -72,17 +72,38 @@ describe("partes", () => {
 		expect(t).toContain("Até 12x sem juros no cartão de crédito");
 	});
 
-	it("rodape: benefícios, regras do frete, contato, legal; sem Pix e sem cupom por padrão", () => {
+	it("rodape: benefícios do Figma, regras do frete, contato e créditos; sem Pix e sem cupom por padrão", () => {
 		const node = rodape.render(state("start"), defaults);
 		const t = all(node);
-		expect(t).toContain("12x sem juros no cartão de crédito");
-		expect(t).toContain("Frete grátis");
+		expect(t.indexOf("12x sem juros")).toBeLessThan(t.indexOf("Frete grátis"));
+		expect(t).toContain("no cartão de crédito");
+		expect(t).toContain("ver regras");
+		expect(t).toContain("Travou em alguma etapa?");
 		expect(t).toContain("CNPJ: 29.695.217/0001-45");
+		expect(t).toContain(`© Todos os direitos reservados - QuickStart - ${new Date().getFullYear()}`);
 		expect(t).not.toMatch(/pix/i);
+		expect(t).not.toContain("QUERO100");
+		expect(t).not.toMatch(/copiar/i);
+		expect(findAll(node, "svg")).toHaveLength(2);
 		expect(findAll(node, "link").map((l) => l.props.href)).toEqual([
 			"https://quickstart2.lojavirtualnuvem.com.br/politica-de-entrega/",
 			"https://quickstart2.lojavirtualnuvem.com.br/contato/",
+			"https://www.nuvemshop.com.br",
+			"https://quickdigital.com.br",
 		]);
+	});
+
+	it("rodape: Pix e cupom ligados no código aparecem na ordem do Figma", () => {
+		const node = rodape.render(state("start"), { ...defaults, pixDiscount: 10, coupon: PHILIPS_COUPON });
+		const t = all(node);
+		const order = ["10% OFF", "12x sem juros", "Frete grátis", "R$ 100 OFF"].map((x) => t.indexOf(x));
+		expect(order.every((pos, i) => pos >= 0 && (i === 0 || pos > order[i - 1]))).toBe(true);
+		expect(t).toContain("no Pix");
+		expect(t).toContain("na linha Philips");
+		expect(t).toContain("QUERO100");
+		expect(findAll(node, "svg")).toHaveLength(4);
+		// um separador entre cada benefício + a faixa em degradê
+		expect(findAll(node, "box")).toHaveLength(4);
 	});
 
 	it("rodape: cupom e WhatsApp só se configurados", () => {
