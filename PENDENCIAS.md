@@ -10,10 +10,10 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
-- [ ] **Tema publicado mudou (2026-10-19):** a loja passou a usar o tema **14688507 "CPAP Fit — Dev (1.4.2)"**
-  (criado e publicado fora desta sessão). Todo o trabalho de 2026-10-19 está no **14473488**. Decidir: publicar o
-  14473488 ou levar as mudanças para o 14688507 e repontar `THEME_ID_*` (`.env` e secrets). Detalhes em
-  [docs/gap-report.md](docs/gap-report.md).
+- [x] **Tema publicado mudou (2026-10-19):** a loja tinha passado a usar o **14688507 "CPAP Fit — Dev (1.4.2)"**
+  (criado e publicado fora da sessão). O **14473488** foi publicado de novo a pedido do Denis; o 14688507 ficou como
+  rascunho (base Ipanema 1.4.2, sem o trabalho de 2026-10-19). Se um dia for preciso atualizar a base do Ipanema, as
+  mudanças do fork terão de ser levadas para o tema novo.
 - [ ] **Itens da auditoria Figma × loja (2026-10-19):** lista do que a loja precisa preencher e do que é limite da
   plataforma em [docs/gap-report.md](docs/gap-report.md) ("Não feito" e "O que a loja precisa preencher").
 - [x] **PLP — 24 por página (2026-10-19):** testado no tema com fork — a plataforma ignora o valor do `paginate`

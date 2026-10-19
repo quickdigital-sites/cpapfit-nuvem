@@ -173,6 +173,7 @@ no ar não tem estas mudanças**. Ver "Decisão pendente" no fim.
 - **Conteúdo:** lista de lojas físicas, opções de "Motivo" do Fale conosco, revisão dos textos de Quem somos.
 - **Decisão de design:** botões COMPRAR em teal escuro (contraste) em vez do ciano do Figma.
 
-## Decisão pendente
-O tema publicado (14688507) não tem este trabalho. Opções: publicar o 14473488, ou aplicar estas mudanças no 14688507
-(base Ipanema 1.4.2) e repontar `THEME_ID_*` no `.env` e nos secrets do GitHub.
+## Tema publicado
+Resolvido em 2026-10-19: a pedido do Denis, o **14473488** foi publicado de novo (`nuvemshop theme publish`) e a loja
+no ar serve este trabalho. O **14688507** (Ipanema 1.4.2) ficou como rascunho, sem estas mudanças. `.env` e secrets
+seguem apontando para 14473488.
