@@ -108,3 +108,71 @@ Figma; **parcial** = existe mas diverge; **falta** = não existe; **bug** = queb
 | Figma | Status | Motivo |
 |---|---|---|
 | `367:13649` Entrega | **plataforma** | O checkout é da Nuvemshop; o tema não tem templates dele (só cores/logo no admin). A camada `filtros-marcados` nesse frame está oculta e é sobra de outro arquivo. |
+
+---
+
+# Depois da implementação (2026-10-19)
+
+Tudo foi publicado no tema **14473488 (CPAP Fit — Dev)** e conferido pela pré-visualização
+(`?theme_installation_id=14473488`) em 390, 768, 1024, 1280, 1440, 1600 e 1920 px: **nenhuma página rola para o lado**.
+⚠️ Durante o trabalho, outro tema — **14688507 "CPAP Fit — Dev (1.4.2)"** — foi criado e **publicado** na loja (fora
+desta sessão). Ele é uma cópia do nosso tema de antes da etapa da home atualizada para o Ipanema 1.4.2, então **a loja
+no ar não tem estas mudanças**. Ver "Decisão pendente" no fim.
+
+## Status por tela
+
+| Tela | Antes | Depois | Arquivos |
+|---|---|---|---|
+| Home (seções escondidas) | **bug** | ok | `frontend/src/css/institucional.css` |
+| Header desktop / flutuante / mobile | parcial / **bug** / parcial | ok | `theme/blocks/header-utilities.tpl`, `theme/layouts/resources/icons-sprite.tpl`, `theme/templates/layout/header.json`, `frontend/src/css/main.css`, `frontend/src/js/components/header-search.js` (sai `header-plans.js`) |
+| Barra de benefícios | parcial | ok (4 itens, "ver regras" e cupom editáveis no Brand Editor; um item por vez no mobile) | `theme/blocks/nav-icon-text-item.tpl`, `header.json`, `main.css`, `frontend/src/js/components/header-bar.js` |
+| Mega menu | parcial | ok (banners dependem do cadastro) | `main.css` |
+| Busca aberta | parcial | ok (termos sugeridos = plataforma) | `theme/snippets/header/search-form.tpl`, `main.css`, `header-search.js` |
+| Card de produto | parcial | ok (sem coração) | `theme/snippets/product-list/product-item/item.tpl`, `frontend/src/css/product-card.css` |
+| Minicarrinho | **falta** | ok | `theme/snippets/cart/{cart-panel,cart-summary,cart-totals,_cart-item}.tpl`, `theme/snippets/shipping/shipping-calculator.tpl`, `theme/config/settings_data.json`, `frontend/src/css/cart.css` |
+| Home: carrosséis | parcial | ok (2,2 no mobile, 3 no tablet, setas dentro da página) | `theme/static/js/store.js`, `frontend/src/js/components/home-tabs.js`, `frontend/src/css/home.css` |
+| Home: hero/linhas/marcas/serviços/banners | parcial | ok | `home.css` |
+| Catálogo: layout 768–1199 | **bug** | ok | `frontend/src/css/plp.css` |
+| Catálogo: faixa de preço | **falta** | ok (slider) | `theme/snippets/product-list/filters/price-filter.tpl`, `frontend/src/js/components/price-range.js`, `plp.css` |
+| Catálogo: 24 por página | parcial | **plataforma** (o `paginate` do tema é ignorado; segue 60) | `theme/sections/main-products-grid.tpl`, `frontend/src/js/components/plp.js` |
+| Catálogo: gaveta de filtros | parcial | ok (painel de 338px) | `plp.css` |
+| Produto: layout 768–1599 | **bug** | ok | `frontend/src/css/pdp.css` |
+| Produto: Ficha técnica, FAQ, vídeo | **falta** | ok (lidos da descrição e do vídeo cadastrado) | `frontend/src/js/components/pdp.js`, `pdp.css` |
+| Produto: cupom e WhatsApp | fixos no código | configuráveis (tema / admin) | `theme/sections/main-product.tpl`, `theme/config/settings_schema.json`, `pdp.js` |
+| Produto: barra fixa mobile | **falta** | ok | `pdp.js`, `pdp.css` |
+| Produto: variante de opção única | parcial | ok (escondida) | `pdp.js`, `pdp.css` |
+| Troca, Devolução, Garantia | parcial | ok (sanfona + Fale conosco) | `frontend/src/js/components/institucional.js`, `institucional.css` |
+| Fale conosco | parcial | ok no mobile; sem foto e sem anexo | `institucional.css` |
+| Quem somos | parcial / **bug** | ok | `institucional.css`, `home.css` |
+| Checkout "Entrega" | plataforma | plataforma | — |
+
+## Testes feitos (pré-visualização)
+- Comprar pelo card (compra rápida → gaveta) e pela página de produto com variante (Grande L → SKU muda → item com a variante no carrinho).
+- Calculadora de frete na gaveta (CEP 88015-000: SEDEX, Total Express e retirada na loja).
+- Filtro + ordenação + página juntos (`/produtos/page/2/?sort_by=price-descending&min_price=100&max_price=3000`) e arrastar o slider de preço (aplica `min_price` mantendo a ordenação).
+- Busca com sugestões e botão limpar; menu mobile; header flutuante; mega menu.
+- Build: `cd frontend && npm run build` sem erros (o projeto não tem lint).
+
+## Não feito / bloqueado pela plataforma
+- **Coração de favoritos** (card, produto): o tema não tem lista de desejos; precisa de app.
+- **24 produtos por página**: a plataforma ignora o valor do `paginate` no tema.
+- **Termos sugeridos na busca**: a busca nativa só sugere produtos.
+- **Anexo no Fale conosco**: o formulário nativo não envia arquivo.
+- **Checkout (etapa Entrega)**: é da Nuvemshop.
+- **Logo da marca no topo do produto**: não há imagem por marca no cadastro; precisaria de um logo por marca (configuração ou pasta de imagens).
+- **"Cod. do Produto"** do Figma: o tema mostra o SKU da variante.
+- **Foto do Fale conosco**: falta a imagem final.
+- **Seção de vídeo do produto**: pronta, mas nenhum produto testado tem vídeo cadastrado.
+
+## O que a loja precisa preencher
+- **Admin → Pagamentos:** desconto Pix (hoje 0%: preço Pix e selos não aparecem, mas a barra e o rodapé anunciam "10% off no pix"); confirmar "12x sem juros".
+- **Admin → Frete:** valor mínimo de frete grátis (sem ele a barra de progresso do carrinho não aparece).
+- **Categorias:** "Kits promocionais" (menu e 1ª aba de Destaques) e uma origem própria para "Os mais vendidos" (hoje repete os destaques); descrições de categoria (texto SEO).
+- **Produtos:** limpar nomes de variante ("Unico/único", "Ref. …"); vídeos; link do manual em PDF dentro da seção "Ficha Técnica" da descrição.
+- **Brand Editor:** banners do mega menu; textos e cupom da barra de benefícios (bloco da barra); cupom da página de produto (Formulário de produto → CPAP Fit — cupom); pílula Planos e ícone de lojas (bloco Utilitários); URLs e legendas dos vídeos da home.
+- **Conteúdo:** lista de lojas físicas, opções de "Motivo" do Fale conosco, revisão dos textos de Quem somos.
+- **Decisão de design:** botões COMPRAR em teal escuro (contraste) em vez do ciano do Figma.
+
+## Decisão pendente
+O tema publicado (14688507) não tem este trabalho. Opções: publicar o 14473488, ou aplicar estas mudanças no 14688507
+(base Ipanema 1.4.2) e repontar `THEME_ID_*` no `.env` e nos secrets do GitHub.

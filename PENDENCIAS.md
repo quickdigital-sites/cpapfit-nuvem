@@ -10,6 +10,15 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
+- [ ] **Tema publicado mudou (2026-10-19):** a loja passou a usar o tema **14688507 "CPAP Fit — Dev (1.4.2)"**
+  (criado e publicado fora desta sessão). Todo o trabalho de 2026-10-19 está no **14473488**. Decidir: publicar o
+  14473488 ou levar as mudanças para o 14688507 e repontar `THEME_ID_*` (`.env` e secrets). Detalhes em
+  [docs/gap-report.md](docs/gap-report.md).
+- [ ] **Itens da auditoria Figma × loja (2026-10-19):** lista do que a loja precisa preencher e do que é limite da
+  plataforma em [docs/gap-report.md](docs/gap-report.md) ("Não feito" e "O que a loja precisa preencher").
+- [x] **PLP — 24 por página (2026-10-19):** testado no tema com fork — a plataforma ignora o valor do `paginate`
+  (continua 60). O slider de preço foi feito (campos nativos min/max por baixo).
+
 - [ ] **Cadastrar os banners reais de cada categoria** (conteúdo, no admin).
   O suporte já está pronto (ver "Resolvido"). Falta o lojista **adicionar os blocos
   de banner no Brand Editor** para cada categoria, com a **foto**, o **nome da marca**
