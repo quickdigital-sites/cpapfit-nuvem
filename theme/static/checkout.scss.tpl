@@ -1730,7 +1730,9 @@ a {
   font: 700 14px/18.4px Montserrat, sans-serif !important;
   letter-spacing: 0;
   color: var(--qd-ink) !important;
-  white-space: normal;
+  {#/* o nativo corta o rótulo numa linha (nowrap + overflow hidden); no celular "Complemento (opcional)" não cabe */#}
+  white-space: normal !important;
+  overflow: visible !important;
 }
 {#/* obrigatório = todos menos complemento */#}
 :root .has-float-label > label.input-label::after {
@@ -1753,6 +1755,7 @@ a {
 :root .has-float-label > label[for="shippingAddress.floor"],
 :root .has-float-label > label[for="billingAddress.id_number"] {
   display: flex;
+  flex-wrap: wrap;
 }
 :root .has-float-label > label[for="shippingAddress.phone"]::before {
   content: "Telefone";
