@@ -242,3 +242,19 @@ div:is([data-section-id="complementary_products"], [data-section-id="alternative
   .qd-pdp-details-body { font-size: 13px; line-height: 20px; }
   .qd-pdp-details-body p { margin-bottom: 20px; }
 }
+
+/* --- Larguras intermediárias (Figma só tem 1920 e 390) ---------------------------------------
+   768–1199: uma coluna (galeria em cima, compra embaixo). 1200–1599: duas colunas proporcionais.
+   Abaixo de 1600 o cupom desce para baixo do preço, sem a divisória lateral. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .qd-pdp .product-columns { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
+}
+@media (min-width: 1200px) and (max-width: 1599.98px) {
+  .qd-pdp .product-columns { grid-template-columns: minmax(0, 46%) minmax(0, 1fr); }
+  .qd-pdp .swiper-product-thumb { height: auto; max-height: 504px; }
+}
+@media (min-width: 768px) and (max-width: 1599.98px) {
+  .qd-pdp-price-row { flex-direction: column; gap: 16px; }
+  .qd-pdp-coupon { padding: 16px 0 0; border-left: 0; border-top: 1px solid #e1dcd7; }
+  .qd-pdp-coupon-box { max-width: 100%; }
+}

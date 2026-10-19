@@ -282,3 +282,19 @@ html:not(.qd-plp-ready) :is(.template-category, .template-search) :is(.page-head
 
 /* "limpar" do filtro de preço virou <button> no tema (era <a> sem href — Lighthouse crawlable-anchors) */
 button.input-clear-content { border: 0; background: none; padding: 0; cursor: pointer; }
+
+/* --- Tablet / notebook pequeno (768–1199): coluna de filtros mais estreita, 2–3 colunas de produtos
+   e cabeçalho quebrando linha — sem rolagem lateral ------------------------------------------ */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .qd-plp .section-main-products-grid .grid.grid-md-auto-4 { grid-template-columns: 240px minmax(0, 1fr); gap: 24px; }
+  .qd-plp .js-product-table.grid-md-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qd-plp-head { flex-wrap: wrap; gap: 12px 24px; }
+  .qd-plp-title .page-header-title { font-size: 32px; line-height: 40px; }
+  .qd-plp .filters-controls-content { padding: 20px 16px 12px; }
+}
+@media (min-width: 1024px) and (max-width: 1199.98px) {
+  .qd-plp .js-product-table.grid-md-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) and (max-width: 1439.98px) {
+  .qd-plp-title .page-header-title { font-size: clamp(32px, 3vw, 44px); line-height: 1.3; }
+}

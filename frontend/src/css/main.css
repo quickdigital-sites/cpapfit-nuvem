@@ -436,6 +436,9 @@
   .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 9px 12px; }
   .nav-desktop-list > li.nav-main-item:first-child { padding-right: 12px; }
 }
+@media (min-width: 1440px) and (max-width: 1599.98px) {
+  .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 10px 12px; }
+}
 @media (min-width: 1200px) and (max-width: 1599.98px) {
   /* chevron menor para os 8 itens caberem */
   .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { gap: 4px; }
@@ -610,6 +613,7 @@
   .search-container .search-submit-btn { width: 32px; height: 32px; }
   .search-container .search-submit-btn svg { width: 16px; height: 16px; }
   .head-row .qd-plans-pill, .head-row .qd-stores-link { display: none !important; }
+  .head-row .search-container { margin-left: 0; margin-right: 0; padding-left: 0 !important; padding-right: 0 !important; }
 }
 
 /* Figma 24:689: o header flutuante mantém a logo do mesmo tamanho (o tema encolhe com .compress) */

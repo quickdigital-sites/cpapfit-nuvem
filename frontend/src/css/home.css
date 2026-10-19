@@ -432,3 +432,23 @@ div[data-section-id="videos"] { padding: 20px 0 70px !important; }
   [data-section-id="videos"] .video-block + .text-block .text-content,
   [data-section-id="videos"] .video-block + .text-block p { font-size: 12px; line-height: 15px; }
 }
+
+/* ==========================================================================
+   Setas dos carrosséis abaixo de ~1720px: o tema as põe 32px FORA do container
+   (.swiper-button-outside), o que gera rolagem lateral quando não há margem.
+   Aqui elas entram na borda do carrossel, com sombra para destacar do card.
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1719.98px) {
+  .swiper-button-outside.swiper-button-prev { left: 4px !important; }
+  .swiper-button-outside.swiper-button-next { right: 4px !important; }
+  .swiper-button-outside:is(.swiper-button-prev, .swiper-button-next) { box-shadow: 0 2px 10px rgba(0, 0, 0, .15); }
+}
+
+/* Dicas & Vídeos entre 768 e 1199: 4 cards de 284px não cabem — vira faixa com rolagem por toque */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  [data-section-id="videos"] .custom-section-content > .group-block > .group-content {
+    justify-content: flex-start !important; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding-bottom: 8px; scrollbar-width: thin;
+  }
+  [data-section-id="videos"] .custom-section-content > .group-block > .group-content > .group-block { scroll-snap-align: start; }
+}
