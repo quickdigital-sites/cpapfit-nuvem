@@ -18,10 +18,10 @@ echo ">> build do frontend"
 scripts/sync-content.sh "$THEME_ID"
 cd theme
 echo ">> diff ($ENV_NAME / theme $THEME_ID)"
-nuvemshop theme diff --theme-id "$THEME_ID" "${TOKEN_FLAG[@]}"
+nuvemshop theme diff --theme-id "$THEME_ID" ${TOKEN_FLAG[@]+"${TOKEN_FLAG[@]}"}
 echo ">> push"
-nuvemshop theme push --theme-id "$THEME_ID" -y "${TOKEN_FLAG[@]}"
+nuvemshop theme push --theme-id "$THEME_ID" -y ${TOKEN_FLAG[@]+"${TOKEN_FLAG[@]}"}
 if [ "${2:-}" = "--publish" ]; then
   echo ">> publish"
-  nuvemshop theme publish --theme-id "$THEME_ID" -y "${TOKEN_FLAG[@]}"
+  nuvemshop theme publish --theme-id "$THEME_ID" -y ${TOKEN_FLAG[@]+"${TOKEN_FLAG[@]}"}
 fi

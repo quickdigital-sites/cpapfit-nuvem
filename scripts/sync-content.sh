@@ -22,7 +22,7 @@ TOKEN_FLAG=(); [ -n "${NUVEMSHOP_CLI_TOKEN:-}" ] && TOKEN_FLAG=(--token "$NUVEMS
 TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 cp theme/.nuvem "$TMP/" 2>/dev/null || true
 echo ">> baixando o conteúdo do editor (tema $THEME_ID)"
-( cd "$TMP" && nuvemshop theme pull --theme-id "$THEME_ID" "${TOKEN_FLAG[@]}" >/dev/null )
+( cd "$TMP" && nuvemshop theme pull --theme-id "$THEME_ID" ${TOKEN_FLAG[@]+"${TOKEN_FLAG[@]}"} >/dev/null )
 n=0
 for f in "$TMP"/templates/pages/*.json "$TMP"/templates/pages/account/*.json "$TMP"/templates/layout/*.json "$TMP"/config/settings_data.json; do
   [ -f "$f" ] || continue

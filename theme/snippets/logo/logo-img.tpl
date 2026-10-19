@@ -5,6 +5,7 @@
 {% set logo_dimensions = store.logo_dimensions() %}
 {% set logo_thumbnail = logo_size ? logo_size : 'medium' %}
 
+{# acima da dobra: sem lazy-load (image_lazy: 'false') #}
 <div id="logo" class="logo-img-container">
     <a href="{{ store.url }}">
         {% include 'snippets/image.tpl' with {
@@ -15,6 +16,7 @@
             image_width: logo_dimensions.width,
             image_height: logo_dimensions.height,
             image_thumbs: ['medium', 'large', 'huge'],
+            image_lazy: 'false',
         } %}
     </a>
     {% if template == 'home' %}

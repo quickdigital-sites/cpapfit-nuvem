@@ -616,6 +616,13 @@
   .head-row .search-container { margin-left: 0; margin-right: 0; padding-left: 0 !important; padding-right: 0 !important; }
 }
 
+/* Desempenho: a altura da logo fica reservada antes da imagem chegar (sem isso o header cresce 16px no
+   celular quando ela carrega e empurra a página inteira — CLS 0.12 na home). Mesma altura que o max-height já dava. */
+.head-main .logo-default .logo-img { height: var(--logo-height-desktop); }
+@media (max-width: 767.98px) {
+  .head-main .logo-default .logo-img { height: var(--logo-height-mobile); }
+}
+
 /* Figma 24:689: o header flutuante mantém a logo do mesmo tamanho (o tema encolhe com .compress) */
 .head-main.compress .logo-img { max-height: var(--logo-height-desktop) !important; height: var(--logo-height-desktop) !important; }
 @media (max-width: 767.98px) {
