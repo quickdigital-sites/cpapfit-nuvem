@@ -48,7 +48,10 @@
 >
   <div class="media-visual">
       {# Desktop image: always lazy when mobile variant exists, otherwise follows priority #}
-      {% if slide.image %}
+      {# CPAP Fit: no 1º slide com as duas fotos, um <picture> só (ver snippets/qd-hero-picture.tpl) #}
+      {% if is_priority and has_responsive_images %}
+        {% include 'snippets/qd-hero-picture.tpl' with { hero_desktop: slide.image, hero_mobile: slide.image_mobile, hero_alt: image_mobile_alt } %}
+      {% elseif slide.image %}
         {% set desktop_lazy = has_responsive_images or not is_priority %}
         {% include 'snippets/image.tpl' with {
           image_src: slide.image,
@@ -86,7 +89,7 @@
       {% endif %}
 
       {# Mobile image: prioritized for LCP on first slide of first section #}
-      {% if has_mobile_image %}
+      {% if has_mobile_image and not (is_priority and has_responsive_images) %}
         {% include 'snippets/image.tpl' with {
           image_src: slide.image_mobile,
           image_alt: image_mobile_alt,

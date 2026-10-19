@@ -84,6 +84,7 @@ div[data-section-id="hero"] { min-height: 0 !important; } /* o tema imprime min-
   min-height: var(--qd-hero-h) !important;
 }
 [data-section-id="hero"] .media-visual { background: var(--qd-indigo); }
+.qd-hero-picture { display: block; width: 100%; height: 100%; } /* 1º slide: <picture> ocupa a área da foto */
 [data-section-id="hero"] .media-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
 /* desktop: foto ocupa só a direita, como no Figma (left 34.6%, largura 65.4%, altura 155%, top -16%) */
 @media (min-width: 768px) {
