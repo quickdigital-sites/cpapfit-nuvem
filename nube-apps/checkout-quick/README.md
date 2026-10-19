@@ -13,7 +13,7 @@ do tema da loja). Referência visual: Figma `1P4JHFz4FEG8UEBkDOB1qm`, frame `367
 | **faixa-topo** | `after_header` | entrega, pagamento | "AMBIENTE 100% SEGURO" + cadeado dourado, alinhado à direita (no Figma fica dentro do cabeçalho, que é da Nuvemshop) |
 | **frete-gratis** | `after_line_items_price` | entrega, pagamento | **desligada** até `free_shipping_threshold` ser configurado; aí mostra quanto falta + barra |
 | **selos-pagamento** | `before_payment_options` | pagamento | cadeado · "Pagamento rápido e protegido" · texto de segurança · "Até 12x sem juros no cartão de crédito" |
-| **rodape** | `after_main_content` | entrega, pagamento | rodapé azul do Figma (`363:9230`), ícones do tema: [10% OFF no Pix] · 12x sem juros no cartão de crédito · Frete grátis (ver regras → `/politica-de-entrega/`) · [R$ 100 OFF na linha Philips + QUERO100] · endereço, CNPJ e "© Todos os direitos reservados - loja - ano" com os créditos Nuvemshop e Quick Digital · faixa em degradê. Entre colchetes: desligado por padrão |
+| **rodape** | `after_main_content` | entrega, pagamento | rodapé azul do Figma (`363:9230`), ícones do tema: [10% OFF no Pix] · 12x sem juros no cartão de crédito · Frete grátis (ver regras → `/politica-de-entrega/`) · [R$ 100 OFF na linha Philips + QUERO100] · "Travou em alguma etapa?" com Fale com a gente / WhatsApp · endereço, CNPJ e "© Todos os direitos reservados - loja - ano" com os créditos Nuvemshop e Quick Digital · faixa em degradê. Entre colchetes: desligado por padrão |
 | **pos-compra** | `after_order_number` | pedido confirmado | "Pedido confirmado!" · "Cada atualização do seu pedido chega no seu e-mail." · WhatsApp se configurado |
 
 **Sem prometer o que a loja não garante:** o "10% OFF no Pix" fica desligado porque o desconto Pix está em 0% nos
@@ -52,13 +52,8 @@ dos formulários, cartões das opções de frete e do endereço, botão "Continu
 resumo (sem a marca acima do nome), subtotal/frete/total, preço no Pix (só aparece se o desconto Pix estiver
 configurado), link de cupom e as formas de pagamento. Cor principal, logo e fonte do checkout vêm das
 configurações de checkout no admin. O botão "Copiar" do cupom também não existe: o Worker não acessa a área de
-transferência.
-
-**O resto do visual vem do tema:** o bloco "CPAP Fit" no fim de `theme/static/checkout.scss.tpl` (tema com fork)
-vira o CSS do checkout: cabeçalho com o logo "10 anos" e o selo, etapas, campos, frete, endereço, resumo e o
-rodapé deste app na largura da tela (com as margens do celular). Script de checkout é sempre NubeSDK, então não
-há como fazer isso com JavaScript. Seguem nativos: textos de exemplo dentro dos campos, marca acima do nome do
-produto e o "× 1" do resumo.
+transferência. O rodapé ocupa a largura da área do checkout (não a tela inteira, como no Figma), e no celular os
+benefícios quebram em linhas, com os separadores entre eles.
 
 ## Estrutura
 
