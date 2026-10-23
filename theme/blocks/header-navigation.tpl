@@ -9,6 +9,14 @@
 {% set show_secondary_menu = block.settings.show_secondary_menu %}
 {% set secondary_menu_id = block.settings.menu %}
 
+{# CPAP Fit: troca um subitem do menu (ex.: Serviços › Apoio e Monitoramento de CPAP) pelo Acompanhamento PASSOS.
+   Campos "PASSOS no menu" deste bloco; o mesmo vale no menu do celular (snippets/navigation/navigation-list-hamburger.tpl).
+   A categoria do admin não muda: só o link mostrado no menu. #}
+{% set qd_swap_on = block.settings.qd_passos_enabled is not same as(false) %}
+{% set qd_swap_match = block.settings.qd_passos_match | default('/servicos/apoio-e-monitoramento-de-cpap/') %}
+{% set qd_swap_label = block.settings.qd_passos_label | default('Acompanhamento PASSOS') %}
+{% set qd_swap_url = block.settings.qd_passos_url | default('https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=servicos') %}
+
 {# Derived layout classes #}
 {% set secondary_menu_links = secondary_menu_id ? menus[secondary_menu_id] | default([]) : [] %}
 {% set has_secondary_menu = show_secondary_menu and secondary_menu_links | length > 0 %}
@@ -104,8 +112,10 @@
 										{% if item.subitems %}
 											<ul class="desktop-list-subitems list-unstyled" {% if banner_count > 0 %}style="grid-column: span {{ col_count }}; column-count: {{ col_count }};"{% endif %}>
 												{% for subitem in item.subitems %}
+													{% set qd_is_swap = qd_swap_on and qd_swap_match and qd_swap_match in subitem.url %}
+													{% set subitem_url = qd_is_swap ? qd_swap_url : subitem.url %}
 													<li class="nav-item">
-														<a href="{{ subitem.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subitem.url } %} class="nav-list-link nav-list-link-heading">{{ subitem.name }}</a>
+														<a href="{{ subitem_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subitem_url } %} class="nav-list-link nav-list-link-heading">{{ qd_is_swap ? qd_swap_label : subitem.name }}</a>
 														{% if subitem.subitems %}
 															<ul class="list-subitems list-unstyled">
 																{% for subsubitem in subitem.subitems %}
@@ -178,6 +188,43 @@
       "id": "menu",
       "label": "Menu principal",
       "info": "Os itens do menu são editados em Loja online › Menus, no painel da loja."
+    },
+    {
+      "type": "header",
+      "content": "PASSOS no menu"
+    },
+    {
+      "type": "setting",
+      "setting_type": "toggle",
+      "id": "qd_passos_enabled",
+      "label": "Trocar um item do menu pelo Acompanhamento PASSOS",
+      "info": "Desligado: o menu volta a mostrar o item original do admin.",
+      "default": true
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "qd_passos_match",
+      "label": "Endereço do item que será trocado",
+      "info": "Parte do link do item no menu, ex.: /servicos/apoio-e-monitoramento-de-cpap/",
+      "default": "/servicos/apoio-e-monitoramento-de-cpap/",
+      "visible_if": "{{ block.settings.qd_passos_enabled }}"
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "qd_passos_label",
+      "label": "Texto no menu",
+      "default": "Acompanhamento PASSOS",
+      "visible_if": "{{ block.settings.qd_passos_enabled }}"
+    },
+    {
+      "type": "setting",
+      "setting_type": "url",
+      "id": "qd_passos_url",
+      "label": "Link",
+      "default": "https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=servicos",
+      "visible_if": "{{ block.settings.qd_passos_enabled }}"
     }
   ]
 }
