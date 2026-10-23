@@ -15,6 +15,7 @@
 		{ name: 'BLOG', url: 'http://blog.cpapfit.com.br/' },
 		{ name: 'Seja um representante!', url: 'https://materiais.cpapfit.com.br/seja-um-representante/' },
 		{ name: 'Quem somos', url: '/quem-e-a-cpap-fit/' },
+		{ name: '', url: '', qd_passos: true },
 		{ name: 'Nossas lojas', url: '/nossas-lojas/' },
 		{ name: 'Planos de assinatura', url: '/planos-de-assinatura/' }
 	],
@@ -26,17 +27,31 @@
 	]
 ] %}
 
+{# Link "Programa PASSOS" (campos da Coluna 2): entra depois de "Quem somos" nos links padrão; com menu do admin, no fim da coluna #}
+{% set passos_on = block.settings.qd_passos_enabled is not same as(false) %}
+{% set passos_link = {
+	name: block.settings.qd_passos_label | default('Programa PASSOS'),
+	url: block.settings.qd_passos_url | default('https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=rodape')
+} %}
+
 <div class="qd-footer-links" {{ block | block_attributes }}>
 	{% for i in 1..3 %}
 		{% set title = attribute(block.settings, 'title_' ~ i) %}
 		{% set menu_id = attribute(block.settings, 'menu_' ~ i) %}
-		{% set links = menu_id and menus[menu_id] ? menus[menu_id] : default_links[i - 1] %}
+		{% set from_menu = menu_id and menus[menu_id] %}
+		{% set links = from_menu ? menus[menu_id] : default_links[i - 1] %}
+		{% if i == 2 and from_menu and passos_on %}
+			{% set links = links | merge([passos_link]) %}
+		{% endif %}
 		{% if title and links %}
 			<details class="qd-footer-menu" data-qd-footer-menu>
 				<summary>{{ title }}</summary>
 				<ul>
 					{% for item in links %}
-						<li><a href="{{ item.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.url } %}>{{ item.name }}</a></li>
+						{% set link = item.qd_passos is defined and item.qd_passos ? (passos_on ? passos_link : null) : item %}
+						{% if link %}
+							<li><a href="{{ link.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: link.url } %}>{{ link.name }}</a></li>
+						{% endif %}
 					{% endfor %}
 				</ul>
 			</details>
@@ -89,6 +104,30 @@
       "setting_type": "menu",
       "id": "menu_2",
       "label": "Menu com os links"
+    },
+    {
+      "type": "setting",
+      "setting_type": "toggle",
+      "id": "qd_passos_enabled",
+      "label": "Mostrar o link do Programa PASSOS",
+      "info": "Fica depois de \"Quem somos\". Com um menu escolhido acima, entra no fim da coluna.",
+      "default": true
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "qd_passos_label",
+      "label": "Texto do link PASSOS",
+      "default": "Programa PASSOS",
+      "visible_if": "{{ block.settings.qd_passos_enabled }}"
+    },
+    {
+      "type": "setting",
+      "setting_type": "url",
+      "id": "qd_passos_url",
+      "label": "Link PASSOS",
+      "default": "https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=rodape",
+      "visible_if": "{{ block.settings.qd_passos_enabled }}"
     },
     {
       "type": "header",
