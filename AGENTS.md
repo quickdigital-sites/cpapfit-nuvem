@@ -52,7 +52,8 @@ scripts/theme-push.sh homolog  # build + preserva o conteúdo do editor + diff +
 
 Arquivo do redesign (Dev Mode): https://www.figma.com/design/1P4JHFz4FEG8UEBkDOB1qm/-Quick--Redesign-CPAP-Fit---Nuvemshop?node-id=0-1&m=dev
 (fileKey `1P4JHFz4FEG8UEBkDOB1qm`). MCP oficial do Figma em `.mcp.json` (login OAuth na primeira vez, sem token
-no repo). Comentários de CSS citam o nó (`Figma 24:661`); mantenha esse hábito. Comparação página × frame:
+no repo). O MCP só lê arquivos em que a conta tem acesso de edição; sem isso, use a cópia
+`QOFUK135D5y7jq7aWyKMth` (mesmos ids de nó). Última auditoria: [claude/figma-parity-report.md](claude/figma-parity-report.md). Comentários de CSS citam o nó (`Figma 24:661`); mantenha esse hábito. Comparação página × frame:
 skill `figma-parity-check`.
 
 ## Convenções

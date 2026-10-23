@@ -192,7 +192,9 @@ html:not(.qd-pdp-ready) .template-product .js-product-detail { visibility: hidde
 .qd-pdp .js-product-info .product-description-content :is(h1, h2, h3, h4, h5, h6, p, ul, li, strong, b) { display: inline; margin: 0; }
 /* a descrição vem do admin com fontes/tamanhos inline: normaliza */
 .qd-pdp .js-product-info .product-description-content * { font-family: inherit !important; font-size: inherit !important; font-weight: inherit !important; line-height: inherit !important; color: inherit !important; }
-.qd-pdp .js-product-info .product-description-content :is(img, iframe, video, table, br) { display: none; }
+/* !important: o editor do admin grava display: inline-block inline nas imagens; sem isso o banner da
+   descrição entra no resumo e cada "linha" do clamp vira uma imagem de ~400px (Figma 35:10696 / 66:17596) */
+.qd-pdp .js-product-info .product-description-content :is(img, picture, figure, iframe, video, table, br) { display: none !important; }
 .qd-pdp .js-product-info .product-description-content :is(h1, h2, h3, h4, h5, h6, p, li)::after { content: " "; }
 
 /* --- Frete: rótulo + pílula na mesma linha --------------------------------- */
