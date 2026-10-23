@@ -565,6 +565,14 @@
   font: 700 11px/16.5px var(--heading-font); text-transform: uppercase;
 }
 .js-navigation-bar .qd-coupon-copy.is-copied { background: var(--qd-teal-strong, #00816e); }
+/* "Destacar como botão" (nav-icon-text-item, qd_pill): pílula colorida, ex.: Acompanhamento PASSOS.
+   A cor vem do Brand Editor (style inline no span); #8e2c8a é o fallback. */
+.js-navigation-bar .qd-nav-pill > span {
+  display: inline-flex; align-items: center; height: 30px; padding: 0 16px; border-radius: 50px;
+  background: #8e2c8a; color: #fefdfc; font-size: 12px; transition: filter .15s;
+}
+.js-navigation-bar a.qd-nav-pill { text-decoration: none; }
+.js-navigation-bar a.qd-nav-pill:hover > span { filter: brightness(1.15); }
 
 @media (min-width: 1200px) {
   .js-navigation-bar.navigation-bar { min-height: 64px; display: flex; align-items: center; padding-left: 0; padding-right: 0; }
@@ -581,6 +589,7 @@
   .js-navigation-bar .navigation-bar-item + .navigation-bar-item::before { left: -8px; }
   .js-navigation-bar .qd-coupon-code { letter-spacing: 2px; padding-left: 10px; margin-left: 4px; }
   .js-navigation-bar .qd-coupon-copy { padding: 6px 10px; }
+  .js-navigation-bar .qd-nav-pill > span { padding: 0 12px; font-size: 11px; }
 }
 
 /* Mobile/tablet: um item por vez (40px), passando sozinho (frontend/src/js/components/header-bar.js) */
@@ -600,6 +609,16 @@
   }
   .js-navigation-bar .qd-coupon-code { height: 26px; letter-spacing: 3px; padding-left: 10px; }
   .js-navigation-bar .qd-coupon-copy { height: 26px; padding: 4px 10px; }
+  .js-navigation-bar .qd-nav-pill > span { height: 26px; }
+}
+
+/* Faixa de anúncio acima do header (seção nativa announcement-bar, Acompanhamento PASSOS).
+   Fina, largura total; cor de fundo e texto no Brand Editor. */
+.adbar { font: 500 13px/16px var(--heading-font); }
+.adbar a { text-decoration: none; }
+.adbar a:hover { text-decoration: underline; }
+@media (max-width: 767.98px) {
+  .adbar { font-size: 12px; line-height: 15px; }
 }
 
 /* ==========================================================================

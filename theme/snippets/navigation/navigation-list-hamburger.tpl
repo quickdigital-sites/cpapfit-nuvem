@@ -53,7 +53,7 @@
 				{% block modal_body %}
 					{% if item.isCategory %}
 						<div class="nav-item">
-							<a class="nav-list-link {{ item.current ? 'selected' }}" href="{{ item.url }}">
+							<a class="nav-list-link {{ item.current ? 'selected' }}" href="{{ item.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.url } %}>
 								{% if item.isRootCategory %}
 									{{ 'general.view_all_products' | t }}
 								{% else %}
@@ -76,7 +76,7 @@
 		</div>
 	{% else %}
 		<div class="nav-item" data-component="menu.item">
-			<a class="nav-list-link {{ item.current ? 'selected' }}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}">{{ item.name }}</a>
+			<a class="nav-list-link {{ item.current ? 'selected' }}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.url } %}>{{ item.name }}</a>
 		</div>
 	{% endif %}
 {% endfor %}

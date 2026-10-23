@@ -1,6 +1,7 @@
 {# Announcement Bar section #}
 
-{% set has_blocks = (section.blocks | length) > 0 %}
+{# CPAP Fit: "Mostrar a faixa" (qd_enabled) esconde a faixa sem apagar os anúncios #}
+{% set has_blocks = (section.blocks | length) > 0 and section.settings.qd_enabled is not same as(false) %}
 {% set has_multiple_announcements = (section.blocks | length) > 1 %}
 {% set animation = section.settings.animation %}
 {% set vertical_padding = section.settings.vertical_padding %}
@@ -51,7 +52,7 @@
 							{% endif %}
 							<div class="{% if is_marquee %}js-adbar-item{% endif %} adbar-item" {% if animation != 'slider' %}{{ block | block_attributes }}{% endif %}>
 								{% if block.settings.link %}
-									<a href="{{ block.settings.link }}" style="color: inherit;">{{ block.settings.text }}</a>
+									<a href="{{ block.settings.link }}" style="color: inherit;"{% include 'snippets/qd-link-attrs.tpl' with { url: block.settings.link } %}>{{ block.settings.text }}</a>
 								{% else %}
 									<span>{{ block.settings.text }}</span>
 								{% endif %}
@@ -101,6 +102,14 @@
     }
   ],
   "settings": [
+    {
+      "type": "setting",
+      "setting_type": "toggle",
+      "id": "qd_enabled",
+      "label": "Mostrar a faixa",
+      "info": "Desligado: a faixa some da loja, mas o texto e o link ficam guardados.",
+      "default": true
+    },
     {
       "type": "header",
       "content": "t:names.colors"
@@ -243,6 +252,7 @@
     {
       "name": "t:names.announcement_bar",
       "settings": {
+        "qd_enabled": true,
         "background_color": "#000000",
         "text_color": "#ffffff",
         "animation": "slider",

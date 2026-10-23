@@ -15,7 +15,7 @@
 {% endif %}
 
 	{% if announcement.link %}
-		<a href="{{ announcement.link }}" class="{{ link_class }}">{{ announcement.text | raw }}</a>
+		<a href="{{ announcement.link }}" class="{{ link_class }}"{% include 'snippets/qd-link-attrs.tpl' with { url: announcement.link } %}>{{ announcement.text | raw }}</a>
 	{% else %}
 		<span class="{{ link_class }}">{{ announcement.text | raw }}</span>
 	{% endif %}

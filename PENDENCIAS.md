@@ -10,6 +10,12 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
+- [ ] **PASSOS (Oxi Saúde) — o que depende do admin (2026-10-23):** faixa do topo e pílula na barra azul já vêm no
+  tema (`utm_medium=topo` / `faixa`). Falta no admin: (1) **Serviços** do menu principal é o menu do admin, sem
+  "Em breve" no código — trocar "Apoio e Monitoramento de CPAP" pelo link PASSOS (`utm_medium=servicos`) em
+  Loja online › Menus; (2) **Rodapé**: criar um menu com os 4 links de Serviços + "Programa PASSOS"
+  (`utm_medium=rodape`) e escolher em Personalizar › Rodapé › Menus do rodapé › Coluna 3. Base:
+  `https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos`. Ainda virão `produto` e `pedido`.
 - [ ] **Checkout (2026-10-19):** visual do Figma `367:13649` no ar pelo tema (bloco "CPAP Fit" no fim de
   `theme/static/checkout.scss.tpl`; script de checkout é sempre NubeSDK, então JS no checkout não serve). O rodapé
   azul vem do app NubeSDK `nube-apps/checkout-quick`. **Falta (Denis):** subir o `dist/main.min.js` atual como v.3

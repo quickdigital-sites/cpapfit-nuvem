@@ -20,6 +20,7 @@ import initPriceRange from "./components/price-range.js";
 import initPdp from "./components/pdp.js";
 import initPixPrice from "./components/pix-price.js";
 import initInstitucional from "./components/institucional.js";
+import initExternalLinks from "./components/external-links.js";
 
 document.addEventListener("alpine:init", () => {
   // Componentes ficam disponíveis nos templates como x-data="miniCart()"
@@ -37,6 +38,7 @@ initPdp();          // PDP: card do topo, preços + cupom, botão WhatsApp
 initPixPrice();     // PDP: preço no Pix acompanha a variação escolhida
 initInstitucional(); // páginas institucionais + Fale conosco: menu lateral, lojas, campos do formulário
 initFooter();       // footer: copiar cupom, menus (acordeão no mobile), "Seu nome" na newsletter
+initExternalLinks(); // links para outro domínio abrem em nova aba (HTML que o Twig não controla)
 
 // Overlay escuro atrás do submenu do menu desktop (mostrado por CSS :has no hover)
 (() => {

@@ -89,7 +89,7 @@
 					{% set has_dropdown = item.subitems or banner_count > 0 %}
 
 					<li class="nav-item nav-main-item {% if has_dropdown %}nav-dropdown{% endif %}">
-						<a href="{{ item.url }}" class="nav-list-link {% if is_featured %}nav-list-link-featured{% endif %} {% if is_featured and featured_link_color %}nav-list-link-featured-color{% endif %}" {% if is_featured and featured_link_color %}style="color: {{ featured_link_color }} !important;"{% endif %}>
+						<a href="{{ item.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.url } %} class="nav-list-link {% if is_featured %}nav-list-link-featured{% endif %} {% if is_featured and featured_link_color %}nav-list-link-featured-color{% endif %}" {% if is_featured and featured_link_color %}style="color: {{ featured_link_color }} !important;"{% endif %}>
 							{{ item.name }}
 							{% if has_dropdown %}
 								<svg class="nav-list-link-icon icon-inline" {% if is_featured and featured_link_color %}style="fill: {{ featured_link_color }} !important;"{% endif %}><use xlink:href="#chevron"/></svg>
@@ -105,12 +105,12 @@
 											<ul class="desktop-list-subitems list-unstyled" {% if banner_count > 0 %}style="grid-column: span {{ col_count }}; column-count: {{ col_count }};"{% endif %}>
 												{% for subitem in item.subitems %}
 													<li class="nav-item">
-														<a href="{{ subitem.url }}" class="nav-list-link nav-list-link-heading">{{ subitem.name }}</a>
+														<a href="{{ subitem.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subitem.url } %} class="nav-list-link nav-list-link-heading">{{ subitem.name }}</a>
 														{% if subitem.subitems %}
 															<ul class="list-subitems list-unstyled">
 																{% for subsubitem in subitem.subitems %}
 																	<li class="nav-item">
-																		<a href="{{ subsubitem.url }}" class="nav-list-link">{{ subsubitem.name }}</a>
+																		<a href="{{ subsubitem.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subsubitem.url } %} class="nav-list-link">{{ subsubitem.name }}</a>
 																	</li>
 																{% endfor %}
 															</ul>

@@ -30,7 +30,7 @@
 				<ul class="list list-unstyled footer-menu-list">
 					{% for item in menus[menu_id] %}
 						<li>
-							<a href="{{ item.url }}" {% if item.url | is_external %}target="_blank"{% endif %}>{{ item.name }}</a>
+							<a href="{{ item.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.url } %}>{{ item.name }}</a>
 						</li>
 					{% endfor %}
 				</ul>

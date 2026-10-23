@@ -14,7 +14,7 @@
 <div class="image-block {% if block_width == 'fill' %}block-fill{% endif %}" {{ block | block_attributes }}>
 	{% if img_settings.image %}
 		{% if img_settings.link %}
-			<a href="{{ img_settings.link }}" class="d-block">
+			<a href="{{ img_settings.link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: img_settings.link } %} class="d-block">
 		{% endif %}
 		{% set desktop_lazy = has_responsive_images or not is_priority %}
 		{% include 'snippets/image.tpl' with {

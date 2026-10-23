@@ -150,6 +150,12 @@ formato — o redesign fixa esses valores no CSS, então mexer neles não mudava
 |---|---|
 | `sections/product-list.tpl` | campo **Nome da aba** (`tab_label`): a vitrine vira uma aba dos Destaques |
 | `sections/qd-stores.tpl` + `blocks/qd-store.tpl` | seção **Lojas físicas** com um bloco **Loja** por loja (antes: HTML no componente `nossas-lojas`) |
+| `sections/announcement-bar.tpl` (2026-10-23) | **Faixa de anúncio** acima do header (Acompanhamento PASSOS): campo **Mostrar a faixa** (`qd_enabled`); texto e link no bloco **Anúncio**; cor de fundo em **Cores › Fundo** |
+| `blocks/nav-icon-text-item.tpl` (2026-10-23) | **Mostrar este benefício** (`qd_enabled`), **Destacar como botão** (`qd_pill`) e **Cor do botão** (`qd_pill_color`); a barra aceita até 5 benefícios. Padrão: PASSOS em pílula; "R$ 100 off na linha Philips" desligado (5 itens não cabem numa linha no computador) |
+| `blocks/qd-footer-links.tpl` (2026-10-23) | **Menus do rodapé**: título + **Menu com os links** (menu do admin) por coluna; sem menu, a coluna mostra os links padrão (antes: HTML no componente `footer-links`) |
+
+Links para outro domínio abrem em nova aba em todo o tema: nos campos de link via `snippets/qd-link-attrs.tpl`
+(filtro `is_external`), no HTML dos blocks "Código"/texto rico via `frontend/src/js/components/external-links.js`.
 
 ## 3. Comportamento quando um campo fica vazio
 
@@ -159,4 +165,6 @@ formato — o redesign fixa esses valores no CSS, então mexer neles não mudava
 - Vitrine sem "Nome da aba": aparece sozinha, com o título dela, fora das abas.
 - Loja sem nome: o card não aparece. Sem WhatsApp: sem botão "Fale com a loja". Sem endereço: sem "Como chegar".
 - Benefício da barra azul sem cupom: sem o botão Copiar. Sem "Texto do link": o benefício inteiro vira o link.
+- Faixa de anúncio com "Mostrar a faixa" desligado: some da loja (texto e link ficam guardados).
+- Coluna do rodapé sem título: some. Sem menu escolhido: mostra os links padrão.
 - Pílula de Planos / ícone de lojas com link vazio: somem do cabeçalho.

@@ -34,13 +34,13 @@
   "blocks": [
     {
       "type": "nav-icon-text-item",
-      "limit": 4
+      "limit": 5
     }
   ],
   "settings": [
     {
       "type": "paragraph",
-      "content": "Cada benefício é um item abaixo. Até 4 cabem numa linha no computador; no celular aparece um por vez."
+      "content": "Cada benefício é um item abaixo. Até 5 cabem numa linha no computador; no celular aparece um por vez."
     }
   ],
   "presets": [

@@ -11,7 +11,7 @@
 
 <div class="brand-logo-block" {{ block | block_attributes }}>
 	{% if logo_link %}
-		<a href="{{ logo_link }}" class="brand-logo-link">
+		<a href="{{ logo_link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: logo_link } %} class="brand-logo-link">
 	{% endif %}
 	{% include 'snippets/image.tpl' with {
 		image_src: image_src,

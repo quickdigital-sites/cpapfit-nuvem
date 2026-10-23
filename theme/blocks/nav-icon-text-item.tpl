@@ -4,24 +4,31 @@
 {% set use_custom_image = item.icon_source == 'custom' and item.custom_image %}
 {% set is_mobile_menu = type == 'mobile_menu' %}
 
-{% set wrapper_class = is_mobile_menu ? 'secondary-menu-link secondary-menu-link-icon' : 'navigation-bar-item' %}
+{# CPAP Fit: "Destacar como botão" (qd_pill) vira a pílula colorida, ex.: Acompanhamento PASSOS #}
+{% set is_pill = item.qd_pill and not is_mobile_menu %}
+{% set wrapper_class = is_mobile_menu ? 'secondary-menu-link secondary-menu-link-icon' : 'navigation-bar-item' ~ (is_pill ? ' qd-nav-pill') %}
 {# CPAP Fit: com "texto do link" o item não vira link inteiro; o link aparece como "ver regras" ao lado #}
 {% set separate_link = item.link and item.link_label %}
 {% set wrap_link = item.link and not separate_link %}
+
+{# "Mostrar este benefício" desligado: o item some sem perder o que foi preenchido #}
+{% if item.qd_enabled is not same as(false) %}
 
 {% if is_mobile_menu %}
 	<li class="secondary-menu-item">
 {% endif %}
 
   {% if wrap_link %}
-    <a href="{{ item.link }}" class="{{ wrapper_class }}" {% if not is_mobile_menu %}{{ block | block_attributes }}{% endif %}>
+    <a href="{{ item.link }}" class="{{ wrapper_class }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.link } %} {% if not is_mobile_menu %}{{ block | block_attributes }}{% endif %}>
   {% elseif is_mobile_menu %}
     <span class="{{ wrapper_class }}">
   {% else %}
     <div class="{{ wrapper_class }}" {{ block | block_attributes }}>
   {% endif %}
 
-    {% if use_custom_image and not is_mobile_menu %}
+    {% if is_pill %}
+      {# pílula: só o texto, na cor escolhida #}
+    {% elseif use_custom_image and not is_mobile_menu %}
       {% include 'snippets/image.tpl' with {
         image_src: item.custom_image,
         image_alt: '',
@@ -33,11 +40,11 @@
     {% endif %}
 
     {% if item.description %}
-      <span>{{ item.description | raw }}</span>
+      <span{% if is_pill and item.qd_pill_color %} style="background-color: {{ item.qd_pill_color }};"{% endif %}>{{ item.description | raw }}</span>
     {% endif %}
 
     {% if separate_link %}
-      <a href="{{ item.link }}" class="qd-nav-item-link">{{ item.link_label }}</a>
+      <a href="{{ item.link }}" class="qd-nav-item-link"{% include 'snippets/qd-link-attrs.tpl' with { url: item.link } %}>{{ item.link_label }}</a>
     {% endif %}
 
     {% if item.coupon_code and not is_mobile_menu %}
@@ -59,11 +66,21 @@
 	</li>
 {% endif %}
 
+{% endif %}
+
 {% schema %}
 {
   "name": "Benefício",
   "icon": "HeartIcon",
   "settings": [
+    {
+      "type": "setting",
+      "setting_type": "toggle",
+      "id": "qd_enabled",
+      "label": "Mostrar este benefício",
+      "info": "Desligado: o benefício some da barra, mas o que foi preenchido fica guardado.",
+      "default": true
+    },
     {
       "type": "setting",
       "setting_type": "icon_picker",
@@ -200,6 +217,22 @@
       "id": "coupon_code",
       "label": "Cupom",
       "info": "Ex.: QUERO100. Aparece com o botão Copiar. Vazio: sem cupom."
+    },
+    {
+      "type": "setting",
+      "setting_type": "toggle",
+      "id": "qd_pill",
+      "label": "Destacar como botão",
+      "info": "Mostra o texto dentro de um botão colorido, sem ícone. Ex.: Acompanhamento PASSOS.",
+      "default": false
+    },
+    {
+      "type": "setting",
+      "setting_type": "color",
+      "id": "qd_pill_color",
+      "label": "Cor do botão",
+      "default": "#8E2C8A",
+      "visible_if": "{{ block.settings.qd_pill }}"
     }
   ]
 }

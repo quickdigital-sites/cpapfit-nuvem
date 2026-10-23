@@ -2,7 +2,7 @@
 # Figma: desktop 24:806 • mobile 24:948.
 #
 #   footer_topo (componente)  redes sociais + barra de benefícios com cupom (COPIAR)
-#   footer (nativo)           Lista VIP (newsletter NATIVA — envia pro admin) + contato + menus (blocks "code")
+#   footer (nativo)           Lista VIP (newsletter NATIVA — envia pro admin) + contato (block "code") + menus (qd-footer-links, nativo)
 #   footer_base (componente)  endereço/CNPJ/© + Nuvemshop / Quick Digital + faixa em degradê
 #   (CSS/JS do build vão no <head> do layout.tpl — frontend/inject.mjs, modo head; no modo footer,
 #    o inject.mjs acrescenta a seção nuvemshop_dev_js sozinho)
@@ -25,7 +25,7 @@ sections:
       menus_toggle: true
       footer_payments_show: false
       footer_shipping_show: false
-    block_order: [newsletter, contato, links]
+    block_order: [newsletter, contato, menus]
     blocks:
       newsletter:
         type: footer-newsletter
@@ -33,7 +33,10 @@ sections:
           title: Lista VIP
           description: Tenha acesso a descontos e condições especiais
       contato: { component: footer-contato }
-      links: { component: footer-links }
+      # menus NATIVOS (blocks/qd-footer-links.tpl): título + menu do admin por coluna; sem menu, links padrão
+      menus:
+        type: qd-footer-links
+        settings: { title_1: Atendimento, title_2: Institucional, title_3: Serviços }
 
   - component: footer-base
     settings: { custom_background_color: "#2F3295" }

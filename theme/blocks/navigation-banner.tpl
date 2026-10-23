@@ -16,7 +16,7 @@
 {% if has_image %}
 
 	{% if banner_url %}
-		<a href="{{ banner_url }}" class="nav-banner-item" aria-label="{{ banner_title ? banner_title : 'general.banner' | t }}">
+		<a href="{{ banner_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: banner_url } %} class="nav-banner-item" aria-label="{{ banner_title ? banner_title : 'general.banner' | t }}">
 	{% else %}
 		<div class="nav-banner-item">
 	{% endif %}

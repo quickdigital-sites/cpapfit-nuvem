@@ -114,7 +114,7 @@
 
   {# Slide link #}
   {% if has_link %}
-    <a href="{{ slide.link }}" class="media-link" aria-label="{{ 't:names.slide' | t }}"></a>
+    <a href="{{ slide.link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: slide.link } %} class="media-link" aria-label="{{ 't:names.slide' | t }}"></a>
   {% endif %}
 
   {# Content #}

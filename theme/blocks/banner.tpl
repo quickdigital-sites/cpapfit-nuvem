@@ -137,7 +137,7 @@
 	
 	{# Banner link as overlay #}
 	{% if has_link %}
-		<a href="{{ banner.link }}" class="{% if text_outside %}banner-link-overlay{% else %}media-link{% endif %}" aria-label="{{ 'general.banner' | t }}"></a>
+		<a href="{{ banner.link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: banner.link } %} class="{% if text_outside %}banner-link-overlay{% else %}media-link{% endif %}" aria-label="{{ 'general.banner' | t }}"></a>
 	{% endif %}
 	
 	{# Content - Renders sub-blocks #}

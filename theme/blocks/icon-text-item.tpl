@@ -19,7 +19,7 @@
 {% endif %}
 
 {% if item.link %}
-	<a href="{{ item.link }}" class="icon-text-item {{ item_class }}" {{ block | block_attributes }}>
+	<a href="{{ item.link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.link } %} class="icon-text-item {{ item_class }}" {{ block | block_attributes }}>
 {% else %}
 	<div class="icon-text-item {{ item_class }}" {{ block | block_attributes }}>
 {% endif %}

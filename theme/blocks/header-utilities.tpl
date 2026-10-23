@@ -38,7 +38,7 @@
 {# CPAP Fit: pílula "Planos de assinatura" e atalho para as lojas físicas (Figma 24:594 / 24:603).
    Textos e links editáveis no Brand Editor (bloco Utilitários). Só aparecem no desktop (CSS). #}
 {% if block.settings.plans_url %}
-	<a href="{{ block.settings.plans_url }}" class="qd-plans-pill" data-block-id="{{ block_id }}" data-block-type="{{ block_type }}">
+	<a href="{{ block.settings.plans_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: block.settings.plans_url } %} class="qd-plans-pill" data-block-id="{{ block_id }}" data-block-type="{{ block_type }}">
 		<span class="qd-plans-pill__icon"><svg class="icon-inline" aria-hidden="true"><use xlink:href="#qd-bookmark"/></svg></span>
 		<span class="qd-plans-pill__text">
 			<span class="qd-plans-pill__title">{{ block.settings.plans_title }}</span>
@@ -48,7 +48,7 @@
 	</a>
 {% endif %}
 {% if block.settings.stores_url %}
-	<a href="{{ block.settings.stores_url }}" class="qd-stores-link header-icon" aria-label="{{ block.settings.stores_label | default('Nossas lojas') }}" data-block-id="{{ block_id }}" data-block-type="{{ block_type }}">
+	<a href="{{ block.settings.stores_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: block.settings.stores_url } %} class="qd-stores-link header-icon" aria-label="{{ block.settings.stores_label | default('Nossas lojas') }}" data-block-id="{{ block_id }}" data-block-type="{{ block_type }}">
 		<svg class="utility-icon icon-inline" aria-hidden="true"><use xlink:href="#qd-pin"/></svg>
 	</a>
 {% endif %}

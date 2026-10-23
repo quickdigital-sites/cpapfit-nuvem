@@ -88,6 +88,10 @@
     {
       "type": "footer-menu",
       "limit": 3
+    },
+    {
+      "type": "qd-footer-links",
+      "limit": 1
     }
   ],
   "settings": [

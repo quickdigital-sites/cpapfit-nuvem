@@ -13,12 +13,12 @@
 		<ul class="menu-block-list list-unstyled">
 			{% for item in menus[menu_id] %}
 				<li class="menu-block-item">
-					<a href="{{ item.url }}" class="menu-block-link">{{ item.name }}</a>
+					<a href="{{ item.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.url } %} class="menu-block-link">{{ item.name }}</a>
 					{% if item.subitems and show_as_accordion %}
 						<ul class="menu-block-sublist list-unstyled">
 							{% for subitem in item.subitems %}
 								<li class="menu-block-subitem">
-									<a href="{{ subitem.url }}" class="menu-block-sublink">{{ subitem.name }}</a>
+									<a href="{{ subitem.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subitem.url } %} class="menu-block-sublink">{{ subitem.name }}</a>
 								</li>
 							{% endfor %}
 						</ul>

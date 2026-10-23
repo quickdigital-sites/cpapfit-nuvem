@@ -32,7 +32,7 @@
 
 {% if btn_settings.label %}
 	<a
-		href="{{ btn_settings.link }}"
+		href="{{ btn_settings.link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: btn_settings.link } %}
 		class="btn btn-{{ btn_variant }} {{ size_class }} {% if btn_style == 'underlined' %}btn-underlined{% endif %} {% if block_width == 'fill' %}block-fill{% endif %}"
 		{{ block | block_attributes }}
 		data-store="button-block-{{ block.id }}"

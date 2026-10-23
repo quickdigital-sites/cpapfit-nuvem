@@ -6,7 +6,7 @@
 
 <div class="category-item" {{ block | block_attributes }}>
 	{% if item_link %}
-		<a href="{{ item_link }}" class="category-item-link">
+		<a href="{{ item_link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: item_link } %} class="category-item-link">
 	{% else %}
 		<span class="category-item-link">
 	{% endif %}

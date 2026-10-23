@@ -2,6 +2,35 @@
   "type": "header",
   "name": "Cabeçalho",
   "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "qd_enabled": true,
+        "background_color": "#00816E",
+        "text_color": "#FEFDFC",
+        "animation": "none",
+        "section_width": "full",
+        "vertical_padding": 6,
+        "horizontal_padding": 16,
+        "use_different_mobile_spacing": false,
+        "mobile_vertical_padding": 6,
+        "mobile_horizontal_padding": 16,
+        "slider_speed": 5,
+        "animation_speed": 5
+      },
+      "blocks": {
+        "passos": {
+          "type": "announcement",
+          "settings": {
+            "text": "Novo no CPAP? Conheça o acompanhamento PASSOS da Oxi Saúde →",
+            "link": "https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=topo"
+          }
+        }
+      },
+      "block_order": [
+        "passos"
+      ]
+    },
     "navigation_bar": {
       "type": "navigation-bar",
       "settings": {
@@ -29,7 +58,8 @@
               "settings": {
                 "icon_source": "design",
                 "icon": "qd-pix",
-                "description": "<strong>10% off</strong> no pix"
+                "description": "<strong>10% off</strong> no pix",
+                "qd_enabled": true
               }
             },
             "item_2": {
@@ -37,7 +67,8 @@
               "settings": {
                 "icon_source": "design",
                 "icon": "qd-card",
-                "description": "<strong>12x sem juros</strong> no cartão de crédito"
+                "description": "<strong>12x sem juros</strong> no cartão de crédito",
+                "qd_enabled": true
               }
             },
             "item_3": {
@@ -47,7 +78,8 @@
                 "icon": "qd-box",
                 "description": "<strong>Frete grátis</strong>",
                 "link": "/politica-de-entrega/",
-                "link_label": "ver regras"
+                "link_label": "ver regras",
+                "qd_enabled": true
               }
             },
             "item_4": {
@@ -56,7 +88,20 @@
                 "icon_source": "design",
                 "icon": "qd-tag",
                 "description": "<strong>R$ 100 off</strong> na linha Philips",
-                "coupon_code": "QUERO100"
+                "coupon_code": "QUERO100",
+                "qd_enabled": false
+              }
+            },
+            "item_5": {
+              "type": "nav-icon-text-item",
+              "settings": {
+                "qd_enabled": true,
+                "icon_source": "design",
+                "icon": "heart",
+                "description": "<strong>Acompanhamento PASSOS</strong> · Conheça →",
+                "link": "https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=faixa",
+                "qd_pill": true,
+                "qd_pill_color": "#8E2C8A"
               }
             }
           },
@@ -64,7 +109,8 @@
             "item_1",
             "item_2",
             "item_3",
-            "item_4"
+            "item_4",
+            "item_5"
           ]
         }
       },
@@ -146,6 +192,7 @@
     }
   },
   "order": [
+    "announcement_bar",
     "header",
     "navigation_bar"
   ]

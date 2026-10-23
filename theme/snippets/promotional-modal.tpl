@@ -64,7 +64,7 @@
 						} %}
 					{% endif %}
 					{% if settings.promotional_popup_url %}
-						<a href="{{ settings.promotional_popup_url }}" class="promotional-modal-image-link" aria-label="{{ settings.promotional_popup_title | striptags }}"></a>
+						<a href="{{ settings.promotional_popup_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: settings.promotional_popup_url } %} class="promotional-modal-image-link" aria-label="{{ settings.promotional_popup_title | striptags }}"></a>
 					{% endif %}
 				</div>
 		{% endif %}
@@ -89,7 +89,7 @@
 							} %}
 						</div>
 					{% elseif settings.promotional_popup_button_text %}
-						<a href="{{ settings.promotional_popup_button_link }}" class="btn btn-primary align-self-{{ btn_align }}">{{ settings.promotional_popup_button_text }}</a>
+						<a href="{{ settings.promotional_popup_button_link }}"{% include 'snippets/qd-link-attrs.tpl' with { url: settings.promotional_popup_button_link } %} class="btn btn-primary align-self-{{ btn_align }}">{{ settings.promotional_popup_button_text }}</a>
 					{% endif %}
 				</div>
 		{% if has_image %}
