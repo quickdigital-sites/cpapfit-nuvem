@@ -1,0 +1,23 @@
+{
+  "$comment": "Regra de unidades (AGENTS.md / .claude/skills/css-units). px só em bordas/outline de 1-2px e sombras; o resto com stylelint-disable-next-line e motivo. Fase 1: warning; vira error quando o CSS estiver convertido.",
+  "reportNeedlessDisables": true,
+  "reportDescriptionlessDisables": true,
+  "rules": {
+    "unit-disallowed-list": [
+      ["px"],
+      {
+        "severity": "warning",
+        "ignoreProperties": {
+          "px": [
+            "/^border(-(top|right|bottom|left|block|inline)(-(start|end))?)?(-width)?$/",
+            "/^outline(-width|-offset)?$/",
+            "box-shadow",
+            "text-shadow",
+            "filter",
+            "backdrop-filter"
+          ]
+        }
+      }
+    ]
+  }
+}

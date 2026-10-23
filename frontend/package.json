@@ -11,7 +11,8 @@
     "compose": "node compose.mjs",
     "inject": "node inject.mjs",
     "dev": "node build.mjs --watch & node compose.mjs --watch & node inject.mjs --watch & tailwindcss -i src/css/main.css -o ../theme/static/css/tailwind.css --watch",
-    "clean": "rm -f ../theme/static/css/tailwind.css ../theme/static/js/app.js"
+    "clean": "rm -f ../theme/static/css/tailwind.css ../theme/static/js/app.js",
+    "lint": "stylelint \"src/css/**/*.css\""
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.17.2",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "esbuild": "^0.28.2",
+    "stylelint": "^17.16.0",
     "tailwindcss": "^4.3.3",
     "yaml": "^2.9.1"
   }

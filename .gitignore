@@ -37,3 +37,6 @@ Thumbs.db
 
 # Harness de preview local (gerado)
 frontend/preview.html
+
+# Claude Code: configuração local de cada dev
+.claude/settings.local.json
