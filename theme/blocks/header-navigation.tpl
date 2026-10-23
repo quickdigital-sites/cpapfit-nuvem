@@ -119,8 +119,11 @@
 														{% if subitem.subitems %}
 															<ul class="list-subitems list-unstyled">
 																{% for subsubitem in subitem.subitems %}
+																	{# mesma troca no 3º nível (ex.: Menu › Serviços › Apoio e Monitoramento de CPAP) #}
+																	{% set qd_is_swap_sub = qd_swap_on and qd_swap_match and qd_swap_match in subsubitem.url %}
+																	{% set subsubitem_url = qd_is_swap_sub ? qd_swap_url : subsubitem.url %}
 																	<li class="nav-item">
-																		<a href="{{ subsubitem.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subsubitem.url } %} class="nav-list-link">{{ subsubitem.name }}</a>
+																		<a href="{{ subsubitem_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subsubitem_url } %} class="nav-list-link">{{ qd_is_swap_sub ? qd_swap_label : subsubitem.name }}</a>
 																	</li>
 																{% endfor %}
 															</ul>
