@@ -19,16 +19,16 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 10px 10px 0;
+  padding: 0.625rem 0.625rem 0;
   background: var(--qd-offwhite);
   border: 1px solid var(--qd-card-border);
-  border-radius: 20px;
+  border-radius: 1.25rem;
   overflow: hidden;
 }
 .products-list-slider .swiper-wrapper { align-items: stretch; }
 .products-list-slider .js-item-product.swiper-slide { height: auto; }
 .js-item-product .product-item-image-container {
-  border-radius: 14px;
+  border-radius: 0.875rem;
   overflow: hidden;
 }
 /* foto quadrada (setting product_aspect_ratio = square) e produto inteiro, sem cortar (Figma) */
@@ -38,71 +38,71 @@
 .js-item-product .product-item-information { display: flex; flex: 1 1 auto; flex-direction: column; }
 .js-item-product .product-item-information-inner {
   flex: 1 1 auto;
-  gap: 8px;
-  padding: 16px 6px;
+  gap: 0.5rem;
+  padding: 1rem 0.375rem;
 }
-.js-item-product .product-item-link { gap: 8px; color: var(--qd-ink); }
+.js-item-product .product-item-link { gap: 0.5rem; color: var(--qd-ink); }
 
 /* selo "30% OFF" (label de promoção abaixo da foto) */
 .js-item-product .product-item-promo-label.label,
 .js-item-product .labels .label-primary {
-  padding: 6px 12px;
+  padding: 0.375rem 0.75rem;
   background: rgba(0, 165, 140, 0.14);
   color: var(--qd-teal-strong);
   border: 0;
-  border-radius: 50px;
+  border-radius: 3.125rem;
   font-family: var(--heading-font);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
-  line-height: 13px;
+  line-height: 0.8125rem;
 }
-.js-item-product .labels { gap: 6px; }
+.js-item-product .labels { gap: 0.375rem; }
 
 /* marca (Figma 24:492) */
 .js-item-product .qd-item-brand {
-  font-family: var(--heading-font); font-size: 11px; font-weight: 700; line-height: 18px;
+  font-family: var(--heading-font); font-size: 0.6875rem; font-weight: 700; line-height: 1.125rem;
   text-transform: uppercase; color: var(--qd-ink);
 }
 /* hover: borda azul de 2,4px (Figma 24:508) — outline por dentro, sem mexer no layout */
 @media (hover: hover) {
-  .js-item-product.product-item { outline: 2.4px solid transparent; outline-offset: -2.4px; transition: outline-color .15s ease; }
+  .js-item-product.product-item { outline: 0.15rem solid transparent; outline-offset: -0.15rem; transition: outline-color .15s ease; }
   .js-item-product.product-item:hover { outline-color: #0086ff; }
 }
 
 .js-item-product .product-item-name {
   margin: 0;
   font-family: var(--body-font);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 1.125rem;
   color: var(--qd-ink);
 }
 
 /* preço de lista: verde e grande (quando não há preço Pix) */
 .js-item-product .product-item-price {
   font-family: var(--heading-font);
-  font-size: 19px;
+  font-size: 1.1875rem;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 1.25rem;
   color: var(--qd-teal-strong);
 }
-.js-item-product .product-item-price-compare { font-size: 13px; color: var(--qd-ink); opacity: .6; }
+.js-item-product .product-item-price-compare { font-size: 0.8125rem; color: var(--qd-ink); opacity: .6; }
 .js-item-product .product-item-discount { display: none; } /* o % já aparece no selo */
 
 /* preço no Pix (payment discount) vem logo abaixo do nome, em destaque */
 .js-item-product .product-item-payment-discount {
   order: 1;
   margin: 0;
-  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px;
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 0.375rem;
   font-family: var(--body-font);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 1.25rem;
   color: var(--qd-ink);
 }
 .js-item-product .product-item-payment-discount .payment-discount-price-product {
   font-family: var(--heading-font);
-  font-size: 19px;
+  font-size: 1.1875rem;
   font-weight: 700;
   color: var(--qd-teal-strong);
 }
@@ -111,7 +111,7 @@
 /* com preço Pix visível, o preço cheio vira linha secundária ("ou R$ 310,00") */
 .js-item-product .product-item-link:has(.product-item-payment-discount:not([style*="none"])) .product-item-price {
   font-family: var(--body-font);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   color: var(--qd-ink);
 }
@@ -122,9 +122,9 @@
 .js-item-product .product-item-installments,
 .js-item-product .product-installments {
   margin: 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 1.25rem;
   color: var(--qd-ink);
 }
 .js-item-product .product-installment-amount,
@@ -133,21 +133,21 @@
 /* botão COMPRAR (quick shop) — pílula verde com carrinho */
 .js-item-product .product-item-quick-shop-container {
   margin-top: auto;
-  padding: 10px 6px 16px;
+  padding: 0.625rem 0.375rem 1rem;
 }
 .js-item-product .product-item-quick-shop-container .btn {
   display: block;
   width: 100%;
-  height: 44px;
-  padding: 0 0 0 40px;
+  height: 2.75rem;
+  padding: 0 0 0 2.5rem;
   border: 0;
-  border-radius: 60px;
-  background: var(--qd-teal-strong) var(--qd-ico-cart-white) no-repeat calc(50% - 38px) center / 24px 24px;
+  border-radius: 3.75rem;
+  background: var(--qd-teal-strong) var(--qd-ico-cart-white) no-repeat calc(50% - 2.375rem) center / 1.5rem 1.5rem;
   color: var(--qd-offwhite);
   font-family: var(--heading-font);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
-  line-height: 44px;
+  line-height: 2.75rem;
   text-align: center;
   text-transform: uppercase;
 }
@@ -158,29 +158,29 @@
 }
 
 /* Mobile (Figma 24:1700): card 160px, foto 144px, tipografia menor, botão 32px */
-@media (max-width: 767.98px) {
-  .js-item-product.product-item { padding: 8px 8px 0; border-radius: 16px; }
-  .js-item-product .product-item-image-container { border-radius: 10px; }
-  .js-item-product .product-item-information-inner { gap: 4px; padding: 8px 0; }
-  .js-item-product .product-item-link { gap: 4px; }
+@media (max-width: 47.9988em) {
+  .js-item-product.product-item { padding: 0.5rem 0.5rem 0; border-radius: 1rem; }
+  .js-item-product .product-item-image-container { border-radius: 0.625rem; }
+  .js-item-product .product-item-information-inner { gap: 0.25rem; padding: 0.5rem 0; }
+  .js-item-product .product-item-link { gap: 0.25rem; }
   .js-item-product .product-item-promo-label.label,
-  .js-item-product .labels .label-primary { padding: 4px 8px; font-size: 10px; line-height: normal; border-radius: 44px; }
-  .js-item-product .product-item-name { font-size: 12px; line-height: 15px; }
+  .js-item-product .labels .label-primary { padding: 0.25rem 0.5rem; font-size: 0.625rem; line-height: normal; border-radius: 2.75rem; }
+  .js-item-product .product-item-name { font-size: 0.75rem; line-height: 0.9375rem; }
   .js-item-product .qd-item-brand {
-    font-size: 10px; line-height: normal; opacity: .6;
+    font-size: 0.625rem; line-height: normal; opacity: .6;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .js-item-product .product-item-price,
-  .js-item-product .product-item-payment-discount .payment-discount-price-product { font-size: 14px; line-height: normal; }
-  .js-item-product .product-item-payment-discount { font-size: 10px; line-height: normal; gap: 0 4px; }
+  .js-item-product .product-item-payment-discount .payment-discount-price-product { font-size: 0.875rem; line-height: normal; }
+  .js-item-product .product-item-payment-discount { font-size: 0.625rem; line-height: normal; gap: 0 0.25rem; }
   .js-item-product .product-item-installments,
   .js-item-product .product-installments,
   .js-item-product .product-item-link:has(.product-item-payment-discount:not([style*="none"])) .product-item-price {
-    font-size: 10px; line-height: 13px;
+    font-size: 0.625rem; line-height: 0.8125rem;
   }
-  .js-item-product .product-item-quick-shop-container { padding: 4px 0 12px; }
+  .js-item-product .product-item-quick-shop-container { padding: 0.25rem 0 0.75rem; }
   .js-item-product .product-item-quick-shop-container .btn {
-    height: 32px; line-height: 32px; padding-left: 20px; border-radius: 16px; font-size: 11px;
-    background-size: 14px 14px; background-position: calc(50% - 30px) center;
+    height: 2rem; line-height: 2rem; padding-left: 1.25rem; border-radius: 1rem; font-size: 0.6875rem;
+    background-size: 0.875rem 0.875rem; background-position: calc(50% - 1.875rem) center;
   }
 }

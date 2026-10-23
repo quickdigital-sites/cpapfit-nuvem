@@ -51,7 +51,7 @@ jobs:
         # um commit novo dá 503 no jsDelivr até ele buscar cada arquivo (imagens quebradas na loja).
         run: |
           npm ci
-          npm run lint   # regra de unidades (AGENTS.md); só avisa até o CSS ser convertido
+          npm run lint   # regra de unidades (AGENTS.md)
           npm run build
 
       - name: Instalar a CLI da Nuvemshop
@@ -108,7 +108,7 @@ jobs:
         # um commit novo dá 503 no jsDelivr até ele buscar cada arquivo (imagens quebradas na loja).
         run: |
           npm ci
-          npm run lint   # regra de unidades (AGENTS.md); só avisa até o CSS ser convertido
+          npm run lint   # regra de unidades (AGENTS.md)
           npm run build
 
       - name: Instalar a CLI da Nuvemshop
