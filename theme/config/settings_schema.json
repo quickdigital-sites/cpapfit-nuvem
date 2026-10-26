@@ -28,6 +28,18 @@
       },
       {
         "type": "header",
+        "content": "Selo de garantia"
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_pdp_warranty_hide_categories",
+        "label": "Não mostrar o selo de garantia nestas categorias",
+        "default": "cpap-e-bipap",
+        "info": "Endereço da categoria (ex.: cpap-e-bipap), separados por vírgula. Vale também para as subcategorias. O selo é o item \"Garantia…\" da página de produto (Personalizar › Produto)."
+      },
+      {
+        "type": "header",
         "content": "Preço"
       },
       {

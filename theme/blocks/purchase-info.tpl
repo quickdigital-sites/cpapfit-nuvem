@@ -1,6 +1,19 @@
 {# Purchase Info Block - Reuses icon-text-item in horizontal layout #}
 
-{% set settings = block.settings | default({}) %}
+{# CPAP Fit: o selo "Garantia…" não aparece nas categorias de equipamento (garantia de fábrica de anos, não 3 meses).
+   Categorias em Configurações do tema › Página de produto › Selo de garantia. #}
+{% set qd_path = '' %}
+{% for crumb in breadcrumbs | default([]) %}
+	{% set qd_path = qd_path ~ ' ' ~ crumb.url %}
+{% endfor %}
+{% set qd_hide_warranty = false %}
+{% for slug in (settings.qd_pdp_warranty_hide_categories is defined ? settings.qd_pdp_warranty_hide_categories : 'cpap-e-bipap') | split(',') %}
+	{% if slug | trim and ('/' ~ slug | trim ~ '/') in qd_path %}
+		{% set qd_hide_warranty = true %}
+	{% endif %}
+{% endfor %}
+
+{% set settings = block.settings | default({}) %} {# daqui em diante, settings = as do bloco #}
 {% set gap = settings.gap is defined ? settings.gap : 24 %}
 {% set icon_size = settings.icon_size is defined ? settings.icon_size : 24 %}
 {% set title_size = settings.title_size is defined ? settings.title_size : 'paragraph' %}
@@ -20,7 +33,7 @@
 
 <div class="product-purchase-info" style="{{ purchase_styles | trim }}" {{ block | block_attributes }} data-store="purchase-info-{{ block.id }}">
 	{% for child_block in block.blocks %}
-		{% if child_block and child_block.type == 'icon-text-item' %}
+		{% if child_block and child_block.type == 'icon-text-item' and not (qd_hide_warranty and 'garantia' in child_block.settings.title | default('') | lower) %}
 			{% include 'blocks/icon-text-item.tpl' with { block: child_block, content_direction: 'horizontal', icon_size: icon_size, title_size: title_size, description_size: description_size, custom_title_font: custom_title_font, custom_title_size: custom_title_size, custom_title_mobile: custom_title_mobile, custom_title_mobile_size: custom_title_mobile_size } %}
 		{% endif %}
 	{% endfor %}
