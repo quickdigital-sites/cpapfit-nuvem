@@ -6,6 +6,10 @@
 {% set horizontal_padding = full_width ? section.settings.horizontal_padding : 0 %}
 {% set column_gap = section.settings.column_gap | default(24) %}
 {% set background_color = section.settings.background_color %}
+{# CPAP Fit: o cupom de "Aproveite também" só aparece nos produtos da marca configurada (campo Marca do produto).
+   Configurações do tema › Página de produto › Cupom em destaque. Vazio = todas as marcas. #}
+{% set qd_coupon_brand = (settings.qd_pdp_coupon_brand is defined ? settings.qd_pdp_coupon_brand : 'Philips') | trim | lower %}
+{% set qd_coupon_on = not qd_coupon_brand or (product.brand and qd_coupon_brand in product.brand | lower) %}
 {% set section_styles %}
 	{% if vertical_padding %}padding-top: {{ vertical_padding }}px; padding-bottom: {{ vertical_padding }}px;{% endif %}
 	{% if horizontal_padding %}padding-left: {{ horizontal_padding }}px; padding-right: {{ horizontal_padding }}px;{% endif %}
@@ -13,7 +17,7 @@
 {% endset %}
 
 
-<section id="single-product" class="js-product-detail js-product-container js-has-new-shipping js-shipping-calculator-container {% if full_width %}section-full-width{% endif %}" data-variants="{{ product.variants_object | json_encode }}" data-section-id="{{ section.id }}" data-store="product-detail" data-qd-whatsapp="{{ store.whatsapp }}" data-qd-coupon-text="{{ settings.qd_pdp_coupon_text }}" data-qd-coupon-code="{{ settings.qd_pdp_coupon_code }}" {% if section_styles | trim %}style="{{ section_styles | trim }}"{% endif %}>
+<section id="single-product" class="js-product-detail js-product-container js-has-new-shipping js-shipping-calculator-container {% if full_width %}section-full-width{% endif %}" data-variants="{{ product.variants_object | json_encode }}" data-section-id="{{ section.id }}" data-store="product-detail" data-qd-whatsapp="{{ store.whatsapp }}" data-qd-coupon-text="{{ settings.qd_pdp_coupon_text }}" data-qd-coupon-code="{{ qd_coupon_on ? settings.qd_pdp_coupon_code }}" {% if section_styles | trim %}style="{{ section_styles | trim }}"{% endif %}>
 	{% if page_width %}
 		<div class="container">
 	{% endif %}
