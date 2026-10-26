@@ -183,6 +183,8 @@ html:not(.qd-pdp-ready) .template-product .js-product-detail { visibility: hidde
 .qd-pdp .product-purchase-info [class*="description"], .qd-pdp .product-purchase-info [class*="description"] p { margin: 0; }
 .qd-pdp .product-purchase-info a { font-size: 0.6875rem; font-weight: 400; line-height: 0.9375rem; text-transform: uppercase; text-decoration: underline; color: var(--qd-ink); }
 .qd-pdp .product-info-description { margin: 0; padding: 0; border: 0; }
+/* descrição só uma vez (BUG-010): pdp.js esconde o resumo quando monta "Detalhes do produto" */
+.qd-pdp .product-info-description[hidden] { display: none !important; }
 .qd-pdp .product-description-heading { margin: 0 0 0.625rem; font-family: var(--heading-font); font-size: 0.8125rem; font-weight: 600; line-height: 1.0313rem; text-transform: none; color: var(--qd-ink); }
 /* no card fica o resumo (4 linhas); o texto inteiro vai para "Detalhes do produto" abaixo */
 .qd-pdp .js-product-info .product-description-content {
