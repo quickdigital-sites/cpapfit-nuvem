@@ -183,6 +183,8 @@ html:not(.qd-pdp-ready) .template-product .js-product-detail { visibility: hidde
 .qd-pdp .product-purchase-info [class*="description"], .qd-pdp .product-purchase-info [class*="description"] p { margin: 0; }
 .qd-pdp .product-purchase-info a { font-size: 0.6875rem; font-weight: 400; line-height: 0.9375rem; text-transform: uppercase; text-decoration: underline; color: var(--qd-ink); }
 .qd-pdp .product-info-description { margin: 0; padding: 0; border: 0; }
+/* descrição só uma vez (BUG-010): pdp.js esconde o resumo quando monta "Detalhes do produto" */
+.qd-pdp .product-info-description[hidden] { display: none !important; }
 .qd-pdp .product-description-heading { margin: 0 0 0.625rem; font-family: var(--heading-font); font-size: 0.8125rem; font-weight: 600; line-height: 1.0313rem; text-transform: none; color: var(--qd-ink); }
 /* no card fica o resumo (4 linhas); o texto inteiro vai para "Detalhes do produto" abaixo */
 .qd-pdp .js-product-info .product-description-content {
@@ -252,6 +254,14 @@ div:is([data-section-id="complementary_products"], [data-section-id="alternative
   .qd-pdp-coupon-box { width: 100%; }
   .qd-pdp-coupon-text { width: auto; flex: 1 1 auto; font-size: 0.6875rem; line-height: 0.8125rem; }
   .qd-pdp-coupon .qd-coupon-code { letter-spacing: 0.25rem; padding: 0 0.5rem; }
+  /* BUG-011: em telas estreitas (até 400px) o texto do cupom quebrava em 4 linhas — sem o ícone e com o
+     código mais compacto ele cabe em 2 */
+  @media (max-width: 25em) {
+    .qd-pdp-coupon-box { gap: 0.375rem; padding: 0.5rem 0.5rem 0.5rem 0.875rem; }
+    .qd-pdp-coupon-icon { display: none; }
+    .qd-pdp-coupon .qd-coupon-code { letter-spacing: 0.125rem; padding: 0 0.375rem; }
+    .qd-pdp-coupon .qd-coupon-copy { padding-left: 0.5rem; padding-right: 0.5rem; }
+  }
   /* COMPRAR + WhatsApp redondo (Figma mobile) */
   .qd-pdp-whatsapp { flex: 0 0 2.625rem; width: 2.625rem; padding: 0; border-radius: 50%; font-size: 0; gap: 0; }
   .qd-pdp .js-shipping-calculator-form .form-label { flex-basis: 100%; }

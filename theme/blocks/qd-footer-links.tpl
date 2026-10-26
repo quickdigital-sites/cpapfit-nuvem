@@ -4,6 +4,9 @@
   os links vêm do admin; sem menu, ficam os links padrão abaixo (os mesmos de antes).
   <details>: acordeão no mobile; no desktop ficam sempre abertos (frontend/src/js/components/footer.js).
 #}
+{# Serviços: os mesmos links do menu (Configurações do tema › Links de serviços; aluguel vazio = WhatsApp da loja) #}
+{% set qd_link_acomp = settings.qd_link_acompanhamento | default('/acompanhamento-passos/') %}
+{% set qd_link_aluguel = settings.qd_link_aluguel | default(store.whatsapp) | default('/servicos/aluguel-de-equipamentos/') %}
 {% set default_links = [
 	[
 		{ name: 'Política de Privacidade', url: '/politica-de-privacidade/' },
@@ -12,7 +15,7 @@
 		{ name: 'Troca, Devolução, Garantia', url: '/trocas-e-devolucoes/' }
 	],
 	[
-		{ name: 'BLOG', url: 'http://blog.cpapfit.com.br/' },
+		{ name: 'BLOG', url: 'https://blog.cpapfit.com.br/' },
 		{ name: 'Seja um representante!', url: 'https://materiais.cpapfit.com.br/seja-um-representante/' },
 		{ name: 'Quem somos', url: '/quem-e-a-cpap-fit/' },
 		{ name: '', url: '', qd_passos: true },
@@ -21,9 +24,9 @@
 	],
 	[
 		{ name: 'Vendas de equipamentos', url: '/produtos/' },
-		{ name: 'Aluguel de CPAP e BIPAP', url: '/servicos/aluguel-de-equipamentos/' },
-		{ name: 'Acompanhamento clínico', url: '/servicos/apoio-e-monitoramento-de-cpap1/' },
-		{ name: 'Aluguel de ventiladores', url: '/servicos/aluguel-de-equipamentos/' }
+		{ name: 'Aluguel de CPAP e BIPAP', url: qd_link_aluguel },
+		{ name: 'Acompanhamento clínico', url: qd_link_acomp },
+		{ name: 'Aluguel de ventiladores', url: qd_link_aluguel }
 	]
 ] %}
 

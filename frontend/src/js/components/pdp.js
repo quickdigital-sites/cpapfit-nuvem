@@ -7,6 +7,7 @@
  *  - Botão "Comprar pelo WhatsApp" ao lado do COMPRAR (mensagem com o nome e o link do produto).
  *  - Descrição dividida nas seções do Figma: "Detalhes do produto", "Ficha técnica" (tabela + manual)
  *    e "Perguntas frequentes" (sanfona), a partir dos títulos h2 que o lojista já usa na descrição.
+ *    O resumo "Descrição" do card de compra (Figma) foi tirado a pedido do cliente: texto repetido.
  *  - "Vídeo do produto" quando o produto tem vídeo cadastrado; barra de compra fixa no mobile.
  */
 // número e cupom vêm do tema (sections/main-product.tpl): WhatsApp do admin da loja e cupom das
@@ -99,7 +100,8 @@ export default function initPdp() {
     const shipBtn = info?.querySelector(".js-calculate-shipping-wording");
     if (shipBtn) shipBtn.textContent = "OK";
 
-    // 5) "Detalhes do produto": descrição completa abaixo das colunas (no card fica o resumo)
+    // 5) "Detalhes do produto": descrição completa abaixo das colunas. A descrição aparece uma vez só
+    //    (BUG-010): o bloco "Descrição" do card de compra some quando os detalhes são montados.
     const desc = info?.querySelector(".js-product-description");
     if (desc && desc.textContent.trim() && !detail.querySelector(".qd-pdp-details")) {
       const details = document.createElement("div");
@@ -110,6 +112,8 @@ export default function initPdp() {
       columns.after(details);
       const sections = splitDescription(details.lastElementChild);
       details.after(...sections);
+      const excerpt = desc.closest(".product-info-description");
+      if (excerpt) excerpt.hidden = true;
     }
 
     // 6) vídeo do produto (o mesmo cadastrado no admin, que já aparece na galeria)

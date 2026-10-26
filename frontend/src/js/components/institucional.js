@@ -24,7 +24,7 @@ const ATENDIMENTO = {
 const INSTITUCIONAL = {
   title: "Institucional",
   items: [
-    { label: "BLOG", href: "http://blog.cpapfit.com.br/", external: true },
+    { label: "BLOG", href: "https://blog.cpapfit.com.br/", external: true },
     { label: "Seja um representante!", href: "https://materiais.cpapfit.com.br/seja-um-representante/", external: true },
     { label: "Quem somos", paths: ["/quem-e-a-cpap-fit/", "/quem-somos/"] },
     { label: "Nossas lojas", paths: ["/nossas-lojas/", "/lojas-fisicas/"] },

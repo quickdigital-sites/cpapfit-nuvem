@@ -6,6 +6,8 @@
 	<form class="js-search-form search-form" action="{{ store.search_url }}" method="get">
 		<div class="search-form-field form-group">
 			<input class="js-search-input form-control search-input input_class" autocomplete="off" type="search" name="q" placeholder="{{ placeholder_text }}" aria-label="{{ placeholder_text }}" />
+			{# CPAP Fit: resultados da busca começam em "Mais vendidos" (BUG-012); o cliente ainda pode trocar a ordem #}
+			<input type="hidden" name="sort_by" value="best-selling" />
 			<button type="submit" class="{% if use_delete_btn %}js-search-input-submit{% endif %} search-btn search-submit-btn" value="{{ 'search.value' | t }}" aria-label="{{ 'search.value' | t }}">
 				{% if use_submit_text %}
 					{{ submit_text }}

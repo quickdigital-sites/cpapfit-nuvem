@@ -611,6 +611,12 @@
   .js-navigation-bar .qd-coupon-code { height: 1.625rem; letter-spacing: 0.1875rem; padding-left: 0.625rem; }
   .js-navigation-bar .qd-coupon-copy { height: 1.625rem; padding: 0.25rem 0.625rem; }
   .js-navigation-bar .qd-nav-pill > span { height: 1.625rem; }
+  /* BUG-011: benefício com cupom não cabia em 360px e cortava o código ("QUERO1"): o texto pode
+     quebrar em 2 linhas e o código fica mais compacto */
+  .js-navigation-bar .navigation-bar-item:has(.qd-nav-coupon) { gap: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem; white-space: normal; }
+  .js-navigation-bar .navigation-bar-item:has(.qd-nav-coupon) > span:not(.qd-nav-coupon) { flex: 1 1 auto; min-width: 0; line-height: 0.875rem; }
+  .js-navigation-bar .qd-nav-coupon { flex: 0 0 auto; }
+  .js-navigation-bar .qd-coupon-code { letter-spacing: 0.0625rem; padding-left: 0.5rem; padding-right: 0.25rem; }
 }
 
 /* Faixa de anúncio acima do header (seção nativa announcement-bar, Acompanhamento PASSOS).
@@ -655,3 +661,21 @@
 @media (max-width: 47.9988em) {
   .head-main.compress .logo-img { max-height: var(--logo-height-mobile) !important; height: var(--logo-height-mobile) !important; }
 }
+
+/* WhatsApp flutuante (snippets/social/whatsapp-chat.tpl) — BUG-004: no celular fica menor e o
+   frontend/src/js/components/whatsapp-float.js esconde o botão enquanto ele estiver sobre um botão de compra */
+.btn-whatsapp { transition: opacity .2s ease; }
+.btn-whatsapp.qd-wa-hidden { opacity: 0; pointer-events: none; }
+@media (max-width: 47.9988em) {
+  .btn-whatsapp { right: 0.75rem; bottom: 0.75rem; width: 2.5rem; height: 2.5rem; padding: 0.5rem; }
+  .btn-whatsapp svg { width: 1.5rem; height: 1.5rem; }
+}
+
+/* Página 404 (sections/main-404.tpl) — BUG-016: busca + categorias */
+.qd-404-search, .qd-404-categories { max-width: 40rem; margin: 2rem 0 0; }
+.qd-404-label { display: block; margin: 0 0 0.75rem; font-family: var(--heading-font); font-size: 0.875rem; font-weight: 600; }
+.qd-404-search-row { display: flex; gap: 0.5rem; }
+.qd-404-search-row .form-control { flex: 1 1 auto; min-width: 0; margin: 0; }
+.qd-404-categories ul { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; }
+.qd-404-categories .btn { padding: 0.5rem 1rem; font-size: 0.8125rem; }
+

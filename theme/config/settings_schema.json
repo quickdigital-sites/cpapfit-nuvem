@@ -27,6 +27,26 @@
         "info": "O cliente copia este código com um clique. Deixe vazio para esconder o bloco do cupom."
       },
       {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_pdp_coupon_brand",
+        "label": "Mostrar o cupom só para a marca",
+        "default": "Philips",
+        "info": "Compara com o campo Marca do produto (ex.: Philips vale para \"Philips Respironics\"). Vazio: o cupom aparece em todos os produtos."
+      },
+      {
+        "type": "header",
+        "content": "Selo de garantia"
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_pdp_warranty_hide_categories",
+        "label": "Não mostrar o selo de garantia nestas categorias",
+        "default": "cpap-e-bipap",
+        "info": "Endereço da categoria (ex.: cpap-e-bipap), separados por vírgula. Vale também para as subcategorias. O selo é o item \"Garantia…\" da página de produto (Personalizar › Produto)."
+      },
+      {
         "type": "header",
         "content": "Preço"
       },
@@ -540,6 +560,30 @@
             "visible_if": "{{ settings.button_primary_style == 'outline' }}"
           }
         ]
+      }
+    ]
+  },
+  {
+    "name": "Links de serviços",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Para onde levam os links de serviços do menu (Serviços) e do rodapé. Trocar aqui muda os dois de uma vez."
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_link_acompanhamento",
+        "label": "Link de Acompanhamento / Apoio e Monitoramento",
+        "default": "/acompanhamento-passos/",
+        "info": "Endereço de uma página da loja (ex.: /acompanhamento-passos/) ou link completo."
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_link_aluguel",
+        "label": "Link de Aluguel de equipamentos",
+        "info": "Vazio: abre o WhatsApp da loja (o mesmo do botão flutuante). Quando houver página de aluguel, cole o endereço aqui."
       }
     ]
   }

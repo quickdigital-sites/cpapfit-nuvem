@@ -57,7 +57,7 @@
 			{% if store.country in zipcode_help_countries %}
 				{% set zipcode_help = 
 					store.country == 'AR' ? 'https://www.correoargentino.com.ar/formularios/cpa' :
-					store.country == 'BR' ? 'http://www.buscacep.correios.com.br/sistemas/buscacep/' :
+					store.country == 'BR' ? 'https://buscacepinter.correios.com.br/app/endereco/index.php' :
 					store.country == 'MX' ? 'https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/Descarga.aspx'
 				%}
 				<a class="{% if product_detail %}js-shipping-zipcode-help{% endif %} btn btn-link font-small" href="{{ zipcode_help }}" target="_blank">{{ 'shipping.dont_know_zipcode' | t }}</a>
