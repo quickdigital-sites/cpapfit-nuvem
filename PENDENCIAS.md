@@ -10,6 +10,17 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
+- [ ] **QA/UAT do cliente (2026-10-26) — o que depende do admin** (o código está no PR `fix/qa-uat`):
+  - **BUG-001 Kits no menu** e **BUG-002 Peças para máscaras no menu:** Loja online › Menus › Menu principal.
+    Kits = categoria KITS (id 41699658, 6 subcategorias). Peças para máscaras = subitem de **Máscaras** (são peças
+    de máscara; Acessórios é de aparelho). Home: bloco "Categoria" novo em Atalhos em círculo (precisa de imagem).
+  - **BUG-007:** vitrine "Kits promocionais" › Produtos › Quais produtos mostrar → categoria KITS.
+  - **BUG-009:** cliente escolhe a campanha; o cupom do banner principal (hero) é texto do editor e precisa bater
+    com Configurações do tema › Página de produto › Cupom em destaque (que agora alimenta rodapé e produto).
+  - **BUG-006/015 (home e Quem somos):** os círculos de Serviços têm o link no editor (aluguel e acompanhamento).
+  - **BUG-013:** nenhuma rede social cadastrada no admin (o rodapé mostra 4 links fixos do componente).
+  - **BUG-017:** título da home e og:image vêm da plataforma (SEO do admin / logo).
+
 - [ ] **PASSOS (Oxi Saúde) — o que depende do admin (2026-10-23):** faixa do topo e pílula na barra azul já vêm no
   tema (`utm_medium=topo` / `faixa`). Falta no admin: (1) **Serviços** do menu principal é o menu do admin, sem
   "Em breve" no código — trocar "Apoio e Monitoramento de CPAP" pelo link PASSOS (`utm_medium=servicos`) em
