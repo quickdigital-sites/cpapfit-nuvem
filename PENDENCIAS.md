@@ -10,6 +10,13 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
+- [ ] **Clarity e Trustvox (2026-10-26):** ainda não instalados — dependem dos acessos da CPAP Fit (contas/IDs).
+- [x] **add_to_cart no dataLayer (2026-10-26):** a plataforma **já envia** o `add_to_cart` nativo (GTM-KP2VVCPZ,
+  Códigos externos) — `{ ecommerce: null }` e depois o evento, no mesmo formato de items do `view_item`, ~1 s depois
+  do clique (quando o POST /comprar/ volta). Conferido na loja em: PDP, card da listagem, quick shop (com variante)
+  e "+" no carrinho; uma vez por ação. **Não adicionar push próprio** (duplicaria). Se uma tag do GTM não dispara,
+  o problema está no container (gatilho "Evento personalizado = add_to_cart", variáveis, consentimento).
+
 - [ ] **Pós-compra com pedido cancelado (2026-10-26):** o app NubeSDK (`nube-apps/checkout-quick`,
   `features/pos-compra.tsx`, no ar como v5) tem a regra "pedido cancelado não mostra nada", mas a Nuvemshop não envia
   `order.status` para a página de pedido — então num pedido cancelado aparece "Pedido recebido!". O comentário do
