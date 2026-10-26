@@ -22,11 +22,34 @@
   </section>
   
   <h2 class="error-page-subtitle">{{ 'general.page_not_found' | t }}</h2>
+
+  {# CPAP Fit (BUG-016): busca e categorias para o cliente seguir navegando #}
+  <form class="qd-404-search" action="{{ store.search_url }}" method="get" role="search">
+    <label class="qd-404-label" for="qd-404-q">Buscar na loja</label>
+    <div class="qd-404-search-row">
+      <input id="qd-404-q" class="form-control" type="search" name="q" placeholder="{{ 'search.placeholder' | t }}" />
+      <input type="hidden" name="sort_by" value="best-selling" />
+      <button type="submit" class="btn btn-primary">{{ 'search.value' | t }}</button>
+    </div>
+  </form>
+  {% if categories | length > 0 %}
+    <nav class="qd-404-categories" aria-label="Categorias">
+      <p class="qd-404-label">Categorias</p>
+      <ul class="list-unstyled">
+        {% for category in categories | slice(0, 10) %}
+          <li><a class="btn btn-secondary" href="{{ category.url }}">{{ category.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
   {% if page_width %}
     </div>
   {% endif %}
 </div>
 
+
+{# O <title> vem da plataforma (platform_head_content) e chega vazio no 404 #}
+<script>if (!document.title.trim()) document.title = {{ ('Página não encontrada - ' ~ store.name) | json_encode | raw }};</script>
 
 {% schema %}
 {
