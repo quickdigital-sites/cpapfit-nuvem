@@ -254,6 +254,14 @@ div:is([data-section-id="complementary_products"], [data-section-id="alternative
   .qd-pdp-coupon-box { width: 100%; }
   .qd-pdp-coupon-text { width: auto; flex: 1 1 auto; font-size: 0.6875rem; line-height: 0.8125rem; }
   .qd-pdp-coupon .qd-coupon-code { letter-spacing: 0.25rem; padding: 0 0.5rem; }
+  /* BUG-011: em telas estreitas (até 400px) o texto do cupom quebrava em 4 linhas — sem o ícone e com o
+     código mais compacto ele cabe em 2 */
+  @media (max-width: 25em) {
+    .qd-pdp-coupon-box { gap: 0.375rem; padding: 0.5rem 0.5rem 0.5rem 0.875rem; }
+    .qd-pdp-coupon-icon { display: none; }
+    .qd-pdp-coupon .qd-coupon-code { letter-spacing: 0.125rem; padding: 0 0.375rem; }
+    .qd-pdp-coupon .qd-coupon-copy { padding-left: 0.5rem; padding-right: 0.5rem; }
+  }
   /* COMPRAR + WhatsApp redondo (Figma mobile) */
   .qd-pdp-whatsapp { flex: 0 0 2.625rem; width: 2.625rem; padding: 0; border-radius: 50%; font-size: 0; gap: 0; }
   .qd-pdp .js-shipping-calculator-form .form-label { flex-basis: 100%; }

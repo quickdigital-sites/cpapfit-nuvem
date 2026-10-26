@@ -611,6 +611,12 @@
   .js-navigation-bar .qd-coupon-code { height: 1.625rem; letter-spacing: 0.1875rem; padding-left: 0.625rem; }
   .js-navigation-bar .qd-coupon-copy { height: 1.625rem; padding: 0.25rem 0.625rem; }
   .js-navigation-bar .qd-nav-pill > span { height: 1.625rem; }
+  /* BUG-011: benefício com cupom não cabia em 360px e cortava o código ("QUERO1"): o texto pode
+     quebrar em 2 linhas e o código fica mais compacto */
+  .js-navigation-bar .navigation-bar-item:has(.qd-nav-coupon) { gap: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem; white-space: normal; }
+  .js-navigation-bar .navigation-bar-item:has(.qd-nav-coupon) > span:not(.qd-nav-coupon) { flex: 1 1 auto; min-width: 0; line-height: 0.875rem; }
+  .js-navigation-bar .qd-nav-coupon { flex: 0 0 auto; }
+  .js-navigation-bar .qd-coupon-code { letter-spacing: 0.0625rem; padding-left: 0.5rem; padding-right: 0.25rem; }
 }
 
 /* Faixa de anúncio acima do header (seção nativa announcement-bar, Acompanhamento PASSOS).
