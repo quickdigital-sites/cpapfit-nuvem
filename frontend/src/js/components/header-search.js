@@ -19,6 +19,8 @@ function go(form) {
   }
   const url = new URL(form.getAttribute("action") || "/search/", location.origin);
   url.searchParams.set("q", q);
+  // demais campos do form (ex.: sort_by=best-selling do search-form.tpl)
+  for (const [k, v] of new FormData(form)) if (k !== "q" && v) url.searchParams.set(k, v);
   const tid = new URLSearchParams(location.search).get("theme_installation_id");
   if (tid) url.searchParams.set("theme_installation_id", tid);
   window.location.assign(url.toString());
