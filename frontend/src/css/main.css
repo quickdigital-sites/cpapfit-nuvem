@@ -460,6 +460,29 @@
   .nav-desktop-list > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 0.5rem 0.375rem; }
 }
 
+/* Menu com 9 ou mais itens (ex.: + Kits): mais justo só nesse caso — com 8 itens o visual fica igual.
+   O que ainda não couber vai para o "Mais" (frontend/src/js/components/nav-more.js). */
+@media (min-width: 75em) {
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) { gap: 0.25rem; }
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { gap: 0.25rem; padding: 0.5rem 0.625rem; }
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link::after {
+    width: 1.125rem; height: 1.125rem; -webkit-mask-size: 1.125rem; mask-size: 1.125rem;
+  }
+  .nav-desktop-list > li[hidden] { display: none !important; }
+}
+@media (min-width: 75em) and (max-width: 89.9988em) {
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item > a.nav-list-link { font-size: 0.8125rem; }
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 0.5rem 0.375rem; }
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item:first-child { padding-right: 0.5rem; }
+}
+@media (min-width: 75em) and (max-width: 85.3738em) {
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 0.5rem 0.3125rem; }
+}
+@media (min-width: 90em) and (max-width: 99.9988em) {
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item > a.nav-list-link { font-size: 0.875rem; }
+  .nav-desktop-list:has(> li.nav-main-item:nth-child(9)) > li.nav-main-item.nav-dropdown:not(:first-child) > a.nav-list-link { padding: 0.5rem 0.5rem; }
+}
+
 /* ==========================================================================
    Menu mobile (hambúrguer lateral) — painéis deslizantes nativos, mas com o
    botão "voltar" visível e "Minha conta" no topo (feedback do cliente).

@@ -13,6 +13,7 @@ import miniCart from "./components/mini-cart.js";
 import productGallery from "./components/product-gallery.js";
 import initHeaderSearch from "./components/header-search.js";
 import initHeaderBar from "./components/header-bar.js";
+import initNavMore from "./components/nav-more.js";
 import initHomeTabs from "./components/home-tabs.js";
 import initFooter from "./components/footer.js";
 import initPlp from "./components/plp.js";
@@ -31,6 +32,7 @@ document.addEventListener("alpine:init", () => {
 
 // Enhancements do header nativo
 initHeaderBar();    // barra de benefícios: um item por vez no mobile
+initNavMore();      // menu desktop: o que não couber na linha vai para "Mais"
 initHeaderSearch(); // garante submit da busca (Enter/clique) + preserva o preview
 initHomeTabs();     // abas de "Destaques" da home (troca a vitrine nativa visível)
 initPriceRange();   // faixa de preço com slider (filtro da listagem)
