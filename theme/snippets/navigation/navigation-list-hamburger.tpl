@@ -4,12 +4,14 @@
 #}
 {% set subitem = subitem | default(false) %}
 
-{# CPAP Fit: troca de um item pelo Acompanhamento PASSOS — mesmos campos e padrões do bloco Menu (blocks/header-navigation.tpl) #}
+{# CPAP Fit: troca de itens do menu — mesmas regras e campos do bloco Menu (blocks/header-navigation.tpl) #}
 {% set qd_nav = nav_block is defined and nav_block ? nav_block.settings : {} %}
-{% set qd_swap_on = qd_nav.qd_passos_enabled is not same as(false) %}
-{% set qd_swap_match = qd_nav.qd_passos_match | default('/servicos/apoio-e-monitoramento-de-cpap/') %}
-{% set qd_swap_label = qd_nav.qd_passos_label | default('Acompanhamento PASSOS') %}
-{% set qd_swap_url = qd_nav.qd_passos_url | default('https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=servicos') %}
+{% set qd_link_acomp = settings.qd_link_acompanhamento | default('/acompanhamento-passos/') %}
+{% set qd_link_aluguel = settings.qd_link_aluguel | default(store.whatsapp) %}
+{% set qd_swaps = [
+	{ on: qd_nav.qd_passos_enabled is not same as(false), match: qd_nav.qd_passos_match | default('/servicos/apoio-e-monitoramento-de-cpap/'), label: qd_nav.qd_passos_label | default('Acompanhamento PASSOS'), url: qd_nav.qd_passos_url | default(qd_link_acomp) },
+	{ on: qd_nav.qd_aluguel_enabled is not same as(false) and qd_link_aluguel, match: qd_nav.qd_aluguel_match | default('/servicos/aluguel-de-equipamentos/'), label: qd_nav.qd_aluguel_label, url: qd_link_aluguel }
+] %}
 
 {% for item in navigation %}
 
@@ -82,10 +84,11 @@
 
 		</div>
 	{% else %}
-		{% set qd_is_swap = qd_swap_on and qd_swap_match and item.url and qd_swap_match in item.url %}
+		{% set qd_rule = null %}
+		{% for r in qd_swaps %}{% if qd_rule is null and r.on and r.match and item.url and r.match in item.url %}{% set qd_rule = r %}{% endif %}{% endfor %}
 		<div class="nav-item" data-component="menu.item">
-			{% if qd_is_swap %}
-				<a class="nav-list-link" href="{{ qd_swap_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: qd_swap_url } %}>{{ qd_swap_label }}</a>
+			{% if qd_rule %}
+				<a class="nav-list-link" href="{{ qd_rule.url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: qd_rule.url } %}>{{ qd_rule.label ?: item.name }}</a>
 			{% else %}
 				<a class="nav-list-link {{ item.current ? 'selected' }}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}"{% include 'snippets/qd-link-attrs.tpl' with { url: item.url } %}>{{ item.name }}</a>
 			{% endif %}

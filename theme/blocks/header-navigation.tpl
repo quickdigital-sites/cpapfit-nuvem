@@ -9,13 +9,16 @@
 {% set show_secondary_menu = block.settings.show_secondary_menu %}
 {% set secondary_menu_id = block.settings.menu %}
 
-{# CPAP Fit: troca um subitem do menu (ex.: Serviços › Apoio e Monitoramento de CPAP) pelo Acompanhamento PASSOS.
-   Campos "PASSOS no menu" deste bloco; o mesmo vale no menu do celular (snippets/navigation/navigation-list-hamburger.tpl).
-   A categoria do admin não muda: só o link mostrado no menu. #}
-{% set qd_swap_on = block.settings.qd_passos_enabled is not same as(false) %}
-{% set qd_swap_match = block.settings.qd_passos_match | default('/servicos/apoio-e-monitoramento-de-cpap/') %}
-{% set qd_swap_label = block.settings.qd_passos_label | default('Acompanhamento PASSOS') %}
-{% set qd_swap_url = block.settings.qd_passos_url | default('https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=servicos') %}
+{# CPAP Fit: troca de itens do menu (Serviços). Regras na ordem: a 1ª cujo "endereço" aparece no link do item vale.
+   1) Apoio e Monitoramento → link de Acompanhamento; 2) Aluguel de Equipamentos → link de Aluguel (vazio = WhatsApp da loja).
+   Links em Configurações do tema › Links de serviços; liga/desliga e textos no bloco Menu › "Troca de itens do menu".
+   O mesmo vale no menu do celular (snippets/navigation/navigation-list-hamburger.tpl). As categorias do admin não mudam. #}
+{% set qd_link_acomp = settings.qd_link_acompanhamento | default('/acompanhamento-passos/') %}
+{% set qd_link_aluguel = settings.qd_link_aluguel | default(store.whatsapp) %}
+{% set qd_swaps = [
+	{ on: block.settings.qd_passos_enabled is not same as(false), match: block.settings.qd_passos_match | default('/servicos/apoio-e-monitoramento-de-cpap/'), label: block.settings.qd_passos_label | default('Acompanhamento PASSOS'), url: block.settings.qd_passos_url | default(qd_link_acomp) },
+	{ on: block.settings.qd_aluguel_enabled is not same as(false) and qd_link_aluguel, match: block.settings.qd_aluguel_match | default('/servicos/aluguel-de-equipamentos/'), label: block.settings.qd_aluguel_label, url: qd_link_aluguel }
+] %}
 
 {# Derived layout classes #}
 {% set secondary_menu_links = secondary_menu_id ? menus[secondary_menu_id] | default([]) : [] %}
@@ -112,18 +115,20 @@
 										{% if item.subitems %}
 											<ul class="desktop-list-subitems list-unstyled" {% if banner_count > 0 %}style="grid-column: span {{ col_count }}; column-count: {{ col_count }};"{% endif %}>
 												{% for subitem in item.subitems %}
-													{% set qd_is_swap = qd_swap_on and qd_swap_match and qd_swap_match in subitem.url %}
-													{% set subitem_url = qd_is_swap ? qd_swap_url : subitem.url %}
+													{% set qd_rule = null %}
+													{% for r in qd_swaps %}{% if qd_rule is null and r.on and r.match and r.match in subitem.url %}{% set qd_rule = r %}{% endif %}{% endfor %}
+													{% set subitem_url = qd_rule ? qd_rule.url : subitem.url %}
 													<li class="nav-item">
-														<a href="{{ subitem_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subitem_url } %} class="nav-list-link nav-list-link-heading">{{ qd_is_swap ? qd_swap_label : subitem.name }}</a>
+														<a href="{{ subitem_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subitem_url } %} class="nav-list-link nav-list-link-heading">{{ qd_rule and qd_rule.label ? qd_rule.label : subitem.name }}</a>
 														{% if subitem.subitems %}
 															<ul class="list-subitems list-unstyled">
 																{% for subsubitem in subitem.subitems %}
 																	{# mesma troca no 3º nível (ex.: Menu › Serviços › Apoio e Monitoramento de CPAP) #}
-																	{% set qd_is_swap_sub = qd_swap_on and qd_swap_match and qd_swap_match in subsubitem.url %}
-																	{% set subsubitem_url = qd_is_swap_sub ? qd_swap_url : subsubitem.url %}
+																	{% set qd_rule_sub = null %}
+																	{% for r in qd_swaps %}{% if qd_rule_sub is null and r.on and r.match and r.match in subsubitem.url %}{% set qd_rule_sub = r %}{% endif %}{% endfor %}
+																	{% set subsubitem_url = qd_rule_sub ? qd_rule_sub.url : subsubitem.url %}
 																	<li class="nav-item">
-																		<a href="{{ subsubitem_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subsubitem_url } %} class="nav-list-link">{{ qd_is_swap_sub ? qd_swap_label : subsubitem.name }}</a>
+																		<a href="{{ subsubitem_url }}"{% include 'snippets/qd-link-attrs.tpl' with { url: subsubitem_url } %} class="nav-list-link">{{ qd_rule_sub and qd_rule_sub.label ? qd_rule_sub.label : subsubitem.name }}</a>
 																	</li>
 																{% endfor %}
 															</ul>
@@ -194,13 +199,17 @@
     },
     {
       "type": "header",
-      "content": "PASSOS no menu"
+      "content": "Troca de itens do menu"
+    },
+    {
+      "type": "paragraph",
+      "content": "Os links ficam em Configurações do tema › Links de serviços. Aqui: ligar/desligar cada troca e o texto mostrado."
     },
     {
       "type": "setting",
       "setting_type": "toggle",
       "id": "qd_passos_enabled",
-      "label": "Trocar um item do menu pelo Acompanhamento PASSOS",
+      "label": "Trocar \"Apoio e Monitoramento\" pelo link de Acompanhamento",
       "info": "Desligado: o menu volta a mostrar o item original do admin.",
       "default": true
     },
@@ -223,11 +232,34 @@
     },
     {
       "type": "setting",
-      "setting_type": "url",
+      "setting_type": "text",
       "id": "qd_passos_url",
-      "label": "Link",
-      "default": "https://acompanhamento.oxisaude.com.br/?utm_source=cpapfit&utm_campaign=passos&utm_medium=servicos",
+      "label": "Link só para o menu",
+      "info": "Vazio: usa o link de Acompanhamento de Configurações do tema › Links de serviços.",
       "visible_if": "{{ block.settings.qd_passos_enabled }}"
+    },
+    {
+      "type": "setting",
+      "setting_type": "toggle",
+      "id": "qd_aluguel_enabled",
+      "label": "Trocar \"Aluguel de Equipamentos\" pelo link de Aluguel",
+      "info": "Link em Configurações do tema › Links de serviços (vazio = WhatsApp da loja).",
+      "default": true
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "qd_aluguel_match",
+      "label": "Endereço do item de aluguel",
+      "default": "/servicos/aluguel-de-equipamentos/",
+      "visible_if": "{{ block.settings.qd_aluguel_enabled }}"
+    },
+    {
+      "type": "setting",
+      "setting_type": "text",
+      "id": "qd_aluguel_label",
+      "label": "Texto no menu (vazio = mantém o nome)",
+      "visible_if": "{{ block.settings.qd_aluguel_enabled }}"
     }
   ]
 }

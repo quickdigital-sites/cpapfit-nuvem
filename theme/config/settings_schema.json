@@ -562,5 +562,29 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Links de serviços",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Para onde levam os links de serviços do menu (Serviços) e do rodapé. Trocar aqui muda os dois de uma vez."
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_link_acompanhamento",
+        "label": "Link de Acompanhamento / Apoio e Monitoramento",
+        "default": "/acompanhamento-passos/",
+        "info": "Endereço de uma página da loja (ex.: /acompanhamento-passos/) ou link completo."
+      },
+      {
+        "type": "setting",
+        "setting_type": "text",
+        "id": "qd_link_aluguel",
+        "label": "Link de Aluguel de equipamentos",
+        "info": "Vazio: abre o WhatsApp da loja (o mesmo do botão flutuante). Quando houver página de aluguel, cole o endereço aqui."
+      }
+    ]
   }
 ]
