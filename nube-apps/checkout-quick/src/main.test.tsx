@@ -32,8 +32,13 @@ function findAll(node: unknown, type: string): Node[] {
 	return [...(n.type === type ? [n] : []), ...findAll(n.props?.children, type)];
 }
 
-const state = (step: "start" | "payment" | "success" | null, subtotal = 174.9) =>
+const state = (
+	step: "start" | "payment" | "success" | null,
+	subtotal = 174.9,
+	extra: { payment?: unknown; order?: unknown } = { payment: { status: "paid", selected: null } },
+) =>
 	({
+		...extra,
 		location: step ? { page: { type: "checkout", data: { step } } } : { page: { type: "home", data: {} } },
 		cart: { prices: { subtotal, discount_coupon: 0, discount_promotion: 0, discount_gateway: 0, shipping: 0, total: subtotal, subtotal_without_taxes: subtotal } },
 		store: { name: "QuickStart", domain: "quickstart2.lojavirtualnuvem.com.br", currency_details: { code: "BRL", display_short: "R$", display_long: "R$", cents_separator: ",", thousands_separator: "." } },
@@ -129,6 +134,18 @@ describe("partes", () => {
 		expect(t).toContain("Pedido confirmado!");
 		expect(t).toContain("chega no seu e-mail");
 		expect(t).toContain("Chama no WhatsApp");
+	});
+
+	it("pos-compra: boleto/Pix em aberto não diz 'confirmado'", () => {
+		const t = all(posCompra.render(state("success", 50, { payment: { status: "pending", selected: null } }), defaults));
+		expect(t).toContain("Pedido recebido!");
+		expect(t).not.toContain("confirmado");
+		expect(t).toContain("pagamento for aprovado");
+	});
+
+	it("pos-compra: pedido cancelado não mostra nada", () => {
+		const s = state("success", 50, { payment: { status: "voided", selected: null }, order: { status: "cancelled" } });
+		expect(posCompra.render(s, defaults)).toBeNull();
 	});
 });
 
