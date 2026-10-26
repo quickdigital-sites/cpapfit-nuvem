@@ -2,6 +2,8 @@
  * Footer CPAP Fit (design/pages/footer.yaml).
  *  - [data-qd-copy]: copia o cupom e mostra "Copiado!" por 2s.
  *  - [data-qd-footer-menu] (<details>): sempre aberto no desktop (≥768px), acordeão no mobile.
+ *  - Cupom da faixa de benefícios: texto e código vêm do cupom da campanha nas configurações do tema
+ *    (data-qd-campaign-* no <body>), a mesma fonte do "Aproveite também" da página de produto. Sem código: some.
  *  - Newsletter nativa: adiciona o campo "Seu nome" (o form nativo manda um nome fixo em
  *    input hidden name="name"; aqui o que o cliente digita vai para esse campo).
  */
@@ -63,9 +65,28 @@ function setupNewsletterName() {
   });
 }
 
+const escapeHtml = (t) => String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+function syncCampaign() {
+  const { qdCampaignText: text, qdCampaignCode: code } = document.body.dataset;
+  if (text === undefined && code === undefined) return; // tema antigo sem os atributos: fica o HTML do componente
+  document.querySelectorAll(".qd-footer-coupon").forEach((li) => {
+    if (!code || !code.trim()) {
+      li.hidden = true;
+      return;
+    }
+    const label = li.querySelector(".qd-footer-coupon-body > span:first-child");
+    // "R$ 100 OFF na linha Philips" → valor em negrito, como no componente
+    if (label && text) label.innerHTML = escapeHtml(text.trim()).replace(/^(R\$\s?[\d.,]+\s?OFF|\d+%\s?OFF)/i, "<strong>$1</strong>");
+    li.querySelectorAll(".qd-coupon-code").forEach((el) => (el.textContent = code.trim()));
+    li.querySelectorAll("[data-qd-copy]").forEach((el) => (el.dataset.qdCopy = code.trim()));
+  });
+}
+
 export default function initFooter() {
   const run = () => {
     syncMenus();
+    syncCampaign();
     setupNewsletterName();
     document.querySelectorAll("[data-qd-footer-menu] > summary").forEach((s) =>
       s.addEventListener("click", (e) => {

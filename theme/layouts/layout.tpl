@@ -67,6 +67,10 @@
       data-inactive-tab-msg2="{{ settings.inactive_tab_message_02 | escape }}"
     {% endif %}
     {% if cart_favicon_url %}data-cart-favicon="{{ cart_favicon_url | escape }}"{% endif %}
+    {# CPAP Fit: cupom da campanha (Configurações do tema › Página de produto › Cupom em destaque) — fonte única
+       para a faixa de cupom do rodapé (footer.js) e o "Aproveite também" da página de produto #}
+    data-qd-campaign-text="{{ settings.qd_pdp_coupon_text | escape }}"
+    data-qd-campaign-code="{{ settings.qd_pdp_coupon_code | escape }}"
     data-preview="{{ params.preview ? 'true' : 'false' }}"
   >
     {{ component('nubesdk-slot', { type: "before_main_content" }) }}
