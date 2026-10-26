@@ -6,6 +6,8 @@
  *    para o page-header (centralizado, acima dos botões Filtrar / Ordenar).
  *  - Paginação numerada (1 2 3 4) a partir do contador nativo "1 / 4" e dos links das setas.
  *  - Grupos de filtro do desktop recolhíveis (chevron), como no Figma.
+ *  - Grupos de filtro em que todas as opções são "Único/Unico…" (Cor: Unico, Tamanho: único Ref. …) somem:
+ *    não ajudam a filtrar. Feito aqui e não no Twig: no Twig derrubou a grade de produtos (ver PR #9).
  *  - Descrição da categoria vira o bloco de "texto SEO" no fim, com "+ ver mais".
  */
 const mq = window.matchMedia("(min-width: 768px)");
@@ -116,8 +118,19 @@ function buildPagination() {
   nav.dataset.qdDone = "1";
 }
 
+// "Único", "único (tela Grande) Ref. …" → "unico…"
+const plain = (t) => (t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
+
+function hideSingleValueFilters() {
+  document.querySelectorAll(".js-filter-container").forEach((g) => {
+    const values = [...g.querySelectorAll(".js-filter-checkbox[data-filter-value]")].map((l) => plain(l.dataset.filterValue));
+    // filtro aplicado continua à vista, senão o cliente não consegue tirar
+    if (values.length && values.every((v) => v.startsWith("unico")) && !g.querySelector("input:checked")) g.hidden = true;
+  });
+}
+
 function setupFilterToggles() {
-  const groups = [...document.querySelectorAll(".filters-desktop-content :is(.filters-categories-container, .js-filter-container, .js-price-filter-container)")];
+  const groups = [...document.querySelectorAll(".filters-desktop-content :is(.filters-categories-container, .js-filter-container, .js-price-filter-container)")].filter((g) => !g.hidden);
   groups[0]?.classList.add("qd-filter-first");
   // Figma: grupos longos recolhidos. Abertos: categorias, os 2 primeiros filtros e os que têm seleção.
   groups.forEach((g, i) => {
@@ -164,6 +177,7 @@ export default function initPlp() {
     try {
       buildHead(grid);
       buildPagination();
+      hideSingleValueFilters();
       setupFilterToggles();
       setupFilterModal();
     } finally {

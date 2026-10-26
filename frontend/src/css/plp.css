@@ -334,3 +334,6 @@ button.input-clear-content { border: 0; background: none; padding: 0; cursor: po
   .qd-plp [data-component="modal-filters"] { width: 21.125rem !important; max-width: 87vw; }
   .qd-plp [data-component="modal-filters"] .qd-price-range { margin-left: 0.875rem; margin-right: 0.875rem; }
 }
+
+/* grupo de filtro só com "Único" (plp.js) */
+.js-filter-container[hidden] { display: none !important; }
