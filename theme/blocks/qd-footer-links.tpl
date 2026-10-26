@@ -15,7 +15,7 @@
 		{ name: 'Troca, Devolução, Garantia', url: '/trocas-e-devolucoes/' }
 	],
 	[
-		{ name: 'BLOG', url: 'http://blog.cpapfit.com.br/' },
+		{ name: 'BLOG', url: 'https://blog.cpapfit.com.br/' },
 		{ name: 'Seja um representante!', url: 'https://materiais.cpapfit.com.br/seja-um-representante/' },
 		{ name: 'Quem somos', url: '/quem-e-a-cpap-fit/' },
 		{ name: '', url: '', qd_passos: true },
