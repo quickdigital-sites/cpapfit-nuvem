@@ -1601,6 +1601,25 @@ a {
     margin-top: -100px;
     padding: 0;
   }
+  {#/* página do pedido (success): a linha não é #main-row e não tem as etapas, então o resumo caía para baixo
+     do conteúdo até 1280px; mesma grade das etapas, sem o recuo de -100px */#}
+  :root .main-container > .row:has(> #main-column):not(#main-row) {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--qd-gap);
+    justify-content: center;
+    max-width: 1270px;
+    margin: 0 auto !important;
+  }
+  :root .row:not(#main-row) > #secondary-column {
+    margin-top: 0;
+  }
+}
+{#/* na página do pedido a Nuvemshop põe "Continuar comprando" dentro de #headbar-right; sem o selo em volta,
+   senão vira "AMBIENTE CONTINUAR COMPRANDO 100% SEGURO" */#}
+:root #headbar-right:has(.headbar-continue)::before,
+:root #headbar-right:has(.headbar-continue)::after {
+  content: none;
 }
 
 {#/* ---------- etapas CARRINHO — ENTREGA — PAGAMENTO (367:13771) ---------- */#}
