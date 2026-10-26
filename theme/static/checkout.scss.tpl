@@ -2144,6 +2144,14 @@ a {
 :root #secondary-column .summary {
   top: 20px;
 }
+{#/* o resumo fixo (sticky) da Nuvemshop vinha com altura 0 (o painel interno é float), então descia até o fim da
+   coluna e passava por cima do rodapé azul; com a altura real ele para no fim do formulário */#}
+:root #secondary-column .summary.sticky {
+  height: auto !important;
+}
+:root #secondary-column .summary.sticky > .summary-details {
+  float: none !important;
+}
 :root table.table-scrollable,
 :root table.table-scrollable tbody {
   display: flex;
