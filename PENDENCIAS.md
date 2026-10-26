@@ -10,6 +10,11 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
 
 ## Aberto
 
+- [ ] **Pós-compra com pedido cancelado (2026-10-26):** o app NubeSDK (`nube-apps/checkout-quick`,
+  `features/pos-compra.tsx`, no ar como v5) tem a regra "pedido cancelado não mostra nada", mas a Nuvemshop não envia
+  `order.status` para a página de pedido — então num pedido cancelado aparece "Pedido recebido!". O comentário do
+  código e o teste descrevem a regra, não o que acontece na loja. Revisitar se o SDK passar a mandar o status do pedido.
+
 - [ ] **QA/UAT do cliente (2026-10-26) — o que depende do admin** (o código está no PR `fix/qa-uat`):
   - **BUG-001 Kits no menu** e **BUG-002 Peças para máscaras no menu:** Loja online › Menus › Menu principal.
     Kits = categoria KITS (id 41699658, 6 subcategorias). Peças para máscaras = subitem de **Máscaras** (são peças
