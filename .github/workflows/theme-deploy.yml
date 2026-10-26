@@ -71,6 +71,10 @@ jobs:
           THEME_ID_HOMOLOG: ${{ secrets.THEME_ID_HOMOLOG }}
         run: |
           set -euo pipefail
+          if [ -z "${THEME_ID_HOMOLOG:-}" ]; then
+            echo "THEME_ID_HOMOLOG vazio — deploy de homolog pausado. Nada a fazer." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           nuvemshop theme diff  --theme-id "$THEME_ID_HOMOLOG" --token "$NUVEMSHOP_CLI_TOKEN" || true
           nuvemshop theme push  --theme-id "$THEME_ID_HOMOLOG" --token "$NUVEMSHOP_CLI_TOKEN" -y
 
@@ -79,6 +83,8 @@ jobs:
           STORE_URL: ${{ vars.STORE_URL }}
           THEME_ID_HOMOLOG: ${{ secrets.THEME_ID_HOMOLOG }}
         run: |
+          # sem tema de homolog não houve push: não há preview para mostrar
+          if [ -z "${THEME_ID_HOMOLOG:-}" ]; then exit 0; fi
           {
             echo "### Preview do homolog"
             if [ -n "${STORE_URL:-}" ]; then
