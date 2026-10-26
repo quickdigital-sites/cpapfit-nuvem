@@ -12,14 +12,7 @@
                 {% include 'snippets/product-list/filters/price-filter.tpl' %}
 
             {% else %}
-                {# CPAP Fit: filtro cujos valores são todos "Único/Unico…" (ex.: Cor: Unico, Tamanho: único Ref. …) não ajuda a filtrar — some (BUG-012) #}
-                {% set qd_only_unico = true %}
-                {% for value in product_filter.values %}
-                    {% if value.product_count > 0 and not ((value.name | lower | replace({'ú': 'u', 'Ú': 'u'}) | trim) starts with 'unico') %}
-                        {% set qd_only_unico = false %}
-                    {% endif %}
-                {% endfor %}
-                {% if product_filter.has_products and not qd_only_unico %}
+                {% if product_filter.has_products %}
                 
                     <div class="js-filter-container {% if accordion %}js-accordion-private-container filter-accordion{% endif %}" data-store="filters-group" data-component="list.filter-{{ product_filter.type }}" data-component-value="{{ product_filter.key }}">
                         {% if accordion %}
