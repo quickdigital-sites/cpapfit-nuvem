@@ -16,15 +16,16 @@
 
 /* Anti layout shift: nas outras páginas o institucional.js monta a coluna lateral e move o conteúdo.
    Até ele terminar (html.qd-inst-ready) o <main> fica invisível; se o JS falhar, aparece sozinho em 3s
-   (@keyframes qd-reveal em pdp.css). */
-html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .template-contact) main { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
+   (@keyframes qd-reveal em pdp.css). Nossas lojas não esconde: já nasce na posição final (abaixo). */
+html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit, .page-nossas-lojas), .template-contact) main { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
 
 /* Seções do page.json que só servem a Quem somos */
 .template-page:not(.page-quem-e-a-cpap-fit) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
   [data-section-id="servicos"], [data-section-id="videos"], [data-section-id="marcas"]) { display: none !important; }
 [data-section-id="qd_stores"] { display: none !important; } /* Lojas físicas: a lista vai para a coluna (JS) */
-/* Nossas lojas: até o JS mover a lista, ela já ocupa (invisível) o lugar e a altura finais, com o espaço da
-   coluna lateral, do título e dos filtros reservado; senão o rodapé nasce no topo e salta (CLS 0,68).
+/* Nossas lojas: até o JS mover a lista, ela já ocupa o lugar e a altura finais, com o espaço da coluna lateral,
+   do título e dos filtros reservado; senão o rodapé nasce no topo e salta (CLS 0,68). Fica visível desde a 1ª
+   pintura para a foto da 1ª loja (LCP) não esperar o JS; a coluna e o título só aparecem no espaço reservado.
    Topo: padding 3.75rem + título 2.125rem + gap 1.25rem; esquerda: 1rem + coluna 17.5rem + gap 6.25rem */
 html:not(.qd-inst-ready) .page-nossas-lojas main { max-width: 87rem; margin-inline: auto; padding: 7.125rem 1rem 3.75rem 24.75rem; }
 html:not(.qd-inst-ready) .page-nossas-lojas [data-section-id="page_content"] .container { max-width: none; padding: 0; }
