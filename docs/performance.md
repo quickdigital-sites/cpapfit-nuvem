@@ -57,9 +57,11 @@ topo da home idênticas pixel a pixel.
   por tipo de página (banner na home, grade na categoria, galeria no produto); um recorte errado mostra a página
   sem estilo por um instante e ela pula. O CSS sem uso é quase todo do Ipanema (regras de outras páginas e
   recursos desligados) — tirá-lo é refatorar o tema base.
-- **Pré-carregar a fonte.** Já está otimizada: carrega sem bloquear (`display=swap`), com preconnect, um só
-  arquivo woff2 e fonte reserva com as mesmas medidas (sem pulo). Pré-carregar fixaria uma URL do Google que
-  muda a cada versão e disputaria banda com a foto do banner no celular.
+- **Pré-carregar a fonte** — feito depois (2026-10-27): a Montserrat passou a vir do repo público de assets
+  (jsDelivr, URL fixa por commit, cache imutável), pré-carregada no topo do `layout.tpl`, sem o CSS do Google.
+  Motivo: com `display=swap`, nos ~50ms entre o CSS do Google chegar e o woff2 terminar, o Chrome desenhava o
+  texto numa 3ª largura e linhas no limite quebravam diferente (CLS ~0,1 em Política de entrega). A fonte reserva
+  (`Montserrat Fallback`) ganhou uma face por peso no mesmo período. Ver o PR para os números.
 - **Foto do banner no computador (137KB).** É um arquivo único de 1920px no jsDelivr, que não gera tamanhos
   menores. Para economizar ~70KB, subir a foto pelo editor (a Nuvemshop gera os tamanhos) ou publicar uma
   versão de 1280px.
