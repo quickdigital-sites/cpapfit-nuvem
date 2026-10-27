@@ -107,14 +107,55 @@
 
 {% else %}
 
-	{# CPAP Fit: a fonte é carregada sem bloquear pelo <link> do layout.tpl (qd_fonts_url) #}
+	{# CPAP Fit: a fonte é carregada sem bloquear pelo <link> do layout.tpl (qd_fonts_url). Até ela chegar o texto usa
+	   a Arial com as medidas da Montserrat, uma face por faixa de peso: size-adjust = largura da Montserrat ÷ Arial
+	   no mesmo texto (300 a 700, medido); ascent/descent = métricas da Montserrat (96,8% / 25,1%) ÷ size-adjust.
+	   Negrito usa a Arial Bold: o negrito sintético da Arial regular era 3,5% a 9% mais estreito e, quando a Montserrat
+	   chegava, a linha quebrava em outro lugar (CLS ~0,1 em Política de entrega). #}
 	@font-face {
 		font-family: "Montserrat Fallback";
 		src: local("Arial");
-		ascent-override: 85.79%;
+		font-weight: 100 349;
+		ascent-override: 88.19%;
+		descent-override: 22.87%;
+		line-gap-override: 0%;
+		size-adjust: 109.76%;
+	}
+	@font-face {
+		font-family: "Montserrat Fallback";
+		src: local("Arial");
+		font-weight: 350 449;
+		ascent-override: 87.09%;
+		descent-override: 22.58%;
+		line-gap-override: 0%;
+		size-adjust: 111.15%;
+	}
+	@font-face {
+		font-family: "Montserrat Fallback";
+		src: local("Arial");
+		font-weight: 450 549;
+		ascent-override: 85.82%;
 		descent-override: 22.25%;
 		line-gap-override: 0%;
-		size-adjust: 112.83%;
+		size-adjust: 112.80%;
+	}
+	@font-face {
+		font-family: "Montserrat Fallback";
+		src: local("Arial Bold"), local("Arial-BoldMT");
+		font-weight: 550 649;
+		ascent-override: 90.34%;
+		descent-override: 23.43%;
+		line-gap-override: 0%;
+		size-adjust: 107.15%;
+	}
+	@font-face {
+		font-family: "Montserrat Fallback";
+		src: local("Arial Bold"), local("Arial-BoldMT");
+		font-weight: 650 900;
+		ascent-override: 88.73%;
+		descent-override: 23.01%;
+		line-gap-override: 0%;
+		size-adjust: 109.09%;
 	}
 
 {% endif %}
