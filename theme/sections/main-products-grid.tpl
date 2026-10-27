@@ -108,9 +108,10 @@
           {# Product list #}
           <div class="js-product-table grid {{ grid_mobile_class }} {{ grid_desktop_class }}">
             {# Prioritize first 2 product images for LCP. Category bumps the threshold to absorb category-hero. #}
+            {# CPAP Fit: a 1ª fileira (2 no celular, 4 no computador) carrega sem lazy; fetchpriority="high" só na 1ª #}
             {% set is_priority_section = section.index <= (template == 'category' ? 3 : 2) %}
             {% for product in display_products %}
-              {% include 'snippets/product-list/product-item/item.tpl' with {image_priority_high: is_priority_section and loop.index in [1, 2]} %}
+              {% include 'snippets/product-list/product-item/item.tpl' with {image_priority_high: is_priority_section and loop.index == 1, image_eager: is_priority_section and loop.index <= 4} %}
             {% endfor %}
           </div>
 

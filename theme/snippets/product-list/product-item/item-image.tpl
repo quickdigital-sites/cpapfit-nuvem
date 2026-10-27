@@ -121,13 +121,17 @@
                 {% else %}
 
                     {# Single image format #}
+                    {# CPAP Fit: image_eager = 1ª fileira da grade, sem lazy (o image.tpl só desliga com 'false'); qd-img-eager
+                       tira o fade-in, que esperava o lazysizes marcar a foto como carregada #}
 
                     {% include 'snippets/image.tpl' with common_image_params | merge({
                             image_src: product.is_placeholder ? product.placeholder_image_url : product.featured_image,
                             product_image: not product.is_placeholder,
                             image_thumbs: product.is_placeholder ? false : common_image_params.image_thumbs,
-                            image_classes: common_image_params.image_classes ~ ' ' ~ image_featured_class ~ product_item_image_classes.image_featured,
+                            image_classes: common_image_params.image_classes ~ ' ' ~ image_featured_class ~ product_item_image_classes.image_featured ~ (image_eager ? ' qd-img-eager'),
                             image_priority_high: image_priority_high,
+                            image_lazy: image_eager ? 'false' : true,
+                            image_lazy_js: not image_eager,
                         }) %}
                 {% endif %}
 

@@ -96,6 +96,7 @@
 		slider: show_image_slider,
 		slider_pagination_container: true,
 		image_priority_high: image_priority_high,
+		image_eager: image_eager,
 	} %}
 
 	<div class="product-item-information {{ product_item_classes.information }}" data-store="product-item-info-{{ product.id }}">
