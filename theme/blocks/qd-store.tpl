@@ -8,11 +8,17 @@
 {% if s.name %}
 <article class="qd-store" data-uf="{{ uf }}" {{ block | block_attributes }}>
 	{% if s.image %}
+		{#- 1ª foto é o LCP da página: sem lazy e com prioridade; as demais seguem lazy. Foto do editor
+		    (@media-lib) traz as próprias medidas; a padrão do page.json (loja.webp) é 290 × 290 -#}
+		{%- set is_media_lib = s.image starts with '@media-lib:' -%}
 		{% include 'snippets/image.tpl' with {
 			image_src: s.image,
 			image_alt: s.name,
 			image_classes: 'qd-store-img',
-			image_lazy_js: true,
+			image_lazy_js: not is_priority,
+			image_priority_high: is_priority,
+			image_width: is_media_lib ? null : 290,
+			image_height: is_media_lib ? null : 290,
 		} %}
 	{% endif %}
 	<div class="qd-store-title">

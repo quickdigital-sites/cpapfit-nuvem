@@ -5,7 +5,7 @@
 	<div class="qd-stores-filters" role="group" aria-label="Filtrar lojas por estado" data-qd-stores-filters></div>
 	<div class="qd-stores-grid">
 		{% for block in section.blocks %}
-			{% include 'blocks/' ~ block.type ~ '.tpl' with { block: block } %}
+			{% include 'blocks/' ~ block.type ~ '.tpl' with { block: block, is_priority: loop.first } %}
 		{% endfor %}
 	</div>
 </div>

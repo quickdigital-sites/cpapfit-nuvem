@@ -23,6 +23,16 @@ html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .templ
 .template-page:not(.page-quem-e-a-cpap-fit) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
   [data-section-id="servicos"], [data-section-id="videos"], [data-section-id="marcas"]) { display: none !important; }
 [data-section-id="qd_stores"] { display: none !important; } /* Lojas físicas: a lista vai para a coluna (JS) */
+/* Nossas lojas: até o JS mover a lista, ela já ocupa (invisível) o lugar e a altura finais, com o espaço da
+   coluna lateral, do título e dos filtros reservado; senão o rodapé nasce no topo e salta (CLS 0,68).
+   Topo: padding 3.75rem + título 2.125rem + gap 1.25rem; esquerda: 1rem + coluna 17.5rem + gap 6.25rem */
+html:not(.qd-inst-ready) .page-nossas-lojas main { max-width: 87rem; margin-inline: auto; padding: 7.125rem 1rem 3.75rem 24.75rem; }
+html:not(.qd-inst-ready) .page-nossas-lojas [data-section-id="page_content"] .container { max-width: none; padding: 0; }
+html:not(.qd-inst-ready) .page-nossas-lojas .page-content p {
+  margin: 0; font-family: var(--heading-font); font-size: 1rem !important; font-weight: 500; line-height: 1.375rem !important; letter-spacing: 0.01rem;
+}
+html:not(.qd-inst-ready) .page-nossas-lojas [data-section-id="qd_stores"] { display: block !important; margin-top: 1.25rem; }
+html:not(.qd-inst-ready) .page-nossas-lojas .qd-stores-filters { min-height: 2.625rem; }
 /* o título vai para a coluna de conteúdo (JS); em Quem somos, a faixa já tem o título */
 :is(.template-page, .template-contact) [data-section-id="heading"],
 .qd-inst-source { display: none !important; }
@@ -186,10 +196,13 @@ div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
 /* --- Responsivo: tablet (< 1200px) e mobile (< 768px) ----------------------- */
 @media (max-width: 74.9375em) {
   .container.qd-inst { grid-template-columns: 13.75rem minmax(0, 1fr); column-gap: 2.5rem; padding: 2.5rem 1rem; }
+  html:not(.qd-inst-ready) .page-nossas-lojas main { padding: 5.875rem 1rem 2.5rem 17.25rem; }
   .qd-stores-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 47.9375em) {
   .container.qd-inst { display: flex; flex-direction: column; align-items: stretch; gap: 1.25rem; padding: 0.625rem 1.25rem 1.25rem; }
+  /* reserva: seletor de páginas (3.375rem) + título com divisória (3.1875rem) + gaps */
+  html:not(.qd-inst-ready) .page-nossas-lojas main { padding: 9.6875rem 1.25rem 1.25rem; }
   .qd-inst-aside { width: 100%; gap: 0; padding-bottom: 0.625rem; }
   .qd-inst-aside-title, .qd-inst-menu, .qd-inst-aside .qd-footer-contact { display: none; }
   .qd-inst-pick { display: block; }
