@@ -14,24 +14,21 @@
 /* Quem somos é identificada no servidor: o layout.tpl põe page-<slug> no <body> (tema forkado).
    Assim as seções e o texto dela já saem certos na 1ª pintura, sem esperar o JS. */
 
-/* Anti layout shift: nas outras páginas o institucional.js monta a coluna lateral e move o conteúdo.
-   Até ele terminar (html.qd-inst-ready) o <main> fica invisível; se o JS falhar, aparece sozinho em 3s
-   (@keyframes qd-reveal em pdp.css). Nossas lojas não esconde: já nasce na posição final (abaixo). */
-html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit, .page-nossas-lojas), .template-contact) main { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
+/* Anti layout shift: nas outras páginas o institucional.js monta a coluna lateral, põe o título e move o
+   conteúdo. Até ele terminar (html.qd-inst-ready) o <main> já reserva o espaço da coluna e do título, e o
+   texto do admin já tem o estilo final (:where(.template-page) .page-content, abaixo): tudo nasce na posição
+   final e visível, sem esperar o JS (LCP). Topo: padding 3.75rem + título 2.125rem + gap 1.25rem;
+   esquerda: 1rem + coluna 17.5rem + gap 6.25rem. */
+html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .template-contact) main {
+  max-width: 87rem; margin-inline: auto; padding: 7.125rem 1rem 3.75rem 24.75rem;
+}
+html:not(.qd-inst-ready) .template-page:not(.page-quem-e-a-cpap-fit) [data-section-id="page_content"] .container { max-width: none; padding: 0; }
 
 /* Seções do page.json que só servem a Quem somos */
 .template-page:not(.page-quem-e-a-cpap-fit) :is([data-section-id="quem_somos_hero"], [data-section-id="categorias"],
   [data-section-id="servicos"], [data-section-id="videos"], [data-section-id="marcas"]) { display: none !important; }
 [data-section-id="qd_stores"] { display: none !important; } /* Lojas físicas: a lista vai para a coluna (JS) */
-/* Nossas lojas: até o JS mover a lista, ela já ocupa o lugar e a altura finais, com o espaço da coluna lateral,
-   do título e dos filtros reservado; senão o rodapé nasce no topo e salta (CLS 0,68). Fica visível desde a 1ª
-   pintura para a foto da 1ª loja (LCP) não esperar o JS; a coluna e o título só aparecem no espaço reservado.
-   Topo: padding 3.75rem + título 2.125rem + gap 1.25rem; esquerda: 1rem + coluna 17.5rem + gap 6.25rem */
-html:not(.qd-inst-ready) .page-nossas-lojas main { max-width: 87rem; margin-inline: auto; padding: 7.125rem 1rem 3.75rem 24.75rem; }
-html:not(.qd-inst-ready) .page-nossas-lojas [data-section-id="page_content"] .container { max-width: none; padding: 0; }
-html:not(.qd-inst-ready) .page-nossas-lojas .page-content p {
-  margin: 0; font-family: var(--heading-font); font-size: 1rem !important; font-weight: 500; line-height: 1.375rem !important; letter-spacing: 0.01rem;
-}
+/* Nossas lojas: a lista de lojas já ocupa o lugar final antes do JS movê-la para a coluna (CLS 0,68 sem isso) */
 html:not(.qd-inst-ready) .page-nossas-lojas [data-section-id="qd_stores"] { display: block !important; margin-top: 1.25rem; }
 html:not(.qd-inst-ready) .page-nossas-lojas .qd-stores-filters { min-height: 2.625rem; }
 /* o título vai para a coluna de conteúdo (JS); em Quem somos, a faixa já tem o título */
@@ -82,24 +79,24 @@ html:not(.qd-inst-ready) .page-nossas-lojas .qd-stores-filters { min-height: 2.6
 .qd-inst-aside .qd-footer-whatsapp:hover { background: var(--qd-cream); }
 
 /* --- Conteúdo do admin (Troca, políticas, Quem somos) ----------------------- */
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) { display: flex; flex-direction: column; gap: 1.625rem; font-family: var(--heading-font); }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(p, li, span, div, td) {
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) { display: flex; flex-direction: column; gap: 1.625rem; font-family: var(--heading-font); }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) :is(p, li, span, div, td) {
   font-family: inherit !important; font-size: 1rem !important; font-weight: 500; line-height: 1.375rem !important; letter-spacing: 0.01rem; color: var(--qd-inst-text) !important;
   /* !important: o texto do admin traz font-size/cor inline (o JS limpa, mas a 1ª pintura é antes) */
 }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(p, ul, ol) { margin: 0; }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(ul, ol) { padding-left: 1.25em; }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(ul, ol):has(> li[style*="list-style"]) { padding-left: 0; }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) li[style*="list-style"] + li { margin-top: 0.9375rem; }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(strong, b) { font-weight: 700; }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) a { color: var(--qd-indigo); text-decoration: underline; }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) :is(h1, h2, h3, h4) {
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) :is(p, ul, ol) { margin: 0; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) :is(ul, ol) { padding-left: 1.25em; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) :is(ul, ol):has(> li[style*="list-style"]) { padding-left: 0; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) li[style*="list-style"] + li { margin-top: 0.9375rem; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) :is(strong, b) { font-weight: 700; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) a { color: var(--qd-indigo); text-decoration: underline; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) :is(h1, h2, h3, h4) {
   margin: 0; padding-top: 1.625rem; border-top: 1px solid var(--qd-inst-line);
   font-family: inherit; font-size: 1.25rem; font-weight: 500; line-height: 1.25rem; letter-spacing: 0.0219rem; color: var(--qd-inst-navy);
 }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) > :is(h1, h2, h3, h4):first-child { padding-top: 0; border-top: 0; }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) hr { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--qd-inst-line); }
-:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content) img { max-width: 100%; height: auto; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) > :is(h1, h2, h3, h4):first-child { padding-top: 0; border-top: 0; }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) hr { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--qd-inst-line); }
+:is(.qd-inst-content, .page-quem-e-a-cpap-fit .page-content, :where(.template-page) .page-content) img { max-width: 100%; height: auto; }
 
 /* --- Nossas lojas ----------------------------------------------------------- */
 .qd-stores { display: flex; flex-direction: column; gap: 1.25rem; }
@@ -143,28 +140,28 @@ html:not(.qd-inst-ready) .page-nossas-lojas .qd-stores-filters { min-height: 2.6
 .qd-contact > .qd-inst-title { padding-bottom: 1.25rem; border-bottom: 1px solid var(--qd-inst-line); }
 .qd-contact-subtitle { margin: 0 0 0.375rem; font-family: var(--heading-font); font-size: 1.25rem; font-weight: 500; line-height: 1.25rem; color: var(--qd-dark); }
 .qd-contact .alert { margin: 0; }
-.qd-contact .qd-contact-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.875rem 2.5rem; }
-.qd-contact .qd-contact-form > :is(.qd-contact-full, button[type="submit"]) { grid-column: 1 / -1; }
-.qd-contact .qd-contact-form .form-group { display: flex; flex-direction: column; gap: 0.625rem; margin: 0; }
-.qd-contact .qd-contact-form .form-label {
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.875rem 2.5rem; }
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) > :is(.qd-contact-full, button[type="submit"]) { grid-column: 1 / -1; }
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) .form-group { display: flex; flex-direction: column; gap: 0.625rem; margin: 0; }
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) .form-label {
   margin: 0; font-family: var(--heading-font); font-size: 0.875rem; font-weight: 700; line-height: 1.15rem; color: var(--qd-ink);
 }
-.qd-contact .qd-contact-form .form-control {
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) .form-control {
   width: 100%; height: 3.125rem; padding: 0 1rem; border: 0; border-radius: 0; background: var(--qd-cream); box-shadow: none;
   font-family: var(--heading-font); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.0088rem; color: var(--qd-ink);
 }
-.qd-contact .qd-contact-form .form-control::placeholder { color: var(--qd-ink); opacity: 1; }
-.qd-contact .qd-contact-form .form-control:focus { outline: 2px solid var(--qd-gold); outline-offset: -2px; }
-.qd-contact .qd-contact-form textarea.form-control { height: 15.4375rem; padding: 1.0313rem 1rem; resize: vertical; }
-.qd-contact .qd-contact-form select.form-control {
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) .form-control::placeholder { color: var(--qd-ink); opacity: 1; }
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) .form-control:focus { outline: 2px solid var(--qd-gold); outline-offset: -2px; }
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) textarea.form-control { height: 15.4375rem; padding: 1.0313rem 1rem; resize: vertical; }
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) select.form-control {
   appearance: none; padding-right: 3rem; cursor: pointer;
   background: var(--qd-cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.17l4.95-4.95 1.41 1.41L12 16 5.64 9.64l1.41-1.41L12 13.17z' fill='%232C4372'/%3E%3C/svg%3E") no-repeat right 1rem center;
 }
-.qd-contact .qd-contact-form button[type="submit"] {
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) button[type="submit"] {
   width: 100%; height: 2.7813rem; margin: 0; border: 0; border-radius: 3.125rem; background: var(--qd-inst-green);
   font-family: var(--heading-font); font-size: 0.75rem; font-weight: 700; line-height: 1.125rem; text-transform: uppercase; color: #fff;
 }
-.qd-contact .qd-contact-form button[type="submit"]:hover { filter: brightness(.95); }
+:is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) button[type="submit"]:hover { filter: brightness(.95); }
 
 /* --- Quem somos ------------------------------------------------------------- */
 div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
@@ -197,13 +194,13 @@ div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
 /* --- Responsivo: tablet (< 1200px) e mobile (< 768px) ----------------------- */
 @media (max-width: 74.9375em) {
   .container.qd-inst { grid-template-columns: 13.75rem minmax(0, 1fr); column-gap: 2.5rem; padding: 2.5rem 1rem; }
-  html:not(.qd-inst-ready) .page-nossas-lojas main { padding: 5.875rem 1rem 2.5rem 17.25rem; }
+  html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .template-contact) main { padding: 5.875rem 1rem 2.5rem 17.25rem; }
   .qd-stores-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 47.9375em) {
   .container.qd-inst { display: flex; flex-direction: column; align-items: stretch; gap: 1.25rem; padding: 0.625rem 1.25rem 1.25rem; }
   /* reserva: seletor de páginas (3.375rem) + título com divisória (3.1875rem) + gaps */
-  html:not(.qd-inst-ready) .page-nossas-lojas main { padding: 9.6875rem 1.25rem 1.25rem; }
+  html:not(.qd-inst-ready) :is(.template-page:not(.page-quem-e-a-cpap-fit), .template-contact) main { padding: 9.6875rem 1.25rem 1.25rem; }
   .qd-inst-aside { width: 100%; gap: 0; padding-bottom: 0.625rem; }
   .qd-inst-aside-title, .qd-inst-menu, .qd-inst-aside .qd-footer-contact { display: none; }
   .qd-inst-pick { display: block; }
@@ -216,7 +213,7 @@ div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
   .qd-stores-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
   .qd-store-img { height: 11.0625rem; }
   .qd-store .qd-store-btn { padding: 0 0.5rem; font-size: 0.6875rem; }
-  .qd-contact .qd-contact-form { grid-template-columns: minmax(0, 1fr); gap: 1.875rem; }
+  :is(.qd-contact .qd-contact-form, :where(html:not(.qd-inst-ready) .template-contact .contact-form-container) form) { grid-template-columns: minmax(0, 1fr); gap: 1.875rem; }
   .qd-contact-subtitle { font-size: 1.125rem; }
 
   [data-section-id="quem_somos_hero"] .swiper-slide.media { height: 23.125rem !important; min-height: 23.125rem !important; }
@@ -255,6 +252,54 @@ div[data-section-id="quem_somos_hero"] { min-height: 0 !important; }
   font: 500 0.6875rem/1 var(--heading-font); text-transform: uppercase;
 }
 .qd-inst-cta-btn:hover { background: var(--qd-ink); color: #fff; }
+
+/* --- Antes do JS (html:not(.qd-inst-ready)): geometria final já na 1ª pintura -------------------------------- */
+/* Atendimento: a coluna lateral tem o bloco de contato (32.6875rem); página curta não pode ficar mais baixa que ela */
+@media (min-width: 48em) {
+  html:not(.qd-inst-ready) :is(.page-politica-de-privacidade, .page-politica-de-entrega, .page-trocas-e-devolucoes, .page-troca-devolucao-garantia)
+    [data-section-id="page_content"] { min-height: calc(32.6875rem - 3.375rem); }
+}
+/* Troca, Devolução, Garantia: cada h2 já tem a geometria do cartão da sanfona que o JS monta (o 1º aberto, os
+   outros fechados) e fica reservado o "Ainda continua com dúvida?" (margem 1.25 + texto 1.2188 + gap 0.75 + botão 2
+   + gap 1.25rem). Os cartões ficam invisíveis até o JS (se ele falhar, aparecem em 3s, qd-reveal em pdp.css);
+   a introdução (LCP) já aparece. */
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content { row-gap: 0; margin-bottom: 6.4688rem; }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > :not(h2, h2 ~ *) { margin-bottom: 1.625rem; }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > :is(h2, h2 ~ *) { visibility: hidden; animation: qd-reveal 0s 3s forwards; }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 {
+  display: flex; align-items: center; box-sizing: border-box; min-height: calc(3rem + 1.25rem + 0.125rem); margin: 0; border: 0;
+  padding: calc(0.625rem + 0.0625rem) calc(1rem + 0.0625rem) calc(0.625rem + 0.0625rem) calc(3.25rem + 0.0625rem);
+  font: 700 0.8125rem/1.125rem var(--heading-font); letter-spacing: normal;
+}
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2:first-of-type { min-height: calc(3rem + 1.25rem + 0.0625rem); }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 ~ h2 { margin-top: 0.5rem; }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 ~ h2 ~ :not(h2) { display: none; }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 ~ :not(h2, h2 ~ h2 ~ *) {
+  margin-top: 0.875rem; margin-inline: calc(1rem + 0.0625rem); /* margem: padding apagaria o recuo das listas */
+}
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 + :not(h2, h2 ~ h2 ~ *) { margin-top: 0.25rem; }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 ~ :not(h2):has(+ h2) { margin-bottom: calc(1rem + 0.0625rem); }
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 ~ :not(h2, h2 ~ h2 ~ *) :is(p, li, span, strong),
+html:not(.qd-inst-ready) :is(.page-trocas-e-devolucoes, .page-troca-devolucao-garantia) .page-content > h2 ~ p:not(h2 ~ h2 ~ *) {
+  font-size: 0.75rem !important; line-height: 1.25rem !important;
+}
+/* Fale conosco: o formulário nativo já com o layout final (regras :where acima), sem a coluna de apresentação (o
+   JS não a usa) e com o espaço do título com divisória, do subtítulo e dos 4 campos extras (2 linhas) reservado */
+html:not(.qd-inst-ready) .template-contact .contact-info-container { display: none; }
+html:not(.qd-inst-ready) .template-contact .contact-form-section,
+html:not(.qd-inst-ready) .template-contact .contact-form-section > .container { max-width: none; margin: 0; padding: 0 !important; }
+html:not(.qd-inst-ready) .template-contact .contact-form-section .d-grid { display: block !important; } /* .d-grid do Ipanema é !important */
+html:not(.qd-inst-ready) .template-contact :is(.contact-form-container, .contact-form-container form) { width: 100%; max-width: none; margin: 0; padding: 0; }
+html:not(.qd-inst-ready) .template-contact.template-contact main { padding-top: calc(3.75rem + 2.125rem + 1.25rem + 0.0625rem + 1.25rem + 1.25rem + 0.375rem + 1.25rem); }
+html:not(.qd-inst-ready) .template-contact .contact-form-container .form-group:has(textarea) { grid-column: 1 / -1; margin-top: calc(2 * (1.15rem + 0.625rem + 3.125rem + 1.875rem)); }
+@media (max-width: 74.9375em) {
+  html:not(.qd-inst-ready) .template-contact.template-contact main { padding-top: calc(2.5rem + 2.125rem + 1.25rem + 0.0625rem + 1.25rem + 1.25rem + 0.375rem + 1.25rem); }
+}
+@media (max-width: 47.9375em) {
+  /* no celular a coluna vira o seletor de páginas + o bloco de contato, acima do título; os 4 campos extras são 4 linhas */
+  html:not(.qd-inst-ready) .template-contact.template-contact main { padding-top: 23.9375rem; }
+  html:not(.qd-inst-ready) .template-contact .contact-form-container .form-group:has(textarea) { margin-top: calc(4 * (1.15rem + 0.625rem + 3.125rem + 1.875rem)); }
+}
 
 /* --- Fale conosco: reCAPTCHA na coluna do formulário -------------------------------------- */
 .qd-contact .g-recaptcha, .qd-contact [class*="recaptcha"] { margin-left: 0 !important; margin-right: auto !important; }
