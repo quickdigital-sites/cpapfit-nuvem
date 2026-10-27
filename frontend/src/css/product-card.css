@@ -184,3 +184,6 @@
     background-size: 0.875rem 0.875rem; background-position: calc(50% - 1.875rem) center;
   }
 }
+
+/* 1ª fileira da grade sai sem lazy (item-image.tpl): sem o lazysizes, o fade-in do Ipanema deixaria a foto em opacity 0 */
+.product-item-image.fade-in.qd-img-eager { opacity: 1; }
