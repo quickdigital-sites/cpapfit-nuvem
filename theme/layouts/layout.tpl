@@ -4,17 +4,24 @@
     {# Meta tags component #}
     {{ component('head-tags') }}
 
-    {# Google Fonts preconnect #}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+    {# CPAP Fit: a Montserrat (a fonte do tema, fixada em --heading-font/--body-font no main.css) vem do repo público
+       de assets no jsDelivr (design/assets/fonts, publicado por scripts/publish-assets.sh), pré-carregada aqui no
+       topo: um só woff2 variável (300–700, latin, 35KB, cache imutável) pedido junto com o HTML, sem a ida extra ao
+       CSS do Google. Assim ele costuma chegar antes da 1ª pintura e o texto não troca de fonte na frente do
+       visitante. O @font-face fica no style-tokens.tpl. #}
+    {% set qd_font_url = 'https://cdn.jsdelivr.net/gh/quickdigital-sites/quickdigital-sites-cpapfit-assets@d85f7c232dd7cd8dbef4896340334b3b5f73a053/design/assets/fonts/montserrat-latin-v31.woff2' %}
+    <link rel="preload" href="{{ qd_font_url }}" as="font" type="font/woff2" crossorigin />
+
     {# Preload critical assets #}
-    {# CPAP Fit: fontes do Google SEM bloquear a 1ª pintura (display=swap — o texto aparece na fonte
-       de fallback e troca quando a Montserrat chega). Antes era um @import no style-tokens.tpl, que
-       bloqueava a renderização, e só com 400/700: o Figma usa 300/500/600 também. #}
-    {% set qd_fonts_url = ([settings.font_headings, settings.font_rest] | merge(additional_fonts)) | google_fonts_url('300,400,500,600,700') %}
-    <link rel="preload" as="style" href="{{ qd_fonts_url }}" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="{{ qd_fonts_url }}" /></noscript>
+    {# CPAP Fit: só se o editor tiver outra fonte além da Montserrat ela vem do Google, sem bloquear a 1ª pintura
+       (display=swap). Antes era um @import no style-tokens.tpl, que bloqueava a renderização. #}
+    {% if 'Montserrat' not in settings.font_headings or 'Montserrat' not in settings.font_rest or additional_fonts | default([]) is not empty %}
+      {% set qd_fonts_url = ([settings.font_headings, settings.font_rest] | merge(additional_fonts | default([]))) | google_fonts_url('300,400,500,600,700') %}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link rel="preload" as="style" href="{{ qd_fonts_url }}" onload="this.onload=null;this.rel='stylesheet'" />
+      <noscript><link rel="stylesheet" href="{{ qd_fonts_url }}" /></noscript>
+    {% endif %}
     <link rel="preload" href="{{ 'js/libraries-standalone.js' | static_url }}" as="script" />
     <link rel="preload" href="{{ 'css/style-critical.css' | static_url }}" as="style" />
     <link rel="preload" href="{{ 'css/style-utilities.css' | static_url }}" as="style" />
