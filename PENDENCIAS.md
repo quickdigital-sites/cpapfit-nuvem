@@ -17,6 +17,35 @@ Convenção: `[ ]` aberto · `[x]` resolvido (mantém no histórico com a data).
   e "+" no carrinho; uma vez por ação. **Não adicionar push próprio** (duplicaria). Se uma tag do GTM não dispara,
   o problema está no container (gatilho "Evento personalizado = add_to_cart", variáveis, consentimento).
 
+- [ ] **Home — LCP de 10 s em parte das rodadas do PageSpeed por causa das tags do GTM (2026-10-27):** a nota da home
+  no celular alterna entre dois resultados, sem mudança no tema entre as rodadas (PageSpeed Insights, celular, 27/10):
+
+  | Hora | Nota | LCP | TBT | CLS |
+  |---|---|---|---|---|
+  | 13:45 | 53 | 10,1 s | 510 ms | 0 |
+  | 13:49 | 91 | 2,9 s | 190 ms | 0,035 |
+  | 13:52 | 60 | 10,8 s | 370 ms | 0,018 |
+
+  - **A foto não é o problema:** o LCP é sempre a foto do banner (no HTML, `fetchpriority="high"`). Na rodada ruim de
+    13:52 ela termina de baixar em ~250 ms (TTFB 30 ms, atraso 190 ms, carga 30 ms) e só aparece **2,1 s depois**
+    ("atraso na renderização"); a 1ª pintura da página também atrasa (FCP 2,4 s).
+  - **O que ocupa esse tempo:** o container `GTM-KP2VVCPZ` (injetado pela integração GTM da Nuvemshop, não pelo tema)
+    e as tags que ele carrega, Google Ads (`gtag/js?id=AW-987…`) e GA4 (`gtag/js?id=G-QK2S6LT9LR`). São 508 KB e
+    467 ms de linha de execução principal, o maior terceiro do relatório, e as tarefas mais longas da rodada são
+    deles (gtag AW 204 ms, gtag GA4 185 ms, gtm.js 83 + 76 ms). O PageSpeed também aponta
+    `popups.rdstation.com.br` no caminho crítico; o RD Station não está no tema, então deve vir pelo container.
+  - **Por que só às vezes:** quando esses scripts chegam e rodam antes da 1ª pintura, o Lighthouse soma esse trabalho
+    ao tempo da foto e o simula num celular lento, e o LCP vai a ~10 s. Quando a pintura vem antes, o LCP fica em ~3 s.
+  - **O tema não resolve:** atrasar o GTM pelo tema mexeria na integração da plataforma e no container, o que está
+    fora do escopo combinado ("não tocar no GTM").
+  - **Opções para quem administra o container** (cada uma conferida com o PageSpeed antes e depois):
+    1. Disparar as tags de Google Ads e GA4 em "Janela carregada" (Window Loaded) em vez de "Visualização de
+       página"/"Inicialização". As conversões e o `add_to_cart` seguem pelos eventos do dataLayer, que ficam guardados
+       até as tags carregarem.
+    2. Ver se o RD Station (popups) precisa rodar em todas as páginas e na carga inicial; se não, restringir a
+       página ou atrasar o gatilho.
+    3. Revisar tags duplicadas ou sem uso no container: cada `gtag/js` tem ~160–180 KB.
+
 - [ ] **Pós-compra com pedido cancelado (2026-10-26):** o app NubeSDK (`nube-apps/checkout-quick`,
   `features/pos-compra.tsx`, no ar como v5) tem a regra "pedido cancelado não mostra nada", mas a Nuvemshop não envia
   `order.status` para a página de pedido — então num pedido cancelado aparece "Pedido recebido!". O comentário do
